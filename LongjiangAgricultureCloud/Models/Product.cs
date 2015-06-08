@@ -9,7 +9,7 @@ namespace LongjiangAgricultureCloud.Models
     public class Product
     {
         /// <summary>
-        /// 商品编号
+        /// 商品ID
         /// </summary>
         public int ID { get; set; }
 
@@ -56,5 +56,11 @@ namespace LongjiangAgricultureCloud.Models
         public int CatalogID { get; set; }
 
         public virtual Catalog Catalog { get; set; }
+
+        /// <summary>
+        /// 商品编码
+        /// </summary>
+        [Index(IsUnique = false)]
+        public string ProductCode { get; set; }
     }
 }

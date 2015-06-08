@@ -8,7 +8,10 @@ namespace LongjiangAgricultureCloud.Models
 {
     public enum CatalogType
     {
-        Product
+        商品分类,
+        农机服务分类,
+        本地通分类,
+        农业信息分类
     }
 
     public class Catalog
@@ -19,5 +22,7 @@ namespace LongjiangAgricultureCloud.Models
 
         [Index]
         public int Level { get; set; }
+
+        public string Title { get; set; }
     }
 }
