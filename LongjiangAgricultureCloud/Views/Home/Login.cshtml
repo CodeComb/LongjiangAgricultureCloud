@@ -14,11 +14,15 @@
 </head>
 <body bgcolor="#2a3b52">
     <div class="login">
-        <img class="login-logo" src="~/Images/Logo.png" alt="龙江云农业" />
-        <h2 class="login-title">登录龙江云农业</h2>
-        <input type="text" class="login-textbox" placeholder="用户名" />
-        <br /><input type="password" class="login-textbox" placeholder="密码" />
-        <input type="submit" value="" class="login-go" />
+        @using (Html.BeginForm("Login", "Shared", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <img class="login-logo" src="~/Images/Logo.png" alt="龙江云农业" />
+            <h2 class="login-title">登录龙江云农业</h2>
+            <input type="text" class="login-textbox" placeholder="用户名" />
+            <br /><input type="password" class="login-textbox" placeholder="密码" />
+            <input type="submit" value="" class="login-go" />
+        }
     </div>
     <div class="clr"></div>
     <div class="footer">
