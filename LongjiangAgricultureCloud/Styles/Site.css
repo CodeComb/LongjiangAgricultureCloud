@@ -1,7 +1,7 @@
 ﻿body {
     margin: 0;
     font-family: 'Microsoft YaHei';
-    background-color: rgb(244,244,244);
+    background-color: rgb(241,241,241);
     background-image: url(/Images/bg.png)
 }
 
@@ -137,7 +137,7 @@ h6 {
 }
 
     .sidebar-menu:hover, .sidebar.active {
-        background-color: #fff;
+        background-color: rgb(241,241,241);
         color: #333;
     }
 
