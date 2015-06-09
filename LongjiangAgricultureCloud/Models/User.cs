@@ -32,5 +32,7 @@ namespace LongjiangAgricultureCloud.Models
         public int AreaID { get; set; }
 
         public virtual Area Area { get; set; }
+
+        public UserRole Role { get; set; }
     }
 }

@@ -9,13 +9,21 @@ namespace LongjiangAgricultureCloud.Models
     public class LongjiangAgricultureCloudContext : DbContext
     {
         public DbSet<Area> Areas { get; set; }
+
         public DbSet<Catalog> Catalogs { get; set; }
+
         public DbSet<Comment> Comments { get; set; }
+
         public DbSet<Information> Informations { get; set; }
+
         public DbSet<Order> Orders { get; set; }
+
         public DbSet<OrderDetail> OrderDetails { get; set; }
+
         public DbSet<Product> Products { get; set; }
+
         public DbSet<Provider> Providers { get; set; }
+
         public DbSet<User> Users { get; set; }
 
         public LongjiangAgricultureCloudContext() : base("mssqldb") { }
