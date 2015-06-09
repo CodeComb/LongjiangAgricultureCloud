@@ -2,6 +2,7 @@
     margin: 0;
     font-family: 'Microsoft YaHei';
     background-color: rgb(244,244,244);
+    background-image: url(/Images/bg.png)
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -112,10 +113,61 @@ h6 {
     background-color: #2a3b52;
     width: 220px;
     padding: 20px;
-    height: 100%;
+    height: calc(100% - 40px);
     position: absolute;
+    overflow-y: auto;
 }
+
+.sidebar-subtitle {
+    font-size: 14px;
+    font-weight: bold;
+    color: #aaa;
+    margin: 10px 0;
+}
+
+.sidebar-menu {
+    padding: 10px 20px;
+    margin: 0 -20px;
+    background-color: rgb(30, 91, 120);
+    color: #ddd;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background 0.2s linear, color 0.2s linear;
+    border-top: 1px solid rgb(29, 77, 100);
+}
+
+    .sidebar-menu:hover, .sidebar.active {
+        background-color: #fff;
+        color: #333;
+    }
 
 .container {
     width: calc(100% - 260px);
+    margin-left: 260px;
+}
+
+a, a:visited {
+    color: #119eea;
+    text-decoration: none;
+    outline: 0;
+    transition: color 0.2s linear;
+}
+
+a:hover {
+    color: #3eb2f1;
+    text-decoration: none;
+}
+
+a.dark, a.dark:visited {
+    color: #0dc6fb;
+    text-decoration: none;
+}
+
+a.dark:focus, a.dark:hover {
+    color: #25ccfb;
+    text-decoration: none;
+}
+
+.wrap-cont {
+    padding: 30px;
 }

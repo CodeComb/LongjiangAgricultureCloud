@@ -10,7 +10,7 @@ namespace LongjiangAgricultureCloud.Controllers
     public class SharedController : BaseController
     {
         // GET: Shared
-        [Route("/Login")]
+        [Route("Login")]
         public ActionResult Login()
         {
             return View();
@@ -22,7 +22,7 @@ namespace LongjiangAgricultureCloud.Controllers
             return View();
         }
 
-        [Route("/Login")]
+        [Route("Login")]
         [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult Login(string Username, string Password, string returnUrl)
