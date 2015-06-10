@@ -16,8 +16,11 @@ namespace LongjiangAgricultureCloud.Controllers
             return View();
         }
 
-        public ActionResult Message(string msg)
+        [Route("Message")]
+        public ActionResult Message(string msg, string sid)
         {
+            if (Session[sid].ToString() != sid)
+                return RedirectToAction("NoAccess", "Shared", null);
             ViewBag.Msg = msg;
             return View();
         }
@@ -31,7 +34,7 @@ namespace LongjiangAgricultureCloud.Controllers
             var user = (from u in DB.Users
                         where u.Username == Username
                         && u.Password == pwd
-                        && u.Role != Models.UserRole.普通用户
+                        && u.Role >= Models.UserRole.大区经理
                         select u).SingleOrDefault();
             if (user == null)
             {
@@ -50,6 +53,11 @@ namespace LongjiangAgricultureCloud.Controllers
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Login", "Shared");
+        }
+
+        public ActionResult Success()
+        {
+            return View();
         }
     }
 }

@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "站点参数";
+}
+
+<h2>基本参数设定</h2>
+@using (Html.BeginForm("Base", "General", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <table class="detail-table">
+        <tr>
+            <td class="row-title">商品评论审核开关</td>
+            <td><input type="checkbox" name="VerifyProductComment" @(ViewBag.VerifyProductComment == true ? "checked" : "") /> 勾选后开启审核</td>
+        </tr>
+        <tr>
+            <td class="row-title">农机服务信息审核开关</td>
+            <td><input type="checkbox" name="VerifyService" @(ViewBag.VerifyService == true ? "checked" : "") /> 勾选后开启审核</td>
+        </tr>
+        <tr>
+            <td class="row-title">本地通信息审核开关</td>
+            <td><input type="checkbox" name="VerifyLocalTong" @(ViewBag.VerifyLocalTong == true ? "checked" : "") /> 勾选后开启审核</td>
+        </tr>
+    </table>
+    <p><input type="submit" class="button blue" value="提交" /></p>
+}
+<br />
+<h2>支付信息设定</h2>
+@using (Html.BeginForm("Pay", "General", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <table class="detail-table">
+        <tr>
+            <td class="row-title">支付宝 App Key</td>
+            <td><input type="text" name="AlipayAppKey" class="textbox w-3" value="@ViewBag.AlipayAppKey" /></td>
+        </tr>
+        <tr>
+            <td class="row-title">微信支付 App Key</td>
+            <td><input type="text" class="textbox w-3" value="@ViewBag.WeixinAppKey" /></td>
+        </tr>
+    </table>
+    <p><input type="submit" class="button blue" value="提交" /></p>
+}

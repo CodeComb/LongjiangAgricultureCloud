@@ -142,7 +142,6 @@ h6 {
     }
 
 .container {
-    width: calc(100% - 260px);
     margin-left: 260px;
 }
 
@@ -170,4 +169,282 @@ a.dark:focus, a.dark:hover {
 
 .wrap-cont {
     padding: 30px;
+    height: calc(100% - 60px);
+    overflow: auto;
+    position: absolute;
+    width: calc(100% - 320px);
 }
+
+.detail-table {
+    width: 100%;
+}
+
+.detail-table td {
+    padding: 16px 10px;
+    border: 1px solid #ddd;
+}
+
+.row-title {
+    background-color: #f0f0f0;
+    width: 180px;
+}
+
+table {
+    table-layout: auto;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.table {
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.table-inline {
+    border: 1px solid #ddd;
+    margin-top: 10px;
+}
+
+.table th, .table td, .table-inline th, .table-inline td {
+    padding: 8px;
+}
+
+.table th, .table-inline th {
+    background-color: rgb(253,217,0);
+    color: #555;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.65);
+    font-size: 14px;
+}
+
+.table tbody tr, .table-inline tbody tr {
+    transition: background 0.2s linear;
+}
+
+.table tbody tr:hover, .table-inline tbody tr:hover {
+    background-color: rgb(255,248,233);
+    cursor: pointer;
+}
+
+.tl {
+    text-align: left;
+}
+
+.tc {
+    text-align: center;
+}
+
+.table tr, .table-inline tr {
+    border-bottom: 1px solid #ccc;
+}
+
+.table tr:nth-child(odd), .table-inline tr:nth-child(odd) {
+    background-color: rgb(245,245,245);
+}
+
+.textbox {
+    margin: 0;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 20px;
+    line-height: 20px;
+    outline: 0;
+    padding: 4px;
+    border: 1px solid #ccc;
+    transition: box-shadow .2s linear,background .2s linear;
+    background: #f2f2f2;
+    max-width:100%;
+    _width:120px;
+    *width:120px;
+    behavior:url(/styles/PIE.htc);
+}
+
+.textbox:hover {
+    border-color: #b8b8b8;
+    background: #fcfcfc;
+}
+
+.textbox:focus {
+    border-color: #ffdf00;
+    background: #fcfcfc;
+    -webkit-box-shadow: 0 0 10px #ffdf00;
+    box-shadow: 0 0 10px #ffdf00;
+    behavior:url(/styles/PIE.htc);
+}
+
+.textbox.error {
+    border-color: #ff696d;
+    background: #fcfcfc;
+    -webkit-box-shadow: 0 0 10px rgb(255, 128, 128);
+    box-shadow: 0 0 10px rgb(255, 128, 128);
+    behavior:url(/styles/PIE.htc);
+}
+
+.w-0-6 {
+    width: 60px!important;
+}
+
+.w-0-8 {
+    width: 80px!important;
+}
+
+.w-1 {
+    width: 100px!important;
+}
+
+.w-2 {
+    width: 200px!important;
+}
+
+.w-3 {
+    width: 300px!important;
+}
+
+.button {
+    text-transform: none;
+    margin: 5px 10px 0 0;
+    line-height: normal;
+    border: 0;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 8px;
+    outline: 0;
+    transition: all 0.2s linear;
+    behavior:url(/styles/PIE.htc);
+}
+
+.button.small{
+    font-size: 12px;
+    margin: 2px 5px 0 0;
+    padding: 2px 5px;
+    border-radius: 4px;
+    behavior:url(/styles/PIE.htc);
+}
+
+@-webkit-keyframes greenPulse {
+    from {
+        background-color: #749a02;
+        -webkit-box-shadow: 0 0 9px #fff
+    }
+
+    50% {
+        background-color: #91bd09;
+        -webkit-box-shadow: 0 0 18px #91bd09
+    }
+
+    to {
+        background-color: #749a02;
+        -webkit-box-shadow: 0 0 9px #fff
+    }
+}
+
+.button.green {
+    color: #fff;
+    background-color: #91bd09;
+    -webkit-animation-name: greenPulse;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    transition: all 0.2s linear;
+    behavior:url(/styles/PIE.htc);
+}
+
+@-webkit-keyframes bluePulse {
+    from {
+        background-color: #007d9a;
+        -webkit-box-shadow: 0 0 9px #fff
+    }
+
+    50% {
+        background-color: #2daebf;
+        -webkit-box-shadow: 0 0 18px #2daebf
+    }
+
+    to {
+        background-color: #007d9a;
+        -webkit-box-shadow: 0 0 9px #fff
+    }
+}
+
+.button.blue {
+    color: #fff;
+    background-color: #2daebf;
+    -webkit-animation-name: bluePulse;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    transition: all 0.2s linear;
+    behavior:url(/styles/PIE.htc);
+}
+
+@-webkit-keyframes redPulse {
+    from {
+        background-color: #bc330d;
+        -webkit-box-shadow: 0 0 9px #fff
+    }
+
+    50% {
+        background-color: #e33100;
+        -webkit-box-shadow: 0 0 18px #e33100
+    }
+
+    to {
+        background-color: #bc330d;
+        -webkit-box-shadow: 0 0 9px #fff
+    }
+}
+
+.button.red {
+    color: #fff;
+    background-color: #e33100;
+    -webkit-animation-name: redPulse;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    transition: all 0.2s linear;
+    behavior:url(/styles/PIE.htc);
+}
+
+@-webkit-keyframes yellowPulse {
+    from {
+        background-color: #fc9200;
+        -webkit-box-shadow: 0 0 9px #fff;
+    }
+
+    50% {
+        background-color: #ffb515;
+        -webkit-box-shadow: 0 0 18px #ffb515;
+    }
+
+    to {
+        background-color: #fc9200;
+        -webkit-box-shadow: 0 0 9px #fff;
+    }
+}
+
+.button.yellow {
+    color: #fff;
+    background-color: #ff5c00;
+    -webkit-animation-name: yellowPulse;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    transition: all 0.2s linear;
+    behavior:url(/styles/PIE.htc);
+}
+
+.info {
+    width: 500px;
+    padding: 30px;
+    background-color: #fff;
+    color: #000;
+}
+
+.info .btn{
+    padding: 5px 10px;
+    border: 3px solid #000;
+    background-color: #fff;
+    transition: background 0.2s linear;
+}
+
+    .info .btn:hover {
+        background-color: #ccc;
+    }

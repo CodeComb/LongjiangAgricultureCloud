@@ -26,7 +26,7 @@ namespace LongjiangAgricultureCloud.Controllers
 
         public ActionResult Msg(string msg)
         {
-            return RedirectToAction("Message", "Shared", new { msg = msg });
+            return RedirectToAction("Message", "Shared", new { msg = msg, sid = Session["sid"].ToString() });
         }
     }
 }
