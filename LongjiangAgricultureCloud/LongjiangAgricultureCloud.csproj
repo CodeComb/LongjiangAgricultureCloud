@@ -117,8 +117,10 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery.datetimepicker.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\site.js" />
+    <Content Include="Styles\datetimepicker.css" />
     <Content Include="Styles\icons.css" />
     <Content Include="Styles\Site.css" />
     <Content Include="Web.config" />
@@ -162,7 +164,9 @@
     <Content Include="Views\Shared\Login.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Success.cshtml" />
-    <Content Include="Views\General\General.cshtml" />
+    <Content Include="Views\General\Index.cshtml" />
+    <Content Include="Views\General\Catalog.cshtml" />
+    <Content Include="Views\General\Comment.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

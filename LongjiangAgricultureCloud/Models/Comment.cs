@@ -8,7 +8,8 @@ namespace LongjiangAgricultureCloud.Models
 {
     public enum CommentType
     {
-        Product
+        商品评论,
+        本地通评论
     }
 
     public class Comment

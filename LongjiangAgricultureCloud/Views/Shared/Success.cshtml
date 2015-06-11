@@ -12,12 +12,13 @@
     <title>@ViewBag.Title - 龙江云农业</title>
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
 </head>
-<body bgcolor="#2a3b52">
+<body style="background-image:none;background-color:#2a3b52">
     <div class="info">
         <h2>操作成功</h2>
         <p>您执行的操作已经成功，您可通过下面的按钮进行跳转！</p>
-        <p>
-
+        <p style="margin-top:30px;">
+            <a class="btn" href="@Request.UrlReferrer.ToString()">返回上一页</a>
+            <a class="btn" href="/">返回首页</a>
         </p>
     </div>
     <div class="footer">

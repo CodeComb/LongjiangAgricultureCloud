@@ -436,19 +436,49 @@ table {
     padding: 30px;
     background-color: #fff;
     color: #000;
+    margin: 0 auto;
+    margin-top: 180px;
 }
 
-.info .btn{
+.btn{
     padding: 5px 10px;
     border: 3px solid #000;
     background-color: #fff;
+    color: #000;
+    font-weight: bold;
     transition: background 0.2s linear;
 }
 
-    .info .btn:hover {
-        background-color: #ccc;
+    .btn:hover {
+        background-color: #ddd;
     }
+
+    .btn.inverse {
+        color: #fff;
+        background-color: #000
+    }
+
+        .btn.inverse:hover {
+            background-color: #2a3b52;
+        }
 
 .ico {
     margin-right: 10px;
+}
+
+.search {
+    padding: 20px;
+    background-color: #fff;
+}
+
+select {
+    display: inline-block;
+    vertical-align: middle;
+    border: 1px solid #cccccc;
+    background-color: #ffffff;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    margin: 0;
+    width: 150px;
 }
