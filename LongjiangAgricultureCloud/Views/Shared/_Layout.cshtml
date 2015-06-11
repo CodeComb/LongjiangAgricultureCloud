@@ -12,24 +12,28 @@
 <body>
     <div class="left-sidebar">
         <div class="sidebar-subtitle">基本信息管理</div>
-        <a href="#"><div class="sidebar-menu"><i class="fa fa-star icon ico"></i>站点参数</div></a>
-        <a href="#"><div class="sidebar-menu"><i class="fa fa-tasks icon ico"></i>分类管理</div></a>
-        <a href="#"><div class="sidebar-menu"><i class="fa fa-comment icon ico"></i>评论管理</div></a>
+        <a href="/General/Base"><div class="sidebar-menu"><i class="fa fa-star icon ico"></i>站点参数</div></a>
+        <a href="/General/Catalog"><div class="sidebar-menu"><i class="fa fa-tasks icon ico"></i>分类管理</div></a>
+        <a href="/General/Comment"><div class="sidebar-menu"><i class="fa fa-comment icon ico"></i>评论管理</div></a>
         <div class="sidebar-subtitle">用户管理</div>
-        <a href="#"><div class="sidebar-menu"><i class="fa fa-group icon ico"></i>用户管理</div></a>
-        <a href="#"><div class="sidebar-menu"><i class="fa fa-globe icon ico"></i>地区管理</div></a>
+        <a href="/User"><div class="sidebar-menu"><i class="fa fa-group icon ico"></i>用户管理</div></a>
+        <a href="/User/Area"><div class="sidebar-menu"><i class="fa fa-globe icon ico"></i>地区管理</div></a>
         <div class="sidebar-subtitle">商城管理</div>
-        <a href="#"><div class="sidebar-menu"><i class="fa fa-gift icon ico"></i>商品管理</div></a>
-        <a href="#"><div class="sidebar-menu"><i class="fa fa-heart icon ico"></i>加盟管理</div></a>
-        <a href="#"><div class="sidebar-menu"><i class="fa fa-barcode icon ico"></i>订单管理</div></a>
-        <a href="#"><div class="sidebar-menu"><i class="fa fa-random icon ico"></i>配送报表</div></a>
-        <a href="#"><div class="sidebar-menu"><i class="fa fa-money icon ico"></i>财务报表</div></a>
+        <a href="/Product"><div class="sidebar-menu"><i class="fa fa-gift icon ico"></i>商品管理</div></a>
+        <a href="/Product/Provider"><div class="sidebar-menu"><i class="fa fa-heart icon ico"></i>加盟管理</div></a>
+        <a href="/Product/Order"><div class="sidebar-menu"><i class="fa fa-barcode icon ico"></i>订单管理</div></a>
+        <a href="/Product/Distribute"><div class="sidebar-menu"><i class="fa fa-random icon ico"></i>配送报表</div></a>
+        <a href="/Product/Finance"><div class="sidebar-menu"><i class="fa fa-money icon ico"></i>财务报表</div></a>
         <div class="sidebar-subtitle">农机服务</div>
-        <a href="#"><div class="sidebar-menu"><i class="fa fa-file icon ico"></i>信息管理</div></a>
+        <a href="/Service"><div class="sidebar-menu"><i class="fa fa-file icon ico"></i>信息管理</div></a>
         <div class="sidebar-subtitle">本地通</div>
-        <a href="#"><div class="sidebar-menu"><i class="fa fa-file icon ico"></i>信息管理</div></a>
+        <a href="/Local"><div class="sidebar-menu"><i class="fa fa-file icon ico"></i>信息管理</div></a>
         <div class="sidebar-subtitle">其它操作</div>
-        <a href="#"><div class="sidebar-menu"><i class="fa fa-sign-out icon ico"></i>退出系统</div></a>
+        <a href="javascript:$('#frmLogout').submit()"><div class="sidebar-menu"><i class="fa fa-sign-out icon ico"></i>退出系统</div></a>
+        @using (Html.BeginForm("Logout", "Shared", null, FormMethod.Post, new { id = "frmLogout" }))
+        {
+            @Html.AntiForgeryToken()
+        }
     </div>
     <div class="container">
         <div class="wrap-cont">
