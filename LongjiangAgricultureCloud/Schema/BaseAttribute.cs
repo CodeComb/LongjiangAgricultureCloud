@@ -23,7 +23,10 @@ namespace LongjiangAgricultureCloud.Schema
 
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
-            filterContext.HttpContext.Response.Redirect("/Shared/NoAccess");
+            if (filterContext.HttpContext.User.Identity.IsAuthenticated)
+                filterContext.HttpContext.Response.Redirect("/Shared/NoAccess");
+            else
+                filterContext.HttpContext.Response.Redirect("/Login");
         }
     }
 }

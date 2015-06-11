@@ -25,6 +25,8 @@ namespace LongjiangAgricultureCloud.Models
         [ForeignKey("Father")]
         public int FatherID { get; set; }
 
+        public virtual Area Father { get; set; }
+
         public AreaLevel Level { get; set; }
 
         public virtual ICollection<Area> Children { get; set; }

@@ -7,7 +7,7 @@ using LongjiangAgricultureCloud.Schema;
 
 namespace LongjiangAgricultureCloud.Controllers
 {
-    //[CheckRole(Models.UserRole.大区经理)]
+    [CheckRole(Models.UserRole.大区经理)]
     public class HomeController : BaseController
     {
         // GET: Home

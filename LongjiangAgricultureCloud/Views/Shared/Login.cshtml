@@ -11,15 +11,15 @@
     <title>@ViewBag.Title - 龙江云农业</title>
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
 </head>
-<body bgcolor="#2a3b52">
+<body style="background-color:#2a3b52;background-image:none;">
     <div class="login">
         @using (Html.BeginForm("Login", "Shared", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
             <img class="login-logo" src="~/Images/Logo.png" alt="龙江云农业" />
             <h2 class="login-title">登录龙江云农业</h2>
-            <input type="text" class="login-textbox" placeholder="用户名" />
-            <br /><input type="password" class="login-textbox" placeholder="密码" />
+            <input type="text" class="login-textbox" placeholder="用户名" name="Username" />
+            <br /><input type="password" class="login-textbox" placeholder="密码" name="Password" />
             <input type="submit" value="" class="login-go" />
         }
     </div>
