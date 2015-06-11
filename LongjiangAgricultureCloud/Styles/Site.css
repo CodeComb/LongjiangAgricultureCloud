@@ -451,3 +451,22 @@ select {
     padding: 5px;
     text-overflow: ellipsis;  
 }
+
+.pager-item, .pager-item:visited, .pager-item:active {
+    color: #fff;
+    background-color: #2a3b52;
+    transition: background 0.2s linear, color 0.2s linear;
+    float: left;
+    font-size: 18px;
+    padding: 10px;
+    margin-right: 1px;
+}
+
+.pager {
+    padding: 20px 0;
+}
+
+.pager-item.active, .pager-item:hover {
+    background-color: rgb(30, 91, 120);
+    color: #fff;
+}
