@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LongjiangAgricultureCloud.Models
@@ -39,11 +40,15 @@ namespace LongjiangAgricultureCloud.Models
         public virtual User User { get; set; }
 
         [Index]
+        [StringLength(256)]
         public PayMethod PayMethod { get; set; }
 
         [Index]
+        [StringLength(256)]
         public string PayCode { get; set; }
 
         public string Hint { get; set; }
+
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

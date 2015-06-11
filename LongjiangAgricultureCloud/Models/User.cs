@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LongjiangAgricultureCloud.Models
@@ -20,6 +21,7 @@ namespace LongjiangAgricultureCloud.Models
         public int ID { get; set; }
 
         [Index(IsUnique = true)]
+        [StringLength(32)]
         public string Username { get; set; }
 
         public string Password { get; set; }
