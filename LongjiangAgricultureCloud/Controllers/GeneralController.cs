@@ -58,7 +58,7 @@ namespace LongjiangAgricultureCloud.Controllers
             if (Type.HasValue)
                 query = query.Where(x => x.Type == Type);
             ViewBag.PageInfo = PagerHelper.Do(ref query, 50, p);
-            return View();
+            return View(query);
         }
     }
 }
