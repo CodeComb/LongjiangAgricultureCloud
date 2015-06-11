@@ -448,3 +448,7 @@ table {
     .info .btn:hover {
         background-color: #ccc;
     }
+
+.ico {
+    margin-right: 10px;
+}
