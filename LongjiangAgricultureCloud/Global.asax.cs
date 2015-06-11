@@ -14,8 +14,8 @@ namespace LongjiangAgricultureCloud
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
-
-        protected void Session_Start()
+        
+        protected void Session_Start(object sender, EventArgs e)
         {
             Session["sid"] = Guid.NewGuid().ToString();
         }

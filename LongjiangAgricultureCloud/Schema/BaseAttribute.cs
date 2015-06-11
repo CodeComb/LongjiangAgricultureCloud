@@ -26,7 +26,7 @@ namespace LongjiangAgricultureCloud.Schema
             if (filterContext.HttpContext.User.Identity.IsAuthenticated)
                 filterContext.HttpContext.Response.Redirect("/Shared/NoAccess");
             else
-                filterContext.HttpContext.Response.Redirect("/Login");
+                base.HandleUnauthorizedRequest(filterContext);
         }
     }
 }

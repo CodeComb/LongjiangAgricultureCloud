@@ -19,7 +19,7 @@ namespace LongjiangAgricultureCloud.Controllers
         [Route("Message")]
         public ActionResult Message(string msg, string sid)
         {
-            if (Session[sid].ToString() != sid)
+            if (Session["sid"].ToString() != sid)
                 return RedirectToAction("NoAccess", "Shared", null);
             ViewBag.Msg = msg;
             return View();
@@ -31,6 +31,7 @@ namespace LongjiangAgricultureCloud.Controllers
         public ActionResult Login(string Username, string Password, string returnUrl)
         {
             var pwd = Helpers.Security.SHA1(Password);
+            System.Diagnostics.Debug.WriteLine(pwd);
             var user = (from u in DB.Users
                         where u.Username == Username
                         && u.Password == pwd

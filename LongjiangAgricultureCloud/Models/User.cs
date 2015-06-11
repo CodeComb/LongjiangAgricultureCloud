@@ -30,11 +30,13 @@ namespace LongjiangAgricultureCloud.Models
 
         public string Answer { get; set; }
 
-        [Index]
-        public int AreaID { get; set; }
+        [ForeignKey("Area")]
+        public int? AreaID { get; set; }
 
         public virtual Area Area { get; set; }
 
         public UserRole Role { get; set; }
+
+        public virtual ICollection<Provider> Providers { get; set; }
     }
 }

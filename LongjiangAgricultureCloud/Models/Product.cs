@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LongjiangAgricultureCloud.Models
@@ -61,6 +62,7 @@ namespace LongjiangAgricultureCloud.Models
         /// 商品编码
         /// </summary>
         [Index(IsUnique = false)]
+        [StringLength(256)]
         public string ProductCode { get; set; }
     }
 }

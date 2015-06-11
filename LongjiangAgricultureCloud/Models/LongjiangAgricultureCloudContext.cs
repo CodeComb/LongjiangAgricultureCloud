@@ -27,5 +27,11 @@ namespace LongjiangAgricultureCloud.Models
         public DbSet<User> Users { get; set; }
 
         public LongjiangAgricultureCloudContext() : base("mssqldb") { }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<User>().HasMany(u => u.Providers).WithRequired(p => p.User).WillCascadeOnDelete(false);
+        }
     }
 }

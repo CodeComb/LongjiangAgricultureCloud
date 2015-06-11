@@ -40,7 +40,6 @@ namespace LongjiangAgricultureCloud.Models
         public virtual User User { get; set; }
 
         [Index]
-        [StringLength(256)]
         public PayMethod PayMethod { get; set; }
 
         [Index]
