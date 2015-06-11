@@ -42,7 +42,7 @@ namespace LongjiangAgricultureCloud.Helpers
         public static MvcHtmlString MakePager<TModel>(this HtmlHelper<TModel> self)
         {
             var tmp = (PagerInfo)self.ViewBag.PageInfo;
-            var p = Convert.ToInt32(self.ViewContext.HttpContext.Request.QueryString["p"]);
+            var p = self.ViewContext.HttpContext.Request.QueryString["p"] == null ? 1 : Convert.ToInt32(self.ViewContext.HttpContext.Request.QueryString["p"]);
             var html = "<div class=\"pager\">";
             for (var i = tmp.Start; i <= tmp.End; i++)
             {
@@ -50,9 +50,12 @@ namespace LongjiangAgricultureCloud.Helpers
                 foreach (string k in self.ViewContext.HttpContext.Request.QueryString.Keys)
                 {
                     if (k == "p") continue;
-                    str += "&" + k + "=" + self.ViewContext.HttpContext.Request.QueryString[k];
+                    str += "&" + HttpUtility.UrlEncode(k) + "=" + HttpUtility.UrlEncode(self.ViewContext.HttpContext.Request.QueryString[k]);
                 }
-                html += "<a class=\"pager-item\" href=\"" + str + "\">" + i + "</a>";
+                if (p == i)
+                    html += "<a class=\"pager-item active\" href=\"" + str + "\">" + i + "</a>";
+                else
+                    html += "<a class=\"pager-item\" href=\"" + str + "\">" + i + "</a>";
             }
             html += "</div>";
             return new MvcHtmlString(html);
