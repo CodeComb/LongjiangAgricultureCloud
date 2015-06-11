@@ -4,7 +4,9 @@ using System.Linq;
 using System.Configuration;
 using System.Web;
 using System.Web.Mvc;
+using LongjiangAgricultureCloud.Models;
 using LongjiangAgricultureCloud.Schema;
+using LongjiangAgricultureCloud.Helpers;
 
 namespace LongjiangAgricultureCloud.Controllers
 {
@@ -46,8 +48,16 @@ namespace LongjiangAgricultureCloud.Controllers
             return View();
         }
 
-        public ActionResult Comment()
+        public ActionResult Comment(int p = 1, CommentType? Type, DateTime? Begin, DateTime? End)
         {
+            IEnumerable<Comment> query = DB.Comments;
+            if (Begin.HasValue)
+                query = query.Where(x => x.Time >= Begin.Value);
+            if (End.HasValue)
+                query = query.Where(x => x.Time <= End.Value);
+            if (Type.HasValue)
+                query = query.Where(x => x.Type == Type);
+            ViewBag.PageInfo = PagerHelper.Do(ref query, 50, p);
             return View();
         }
     }

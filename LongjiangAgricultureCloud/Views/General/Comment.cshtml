@@ -1,17 +1,47 @@
-﻿
+﻿@model IEnumerable<Comment>
 @{
     ViewBag.Title = "评论管理";
 }
 
 <h2>评论管理</h2>
-<div class="search">
+<form class="search">
     检索：
-    <select>
+    <select name="Type">
         <option value="">评论类别</option>
-        <option>商品评论</option>
-        <option>本地通评论</option>
+        <option @(Request.QueryString["Type"] == "商品评论" ? "selected" : "")>商品评论</option>
+        <option @(Request.QueryString["Type"] == "本地通评论" ? "selected" : "")>本地通评论</option>
     </select>
-    <input type="text" class="textbox datetime" name="Begin" placeholder="起始时间" />
-    <input type="text" class="textbox datetime" name="End" placeholder="结束时间" />
+    <input type="text" class="textbox datetime" name="Begin" placeholder="起始时间" value="@Request.QueryString["Begin"]" />
+    <input type="text" class="textbox datetime" name="End" placeholder="结束时间" value="@Request.QueryString["End"]" />
     <input type="submit" class="button blue" value="检索" />
-</div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>类别</th>
+            <th>内容</th>
+            <th>发表者</th>
+            <th>时间</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.ID</td>
+                <td>
+                    @c.Type
+                </td>
+                <td>@c.Content</td>
+                <td>@c.User.Username</td>
+                <td>@c.Time.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>
+                    <a href="#">删除6生物性</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
