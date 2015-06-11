@@ -48,7 +48,7 @@ namespace LongjiangAgricultureCloud.Controllers
             return View();
         }
 
-        public ActionResult Comment(int p = 1, CommentType? Type, DateTime? Begin, DateTime? End)
+        public ActionResult Comment(CommentType? Type, DateTime? Begin, DateTime? End, int p = 1)
         {
             IEnumerable<Comment> query = DB.Comments;
             if (Begin.HasValue)
