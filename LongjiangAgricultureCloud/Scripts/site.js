@@ -3,7 +3,7 @@
 });
 
 function postDelete(url, id) {
-    $.post(url, { _csrf: csrf }, function (data) {
+    $.post(url, { '__RequestVerificationToken': csrf }, function (data) {
         $('#' + id).remove();
         if (data == 'ok' || data == 'OK')
             ;
