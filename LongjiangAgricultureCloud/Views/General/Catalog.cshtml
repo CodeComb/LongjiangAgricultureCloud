@@ -38,6 +38,7 @@
 <h2>添加分类</h2>
 @using (Html.BeginForm("CreateCatalog", "General", FormMethod.Post))
 {
+    @Html.AntiForgeryToken()
     <table class="detail-table">
         <tr>
             <td class="row-title">分类名称</td>

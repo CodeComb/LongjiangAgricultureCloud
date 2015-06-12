@@ -11,8 +11,12 @@
     <input type="text" class="textbox" name="Name" placeholder="真实姓名" />
     <select>
         <option value="">权限</option>
+        @foreach (var str in Enum.GetNames(typeof(UserRole)))
+        {
+            <option>@str</option>
+        }
     </select>
-    <input type="submit" class="button blue" value="检索" />
+    <input type="submit" class="btn" value="检索" />
 </form>
 
 <table class="table">
@@ -53,3 +57,4 @@
         }
     </tbody>
 </table>
+@Html.MakePager()

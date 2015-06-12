@@ -32,6 +32,7 @@ namespace LongjiangAgricultureCloud.Models
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<User>().HasMany(u => u.Providers).WithRequired(p => p.User).WillCascadeOnDelete(false);
+            modelBuilder.Entity<Area>().HasMany(a => a.Users).WithOptional(u => u.Area).WillCascadeOnDelete(false);
         }
     }
 }

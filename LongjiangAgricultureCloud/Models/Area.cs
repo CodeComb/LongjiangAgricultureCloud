@@ -30,5 +30,7 @@ namespace LongjiangAgricultureCloud.Models
         public AreaLevel Level { get; set; }
 
         public virtual ICollection<Area> Children { get; set; }
+
+        public virtual ICollection<User> Users { get; set; }
     }
 }

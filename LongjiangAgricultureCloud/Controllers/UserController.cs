@@ -74,5 +74,50 @@ namespace LongjiangAgricultureCloud.Controllers
             DB.SaveChanges();
             return RedirectToAction("Success", "Shared");
         }
+
+        public ActionResult Area(int? id)
+        {
+            IEnumerable<Area> query = DB.Areas;
+            if (id.HasValue)
+                query = query.Where(x => x.FatherID == id.Value);
+            else
+                query = query.Where(x => x.FatherID == null);
+            Area a = null;
+            if (id.HasValue)
+                a = DB.Areas.Find(id.Value);
+            ViewBag.Area = a;
+            return View(query.ToList());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateArea(string Title, int? FatherID)
+        {
+            var area = new Area();
+            if (FatherID.HasValue)
+            {
+                var father = DB.Areas.Find(FatherID.Value);
+                area.FatherID = FatherID.Value;
+                area.Level = (AreaLevel)(Convert.ToInt32(father.Level) + 1);
+            }
+            else
+            {
+                area.Level = AreaLevel.省;
+            }
+            area.Title = Title;
+            DB.Areas.Add(area);
+            DB.SaveChanges();
+            return RedirectToAction("Success", "Shared");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteArea(int id)
+        {
+            var area = DB.Areas.Find(id);
+            DB.Areas.Remove(area);
+            DB.SaveChanges();
+            return Content("ok");
+        }
     }
 }
