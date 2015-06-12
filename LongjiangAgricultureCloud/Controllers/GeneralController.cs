@@ -10,7 +10,7 @@ using LongjiangAgricultureCloud.Helpers;
 
 namespace LongjiangAgricultureCloud.Controllers
 {
-    [CheckRole(Models.UserRole.大区经理)]
+    [CheckRole(Models.UserRole.系统管理员)]
     public class GeneralController : BaseController
     {
         // GET: General
@@ -42,8 +42,7 @@ namespace LongjiangAgricultureCloud.Controllers
             ConfigurationManager.AppSettings["WeixinPayAppKey"] = WeixinPayAppKey;
             return RedirectToAction("Success", "Shared", null);
         }
-
-        [CheckRole(UserRole.系统管理员)]
+        
         public ActionResult Catalog(int? id)
         {
             if (id == null)
@@ -61,7 +60,9 @@ namespace LongjiangAgricultureCloud.Controllers
                 return View(DB.Catalogs.Where(x => x.FatherID == id.Value).OrderBy(x => x.Type).ToList());
             }
         }
-
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateCatalog(int? FatherID, string Title, CatalogType? Type)
         {
             var catalog = new Catalog();
@@ -84,7 +85,9 @@ namespace LongjiangAgricultureCloud.Controllers
             DB.SaveChanges();
             return RedirectToAction("Success", "Shared");
         }
-
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteCatalog(int id)
         {
             var catalog = DB.Catalogs.Find(id);
@@ -92,7 +95,7 @@ namespace LongjiangAgricultureCloud.Controllers
             DB.SaveChanges();
             return Content("ok");
         }
-
+        
         public ActionResult Comment(CommentType? Type, DateTime? Begin, DateTime? End, int p = 1)
         {
             IEnumerable<Comment> query = DB.Comments;
@@ -105,7 +108,9 @@ namespace LongjiangAgricultureCloud.Controllers
             ViewBag.PageInfo = PagerHelper.Do(ref query, 50, p);
             return View(query);
         }
-
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteComment(int id)
         {
             var comment = DB.Comments.Find(id);

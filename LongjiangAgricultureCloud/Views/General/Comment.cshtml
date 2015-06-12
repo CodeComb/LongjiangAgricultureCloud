@@ -30,7 +30,7 @@
     <tbody>
         @foreach (var c in Model)
         {
-            <tr>
+            <tr id="comment-@c.ID">
                 <td>@c.ID</td>
                 <td>
                     @c.Type
@@ -39,7 +39,7 @@
                 <td>@c.User.Username</td>
                 <td>@c.Time.ToString("yyyy-MM-dd HH:mm")</td>
                 <td>
-                    <a href="#">删除</a>
+                    <a href="javascript: deleteDialog('/General/DeleteComment/@c.ID', 'comment-@c.ID')">删除</a>
                 </td>
             </tr>
         }

@@ -23,7 +23,7 @@ namespace LongjiangAgricultureCloud.Models
         public string Title { get; set; }
         
         [ForeignKey("Father")]
-        public int FatherID { get; set; }
+        public int? FatherID { get; set; }
 
         public virtual Area Father { get; set; }
 

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<User>
+@{
+    ViewBag.Title = "用户管理";
+}
+
+<h2>用户管理</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>用户ID</th>
+            <th>用户名(手机号)</th>
+            <th>权限</th>
+            <th>真实姓名</th>
+            <th>地址</th>
+            <th>详细地址</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var u in Model)
+        {
+            <tr id="user-@u.ID">
+                <td>@u.ID</td>
+                <td>@u.Username</td>
+                <td>@u.Role</td>
+                <td>@u.Name</td>
+                <td>
+                    @{ Area i = u.AreaID == null ? null : u.Area; var result = ""; }
+                    @while (i != null)
+                    {
+                        result = i.Title + result;
+                        i = i.FatherID == null ? null : i.Father;
+                        @result
+                    }
+                </td>
+                <td>@u.Address</td>
+                <td>
+                    <a href="javascript: deleteDialog('/User/Delete/@u.ID', 'user-@u.ID')">删除</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
