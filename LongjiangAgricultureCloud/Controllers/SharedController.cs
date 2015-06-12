@@ -60,5 +60,41 @@ namespace LongjiangAgricultureCloud.Controllers
         {
             return View();
         }
+
+        public ActionResult GetProvinces()
+        {
+            var ret = DB.Areas.Where(x => x.Level == Models.AreaLevel.省).ToList();
+            return Json(ret.Select(x => new { Title = x.Title, ID = x.ID }), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetCities(int ProvinceID)
+        {
+            var ret = DB.Areas.Where(x => x.FatherID == ProvinceID).ToList();
+            return Json(ret.Select(x => new { Title = x.Title, ID = x.ID }), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetDistricts(int CityID)
+        {
+            var ret = DB.Areas.Where(x => x.FatherID == CityID).ToList();
+            return Json(ret.Select(x => new { Title = x.Title, ID = x.ID }), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetTowns(int DistrictID)
+        {
+            var ret = DB.Areas.Where(x => x.FatherID == DistrictID).ToList();
+            return Json(ret.Select(x => new { Title = x.Title, ID = x.ID }), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetHamlets(int TownID)
+        {
+            var ret = DB.Areas.Where(x => x.FatherID == TownID).ToList();
+            return Json(ret.Select(x => new { Title = x.Title, ID = x.ID }), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetVillages(int HamletID)
+        {
+            var ret = DB.Areas.Where(x => x.FatherID == HamletID).ToList();
+            return Json(ret.Select(x => new { Title = x.Title, ID = x.ID }), JsonRequestBehavior.AllowGet);
+        }
     }
 }
