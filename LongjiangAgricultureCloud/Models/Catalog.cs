@@ -24,5 +24,12 @@ namespace LongjiangAgricultureCloud.Models
         public int Level { get; set; }
 
         public string Title { get; set; }
+
+        [ForeignKey("Father")]
+        public int? FatherID { get; set; }
+
+        public virtual Catalog Father { get; set; }
+
+        public virtual ICollection<Catalog> Catalogs { get; set; }
     }
 }

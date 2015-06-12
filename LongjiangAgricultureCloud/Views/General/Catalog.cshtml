@@ -1,7 +1,73 @@
-﻿
+﻿@model ICollection<Catalog>
 @{
-    ViewBag.Title = "Catalog";
+    ViewBag.Title = "分类管理";
 }
 
-<h2>Catalog</h2>
+<h2>分类列表</h2>
 
+<table class="table">
+    <thead>
+        <tr>
+            <th>分类ID</th>
+            <th>所属模块</th>
+            <th>分类名称</th>
+            <th>分类级数</th>
+            <th>父类名</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr id="catalog-@c.ID">
+                <td>@c.ID</td>
+                <td>@c.Type</td>
+                <td>@c.Title</td>
+                <td>@(c.Level + 1)</td>
+                <td>@(c.Level == 0 ? "-" : c.Father.Title)</td>
+                <td>
+                    <a href="/General/Catalog/@c.ID">管理子类别</a>
+                    <a href="javascript: deleteDialog('/General/DeleteCatalog/@c.ID', 'catalog-@c.ID')">删除</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<br />
+<h2>添加分类</h2>
+@using (Html.BeginForm("CreateCatalog", "General", FormMethod.Post))
+{
+    <table class="detail-table">
+        <tr>
+            <td class="row-title">分类名称</td>
+            <td>@Html.TextBox("Title", "", new { @class = "textbox w-3" })</td>
+        </tr>
+        @if (ViewBag.Level == 0)
+        {
+            <tr>
+                <td class="row-title">所属模块</td>
+                <td>
+                    <select name="Type">
+                        <option>商品分类</option>
+                        <option>农机服务分类</option>
+                        <option>本地通分类</option>
+                        <option>农业信息分类</option>
+                    </select>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td class="row-title">父类别</td>
+                <td>@ViewBag.FatherTitle<input type="hidden" name="FatherID" value="@ViewBag.FatherID" /></td>
+            </tr>
+            <tr>
+                <td class="row-title">所属模块</td>
+                <td>@ViewBag.Type</td>
+            </tr>
+        }
+    </table>
+    <p><input type="submit" class="btn inverse" value="创建" /></p>
+}
