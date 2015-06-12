@@ -170,6 +170,8 @@
     <Content Include="Views\General\Catalog.cshtml" />
     <Content Include="Views\General\Comment.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -26,12 +26,53 @@ namespace LongjiangAgricultureCloud.Controllers
             return View(query);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
             var user = DB.Users.Find(id);
             DB.Users.Remove(user);
             DB.SaveChanges();
             return Content("ok");
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var user = DB.Users.Find(id);
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, User User)
+        {
+            var user = DB.Users.Find(id);
+            if (user.Username != User.Username && DB.Users.Any(x => x.Username == User.Username))
+                return Msg("已经存在用户名(手机号)为\"" + User.Username + "\"的用户，请修改后重试！");
+            user.Name = User.Name;
+            user.AreaID = User.AreaID; //TODO: 选择地区
+            user.Question = User.Question;
+            user.Answer = User.Answer;
+            user.Password = Security.SHA1(User.Password);
+            DB.SaveChanges();
+            return RedirectToAction("Success", "Shared");
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(User User, string Confirm)
+        {
+            if (User.Password != Confirm)
+                return Msg("两次密码输入不一致，请返回重新尝试！");
+            User.Password = Security.SHA1(Confirm);
+            DB.Users.Add(User);
+            DB.SaveChanges();
+            return RedirectToAction("Success", "Shared");
         }
     }
 }

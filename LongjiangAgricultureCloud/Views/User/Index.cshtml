@@ -3,7 +3,7 @@
     ViewBag.Title = "用户管理";
 }
 
-<h2>用户管理</h2>
+<h2>用户管理 <a href="/User/Create" class="sub-menu-item">添加用户</a></h2>
 <table class="table">
     <thead>
         <tr>
@@ -35,7 +35,8 @@
                 </td>
                 <td>@u.Address</td>
                 <td>
-                    <a href="javascript: deleteDialog('/User/Delete/@u.ID', 'user-@u.ID')">删除</a>
+                    <a href="/User/Edit/@u.ID">编辑用户</a>
+                    <a href="javascript: deleteDialog('/User/Delete/@u.ID', 'user-@u.ID')">删除用户</a>
                 </td>
             </tr>
         }

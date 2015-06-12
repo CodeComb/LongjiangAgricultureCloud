@@ -386,7 +386,7 @@ table {
 }
 
 .info {
-    width: 500px;
+    width: 600px;
     padding: 30px;
     background-color: #fff;
     color: #000;
@@ -515,7 +515,7 @@ select {
 }
 
 .message-container {
-    width: 520px;
+    width: 600px;
     padding: 30px;
     margin: 0 auto;
 }
@@ -543,4 +543,9 @@ select {
 
 .table tbody tr:hover a {
     color: #fff;
+}
+
+.sub-menu-item {
+    font-size: 16px;
+    color: #119eea!important;
 }
