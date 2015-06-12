@@ -404,6 +404,7 @@ table {
 }
 
     .btn:hover {
+        color: #000;
         background-color: #ddd;
     }
 
@@ -413,7 +414,19 @@ table {
     }
 
         .btn.inverse:hover {
+            color: #fff;
             background-color: #2a3b52;
+        }
+
+    .btn.red {
+        color: #fff;
+        border: 3px solid red;
+        background-color: #ff696d
+    }
+
+        .btn.red:hover {
+            color: #fff;
+            background-color: red;
         }
 
 .ico {
@@ -469,4 +482,43 @@ select {
 .pager-item.active, .pager-item:hover {
     background-color: rgb(30, 91, 120);
     color: #fff;
+}
+
+.message-bg {
+    background-color: rgba(0,0,0,0.5);
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.2s linear;
+}
+
+    .message-bg.active {
+        opacity: 1;
+    }
+
+.message-outer {
+    top: 50%;
+    width: 100%;
+    position: absolute;
+    background-color: #fff;
+    opacity: 0;
+    transform: scale(1.2);
+    transition: opacity 0.2s linear, transform 0.2s linear;
+}
+
+.message-outer {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.message-container {
+    width: 520px;
+    padding: 30px;
+    margin: 0 auto;
+}
+
+.message-buttons {
+    margin-top: 20px;
 }
