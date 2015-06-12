@@ -5,14 +5,10 @@
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm("Edit", "User", new { id = @Model.ID }, FormMethod.Post, null))
+@using (Html.BeginForm("Create", "User", null, FormMethod.Post, null))
 {
     @Html.AntiForgeryToken()
     <table class="detail-table">
-        <tr>
-            <td class="row-title">用户ID</td>
-            <td>@Model.ID</td>
-        </tr>
         <tr>
             <td class="row-title">用户名(手机号)</td>
             <td>@Html.TextBoxFor(x => x.Username, new { @class = "textbox w-3" })</td>
