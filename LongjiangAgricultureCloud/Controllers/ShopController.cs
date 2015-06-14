@@ -678,10 +678,57 @@ namespace LongjiangAgricultureCloud.Controllers
             return RedirectToAction("Success", "Shared");
         }
 
+        /// <summary>
+        /// 商品详情
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Product(int id)
         {
             var product = DB.Products.Find(id);
             return View(product);
+        }
+
+        /// <summary>
+        /// 订单详情
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult ShowOrder(int id)
+        {
+            var order = DB.Orders.Find(id);
+            return View(order);
+        }
+
+        /// <summary>
+        /// 修改订单状态
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult EditOrder(int id)
+        {
+            var order = DB.Orders.Find(id);
+            return View(order);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditOrder(int id, OrderStatus Status)
+        {
+            var order = DB.Orders.Find(id);
+            if (order.Status == OrderStatus.已取消 && Status != OrderStatus.已取消)
+            {
+                foreach (var od in order.OrderDetails)
+                    od.Product.StoreCount -= od.Count;
+            }
+            else if (order.Status != OrderStatus.已取消 && Status == OrderStatus.已取消)
+            {
+                foreach (var od in order.OrderDetails)
+                    od.Product.StoreCount += od.Count;
+            }
+            order.Status = Status;
+            DB.SaveChanges();
+            return RedirectToAction("Success", "Shared");
         }
     }
 }
