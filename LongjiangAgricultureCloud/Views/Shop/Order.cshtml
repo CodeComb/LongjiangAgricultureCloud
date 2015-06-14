@@ -7,12 +7,12 @@
 
 <form class="search">
     检索：
-    <input name="ID" type="text" class="textbox" placeholder="订单号" value="@Request.QueryString["ID"]" />
-    <input name="Begin" type="text" class="textbox datetime" placeholder="订单日期(大于)" value="@Request.QueryString["Begin"]" />
-    <input name="End" type="text" class="textbox datetime" placeholder="订单日期(小与)" value="@Request.QueryString["End"]" />
-    <input name="Name" type="text" class="textbox" placeholder="姓名" value="@Request.QueryString["Name"]" />
-    <input name="Address" type="text" class="textbox" placeholder="地址" value="@Request.QueryString["Address"]" />
-    <input name="Phone" type="text" class="textbox" placeholder="联系电话" value="@Request.QueryString["Phone"]" />
+    <input name="ID" type="text" class="textbox w-0-6" placeholder="订单号" value="@Request.QueryString["ID"]" />
+    <input name="Begin" type="text" class="textbox datetime w-0-8" placeholder="订单日期(大于)" value="@Request.QueryString["Begin"]" />
+    <input name="End" type="text" class="textbox datetime w-0-8" placeholder="订单日期(小于)" value="@Request.QueryString["End"]" />
+    <input name="Name" type="text" class="textbox w-0-6" placeholder="姓名" value="@Request.QueryString["Name"]" />
+    <input name="Address" type="text" class="textbox w-0-6" placeholder="地址" value="@Request.QueryString["Address"]" />
+    <input name="Phone" type="text" class="textbox w-0-6" placeholder="联系电话" value="@Request.QueryString["Phone"]" />
     <select name="Status">
         <option value="">订单状态</option>
         @foreach (var s in Enum.GetNames(typeof(OrderStatus)))
@@ -27,11 +27,11 @@
     <thead>
         <tr>
             <th>订单号</th>
-            <td>下单用户</td>
-            <td>下单日期</td>
-            <td>状态</td>
-            <td>金额</td>
-            <td>操作</td>
+            <th>下单用户</th>
+            <th>下单日期</th>
+            <th>状态</th>
+            <th>金额</th>
+            <th>操作</th>
         </tr>
     </thead>
     <tbody>
