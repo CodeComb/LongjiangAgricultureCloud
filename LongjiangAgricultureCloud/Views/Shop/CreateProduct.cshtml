@@ -18,6 +18,29 @@
             <td>@Html.TextBoxFor(x => x.ProductCode, new { @class = "textbox w-3" })</td>
         </tr>
         <tr>
+            <td class="row-title">分类</td>
+            <td>
+                <select id="lvl-1">
+                    @foreach (Catalog c in ViewBag.Level1)
+                    {
+                        <option value="@c.ID">@c.Title</option>
+                    }
+                </select>
+                <select id="lvl-2" data-parent-select="lvl-1">
+                    @foreach (Catalog c in ViewBag.Level2)
+                    {
+                        <option value="@c.ID" data-parent-id="@c.FatherID">@c.Title</option>
+                    }
+                </select>
+                <select id="lvl-3" data-parent-select="lvl-2">
+                    @foreach (Catalog c in ViewBag.Level3)
+                    {
+                        <option value="@c.ID" data-parent-id="@c.FatherID">@c.Title</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
             <td class="row-title">规格</td>
             <td>@Html.TextBoxFor(x => x.Standard, new { @class = "textbox w-3" })</td>
         </tr>
@@ -62,7 +85,7 @@
         }
         <tr>
             <td class="row-title">库存</td>
-            <td>@Html.TextBoxFor(x => x.Store, new { @class = "textbox w-3" })</td>
+            <td>@Html.TextBoxFor(x => x.StoreCount, new { @class = "textbox w-3" })</td>
         </tr>
         <tr>
             <td class="row-title">供应商</td>

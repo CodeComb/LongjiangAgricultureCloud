@@ -54,6 +54,15 @@ namespace LongjiangAgricultureCloud.Controllers
         {
             ViewBag.Stores = DB.Stores.Where(x => !x.Delete).ToList();
             ViewBag.Providers = DB.Providers.Where(x => x.Status == ProviderStatus.审核通过).ToList();
+            ViewBag.Level1 = (from c in DB.Catalogs
+                              where c.Level == 0
+                              select c).ToList();
+            ViewBag.Level2 = (from c in DB.Catalogs
+                              where c.Level == 1
+                              select c).ToList();
+            ViewBag.Level3 = (from c in DB.Catalogs
+                              where c.Level == 2
+                              select c).ToList();
             return View();
         }
 
@@ -71,7 +80,7 @@ namespace LongjiangAgricultureCloud.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateProduct(string Title, string ProductCode, string Standard, string Unit, float Price, int StoreID, int StoreCount, int? ProviderID)
+        public ActionResult CreateProduct(string Title, int CatalogID, string Description, string ProductCode, string Standard, string Unit, float Price, int StoreID, int StoreCount, int? ProviderID)
         {
             var Product = new Product();
             Product.Title = Title;
@@ -82,6 +91,8 @@ namespace LongjiangAgricultureCloud.Controllers
             Product.StoreID = StoreID;
             Product.StoreCount = StoreCount;
             Product.ProviderID = ProviderID;
+            Product.Description = Description;
+            Product.CatalogID = CatalogID;
             #region 处理5张图片
             var Picture1 = Request.Files["Picture1"];
             if (Picture1 != null)

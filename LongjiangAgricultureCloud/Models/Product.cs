@@ -73,5 +73,7 @@ namespace LongjiangAgricultureCloud.Models
         public int StoreID { get; set; }
 
         public virtual Store Store { get; set; }
+
+        public string Description { get; set; }
     }
 }
