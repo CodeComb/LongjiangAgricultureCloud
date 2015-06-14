@@ -22,6 +22,12 @@ namespace LongjiangAgricultureCloud.Controllers
                         where u.Username == User.Identity.Name
                         select u).Single();
             }
+            ViewBag.Provinces = DB.Areas.Where(x => x.Level == AreaLevel.省).ToList();
+            ViewBag.Cities = DB.Areas.Where(x => x.Level == AreaLevel.市).ToList();
+            ViewBag.Districts = DB.Areas.Where(x => x.Level == AreaLevel.区县).ToList();
+            ViewBag.Towns = DB.Areas.Where(x => x.Level == AreaLevel.乡镇).ToList();
+            ViewBag.Hamlets = DB.Areas.Where(x => x.Level == AreaLevel.村).ToList();
+            ViewBag.Villages = DB.Areas.Where(x => x.Level == AreaLevel.屯).ToList();
         }
 
         public ActionResult Msg(string msg)

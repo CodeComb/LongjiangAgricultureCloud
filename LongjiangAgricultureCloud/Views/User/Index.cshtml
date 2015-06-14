@@ -9,7 +9,7 @@
     检索：
     <input type="text" class="textbox" name="Username" placeholder="用户名(手机号)" />
     <input type="text" class="textbox" name="Name" placeholder="真实姓名" />
-    <select>
+    <select name="Role">
         <option value="">权限</option>
         @foreach (var str in Enum.GetNames(typeof(UserRole)))
         {
@@ -43,10 +43,13 @@
                     @{ Area i = u.AreaID == null ? null : u.Area; var result = ""; }
                     @while (i != null)
                     {
-                        result = i.Title + result;
+                        if (i.Title != "-")
+                        {
+                            result = i.Title + result;
+                        }
                         i = i.FatherID == null ? null : i.Father;
-                        @result
                     }
+                    @result
                 </td>
                 <td>@u.Address</td>
                 <td>

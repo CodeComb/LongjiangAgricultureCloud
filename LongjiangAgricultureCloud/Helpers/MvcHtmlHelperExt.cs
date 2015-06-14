@@ -38,7 +38,7 @@ namespace LongjiangAgricultureCloud.Helpers
         {
             return new MvcHtmlString(Helpers.Time.ToTimeStamp(time).ToString());
         }
-
+        
         public static MvcHtmlString MakePager<TModel>(this HtmlHelper<TModel> self)
         {
             var tmp = (PagerInfo)self.ViewBag.PageInfo;

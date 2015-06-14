@@ -29,6 +29,52 @@
             <td class="row-title">真实姓名</td>
             <td>@Html.TextBoxFor(x => x.Name, new { @class = "textbox w-3" })</td>
         </tr>
+        <tr>
+            <td class="row-title">地理位置</td>
+            <td>
+                <select id="province">
+                    <option value="">省</option>
+                    @foreach (Area a in ViewBag.Provinces)
+                    {
+                        <option value="@a.ID">@a.Title</option>
+                    }
+                </select>
+                <select id="city" data-parent-select="province">
+                    @foreach (Area a in ViewBag.Cities)
+                    {
+                        <option data-parent-id="@a.FatherID" value="@a.ID">@a.Title</option>
+                    }
+                </select>
+                <select id="district" data-parent-select="city">
+                    @foreach (Area a in ViewBag.Districts)
+                    {
+                        <option data-parent-id="@a.FatherID" value="@a.ID">@a.Title</option>
+                    }
+                </select>
+                <select id="town" data-parent-select="district">
+                    @foreach (Area a in ViewBag.Towns)
+                    {
+                        <option data-parent-id="@a.FatherID" value="@a.ID">@a.Title</option>
+                    }
+                </select>
+                <select id="hamlet" data-parent-select="town">
+                    @foreach (Area a in ViewBag.Hamlets)
+                    {
+                        <option data-parent-id="@a.FatherID" value="@a.ID">@a.Title</option>
+                    }
+                </select>
+                <select id="village" data-parent-select="hamlet" name="AreaID">
+                    @foreach (Area a in ViewBag.Villages)
+                    {
+                        <option data-parent-id="@a.FatherID" value="@a.ID">@a.Title</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="row-title">详细位置</td>
+            <td>@Html.TextBoxFor(x => x.Address, new { @class = "textbox w-3" })</td>
+        </tr>
     </table>
     <p><input type="submit" value="保存" class="btn inverse" /></p>
 }
