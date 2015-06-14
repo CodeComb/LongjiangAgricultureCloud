@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Configuration;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -29,6 +30,11 @@ namespace LongjiangAgricultureCloud.Controllers
             ViewBag.Towns = DB.Areas.Where(x => x.Level == AreaLevel.乡镇).ToList();
             ViewBag.Hamlets = DB.Areas.Where(x => x.Level == AreaLevel.村).ToList();
             ViewBag.Villages = DB.Areas.Where(x => x.Level == AreaLevel.屯).ToList();
+            ViewBag.VerifyProductComment = Convert.ToBoolean(ConfigurationManager.AppSettings["VerifyProductComment"]);
+            ViewBag.VerifyService = Convert.ToBoolean(ConfigurationManager.AppSettings["VerifyService"]);
+            ViewBag.VerifyLocalTong = Convert.ToBoolean(ConfigurationManager.AppSettings["VerifyLocalTong"]);
+            ViewBag.AlipayAppKey = ConfigurationManager.AppSettings["AlipayAppKey"];
+            ViewBag.WeixinPayAppKey = ConfigurationManager.AppSettings["WeixinPayAppKey"];
         }
 
         public ActionResult Msg(string msg)

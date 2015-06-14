@@ -47,5 +47,10 @@ namespace LongjiangAgricultureCloud.Models
         public int CatalogID { get; set; }
 
         public virtual Catalog Catalog { get; set; }
+
+        [Index]
+        public DateTime Time { get; set; }
+
+        public InformationType Type { get; set; }
     }
 }

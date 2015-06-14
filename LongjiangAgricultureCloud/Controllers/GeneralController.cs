@@ -16,11 +16,6 @@ namespace LongjiangAgricultureCloud.Controllers
         // GET: General
         public ActionResult Index()
         {
-            ViewBag.VerifyProductComment = Convert.ToBoolean(ConfigurationManager.AppSettings["VerifyProductComment"]);
-            ViewBag.VerifyService = Convert.ToBoolean(ConfigurationManager.AppSettings["VerifyService"]);
-            ViewBag.VerifyLocalTong = Convert.ToBoolean(ConfigurationManager.AppSettings["VerifyLocalTong"]);
-            ViewBag.AlipayAppKey = ConfigurationManager.AppSettings["AlipayAppKey"];
-            ViewBag.WeixinPayAppKey = ConfigurationManager.AppSettings["WeixinPayAppKey"];
             return View();
         }
 

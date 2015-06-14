@@ -328,6 +328,9 @@
     <Compile Include="Controllers\CKEditorController.cs" />
     <Compile Include="Controllers\GeneralController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InformationController.cs" />
+    <Compile Include="Controllers\LocalController.cs" />
+    <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -387,6 +390,7 @@
     <Content Include="Views\Shop\Order.cshtml" />
     <Content Include="Views\Shop\ShowOrder.cshtml" />
     <Content Include="Views\Shop\EditOrder.cshtml" />
+    <Content Include="Views\Service\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -396,6 +400,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Information\" />
+    <Folder Include="Views\Local\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
