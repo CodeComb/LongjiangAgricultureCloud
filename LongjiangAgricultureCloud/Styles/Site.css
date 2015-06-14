@@ -549,3 +549,11 @@ select {
     font-size: 16px;
     color: #119eea!important;
 }
+
+img {
+    max-width: 100%;
+}
+
+.img-cert {
+    width: 480px;
+}

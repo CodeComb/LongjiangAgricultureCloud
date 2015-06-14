@@ -21,6 +21,7 @@ namespace LongjiangAgricultureCloud.Controllers
                 CurrentUser = (from u in DB.Users
                         where u.Username == User.Identity.Name
                         select u).Single();
+                ViewBag.CurrentUser = CurrentUser;
             }
             ViewBag.Provinces = DB.Areas.Where(x => x.Level == AreaLevel.省).ToList();
             ViewBag.Cities = DB.Areas.Where(x => x.Level == AreaLevel.市).ToList();
