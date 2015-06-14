@@ -1,0 +1,84 @@
+﻿@model Information
+@{
+    ViewBag.Title = "发布信息";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Create", "Service", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table class="detail-table">
+        <tr>
+            <td class="row-title">分类</td>
+            <td>
+                <select id="lvl1">
+                    <option>无</option>
+                    @foreach (Catalog c in ViewBag.Level1)
+                    {
+                        <option value="@c.ID">@c.Title</option>
+                    }
+                </select>
+
+                <select id="lvl2" data-parent-select="lvl1">
+                    @foreach (Catalog c in ViewBag.Level2)
+                    {
+                        <option data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
+                    }
+                </select>
+
+                <select id="lvl3" data-parent-select="lvl2">
+                    @foreach (Catalog c in ViewBag.Level3)
+                    {
+                        <option data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
+                    }
+                </select>
+
+                <select id="lvl4" data-parent-select="lvl3" name="CatalogID">
+                    @foreach (Catalog c in ViewBag.Level4)
+                    {
+                        <option data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="row-title">类型</td>
+            <td>
+                <select name="Type">
+                    <option>农机找活</option>
+                    <option>附近农手</option>
+                    <option>土地找机手</option>
+                    <option>二手农机</option>
+                    <option>维修站</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="row-title">标题</td>
+            <td>@Html.TextBoxFor(x => x.Title, new { @class = "textbox w-3" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">详细描述</td>
+            <td>@Html.TextAreaFor(x => x.Description, new { @class = "textbox w-3", style = "height: 120px" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">联系人</td>
+            <td>@Html.TextBoxFor(x => x.Name, new { @class = "textbox w-3" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">联系电话</td>
+            <td>@Html.TextBoxFor(x => x.Phone, new { @class = "textbox w-3" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">地址</td>
+            <td>@Html.TextBoxFor(x => x.Address, new { @class = "textbox w-3" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">资质照片（维修站）</td>
+            <td>
+                <input type="file" name="Picture" />
+            </td>
+        </tr>
+    </table>
+    <p><input type="submit" class="btn inverse" value="发布" /></p>
+}

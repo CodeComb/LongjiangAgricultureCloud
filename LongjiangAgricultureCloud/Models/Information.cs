@@ -13,8 +13,15 @@ namespace LongjiangAgricultureCloud.Models
         土地找机手,
         附近农手,
         二手农机,
+        维修站,
         本地通信息,
         农业信息
+    }
+
+    public enum SupplyDemand
+    {
+        供,
+        求
     }
 
     public class Information
@@ -22,6 +29,10 @@ namespace LongjiangAgricultureCloud.Models
         public int ID { get; set; }
 
         public string Title { get; set; }
+
+        public string Name { get; set; }
+
+        public string Phone { get; set; }
 
         [Index]
         public bool Verify { get; set; }
@@ -39,12 +50,12 @@ namespace LongjiangAgricultureCloud.Models
         public string Address { get; set; }
 
         [ForeignKey("User")]
-        public int UserID { get; set; }
+        public int? UserID { get; set; }
 
         public virtual User User { get; set; }
 
         [ForeignKey("Catalog")]
-        public int CatalogID { get; set; }
+        public int? CatalogID { get; set; }
 
         public virtual Catalog Catalog { get; set; }
 
@@ -52,5 +63,7 @@ namespace LongjiangAgricultureCloud.Models
         public DateTime Time { get; set; }
 
         public InformationType Type { get; set; }
+
+        public SupplyDemand? SupplyDemand { get; set; }
     }
 }

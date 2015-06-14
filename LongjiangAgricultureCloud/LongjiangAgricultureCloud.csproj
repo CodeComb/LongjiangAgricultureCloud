@@ -391,6 +391,12 @@
     <Content Include="Views\Shop\ShowOrder.cshtml" />
     <Content Include="Views\Shop\EditOrder.cshtml" />
     <Content Include="Views\Service\Index.cshtml" />
+    <Content Include="Views\Service\Create.cshtml" />
+    <Content Include="Views\Service\Verify.cshtml" />
+    <Content Include="Views\Service\Edit.cshtml" />
+    <Content Include="Views\Local\Index.cshtml" />
+    <Content Include="Views\Local\Edit.cshtml" />
+    <Content Include="Views\Local\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -401,7 +407,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Information\" />
-    <Folder Include="Views\Local\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,0 +1,60 @@
+﻿@model Information
+@{
+    ViewBag.Title = "审核信息";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Verify", "Service", new { id = Model.ID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table class="detail-table">
+        <tr>
+            <td class="row-title">分类</td>
+            <td>
+                @{ var c = Model.Catalog; var str = ""; }
+                @while (c != null)
+                {
+                    str = c.Title + " " + str;
+                    c = c.Father;
+                }
+                @str
+            </td>
+        </tr>
+        <tr>
+            <td class="row-title">类型</td>
+            <td>@Model.Type</td>
+        </tr>
+        <tr>
+            <td class="row-title">标题</td>
+            <td>@Model.Title</td>
+        </tr>
+        <tr>
+            <td class="row-title">详细描述</td>
+            <td>@Model.Description</td>
+        </tr>
+        <tr>
+            <td class="row-title">联系人</td>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <td class="row-title">联系电话</td>
+            <td>@Model.Phone</td>
+        </tr>
+        <tr>
+            <td class="row-title">地址</td>
+            <td>@Model.Address</td>
+        </tr>
+        @if (Model.Type == InformationType.维修站)
+        {
+            <tr>
+                <td class="row-title">资质照片（维修站）</td>
+                <td>
+                    <img src="/Shared/InformationImg/@Model.ID" alt="图片" class="img-cert" />
+                </td>
+            </tr>
+        }
+    </table>
+    <p><input type="submit" class="btn inverse" value="通过审核" /></p>
+                    }
