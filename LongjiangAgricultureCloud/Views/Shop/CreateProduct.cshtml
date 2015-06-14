@@ -41,6 +41,12 @@
             </td>
         </tr>
         <tr>
+            <td class="row-title">商品描述</td>
+            <td>
+                @Html.TextAreaFor(x => x.Description, new { @class="ckeditor" });
+            </td>
+        </tr>
+        <tr>
             <td class="row-title">规格</td>
             <td>@Html.TextBoxFor(x => x.Standard, new { @class = "textbox w-3" })</td>
         </tr>

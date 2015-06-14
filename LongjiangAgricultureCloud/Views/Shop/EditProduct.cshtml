@@ -1,7 +1,145 @@
 ﻿@model Product
 @{
-    ViewBag.Title = "EditProduct";
+    ViewBag.Title = Model.Title + " - 编辑商品";
 }
 
-<h2>EditProduct</h2>
+<h2>@ViewBag.Title</h2>
 
+@using (Html.BeginForm("EditProduct", "Shop", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <table class="detail-table">
+        <tr>
+            <td class="row-title">商品名称</td>
+            <td>@Html.TextBoxFor(x => x.Title, new { @class = "textbox w-3" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">商品编码</td>
+            <td>@Html.TextBoxFor(x => x.ProductCode, new { @class = "textbox w-3" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">分类</td>
+            <td>
+                <select id="lvl-1">
+                    @foreach (Catalog c in ViewBag.Level1)
+                    {
+                        <option @(c.ID == Model.Catalog.Father.FatherID ? "selected" : "") value="@c.ID">@c.Title</option>
+                    }
+                </select>
+                <select id="lvl-2" data-parent-select="lvl-1">
+                    @foreach (Catalog c in ViewBag.Level2)
+                    {
+                        <option @(c.ID == Model.Catalog.FatherID ? "selected" : "") value="@c.ID" data-parent-id="@c.FatherID">@c.Title</option>
+                    }
+                </select>
+                <select id="lvl-3" data-parent-select="lvl-2" name="CatalogID">
+                    @foreach (Catalog c in ViewBag.Level3)
+                    {
+                        <option @(c.ID == Model.CatalogID ? "selected" : "") value="@c.ID" data-parent-id="@c.FatherID">@c.Title</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="row-title">商品描述</td>
+            <td>
+                @Html.TextAreaFor(x => x.Description, new { @class = "ckeditor" });
+            </td>
+        </tr>
+        <tr>
+            <td class="row-title">规格</td>
+            <td>@Html.TextBoxFor(x => x.Standard, new { @class = "textbox w-3" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">单位</td>
+            <td>@Html.TextBoxFor(x => x.Unit, new { @class = "textbox w-3" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">单价</td>
+            <td>@Html.TextBoxFor(x => x.Price, new { @class = "textbox w-3" })</td>
+        </tr>
+        @if (ViewBag.CurrentUser.Role == UserRole.库存管理员)
+        {
+            <tr>
+                <td class="row-title">仓库</td>
+                <td>
+                    <select name="StoreID">
+                        @foreach (Store s in ViewBag.Stores)
+                        {
+                            if (s.UserID == ViewBag.CurrentUser.ID)
+                            {
+                                <optionc value="@s.ID">
+                                    @s.Title</option>
+                            }
+                        }
+                </select>
+            </td>
+        </tr>
+        }
+        else
+        {
+            <tr>
+                <td class="row-title">仓库</td>
+                <td>
+                    <select name="StoreID">
+                        @foreach (Store s in ViewBag.Stores)
+                        {
+                            <option @(c.ID == Model.Catalog.Father.FatherID ? "selected" : "") value="@s.ID">@s.Title</option>
+                        }
+                    </select>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td class="row-title">库存</td>
+            <td>@Html.TextBoxFor(x => x.StoreCount, new { @class = "textbox w-3" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">供应商</td>
+            <td>
+                <select name="ProviderID">
+                    @foreach (Provider p in ViewBag.Providers)
+                    {
+                        <option @(p.ID == Model.ProviderID ? "selected" : "") value="@p.ID">@p.Title</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="row-title">商品展示图片1</td>
+            <td>
+                <p><img src="/Shared/ProductImg/@Model.ID?index=1" alt="商品图片展示" class="img-cert"></p>
+                <p>图片1：<input type="file" name="Picture1" /></p>
+            </td>
+        </tr>
+        <tr>
+            <td class="row-title">商品展示图片2</td>
+            <td>
+                <p><img src="/Shared/ProductImg/@Model.ID?index=2" alt="商品图片展示" class="img-cert"></p>
+                <p>图片1：<input type="file" name="Picture2" /></p>
+            </td>
+        </tr>
+        <tr>
+            <td class="row-title">商品展示图片3</td>
+            <td>
+                <p><img src="/Shared/ProductImg/@Model.ID?index=3" alt="商品图片展示" class="img-cert"></p>
+                <p>图片1：<input type="file" name="Picture3" /></p>
+            </td>
+        </tr>
+        <tr>
+            <td class="row-title">商品展示图片4</td>
+            <td>
+                <p><img src="/Shared/ProductImg/@Model.ID?index=4" alt="商品图片展示" class="img-cert"></p>
+                <p>图片1：<input type="file" name="Picture4" /></p>
+            </td>
+        </tr>
+        <tr>
+            <td class="row-title">商品展示图片5</td>
+            <td>
+                <p><img src="/Shared/ProductImg/@Model.ID?index=5" alt="商品图片展示" class="img-cert"></p>
+                <p>图片1：<input type="file" name="Picture5" /></p>
+            </td>
+        </tr>
+    </table>
+    <p><input type="submit" class="btn inverse" value="保存" /></p>
+}

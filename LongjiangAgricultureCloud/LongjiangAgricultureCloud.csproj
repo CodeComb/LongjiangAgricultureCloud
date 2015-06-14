@@ -325,6 +325,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CKEditorController.cs" />
     <Compile Include="Controllers\GeneralController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
@@ -382,6 +383,7 @@
     <Content Include="Views\Shop\EditStore.cshtml" />
     <Content Include="Views\Shop\Product.cshtml" />
     <Content Include="Views\Shop\EditProduct.cshtml" />
+    <Content Include="Views\CKEditor\Upload.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

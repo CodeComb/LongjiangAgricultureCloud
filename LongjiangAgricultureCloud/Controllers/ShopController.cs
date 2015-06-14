@@ -165,6 +165,128 @@ namespace LongjiangAgricultureCloud.Controllers
         }
 
         /// <summary>
+        /// 编辑商品
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult EditProduct(int id)
+        {
+            var product = DB.Products.Find(id);
+            ViewBag.Stores = DB.Stores.Where(x => !x.Delete).ToList();
+            ViewBag.Providers = DB.Providers.Where(x => x.Status == ProviderStatus.审核通过).ToList();
+            ViewBag.Level1 = (from c in DB.Catalogs
+                              where c.Level == 0
+                              select c).ToList();
+            ViewBag.Level2 = (from c in DB.Catalogs
+                              where c.Level == 1
+                              select c).ToList();
+            ViewBag.Level3 = (from c in DB.Catalogs
+                              where c.Level == 2
+                              select c).ToList();
+            return View(product);
+        }
+
+        /// <summary>
+        /// 编辑商品
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="Title"></param>
+        /// <param name="CatalogID"></param>
+        /// <param name="Description"></param>
+        /// <param name="ProductCode"></param>
+        /// <param name="Standard"></param>
+        /// <param name="Unit"></param>
+        /// <param name="Price"></param>
+        /// <param name="StoreID"></param>
+        /// <param name="StoreCount"></param>
+        /// <param name="ProviderID"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditProduct(int id, string Title, int CatalogID, string Description, string ProductCode, string Standard, string Unit, float Price, int StoreID, int StoreCount, int? ProviderID)
+        {
+            var Product = DB.Products.Find(id);
+            Product.Title = Title;
+            Product.ProductCode = ProductCode;
+            Product.Standard = Standard;
+            Product.Unit = Unit;
+            Product.Price = Price;
+            Product.StoreID = StoreID;
+            Product.StoreCount = StoreCount;
+            Product.ProviderID = ProviderID;
+            Product.Description = Description;
+            Product.CatalogID = CatalogID;
+            #region 处理5张图片
+            var Picture1 = Request.Files["Picture1"];
+            if (Picture1 != null)
+            {
+                using (var binaryReader = new BinaryReader(Picture1.InputStream))
+                {
+                    Product.Picture1 = binaryReader.ReadBytes(Picture1.ContentLength);
+                }
+            }
+            else
+            {
+                Product.Picture1 = null;
+            }
+
+            var Picture2 = Request.Files["Picture2"];
+            if (Picture2 != null)
+            {
+                using (var binaryReader = new BinaryReader(Picture2.InputStream))
+                {
+                    Product.Picture2 = binaryReader.ReadBytes(Picture2.ContentLength);
+                }
+            }
+            else
+            {
+                Product.Picture2 = null;
+            }
+
+            var Picture3 = Request.Files["Picture3"];
+            if (Picture3 != null)
+            {
+                using (var binaryReader = new BinaryReader(Picture3.InputStream))
+                {
+                    Product.Picture3 = binaryReader.ReadBytes(Picture3.ContentLength);
+                }
+            }
+            else
+            {
+                Product.Picture3 = null;
+            }
+
+            var Picture4 = Request.Files["Picture4"];
+            if (Picture4 != null)
+            {
+                using (var binaryReader = new BinaryReader(Picture4.InputStream))
+                {
+                    Product.Picture4 = binaryReader.ReadBytes(Picture4.ContentLength);
+                }
+            }
+            else
+            {
+                Product.Picture4 = null;
+            }
+
+            var Picture5 = Request.Files["Picture5"];
+            if (Picture5 != null)
+            {
+                using (var binaryReader = new BinaryReader(Picture5.InputStream))
+                {
+                    Product.Picture5 = binaryReader.ReadBytes(Picture5.ContentLength);
+                }
+            }
+            else
+            {
+                Product.Picture5 = null;
+            }
+            #endregion
+            DB.SaveChanges();
+            return RedirectToAction("Success", "Shared");
+        }
+
+        /// <summary>
         /// 供应商列表
         /// </summary>
         /// <param name="Title"></param>

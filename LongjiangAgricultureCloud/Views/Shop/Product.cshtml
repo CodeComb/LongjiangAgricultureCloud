@@ -7,8 +7,8 @@
 
 <table class="detail-table">
     <tr>
-        <td class="row-title">商品ID</td>
-        <td>@Model.ID</td>
+        <td class="row-title">商品编号</td>
+        <td>@Model.ProductCode</td>
     </tr>
     <tr>
         <td class="row-title">商品名称</td>
@@ -18,11 +18,12 @@
         <td class="row-title">所属分类</td>
         <td>
             @{ Catalog i = Model.Catalog; var str = ""; }
-            @while (i.FatherID != null)
+            @while (i != null)
             {
-                str = i.Title + str;
+                str = i.Title + " - " + str;
+                i = i.Father;
             }
-            @str
+            @str.TrimEnd(' ').TrimEnd('-')
         </td>
     </tr>
     <tr>
