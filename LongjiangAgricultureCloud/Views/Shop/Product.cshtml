@@ -1,0 +1,73 @@
+﻿@model Product
+@{
+    ViewBag.Title = "商品详情 - " + Model.Title;
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="detail-table">
+    <tr>
+        <td class="row-title">商品ID</td>
+        <td>@Model.ID</td>
+    </tr>
+    <tr>
+        <td class="row-title">商品名称</td>
+        <td>@Model.Title</td>
+    </tr>
+    <tr>
+        <td class="row-title">所属分类</td>
+        <td>
+            @{ Catalog i = Model.Catalog; var str = ""; }
+            @while (i.FatherID != null)
+            {
+                str = i.Title + str;
+            }
+            @str
+        </td>
+    </tr>
+    <tr>
+        <td class="row-title">供应商</td>
+        <td>@(Model.ProviderID == null ? "未分配" : Model.Provider.Title)</td>
+    </tr>
+    <tr>
+        <td class="row-title">所属仓库</td>
+        <td>@Model.Store.Title</td>
+    </tr>
+    <tr>
+        <td class="row-title">库存数量</td>
+        <td>@Model.StoreCount</td>
+    </tr>
+    <tr>
+        <td class="row-title">单位 / 规格</td>
+        <td>@Model.Unit / @Model.Standard</td>
+    </tr>
+    <tr>
+        <td class="row-title">单价</td>
+        <td>￥@Model.Price.ToString("0.00")</td>
+    </tr>
+    <tr>
+        <td class="row-title">图片展示</td>
+        <td>
+            @if (Model.Picture1 != null && Model.Picture1.Length > 0)
+            {
+                <p><img src="/Shared/ProductImg/@Model.ID?index=1" alt="图片展示" class="img-cert" /></p>
+            }
+            @if (Model.Picture2 != null && Model.Picture2.Length > 0)
+            {
+                <p><img src="/Shared/ProductImg/@Model.ID?index=2" alt="图片展示" class="img-cert" /></p>
+            }
+            @if (Model.Picture3 != null && Model.Picture3.Length > 0)
+            {
+                <p><img src="/Shared/ProductImg/@Model.ID?index=3" alt="图片展示" class="img-cert" /></p>
+            }
+            @if (Model.Picture4 != null && Model.Picture4.Length > 0)
+            {
+                <p><img src="/Shared/ProductImg/@Model.ID?index=4" alt="图片展示" class="img-cert" /></p>
+            }
+            @if (Model.Picture5 != null && Model.Picture5.Length > 0)
+            {
+                <p><img src="/Shared/ProductImg/@Model.ID?index=5" alt="图片展示" class="img-cert" /></p>
+            }
+        </td>
+    </tr>
+</table>

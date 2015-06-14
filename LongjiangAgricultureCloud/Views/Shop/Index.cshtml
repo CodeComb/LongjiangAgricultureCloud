@@ -10,11 +10,11 @@
 
 <form class="search">
     检索：
-    <input type="text" class="textbox" name="Title" placeholder="商品名称" />
-    <input type="text" class="textbox" name="ProductCode" placeholder="商品编码" />
-    <input type="text" class="textbox" name="Provider" placeholder="供应商" />
-    <input type="text" class="textbox" name="StoreGte" placeholder="库存 大于" />
-    <input type="text" class="textbox" name="StoreLte" placeholder="库存 小于" />
+    <input type="text" class="textbox" name="Title" placeholder="商品名称" value="@Request.QueryString["Title"]" />
+    <input type="text" class="textbox" name="ProductCode" placeholder="商品编码" value="@Request.QueryString["ProductCode"]" />
+    <input type="text" class="textbox" name="Provider" placeholder="供应商" value="@Request.QueryString["Provider"]" />
+    <input type="text" class="textbox" name="StoreGte" placeholder="库存 大于" value="@Request.QueryString["StoreGte"]" />
+    <input type="text" class="textbox" name="StoreLte" placeholder="库存 小于" value="@Request.QueryString["StoreLte"]" />
     <input type="submit" class="btn" value="检索" />
 </form>
 
@@ -41,7 +41,7 @@
                 <td>@p.Store.Title</td>
                 <td>@p.StoreCount</td>
                 <td>@p.Unit / @p.Standard</td>
-                <td>@p.Price</td>
+                <td>￥@p.Price.ToString("0.00")</td>
                 <td>
                     <a href="/Shop/Product/@p.ID">查看详情</a>
                     <a href="/Shop/EditProduct/@p.ID">编辑商品</a>

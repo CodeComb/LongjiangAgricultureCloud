@@ -545,5 +545,11 @@ namespace LongjiangAgricultureCloud.Controllers
             DB.SaveChanges();
             return RedirectToAction("Success", "Shared");
         }
+
+        public ActionResult Product(int id)
+        {
+            var product = DB.Products.Find(id);
+            return View(product);
+        }
     }
 }

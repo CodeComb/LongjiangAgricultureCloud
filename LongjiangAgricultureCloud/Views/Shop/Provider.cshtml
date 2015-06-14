@@ -10,9 +10,9 @@
 
 <form class="search">
     检索：
-    <input type="text" class="textbox" name="Title" placeholder="供应商名称" />
-    <input type="text" class="textbox" name="Name" placeholder="联系人" />
-    <input type="text" class="textbox" name="Phone" placeholder="联系电话" />
+    <input type="text" class="textbox" name="Title" placeholder="供应商名称" value="@Request.QueryString["Title"]" />
+    <input type="text" class="textbox" name="Name" placeholder="联系人" value="@Request.QueryString["Name"]" />
+    <input type="text" class="textbox" name="Phone" placeholder="联系电话" value="@Request.QueryString["Phone"]" />
     <select name="Status">
         <option value="">供应商状态</option>
         @foreach (var s in Enum.GetNames(typeof(ProviderStatus)))

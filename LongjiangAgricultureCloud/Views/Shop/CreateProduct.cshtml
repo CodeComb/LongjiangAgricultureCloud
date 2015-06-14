@@ -32,7 +32,7 @@
                         <option value="@c.ID" data-parent-id="@c.FatherID">@c.Title</option>
                     }
                 </select>
-                <select id="lvl-3" data-parent-select="lvl-2">
+                <select id="lvl-3" data-parent-select="lvl-2" name="CatalogID">
                     @foreach (Catalog c in ViewBag.Level3)
                     {
                         <option value="@c.ID" data-parent-id="@c.FatherID">@c.Title</option>
