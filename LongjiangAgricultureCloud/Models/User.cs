@@ -39,6 +39,8 @@ namespace LongjiangAgricultureCloud.Models
 
         public string Address { get; set; }
 
+        public string PostCode { get; set; }
+
         public UserRole Role { get; set; }
 
         public virtual ICollection<Provider> Providers { get; set; }

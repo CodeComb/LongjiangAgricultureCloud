@@ -43,11 +43,19 @@ namespace LongjiangAgricultureCloud.Models
         public PayMethod PayMethod { get; set; }
 
         [Index]
+        [StringLength(512)]
+        public string Address { get; set; }
+
+        [Index]
         [StringLength(256)]
         public string PayCode { get; set; }
 
         public string Hint { get; set; }
 
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+
+        public string InvoiceName { get; set; }
+
+        public string InvoiceAddress { get; set; }
     }
 }

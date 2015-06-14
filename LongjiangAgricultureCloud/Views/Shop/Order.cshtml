@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Order>
+@{
+    ViewBag.Title = "订单管理";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<form class="search">
+    检索：
+    <input name="ID" type="text" class="textbox" placeholder="订单号" value="@Request.QueryString["ID"]" />
+    <input name="Begin" type="text" class="textbox datetime" placeholder="订单日期(大于)" value="@Request.QueryString["Begin"]" />
+    <input name="End" type="text" class="textbox datetime" placeholder="订单日期(小与)" value="@Request.QueryString["End"]" />
+    <input name="Name" type="text" class="textbox" placeholder="姓名" value="@Request.QueryString["Name"]" />
+    <input name="Address" type="text" class="textbox" placeholder="地址" value="@Request.QueryString["Address"]" />
+    <input name="Phone" type="text" class="textbox" placeholder="联系电话" value="@Request.QueryString["Phone"]" />
+    <select name="Status">
+        <option value="">订单状态</option>
+        @foreach (var s in Enum.GetNames(typeof(OrderStatus)))
+        {
+            <option>@s</option>
+        }
+    </select>
+    <input type="submit" value="检索" class="btn" />
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>订单号</th>
+            <td>下单用户</td>
+            <td>下单日期</td>
+            <td>状态</td>
+            <td>金额</td>
+            <td>操作</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var o in Model)
+        {
+            <tr>
+                <td>@o.ID</td>
+                <td>@o.User.Name (o.User.Username)</td>
+                <td>@o.Time</td>
+                <td>@o.Status</td>
+                <td>￥@o.OrderDetails.Sum(x => x.Price).ToString("0.00")</td>
+                <td>
+                    <a href="/Shop/ShowOrder/@o.ID">查看详情</a>
+                    <a href="/Shop/EditOrder/@o.ID">修改状态</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.MakePager()

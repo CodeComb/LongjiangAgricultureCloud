@@ -203,6 +203,7 @@ namespace LongjiangAgricultureCloud.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult EditProduct(int id, string Title, int CatalogID, string Description, string ProductCode, string Standard, string Unit, float Price, int StoreID, int StoreCount, int? ProviderID)
         {
             var Product = DB.Products.Find(id);
@@ -225,10 +226,6 @@ namespace LongjiangAgricultureCloud.Controllers
                     Product.Picture1 = binaryReader.ReadBytes(Picture1.ContentLength);
                 }
             }
-            else
-            {
-                Product.Picture1 = null;
-            }
 
             var Picture2 = Request.Files["Picture2"];
             if (Picture2 != null)
@@ -237,10 +234,6 @@ namespace LongjiangAgricultureCloud.Controllers
                 {
                     Product.Picture2 = binaryReader.ReadBytes(Picture2.ContentLength);
                 }
-            }
-            else
-            {
-                Product.Picture2 = null;
             }
 
             var Picture3 = Request.Files["Picture3"];
@@ -251,10 +244,6 @@ namespace LongjiangAgricultureCloud.Controllers
                     Product.Picture3 = binaryReader.ReadBytes(Picture3.ContentLength);
                 }
             }
-            else
-            {
-                Product.Picture3 = null;
-            }
 
             var Picture4 = Request.Files["Picture4"];
             if (Picture4 != null)
@@ -264,10 +253,6 @@ namespace LongjiangAgricultureCloud.Controllers
                     Product.Picture4 = binaryReader.ReadBytes(Picture4.ContentLength);
                 }
             }
-            else
-            {
-                Product.Picture4 = null;
-            }
 
             var Picture5 = Request.Files["Picture5"];
             if (Picture5 != null)
@@ -276,10 +261,6 @@ namespace LongjiangAgricultureCloud.Controllers
                 {
                     Product.Picture5 = binaryReader.ReadBytes(Picture5.ContentLength);
                 }
-            }
-            else
-            {
-                Product.Picture5 = null;
             }
             #endregion
             DB.SaveChanges();
@@ -569,9 +550,38 @@ namespace LongjiangAgricultureCloud.Controllers
             }
         }
 
-        public ActionResult Order()
+        /// <summary>
+        /// 订单管理
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="Begin"></param>
+        /// <param name="End"></param>
+        /// <param name="Status"></param>
+        /// <param name="Address"></param>
+        /// <param name="Name"></param>
+        /// <param name="Phone"></param>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        public ActionResult Order(Guid? ID, DateTime? Begin, DateTime? End, OrderStatus? Status, string Address, string Name, string Phone, int p = 0)
         {
-            return View();
+            IEnumerable<Order> query = DB.Orders;
+            if (ID.HasValue)
+                query = query.Where(x => x.ID == ID.Value);
+            if (Begin.HasValue)
+                query = query.Where(x => x.Time >= Begin.Value);
+            if (End.HasValue)
+                query = query.Where(x => x.Time <= End.Value);
+            if (Status.HasValue)
+                query = query.Where(x => x.Status == Status.Value);
+            if (!string.IsNullOrEmpty(Name))
+                query = query.Where(x => x.User.Name.Contains(Name) || Name.Contains(x.User.Name));
+            if (!string.IsNullOrEmpty(Phone))
+                query = query.Where(x => x.User.Username == Phone);
+            if (!string.IsNullOrEmpty(Address))
+                query = query.Where(x => x.Address.Contains(Address) || Address.Contains(x.Address));
+            query = query.OrderByDescending(x => x.Time);
+            ViewBag.PageInfo = PagerHelper.Do(ref query, 50, p);
+            return View(query);
         }
 
         public ActionResult Distribute()

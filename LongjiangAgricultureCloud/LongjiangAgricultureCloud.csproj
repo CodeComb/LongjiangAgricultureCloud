@@ -384,6 +384,7 @@
     <Content Include="Views\Shop\Product.cshtml" />
     <Content Include="Views\Shop\EditProduct.cshtml" />
     <Content Include="Views\CKEditor\Upload.cshtml" />
+    <Content Include="Views\Shop\Order.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

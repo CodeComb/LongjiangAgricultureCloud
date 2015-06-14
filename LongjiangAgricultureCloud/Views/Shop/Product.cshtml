@@ -27,6 +27,10 @@
         </td>
     </tr>
     <tr>
+        <td class="row-title">商品描述</td>
+        <td>@Html.Sanitized(Model.Description)</td>
+    </tr>
+    <tr>
         <td class="row-title">供应商</td>
         <td>@(Model.ProviderID == null ? "未分配" : Model.Provider.Title)</td>
     </tr>

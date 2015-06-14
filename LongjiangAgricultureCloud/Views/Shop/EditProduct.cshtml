@@ -68,7 +68,7 @@
                         {
                             if (s.UserID == ViewBag.CurrentUser.ID)
                             {
-                                <option value="@s.ID">@s.Title</option>
+                                <option @(s.ID == Model.Catalog.Father.FatherID ? "selected" : "") value="@s.ID">@s.Title</option>
                             }
                         }
                 </select>
@@ -83,7 +83,7 @@
                     <select name="StoreID">
                         @foreach (Store s in ViewBag.Stores)
                         {
-                            <option @(c.ID == Model.Catalog.Father.FatherID ? "selected" : "") value="@s.ID">@s.Title</option>
+                            <option @(s.ID == Model.Catalog.Father.FatherID ? "selected" : "") value="@s.ID">@s.Title</option>
                         }
                     </select>
                 </td>
@@ -115,28 +115,28 @@
             <td class="row-title">商品展示图片2</td>
             <td>
                 <p><img src="/Shared/ProductImg/@Model.ID?index=2" alt="商品图片展示" class="img-cert"></p>
-                <p>图片1：<input type="file" name="Picture2" /></p>
+                <p>图片2：<input type="file" name="Picture2" /></p>
             </td>
         </tr>
         <tr>
             <td class="row-title">商品展示图片3</td>
             <td>
                 <p><img src="/Shared/ProductImg/@Model.ID?index=3" alt="商品图片展示" class="img-cert"></p>
-                <p>图片1：<input type="file" name="Picture3" /></p>
+                <p>图片3：<input type="file" name="Picture3" /></p>
             </td>
         </tr>
         <tr>
             <td class="row-title">商品展示图片4</td>
             <td>
                 <p><img src="/Shared/ProductImg/@Model.ID?index=4" alt="商品图片展示" class="img-cert"></p>
-                <p>图片1：<input type="file" name="Picture4" /></p>
+                <p>图片4：<input type="file" name="Picture4" /></p>
             </td>
         </tr>
         <tr>
             <td class="row-title">商品展示图片5</td>
             <td>
                 <p><img src="/Shared/ProductImg/@Model.ID?index=5" alt="商品图片展示" class="img-cert"></p>
-                <p>图片1：<input type="file" name="Picture5" /></p>
+                <p>图片5：<input type="file" name="Picture5" /></p>
             </td>
         </tr>
     </table>
