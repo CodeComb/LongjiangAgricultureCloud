@@ -9,6 +9,7 @@
 
 @using (Html.BeginForm("Verify", "Service", new { id = Model.ID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    @Html.AntiForgeryToken()
     <table class="detail-table">
         <tr>
             <td class="row-title">分类</td>

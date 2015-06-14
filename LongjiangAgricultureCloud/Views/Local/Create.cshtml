@@ -7,6 +7,7 @@
 
 @using (Html.BeginForm("Create", "Local", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    @Html.AntiForgeryToken()
     <table class="detail-table">
         <tr>
             <td class="row-title">分类</td>
