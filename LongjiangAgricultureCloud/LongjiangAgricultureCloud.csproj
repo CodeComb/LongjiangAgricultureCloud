@@ -400,6 +400,8 @@
     <Content Include="Views\Information\Index.cshtml" />
     <Content Include="Views\Information\Edit.cshtml" />
     <Content Include="Views\Information\Create.cshtml" />
+    <Content Include="Views\Shop\Distribute.cshtml" />
+    <Content Include="Views\Shop\Finance.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
