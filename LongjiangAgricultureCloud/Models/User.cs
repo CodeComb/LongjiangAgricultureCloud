@@ -42,5 +42,7 @@ namespace LongjiangAgricultureCloud.Models
         public UserRole Role { get; set; }
 
         public virtual ICollection<Provider> Providers { get; set; }
+
+        public virtual ICollection<Store> Stores { get; set; }
     }
 }

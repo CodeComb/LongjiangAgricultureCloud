@@ -61,40 +61,18 @@ namespace LongjiangAgricultureCloud.Controllers
             return View();
         }
 
-        public ActionResult GetProvinces()
+        public ActionResult ProductImg(int id, int index)
         {
-            var ret = DB.Areas.Where(x => x.Level == Models.AreaLevel.省).ToList();
-            return Json(ret.Select(x => new { Title = x.Title, ID = x.ID }), JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult GetCities(int ProvinceID)
-        {
-            var ret = DB.Areas.Where(x => x.FatherID == ProvinceID && x.Level == Models.AreaLevel.市).ToList();
-            return Json(ret.Select(x => new { Title = x.Title, ID = x.ID }), JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult GetDistricts(int CityID)
-        {
-            var ret = DB.Areas.Where(x => x.FatherID == CityID && x.Level == Models.AreaLevel.区县).ToList();
-            return Json(ret.Select(x => new { Title = x.Title, ID = x.ID }), JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult GetTowns(int DistrictID)
-        {
-            var ret = DB.Areas.Where(x => x.FatherID == DistrictID && x.Level == Models.AreaLevel.乡镇).ToList();
-            return Json(ret.Select(x => new { Title = x.Title, ID = x.ID }), JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult GetHamlets(int TownID)
-        {
-            var ret = DB.Areas.Where(x => x.FatherID == TownID && x.Level == Models.AreaLevel.村).ToList();
-            return Json(ret.Select(x => new { Title = x.Title, ID = x.ID }), JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult GetVillages(int HamletID)
-        {
-            var ret = DB.Areas.Where(x => x.FatherID == HamletID && x.Level == Models.AreaLevel.屯).ToList();
-            return Json(ret.Select(x => new { Title = x.Title, ID = x.ID }), JsonRequestBehavior.AllowGet);
+            var product = DB.Products.Find(id);
+            switch (index)
+            {
+                case 1: return File(product.Picture1, "image/jpeg");
+                case 2: return File(product.Picture2, "image/jpeg");
+                case 3: return File(product.Picture3, "image/jpeg");
+                case 4: return File(product.Picture4, "image/jpeg");
+                case 5: return File(product.Picture5, "image/jpeg");
+                default: return File(new byte[0], "image/jpeg");
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LongjiangAgricultureCloud.Models
@@ -18,9 +19,15 @@ namespace LongjiangAgricultureCloud.Models
     {
         public int ID { get; set; }
 
+        [StringLength(128)]
+        [Index]
         public string Title { get; set; }
 
         public string Description { get; set; }
+
+        [StringLength(256)]
+        [Index]
+        public string Address { get; set; }
 
         /// <summary>
         /// 营业执照
@@ -79,5 +86,10 @@ namespace LongjiangAgricultureCloud.Models
         public int UserID { get; set; }
 
         public virtual User User { get; set; }
+           
+        [Index]
+        public bool Delete { get; set; }
+
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace LongjiangAgricultureCloud.Models
         /// <summary>
         /// 标题
         /// </summary>
+        [StringLength(256)]
         public string Title { get; set; }
 
         /// <summary>
@@ -37,13 +38,13 @@ namespace LongjiangAgricultureCloud.Models
         /// <summary>
         /// 库存剩余数量
         /// </summary>
-        public int Store { get; set; }
+        public int StoreCount { get; set; }
         
         /// <summary>
         /// 供应商
         /// </summary>
         [ForeignKey("Provider")]
-        public int ProviderID { get; set; }
+        public int? ProviderID { get; set; }
 
         public virtual Provider Provider { get; set; }
 
@@ -64,5 +65,13 @@ namespace LongjiangAgricultureCloud.Models
         [Index(IsUnique = false)]
         [StringLength(256)]
         public string ProductCode { get; set; }
+
+        [Index]
+        public bool Delete { get; set; }
+
+        [ForeignKey("Store")]
+        public int StoreID { get; set; }
+
+        public virtual Store Store { get; set; }
     }
 }

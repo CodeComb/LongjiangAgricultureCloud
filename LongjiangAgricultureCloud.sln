@@ -5,6 +5,13 @@ VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LongjiangAgricultureCloud", "LongjiangAgricultureCloud\LongjiangAgricultureCloud.csproj", "{47ABF126-2E4F-4339-B8AB-9906E8D5C718}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B397955D-AC1A-4DA1-B65C-234559B7B8B0}"
+	ProjectSection(SolutionItems) = preProject
+		Logo.psd = Logo.psd
+		TodoList.txt = TodoList.txt
+		需求文档.docx = 需求文档.docx
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

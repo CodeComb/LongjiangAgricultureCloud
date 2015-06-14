@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewBag.Title = "商品管理";
+}
+
+<h2>
+    商品管理
+    <a href="/Shop/CreateProduct" class="sub-menu-item">添加商品</a>
+</h2>
+
+<form class="search">
+    检索：
+    <input type="text" class="textbox" name="Title" placeholder="商品名称" />
+    <input type="text" class="textbox" name="ProductCode" placeholder="商品编码" />
+    <input type="text" class="textbox" name="Provider" placeholder="供应商" />
+    <input type="text" class="textbox" name="StoreGte" placeholder="库存 大于" />
+    <input type="text" class="textbox" name="StoreLte" placeholder="库存 小于" />
+    <input type="submit" class="btn" value="检索" />
+</form>
+
+<table class="table">
+    <thead>
+        <tr class="tl">
+            <th>商品编码</th>
+            <th>商品名称</th>
+            <th>供应商</th>
+            <th>所属仓库</th>
+            <th>库存</th>
+            <th>单位/规格</th>
+            <th>单价</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr id="product-@p.ID">
+                <td>@p.ProductCode</td>
+                <td>@p.Title</td>
+                <td>@p.Provider.Title</td>
+                <td>@p.Store.Title</td>
+                <td>@p.StoreCount</td>
+                <td>@p.Unit / @p.Standard</td>
+                <td>@p.Price</td>
+                <td>
+                    <a href="/Shop/Product/@p.ID">查看详情</a>
+                    <a href="/Shop/EditProduct/@p.ID">编辑商品</a>
+                    <a href="javascript: deleteDialog('/Shop/DeleteProduct/@p.ID', 'product-@p.ID')">删除商品</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.MakePager()

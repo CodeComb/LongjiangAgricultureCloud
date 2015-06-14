@@ -1,0 +1,90 @@
+﻿@model Product
+@{
+    ViewBag.Title = "添加商品";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("CreateProduct", "Shop", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <table class="detail-table">
+        <tr>
+            <td class="row-title">商品名称</td>
+            <td>@Html.TextBoxFor(x => x.Title, new { @class = "textbox w-3" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">商品编码</td>
+            <td>@Html.TextBoxFor(x => x.ProductCode, new { @class = "textbox w-3" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">规格</td>
+            <td>@Html.TextBoxFor(x => x.Standard, new { @class = "textbox w-3" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">单位</td>
+            <td>@Html.TextBoxFor(x => x.Unit, new { @class = "textbox w-3" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">单价</td>
+            <td>@Html.TextBoxFor(x => x.Price, new { @class = "textbox w-3" })</td>
+        </tr>
+        @if (ViewBag.CurrentUser.Role == UserRole.库存管理员)
+        {
+            <tr>
+                <td class="row-title">仓库</td>
+                <td>
+                    <select name="StoreID">
+                        @foreach (Store s in ViewBag.Stores)
+                        {
+                            if (s.UserID == ViewBag.CurrentUser.ID)
+                            {
+                                <option value="@s.ID">@s.Title</option>
+                            }
+                        }
+                    </select>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td class="row-title">仓库</td>
+                <td>
+                    <select name="StoreID">
+                        @foreach (Store s in ViewBag.Stores)
+                        {
+                            <option value="@s.ID">@s.Title</option>
+                        }
+                    </select>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td class="row-title">库存</td>
+            <td>@Html.TextBoxFor(x => x.Store, new { @class = "textbox w-3" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">供应商</td>
+            <td>
+                <select name="ProviderID">
+                @foreach (Provider p in ViewBag.Providers)
+                {
+                    <option value="@p.ID">@p.Title</option>
+                }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="row-title">商品图片</td>
+            <td>
+                <p>图片1：<input type="file" name="Picture1" /></p>
+                <p>图片2：<input type="file" name="Picture2" /></p>
+                <p>图片3：<input type="file" name="Picture3" /></p>
+                <p>图片4：<input type="file" name="Picture4" /></p>
+                <p>图片5：<input type="file" name="Picture5" /></p>
+            </td>
+        </tr>
+    </table>
+    <p><input type="submit" class="btn inverse" value="添加" /></p>
+}

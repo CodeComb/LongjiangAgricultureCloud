@@ -54,6 +54,8 @@ namespace LongjiangAgricultureCloud.Controllers
             user.Question = User.Question;
             user.Answer = User.Answer;
             user.Password = Security.SHA1(User.Password);
+            user.AreaID = User.AreaID;
+            user.Address = User.Address;
             DB.SaveChanges();
             return RedirectToAction("Success", "Shared");
         }

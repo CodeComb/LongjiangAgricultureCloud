@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Provider>
+@{
+    ViewBag.Title = "供应商管理";
+}
+
+<h2>
+    @ViewBag.Title
+    <a href="/Shop/CreateProvider" class="sub-menu-item">添加供应商</a>
+</h2>
+
+<form class="search">
+    检索：
+    <input type="text" class="textbox" name="Title" placeholder="供应商名称" />
+    <input type="text" class="textbox" name="Name" placeholder="联系人" />
+    <input type="text" class="textbox" name="Phone" placeholder="联系电话" />
+    <select name="Status">
+        <option value="">供应商状态</option>
+        @foreach (var s in Enum.GetNames(typeof(ProivderStatus)))
+        {
+            <option>@s</option>
+        }
+    </select>
+    <input type="submit" class="btn" value="检索" />
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>供应商ID</th>
+            <th>供应商名称</th>
+            <th>地址</th>
+            <th>联系人</th>
+            <th>联系电话</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.ID</td>
+                <td>@p.Title</td>
+                <td>@p.Address</td>
+                <td>@p.Name</td>
+                <td>@p.Phone</td>
+                <td>@p.Status</td>
+                <td>
+                    <a href="/Shop/ShowProvider/@p.ID">详细资料</a>
+                    <a href="/Shop/EditProvider/@p.ID">编辑/审核</a>
+                    <a href="javascript: deleteDialog('/Shop/DeleteProvider/@p.ID', 'provider-@p.ID')">删除供应商</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.MakePager()

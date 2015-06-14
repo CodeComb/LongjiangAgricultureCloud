@@ -1,0 +1,52 @@
+﻿@model Provider
+@{
+    ViewBag.Title = "创建供应商";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("CreateProvider", "Shop", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <table class="detail-table">
+        <tr>
+            <td class="row-title">供应商名称</td>
+            <td>@Html.TextBoxFor(x => x.Title, new { @class = "textbox w-3" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">供应商简介</td>
+            <td>@Html.TextAreaFor(x => x.Description, new { @class = "textbox w-3", style = "height: 120px" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">供应商地址</td>
+            <td>@Html.TextBoxFor(x => x.Address, new { @class = "textbox w-3" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">联系人姓名</td>
+            <td>@Html.TextBoxFor(x => x.Name, new { @class = "textbox w-3" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">联系人手机</td>
+            <td>@Html.TextBoxFor(x => x.Phone, new { @class = "textbox w-3" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">联系人座机</td>
+            <td>@Html.TextBoxFor(x => x.Tel, new { @class = "textbox w-3" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">联系人电子邮箱</td>
+            <td>@Html.TextBoxFor(x => x.Email, new { @class = "textbox w-3" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">照片材料</td>
+            <td>
+                <p>供应商环境或产品照 <input type="file" name="Picture" /></p>
+                <p>营业执照 <input type="file" name="BusinessLicence" /></p>
+                <p>组织机构代码证 <input type="file" name="OrganizationRegistrationCodeCertificate" /></p>
+                <p>税务登记证 <input type="file" name="TaxRegistrationCertificate" /></p>
+                <p>法定代表人身份证 <input type="file" name="ArtificialPersonIdentityCard" /></p>
+            </td>
+        </tr>
+    </table>
+    <p><input type="submit" value="创建" class="btn inverse" /></p>
+}

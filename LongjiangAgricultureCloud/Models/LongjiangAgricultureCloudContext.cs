@@ -25,14 +25,34 @@ namespace LongjiangAgricultureCloud.Models
         public DbSet<Provider> Providers { get; set; }
 
         public DbSet<User> Users { get; set; }
+         
+        public DbSet<Store> Stores { get; set; }
 
         public LongjiangAgricultureCloudContext() : base("mssqldb") { }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<User>().HasMany(u => u.Providers).WithRequired(p => p.User).WillCascadeOnDelete(false);
-            modelBuilder.Entity<Area>().HasMany(a => a.Users).WithOptional(u => u.Area).WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Providers)
+                .WithRequired(p => p.User)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Stores)
+                .WithOptional(s => s.User)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Area>()
+                .HasMany(a => a.Users)
+                .WithOptional(u => u.Area)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Provider>()
+                .HasMany(p => p.Products)
+                .WithOptional(p=>p.Provider)
+                .WillCascadeOnDelete(false);
         }
     }
 }
