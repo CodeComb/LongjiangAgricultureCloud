@@ -7,7 +7,7 @@
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm("Edit", "Information", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Edit", "Local", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <table class="detail-table">
         <tr>
@@ -39,10 +39,26 @@
         <tr>
             <td class="row-title">标题</td>
             <td>@Html.TextBoxFor(x => x.Title, new { @class = "textbox w-3" })</td>
-        </tr>s
+        </tr>
         <tr>
-            <td class="row-title">内容</td>
-            <td>@Html.TextAreaFor(x => x.Description, new { @class = "ckeditor" })</td>
+            <td class="row-title">供/求</td>
+            <td>@Html.EnumDropDownListFor(x => x.SupplyDemand)</td>
+        </tr>
+        <tr>
+            <td class="row-title">详细描述</td>
+            <td>@Html.TextAreaFor(x => x.Description, new { @class = "textbox w-3", style = "height: 120px" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">联系人</td>
+            <td>@Html.TextBoxFor(x => x.Name, new { @class = "textbox w-3" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">联系电话</td>
+            <td>@Html.TextBoxFor(x => x.Phone, new { @class = "textbox w-3" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">地址</td>
+            <td>@Html.TextBoxFor(x => x.Address, new { @class = "textbox w-3" })</td>
         </tr>
     </table>
     <p><input type="submit" class="btn inverse" value="保存" /></p>

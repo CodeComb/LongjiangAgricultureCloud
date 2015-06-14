@@ -1,7 +1,51 @@
-﻿
+﻿@model Information
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "发布信息";
 }
 
-<h2>Create</h2>
+<h2>@ViewBag.Title</h2>
 
+@using (Html.BeginForm("Create", "Information", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table class="detail-table">
+        <tr>
+            <td class="row-title">分类</td>
+            <td>
+                <select id="lvl1">
+                    <option>无</option>
+                    @foreach (Catalog c in ViewBag.Level1)
+                    {
+                        <option value="@c.ID">@c.Title</option>
+                    }
+                </select>
+
+                <select id="lvl2" data-parent-select="lvl1">
+                    @foreach (Catalog c in ViewBag.Level2)
+                    {
+                        <option data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
+                    }
+                </select>
+
+                <select id="lvl3" data-parent-select="lvl2" name="CatalogID">
+                    @foreach (Catalog c in ViewBag.Level3)
+                    {
+                        <option data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="row-title">标题</td>
+            <td>@Html.TextBoxFor(x => x.Title, new { @class = "textbox w-3" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">价格</td>
+            <td>@Html.TextBoxFor(x => x.Price, new { @class = "textbox w-3" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">详细描述</td>
+            <td>@Html.TextAreaFor(x => x.Description, new { @class = "ckeditor" })</td>
+        </tr>
+    </table>
+    <p><input type="submit" class="btn inverse" value="发布" /></p>
+}
