@@ -7,7 +7,7 @@
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm("Edit", "Local", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create", "Service", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <table class="detail-table">
         <tr>
@@ -17,32 +17,47 @@
                     <option>无</option>
                     @foreach (Catalog c in ViewBag.Level1)
                     {
-                        <option @(Model.Catalog.Father.FatherID == c.ID ? "selected" : "") value="@c.ID">@c.Title</option>
+                        <option @(Model.Catalog.Father.Father.FatherID == c.ID ? "selected" : "") value="@c.ID">@c.Title</option>
                     }
                 </select>
 
                 <select id="lvl2" data-parent-select="lvl1">
                     @foreach (Catalog c in ViewBag.Level2)
                     {
-                        <option @(Model.Catalog.FatherID == c.ID ? "selected" : "") data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
+                        <option @(Model.Catalog.Father.FatherID == c.ID ? "selected" : "") data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
                     }
                 </select>
 
-                <select id="lvl3" data-parent-select="lvl2" name="CatalogID">
+                <select id="lvl3" data-parent-select="lvl2">
                     @foreach (Catalog c in ViewBag.Level3)
                     {
-                        <option  @(Model.CatalogID == c.ID ? "selected" : "")data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
+                        <option  @(Model.Catalog.FatherID == c.ID ? "selected" : "")data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
                     }
+                </select>
+
+                <select id="lvl4" data-parent-select="lvl3" name="CatalogID">
+                    @foreach (Catalog c in ViewBag.Level4)
+                    {
+                        <option @(Model.CatalogID == c.ID ? "selected" : "") data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="row-title">类型</td>
+            <td>
+                <select name="Type">
+                    <option @(Model.Type.ToString() == "农机找活" ? "selected" : "")>农机找活</option>
+                    <option @(Model.Type.ToString() == "附近农手" ? "selected" : "")>附近农手</option>
+                    <option @(Model.Type.ToString() == "土地找机手" ? "selected" : "")>土地找机手</option>
+                    <option @(Model.Type.ToString() == "二手农机" ? "selected" : "")>二手农机</option>
+                    <option @(Model.Type.ToString() == "维修站" ? "selected" : "")>维修站</option>
                 </select>
             </td>
         </tr>
         <tr>
             <td class="row-title">标题</td>
             <td>@Html.TextBoxFor(x => x.Title, new { @class = "textbox w-3" })</td>
-        </tr>
-        <tr>
-            <td class="row-title">供/求</td>
-            <td>@Html.EnumDropDownListFor(x => x.SupplyDemand)</td>
         </tr>
         <tr>
             <td class="row-title">详细描述</td>
@@ -60,6 +75,17 @@
             <td class="row-title">地址</td>
             <td>@Html.TextBoxFor(x => x.Address, new { @class = "textbox w-3" })</td>
         </tr>
+        <tr>
+            <td class="row-title">资质照片（维修站）</td>
+            <td>
+                <p>
+                    <img src="/Shared/InformationImg/@Model.ID" alt="图片" class="img-cert" />
+                </p>
+                <p>
+                    <input type="file" name="Picture" />
+                </p>
+            </td>
+        </tr>
     </table>
-    <p><input type="submit" class="btn inverse" value="保存" /></p>
+    <p><input type="submit" class="btn inverse" value="发布" /></p>
 }

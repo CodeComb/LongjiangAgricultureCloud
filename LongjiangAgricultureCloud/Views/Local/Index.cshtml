@@ -1,7 +1,86 @@
-﻿
+﻿@model IEnumerable<Information>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "农机信息管理";
 }
 
-<h2>Index</h2>
+<h2>
+    @ViewBag.Title
+    <a href="/Service/Create" class="sub-menu-item">发布信息</a>
+</h2>
 
+<form class="search">
+    检索：
+    <input type="text" name="Begin" class="textbox w-0-8 datetime" placeholder="发布时间(大于)" value="@Request.QueryString["Begin"]" />
+    <input type="text" name="End" class="textbox w-0-8 datetime" placeholder="发布时间(小于)" value="@Request.QueryString["End"]" />
+    <select name="Type">
+        <option value="">信息类型</option>
+        <option @(Request.QueryString["Type"] == "农机找活" ? "selected" : "")>农机找活</option>
+        <option @(Request.QueryString["Type"] == "附近农手" ? "selected" : "")>附近农手</option>
+        <option @(Request.QueryString["Type"] == "土地找机手" ? "selected" : "")>土地找机手</option>
+        <option @(Request.QueryString["Type"] == "二手农机" ? "selected" : "")>二手农机</option>
+    </select>
+    信息分类
+    <select id="lvl1">
+        <option>不限制</option>
+        @foreach (Catalog c in ViewBag.Level1)
+        {
+            <option value="@c.ID">@c.Title</option>
+        }
+    </select>
+
+    <select id="lvl2" data-parent-select="lvl1">
+        <option>信息分类</option>
+        @foreach (Catalog c in ViewBag.Level2)
+        {
+            <option data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
+        }
+    </select>
+
+    <select id="lvl3" data-parent-select="lvl2" name="CatalogID">
+        <option>信息分类</option>
+        @foreach (Catalog c in ViewBag.Level3)
+        {
+            <option data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
+        }
+    </select>
+    <input type="submit" class="btn" value="检索" />
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>标题</th>
+            <th>发布者</th>
+            <th>分类</th>
+            <th>供求</th>
+            <th>时间</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model)
+        {
+            <tr id="information-@i.ID">
+                <td>@i.Title</td>
+                <td>@i.User.Name (@i.User.Username)</td>
+                <td>
+                    @{ var j = i.Catalog; var str = ""; }
+                    @while (j != null)
+                    {
+                        str = j.Title + " " + str;
+                        j = j.Father;
+                    }
+                    @str
+                </td>
+                <td>@i.SupplyDemand</td>
+                <td>@i.Time.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>
+                    <a href="/Local/Edit/@i.ID">编辑</a>
+                    <a href="javascript: deleteDialog('/Local/Delete/@i.ID', 'information-@i.ID')">删除</a>
+                </td>
+            </tr>
+                        }
+    </tbody>
+</table>
+
+@Html.MakePager()
