@@ -75,7 +75,10 @@
             <tr id="information-@i.ID">
                 <td>@i.Title</td>
                 <td>@i.User.Name (@i.User.Username)</td>
-                <td>@(i.Verify ? "通过" : "未通过")</td>
+                @if (ViewBag.VerifyService)
+                {
+                    <td>@(i.Verify ? "通过" : "未通过")</td>
+                }
                 <td>
                     @{ var j = i.Catalog; var str = ""; }
                     @while (j != null)
