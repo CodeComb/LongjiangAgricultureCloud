@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LongjiangAgricultureCloud.Models
 {
-    public enum ProivderStatus
+    public enum ProviderStatus
     {
         等待审核,
         审核驳回,
@@ -50,7 +50,7 @@ namespace LongjiangAgricultureCloud.Models
         public byte[] ArtificialPersonIdentityCard { get; set; }
 
         [Index]
-        public ProivderStatus Status { get; set; }
+        public ProviderStatus Status { get; set; }
 
         public string Reason { get; set; }
 
@@ -83,7 +83,7 @@ namespace LongjiangAgricultureCloud.Models
         public byte[] Picture { get; set; }
 
         [ForeignKey("User")]
-        public int UserID { get; set; }
+        public int? UserID { get; set; }
 
         public virtual User User { get; set; }
            

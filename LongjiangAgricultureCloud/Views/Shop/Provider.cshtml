@@ -15,7 +15,7 @@
     <input type="text" class="textbox" name="Phone" placeholder="联系电话" />
     <select name="Status">
         <option value="">供应商状态</option>
-        @foreach (var s in Enum.GetNames(typeof(ProivderStatus)))
+        @foreach (var s in Enum.GetNames(typeof(ProviderStatus)))
         {
             <option>@s</option>
         }

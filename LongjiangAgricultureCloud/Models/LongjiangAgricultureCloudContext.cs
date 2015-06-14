@@ -36,7 +36,7 @@ namespace LongjiangAgricultureCloud.Models
 
             modelBuilder.Entity<User>()
                 .HasMany(u => u.Providers)
-                .WithRequired(p => p.User)
+                .WithOptional(p => p.User)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()

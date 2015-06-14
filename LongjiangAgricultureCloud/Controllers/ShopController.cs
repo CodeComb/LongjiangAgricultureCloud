@@ -37,7 +37,7 @@ namespace LongjiangAgricultureCloud.Controllers
         public ActionResult CreateProduct()
         {
             ViewBag.Stores = DB.Stores.ToList();
-            ViewBag.Providers = DB.Providers.Where(x => x.Status == ProivderStatus.审核通过).ToList();
+            ViewBag.Providers = DB.Providers.Where(x => x.Status == ProviderStatus.审核通过).ToList();
             return View();
         }
 
@@ -146,8 +146,17 @@ namespace LongjiangAgricultureCloud.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateProvider(Provider Provider)
+        public ActionResult CreateProvider(string Title, string Description, string Address, string Name, string Phone, string Tel, string Email)
         {
+            var Provider = new Provider();
+            Provider.Title = Title;
+            Provider.Description = Description;
+            Provider.Address = Address;
+            Provider.Name = Name;
+            Provider.Phone = Phone;
+            Provider.Tel = Tel;
+            Provider.Email = Email;
+            Provider.Status = ProviderStatus.审核通过;
             #region 图片上传
             var Picture = Request.Files["Picture"];
             if (Picture != null)
@@ -200,7 +209,7 @@ namespace LongjiangAgricultureCloud.Controllers
             {
                 Provider.TaxRegistrationCertificate = null;
             }
-            
+
             var ArtificialPersonIdentityCard = Request.Files["ArtificialPersonIdentityCard"];
             if (ArtificialPersonIdentityCard != null)
             {
@@ -215,6 +224,7 @@ namespace LongjiangAgricultureCloud.Controllers
             }
             #endregion
             Provider.Time = DateTime.Now;
+            Provider.UserID = null;
             DB.Providers.Add(Provider);
             DB.SaveChanges();
             return RedirectToAction("Success", "Shared");
@@ -228,7 +238,7 @@ namespace LongjiangAgricultureCloud.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditProvider(int id, Provider Provider)
+        public ActionResult EditProvider(int id, string Title, string Description, string Reason, string Address, string Name, string Phone, string Tel, string Email, ProviderStatus Status)
         {
             var provider = DB.Providers.Find(id);
             #region 图片上传
@@ -297,12 +307,12 @@ namespace LongjiangAgricultureCloud.Controllers
                 provider.ArtificialPersonIdentityCard = null;
             }
             #endregion
-            provider.Title = Provider.Title;
-            provider.Reason = Provider.Reason;
-            provider.Status = Provider.Status;
-            provider.Tel = Provider.Tel;
-            provider.Phone = Provider.Phone;
-            provider.Name = Provider.Name;
+            provider.Title = Title;
+            provider.Reason = Reason;
+            provider.Status = Status;
+            provider.Tel = Tel;
+            provider.Phone = Phone;
+            provider.Name = Name;
             DB.SaveChanges();
             return RedirectToAction("Success", "Shared");
         }
