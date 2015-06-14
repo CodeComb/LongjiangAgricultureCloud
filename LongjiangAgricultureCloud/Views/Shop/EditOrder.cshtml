@@ -1,0 +1,22 @@
+﻿@model Order
+@{
+    ViewBag.Title = "编辑订单状态";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("EditOrder", "Shop", new { id = Model.ID }, FormMethod.Post, null))
+{
+    @Html.AntiForgeryToken()
+    <table class="detail-table">
+        <tr>
+            <td class="row-title">订单号</td>
+            <td>@Model.ID</td>
+        </tr>
+        <tr>
+            <td class="row-title">订单状态</td>
+            <td>@Html.EnumDropDownListFor(x => x.Status)</td>
+        </tr>
+    </table>
+    <p><input type="submit" value="保存" class="btn inverse" /></p>
+}
