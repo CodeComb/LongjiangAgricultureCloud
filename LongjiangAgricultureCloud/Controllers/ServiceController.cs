@@ -61,6 +61,22 @@ namespace LongjiangAgricultureCloud.Controllers
 
         public ActionResult Edit(int id)
         {
+            ViewBag.Level1 = (from c in DB.Catalogs
+                              where c.Level == 0
+                              && c.Type == CatalogType.农机服务分类
+                              select c).ToList();
+            ViewBag.Level2 = (from c in DB.Catalogs
+                              where c.Level == 1
+                              && c.Type == CatalogType.农机服务分类
+                              select c).ToList();
+            ViewBag.Level3 = (from c in DB.Catalogs
+                              where c.Level == 2
+                              && c.Type == CatalogType.农机服务分类
+                              select c).ToList();
+            ViewBag.Level4 = (from c in DB.Catalogs
+                              where c.Level == 3
+                              && c.Type == CatalogType.农机服务分类
+                              select c).ToList();
             var information = DB.Informations.Find(id);
             return View(information);
         }
@@ -77,6 +93,22 @@ namespace LongjiangAgricultureCloud.Controllers
 
         public ActionResult Create()
         {
+            ViewBag.Level1 = (from c in DB.Catalogs
+                              where c.Level == 0
+                              && c.Type == CatalogType.农机服务分类
+                              select c).ToList();
+            ViewBag.Level2 = (from c in DB.Catalogs
+                              where c.Level == 1
+                              && c.Type == CatalogType.农机服务分类
+                              select c).ToList();
+            ViewBag.Level3 = (from c in DB.Catalogs
+                              where c.Level == 2
+                              && c.Type == CatalogType.农机服务分类
+                              select c).ToList();
+            ViewBag.Level4 = (from c in DB.Catalogs
+                              where c.Level == 3
+                              && c.Type == CatalogType.农机服务分类
+                              select c).ToList();
             return View();
         }
 
