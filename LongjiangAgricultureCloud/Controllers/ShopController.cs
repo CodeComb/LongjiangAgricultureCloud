@@ -14,6 +14,18 @@ namespace LongjiangAgricultureCloud.Controllers
     public class ShopController : BaseController
     {
         // GET: Shop
+
+        /// <summary>
+        /// 商品列表
+        /// </summary>
+        /// <param name="Title"></param>
+        /// <param name="ProductCode"></param>
+        /// <param name="Provider"></param>
+        /// <param name="Store"></param>
+        /// <param name="StoreGte"></param>
+        /// <param name="StoreLte"></param>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public ActionResult Index(string Title, string ProductCode, string Provider, int? Store, int? StoreGte, int? StoreLte, int p = 0)
         {
             ViewBag.Stores = DB.Stores.ToList();
@@ -34,17 +46,42 @@ namespace LongjiangAgricultureCloud.Controllers
             return View(query);
         }
 
+        /// <summary>
+        /// 创建商品
+        /// </summary>
+        /// <returns></returns>
         public ActionResult CreateProduct()
         {
-            ViewBag.Stores = DB.Stores.ToList();
+            ViewBag.Stores = DB.Stores.Where(x => !x.Delete).ToList();
             ViewBag.Providers = DB.Providers.Where(x => x.Status == ProviderStatus.审核通过).ToList();
             return View();
         }
 
+        /// <summary>
+        /// 创建商品
+        /// </summary>
+        /// <param name="Title"></param>
+        /// <param name="ProductCode"></param>
+        /// <param name="Standard"></param>
+        /// <param name="Unit"></param>
+        /// <param name="Price"></param>
+        /// <param name="StoreID"></param>
+        /// <param name="StoreCount"></param>
+        /// <param name="ProviderID"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateProduct(Product Product)
+        public ActionResult CreateProduct(string Title, string ProductCode, string Standard, string Unit, float Price, int StoreID, int StoreCount, int? ProviderID)
         {
+            var Product = new Product();
+            Product.Title = Title;
+            Product.ProductCode = ProductCode;
+            Product.Standard = Standard;
+            Product.Unit = Unit;
+            Product.Price = Price;
+            Product.StoreID = StoreID;
+            Product.StoreCount = StoreCount;
+            Product.ProviderID = ProviderID;
             #region 处理5张图片
             var Picture1 = Request.Files["Picture1"];
             if (Picture1 != null)
@@ -116,6 +153,14 @@ namespace LongjiangAgricultureCloud.Controllers
             return RedirectToAction("Success", "Shared");
         }
 
+        /// <summary>
+        /// 供应商列表
+        /// </summary>
+        /// <param name="Title"></param>
+        /// <param name="Phone"></param>
+        /// <param name="Name"></param>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public ActionResult Provider(string Title, string Phone, string Name, int p = 1)
         {
             IEnumerable<Provider> query = DB.Providers.Where(x => !x.Delete);
@@ -129,6 +174,11 @@ namespace LongjiangAgricultureCloud.Controllers
             return View(query);
         }
 
+        /// <summary>
+        /// 删除商品
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteProduct(int id)
@@ -139,11 +189,26 @@ namespace LongjiangAgricultureCloud.Controllers
             return Content("ok");
         }
 
+        /// <summary>
+        /// 创建供应商
+        /// </summary>
+        /// <returns></returns>
         public ActionResult CreateProvider()
         {
             return View();
         }
 
+        /// <summary>
+        /// 创建供应商
+        /// </summary>
+        /// <param name="Title"></param>
+        /// <param name="Description"></param>
+        /// <param name="Address"></param>
+        /// <param name="Name"></param>
+        /// <param name="Phone"></param>
+        /// <param name="Tel"></param>
+        /// <param name="Email"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateProvider(string Title, string Description, string Address, string Name, string Phone, string Tel, string Email)
@@ -230,12 +295,31 @@ namespace LongjiangAgricultureCloud.Controllers
             return RedirectToAction("Success", "Shared");
         }
 
+        /// <summary>
+        /// 编辑供应商
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult EditProvider(int id)
         {
             var provider = DB.Providers.Find(id);
             return View(provider);
         }
 
+        /// <summary>
+        /// 编辑供应商
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="Title"></param>
+        /// <param name="Description"></param>
+        /// <param name="Reason"></param>
+        /// <param name="Address"></param>
+        /// <param name="Name"></param>
+        /// <param name="Phone"></param>
+        /// <param name="Tel"></param>
+        /// <param name="Email"></param>
+        /// <param name="Status"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditProvider(int id, string Title, string Description, string Reason, string Address, string Name, string Phone, string Tel, string Email, ProviderStatus Status)
@@ -317,6 +401,11 @@ namespace LongjiangAgricultureCloud.Controllers
             return RedirectToAction("Success", "Shared");
         }
 
+        /// <summary>
+        /// 删除供应商
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteProvider(int id)
@@ -327,6 +416,12 @@ namespace LongjiangAgricultureCloud.Controllers
             return Content("ok");
         }
 
+        /// <summary>
+        /// 供应商图片接口
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public ActionResult ProviderImg(int id, int index)
         {
             var provider = DB.Providers.Find(id);
@@ -354,6 +449,90 @@ namespace LongjiangAgricultureCloud.Controllers
         public ActionResult Finance()
         {
             return View();
+        }
+
+        /// <summary>
+        /// 仓库列表
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        public ActionResult Store(int p = 1)
+        {
+            IEnumerable<Store> query = DB.Stores;
+            ViewBag.PageInfo = PagerHelper.Do(ref query, 50, p);
+            return View(query);
+        }
+
+        /// <summary>
+        /// 删除仓库
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteStore(int id)
+        {
+            var store = DB.Stores.Find(id);
+            store.Delete = true;
+            DB.SaveChanges();
+            return Content("ok");
+        }
+
+        /// <summary>
+        /// 编辑仓库
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult EditStore(int id)
+        {
+            ViewBag.Managers = (from u in DB.Users
+                                where u.Role >= UserRole.库存管理员
+                                select u).ToList();
+            var store = DB.Stores.Find(id);
+            return View(store);
+        }
+
+        /// <summary>
+        /// 创建仓库
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CreateStore()
+        {
+            ViewBag.Managers = (from u in DB.Users
+                                where u.Role >= UserRole.库存管理员
+                                select u).ToList();
+            return View();
+        }
+
+        /// <summary>
+        /// 创建仓库
+        /// </summary>
+        /// <param name="Store"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateStore(Store Store)
+        {
+            DB.Stores.Add(Store);
+            DB.SaveChanges();
+            return RedirectToAction("Success", "Shared");
+        }
+
+        /// <summary>
+        /// 编辑仓库
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="Store"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditStore(int id, Store Store)
+        {
+            var store = DB.Stores.Find(id);
+            store.Title = Store.Title;
+            store.UserID = Store.UserID;
+            DB.SaveChanges();
+            return RedirectToAction("Success", "Shared");
         }
     }
 }

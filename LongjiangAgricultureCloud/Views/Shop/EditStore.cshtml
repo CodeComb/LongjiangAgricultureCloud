@@ -1,0 +1,29 @@
+﻿@model Store
+@{
+    ViewBag.Title = "编辑仓库";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("CreateStore", "Shop", null, FormMethod.Post, null))
+{
+    @Html.AntiForgeryToken()
+    <table class="detail-table">
+        <tr>
+            <td class="row-title">仓库名称</td>
+            <td>@Html.TextBoxFor(x => x.Title, new { @class = "w-3 textbox" })</td>
+        </tr>
+        <tr>
+            <td class="row-title">仓库管理员</td>
+            <td>
+                <select name="UserID">
+                    @foreach (User u in ViewBag.Managers)
+                    {
+                        <option @(u.ID == Model.UserID ? "selected" : "") value="@u.ID">@u.Name (@u.Username)</option>
+                    }
+                </select>
+            </td>
+        </tr>
+    </table>
+    <p><input type="submit" class="btn inverse" value="添加" /></p>
+}

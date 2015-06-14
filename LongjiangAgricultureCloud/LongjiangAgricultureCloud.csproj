@@ -182,6 +182,9 @@
     <Content Include="Views\Shop\Provider.cshtml" />
     <Content Include="Views\Shop\CreateProvider.cshtml" />
     <Content Include="Views\Shop\EditProvider.cshtml" />
+    <Content Include="Views\Shop\Store.cshtml" />
+    <Content Include="Views\Shop\CreateStore.cshtml" />
+    <Content Include="Views\Shop\EditStore.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

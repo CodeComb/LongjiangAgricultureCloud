@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Store>
+@{
+    ViewBag.Title = "仓库管理";
+}
+
+<h2>
+    @ViewBag.Title
+    <a href="/Shop/CreateStore">创建仓库</a>
+</h2>
+
+<table class="table">
+    <thead>
+        <tr class="tl">
+            <th>仓库ID</th>
+            <th>仓库名称</th>
+            <th>库管员</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var s in Model)
+        {
+            <tr id="store-@s.ID">
+                <td>@s.ID</td>
+                <td>@s.Title</td>
+                <td>@s.User.Name (@s.User.Username)</td>
+                <td>
+                    <a href="/Shop/EditStore">编辑仓库</a>
+                    <a href="javascript:deleteDialog('/Shop/DeleteStore/@s.ID', 'store-@s.ID')">删除仓库</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.MakePager()

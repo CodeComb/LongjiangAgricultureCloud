@@ -19,5 +19,7 @@ namespace LongjiangAgricultureCloud.Models
         public int? UserID { get; set; }
 
         public virtual User User { get; set; }
+
+        public bool Delete { get; set; }
     }
 }
