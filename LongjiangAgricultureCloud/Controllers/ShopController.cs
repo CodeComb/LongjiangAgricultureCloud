@@ -711,6 +711,12 @@ namespace LongjiangAgricultureCloud.Controllers
             return View(order);
         }
 
+        /// <summary>
+        /// 修改订单状态
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="Status"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditOrder(int id, OrderStatus Status)
