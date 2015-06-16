@@ -65,5 +65,8 @@ namespace LongjiangAgricultureCloud.Models
         public InformationType Type { get; set; }
 
         public SupplyDemand? SupplyDemand { get; set; }
+
+        [Index]
+        public bool Top { get; set; }
     }
 }

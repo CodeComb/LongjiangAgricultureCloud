@@ -36,7 +36,7 @@
         {
             <tr id="product-@p.ID">
                 <td>@p.ProductCode</td>
-                <td>@p.Title</td>
+                <td>@(p.Top ? "[置顶] " : "")@p.Title</td>
                 <td>@p.Provider.Title</td>
                 <td>@p.Store.Title</td>
                 <td>@p.StoreCount</td>

@@ -63,6 +63,10 @@
             <td class="row-title">地址</td>
             <td>@Html.TextBoxFor(x => x.Address, new { @class = "textbox w-3" })</td>
         </tr>
+        <tr>
+            <td class="row-title">置顶</td>
+            <td>@Html.CheckBoxFor(x => x.Top)</td>
+        </tr>
     </table>
     <p><input type="submit" class="btn inverse" value="保存" /></p>
 }

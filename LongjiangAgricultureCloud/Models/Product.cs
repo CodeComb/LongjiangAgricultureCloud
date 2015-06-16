@@ -75,5 +75,8 @@ namespace LongjiangAgricultureCloud.Models
         public virtual Store Store { get; set; }
 
         public string Description { get; set; }
+
+        [Index]
+        public bool Top { get; set; }
     }
 }
