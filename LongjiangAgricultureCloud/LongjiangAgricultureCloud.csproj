@@ -122,6 +122,7 @@
     <Content Include="Scripts\ckeditor\plugins\wsc\README.md" />
     <Content Include="Scripts\ckeditor\README.md" />
     <Content Include="Scripts\ckeditor\skins\moono\readme.md" />
+    <None Include="Properties\PublishProfiles\ChinaUnicom.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />
     <Content Include="Scripts\ckeditor\ckeditor.js" />
@@ -320,7 +321,9 @@
     <Content Include="Styles\datetimepicker.css" />
     <Content Include="Styles\icons.css" />
     <Content Include="Styles\Site.css" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -356,6 +359,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schema\BaseAttribute.cs" />
     <Compile Include="Schema\CheckRoleAttribute.cs" />
+    <Compile Include="Schema\CheckRoleEqual.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -402,6 +406,8 @@
     <Content Include="Views\Information\Create.cshtml" />
     <Content Include="Views\Shop\Distribute.cshtml" />
     <Content Include="Views\Shop\Finance.cshtml" />
+    <Content Include="Views\Shared\NoAccess.cshtml" />
+    <Content Include="Views\Shared\Message.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

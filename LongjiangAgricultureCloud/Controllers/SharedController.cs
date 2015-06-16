@@ -35,7 +35,6 @@ namespace LongjiangAgricultureCloud.Controllers
             var user = (from u in DB.Users
                         where u.Username == Username
                         && u.Password == pwd
-                        && u.Role >= Models.UserRole.大区经理
                         select u).SingleOrDefault();
             if (user == null)
             {
@@ -43,6 +42,10 @@ namespace LongjiangAgricultureCloud.Controllers
             }
             else
             {
+                if (user.Role < Models.UserRole.大区经理)
+                {
+                    return RedirectToAction("NoAccess", "Shared");
+                }
                 FormsAuthentication.SetAuthCookie(Username, false);
                 return Redirect(returnUrl ?? "/");
             }
@@ -57,6 +60,11 @@ namespace LongjiangAgricultureCloud.Controllers
         }
 
         public ActionResult Success()
+        {
+            return View();
+        }
+
+        public ActionResult NoAccess()
         {
             return View();
         }

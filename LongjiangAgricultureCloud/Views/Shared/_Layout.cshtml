@@ -15,26 +15,46 @@
 </head>
 <body>
     <div class="left-sidebar">
-        <div class="sidebar-subtitle">基本信息管理</div>
-        <a href="/General"><div class="sidebar-menu"><i class="fa fa-star icon ico"></i>站点参数</div></a>
-        <a href="/General/Catalog"><div class="sidebar-menu"><i class="fa fa-tasks icon ico"></i>分类管理</div></a>
-        <a href="/General/Comment"><div class="sidebar-menu"><i class="fa fa-comment icon ico"></i>评论管理</div></a>
-        <div class="sidebar-subtitle">用户管理</div>
-        <a href="/User"><div class="sidebar-menu"><i class="fa fa-group icon ico"></i>用户管理</div></a>
-        <a href="/User/Area"><div class="sidebar-menu"><i class="fa fa-globe icon ico"></i>地区管理</div></a>
+        @if (ViewBag.CurrentUser.Role == UserRole.系统管理员)
+        {
+            <div class="sidebar-subtitle">基本信息管理</div>
+            <a href="/General"><div class="sidebar-menu"><i class="fa fa-star icon ico"></i>站点参数</div></a>
+            <a href="/General/Catalog"><div class="sidebar-menu"><i class="fa fa-tasks icon ico"></i>分类管理</div></a>
+            <a href="/General/Comment"><div class="sidebar-menu"><i class="fa fa-comment icon ico"></i>评论管理</div></a>
+            <div class="sidebar-subtitle">用户管理</div>
+            <a href="/User"><div class="sidebar-menu"><i class="fa fa-group icon ico"></i>用户管理</div></a>
+            <a href="/User/Area"><div class="sidebar-menu"><i class="fa fa-globe icon ico"></i>地区管理</div></a>
+        }
         <div class="sidebar-subtitle">商城管理</div>
-        <a href="/Shop"><div class="sidebar-menu"><i class="fa fa-gift icon ico"></i>商品管理</div></a>
-        <a href="/Shop/Provider"><div class="sidebar-menu"><i class="fa fa-heart icon ico"></i>加盟管理</div></a>
-        <a href="/Shop/Order"><div class="sidebar-menu"><i class="fa fa-barcode icon ico"></i>订单管理</div></a>
-        <a href="/Shop/Store"><div class="sidebar-menu"><i class="fa fa-inbox icon ico"></i>仓库管理</div></a>
-        <a href="/Shop/Distribute"><div class="sidebar-menu"><i class="fa fa-truck icon ico"></i>配送报表</div></a>
-        <a href="/Shop/Finance"><div class="sidebar-menu"><i class="fa fa-money icon ico"></i>财务报表</div></a>
-        <div class="sidebar-subtitle">农机服务</div>
-        <a href="/Service"><div class="sidebar-menu"><i class="fa fa-file icon ico"></i>信息管理</div></a>
-        <div class="sidebar-subtitle">本地通</div>
-        <a href="/Local"><div class="sidebar-menu"><i class="fa fa-file icon ico"></i>信息管理</div></a>
-        <div class="sidebar-subtitle">农业信息</div>
-        <a href="/Information"><div class="sidebar-menu"><i class="fa fa-file icon ico"></i>信息管理</div></a>
+        @if (ViewBag.CurrentUser.Role == UserRole.库存管理员 || ViewBag.CurrentUser.Role == UserRole.系统管理员)
+        {
+            <a href="/Shop"><div class="sidebar-menu"><i class="fa fa-gift icon ico"></i>商品管理</div></a>
+        }
+        @if (ViewBag.CurrentUser.Role == UserRole.系统管理员)
+        {
+            <a href="/Shop/Provider"><div class="sidebar-menu"><i class="fa fa-heart icon ico"></i>加盟管理</div></a>
+            <a href="/Shop/Order"><div class="sidebar-menu"><i class="fa fa-barcode icon ico"></i>订单管理</div></a>
+            <a href="/Shop/Store"><div class="sidebar-menu"><i class="fa fa-inbox icon ico"></i>仓库管理</div></a>
+        }
+        @if (ViewBag.CurrentUser.Role == UserRole.配送管理员 || ViewBag.CurrentUser.Role == UserRole.系统管理员)
+        {
+            <a href="/Shop/Distribute"><div class="sidebar-menu"><i class="fa fa-truck icon ico"></i>配送报表</div></a>
+        }
+        @if (ViewBag.CurrentUser.Role == UserRole.报表统计员 || ViewBag.CurrentUser.Role == UserRole.系统管理员)
+        {
+            <a href="/Shop/Finance"><div class="sidebar-menu"><i class="fa fa-money icon ico"></i>财务报表</div></a>
+        }
+
+        @if (ViewBag.CurrentUser.Role == UserRole.信息审核员 || ViewBag.CurrentUser.Role == UserRole.系统管理员)
+        {
+            <div class="sidebar-subtitle">农机服务</div>
+            <a href="/Service"><div class="sidebar-menu"><i class="fa fa-file icon ico"></i>信息管理</div></a>
+            <div class="sidebar-subtitle">本地通</div>
+            <a href="/Local"><div class="sidebar-menu"><i class="fa fa-file icon ico"></i>信息管理</div></a>
+            <div class="sidebar-subtitle">农业信息</div>
+            <a href="/Information"><div class="sidebar-menu"><i class="fa fa-file icon ico"></i>信息管理</div></a>
+        }
+
         <div class="sidebar-subtitle">其它操作</div>
         <a href="javascript:$('#frmLogout').submit()"><div class="sidebar-menu"><i class="fa fa-sign-out icon ico"></i>退出系统</div></a>
         @using (Html.BeginForm("Logout", "Shared", null, FormMethod.Post, new { id = "frmLogout" }))

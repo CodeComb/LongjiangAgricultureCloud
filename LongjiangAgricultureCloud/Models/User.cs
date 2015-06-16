@@ -13,6 +13,9 @@ namespace LongjiangAgricultureCloud.Models
         服务站,
         大区经理,
         库存管理员,
+        配送管理员,
+        报表统计员,
+        信息审核员,
         系统管理员
     }
 

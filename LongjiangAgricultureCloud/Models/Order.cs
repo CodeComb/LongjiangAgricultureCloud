@@ -57,5 +57,7 @@ namespace LongjiangAgricultureCloud.Models
         public string InvoiceName { get; set; }
 
         public string InvoiceAddress { get; set; }
+
+        public string GiveBackReason { get; set; }
     }
 }

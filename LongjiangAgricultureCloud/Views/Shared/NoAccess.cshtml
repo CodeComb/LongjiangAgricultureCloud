@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "权限不足";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - 龙江云农业</title>
+    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+</head>
+<body style="background-image:none;background-color:#2a3b52">
+    <div class="info">
+        <h2>权限不足</h2>
+        <p>您的权限不足，不能执行本操作，请注销后使用更高权限的账号登录操作！</p>
+        <p style="margin-top:30px;">
+            <a class="btn inverse" href="@Request.UrlReferrer.ToString()">返回上一页</a>
+            <a class="btn" href="/">返回首页</a>
+        </p>
+    </div>
+    <div class="footer">
+        Copyright © 2015 Snow Light Information Technology Co., Ltd. All rights reserved.
+    </div>
+</body>
+</html>

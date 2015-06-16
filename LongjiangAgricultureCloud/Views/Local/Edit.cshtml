@@ -44,8 +44,12 @@
             <td>@Html.EnumDropDownListFor(x => x.SupplyDemand)</td>
         </tr>
         <tr>
+            <td class="row-title">价格</td>
+            <td>@Html.TextBoxFor(x => x.Price, new { @class = "textbox w-3" })</td>
+        </tr>
+        <tr>
             <td class="row-title">详细描述</td>
-            <td>@Html.TextAreaFor(x => x.Description, new { @class = "textbox w-3", style = "height: 120px" })</td>
+            <td>@Html.TextAreaFor(x => x.Description, new { @class = "textbox w-3 nullable", style = "height: 120px" })</td>
         </tr>
         <tr>
             <td class="row-title">联系人</td>

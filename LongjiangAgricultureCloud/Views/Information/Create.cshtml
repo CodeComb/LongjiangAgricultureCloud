@@ -16,21 +16,21 @@
                     <option>无</option>
                     @foreach (Catalog c in ViewBag.Level1)
                     {
-                        <option value="@c.ID">@c.Title</option>
+                        <option @(Model.Catalog.Father.FatherID == c.ID ? "selected" : "") value="@c.ID">@c.Title</option>
                     }
                 </select>
 
                 <select id="lvl2" data-parent-select="lvl1">
                     @foreach (Catalog c in ViewBag.Level2)
                     {
-                        <option data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
+                        <option @(Model.Catalog.FatherID == c.ID ? "selected" : "") data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
                     }
                 </select>
 
                 <select id="lvl3" data-parent-select="lvl2" name="CatalogID">
                     @foreach (Catalog c in ViewBag.Level3)
                     {
-                        <option data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
+                        <option @(Model.CatalogID == c.ID ? "selected" : "") data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
                     }
                 </select>
             </td>
@@ -40,11 +40,7 @@
             <td>@Html.TextBoxFor(x => x.Title, new { @class = "textbox w-3" })</td>
         </tr>
         <tr>
-            <td class="row-title">价格</td>
-            <td>@Html.TextBoxFor(x => x.Price, new { @class = "textbox w-3" })</td>
-        </tr>
-        <tr>
-            <td class="row-title">详细描述</td>
+            <td class="row-title">内容</td>
             <td>@Html.TextAreaFor(x => x.Description, new { @class = "ckeditor" })</td>
         </tr>
     </table>

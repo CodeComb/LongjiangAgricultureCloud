@@ -10,6 +10,7 @@ using LongjiangAgricultureCloud.Helpers;
 
 namespace LongjiangAgricultureCloud.Controllers
 {
+    [CheckRoleEqual(UserRole.信息审核员)]
     public class ServiceController : BaseController
     {
         // GET: Service
@@ -114,7 +115,7 @@ namespace LongjiangAgricultureCloud.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(string Title, string Description, int? CatalogID, string Name, string Phone, string Address)
+        public ActionResult Create(string Title, string Description, int? CatalogID, string Name, string Phone, string Address, InformationType Type)
         {
             var Information = new Information
             {
@@ -124,6 +125,7 @@ namespace LongjiangAgricultureCloud.Controllers
                 Phone = Phone,
                 Address = Address,
                 CatalogID = CatalogID,
+                Type = Type,
                 UserID = CurrentUser.ID,
                 Time = DateTime.Now
             };

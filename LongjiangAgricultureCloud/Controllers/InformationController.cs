@@ -10,6 +10,7 @@ using LongjiangAgricultureCloud.Helpers;
 
 namespace LongjiangAgricultureCloud.Controllers
 {
+    [CheckRoleEqual(UserRole.信息审核员)]
     public class InformationController : BaseController
     {
         // GET: Information

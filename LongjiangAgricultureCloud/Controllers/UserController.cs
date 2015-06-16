@@ -53,7 +53,8 @@ namespace LongjiangAgricultureCloud.Controllers
             user.AreaID = User.AreaID; //TODO: 选择地区
             user.Question = User.Question;
             user.Answer = User.Answer;
-            user.Password = Security.SHA1(User.Password);
+            if (!string.IsNullOrEmpty(User.Password))
+                user.Password = Security.SHA1(User.Password);
             user.AreaID = User.AreaID;
             user.Address = User.Address;
             DB.SaveChanges();
@@ -83,7 +84,7 @@ namespace LongjiangAgricultureCloud.Controllers
             if (id.HasValue)
                 query = query.Where(x => x.FatherID == id.Value);
             else
-                query = query.Where(x => x.FatherID == null);
+                query = query.Where(x => x.FatherID == null && x.Level == AreaLevel.省);
             Area a = null;
             if (id.HasValue)
                 a = DB.Areas.Find(id.Value);
@@ -96,6 +97,7 @@ namespace LongjiangAgricultureCloud.Controllers
         public ActionResult CreateArea(string Title, int? FatherID)
         {
             var area = new Area();
+            area.Title = Title;
             if (FatherID.HasValue)
             {
                 var father = DB.Areas.Find(FatherID.Value);
@@ -106,9 +108,18 @@ namespace LongjiangAgricultureCloud.Controllers
             {
                 area.Level = AreaLevel.省;
             }
-            area.Title = Title;
             DB.Areas.Add(area);
             DB.SaveChanges();
+            var lvl = Convert.ToInt32(area.Level) + 1;
+            var id = area.ID;
+            while (lvl != 5)
+            {
+                var a = new Area { Title = "-", FatherID = id, Level = (AreaLevel)lvl };
+                DB.Areas.Add(a);
+                DB.SaveChanges();
+                lvl++;
+                id = a.ID;
+            }
             return RedirectToAction("Success", "Shared");
         }
 

@@ -10,6 +10,7 @@ using LongjiangAgricultureCloud.Helpers;
 
 namespace LongjiangAgricultureCloud.Controllers
 {
+    [CheckRoleEqual(UserRole.信息审核员)]
     public class LocalController : BaseController
     {
         // GET: Local
@@ -97,6 +98,7 @@ namespace LongjiangAgricultureCloud.Controllers
                 UserID = CurrentUser.ID,
                 Time = DateTime.Now,
                 SupplyDemand = SupplyDemand,
+                Type = InformationType.本地通信息,
                 Price = Price
             };
             
