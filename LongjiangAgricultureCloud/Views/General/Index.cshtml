@@ -19,6 +19,10 @@
             <td class="row-title">本地通信息审核开关</td>
             <td><input type="checkbox" name="VerifyLocalTong" @(ViewBag.VerifyLocalTong == true ? "checked" : "") /> 勾选后开启审核</td>
         </tr>
+        <tr>
+            <td class="row-title">客服电话</td>
+            <td><input type="text" name="ServiceTel" class="w-3 textbox" value="@ViewBag.ServiceTel" /></td>
+        </tr>
     </table>
     <p><input type="submit" class="button blue" value="提交" /></p>
 }

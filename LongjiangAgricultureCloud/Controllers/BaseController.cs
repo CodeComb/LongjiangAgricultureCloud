@@ -35,6 +35,7 @@ namespace LongjiangAgricultureCloud.Controllers
             ViewBag.VerifyLocalTong = Convert.ToBoolean(ConfigurationManager.AppSettings["VerifyLocalTong"]);
             ViewBag.AlipayAppKey = ConfigurationManager.AppSettings["AlipayAppKey"];
             ViewBag.WeixinPayAppKey = ConfigurationManager.AppSettings["WeixinPayAppKey"];
+            ViewBag.ServiceTel = ConfigurationManager.AppSettings["ServiceTel"];
         }
 
         public ActionResult Msg(string msg)
