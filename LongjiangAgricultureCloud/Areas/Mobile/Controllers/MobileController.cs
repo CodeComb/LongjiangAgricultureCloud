@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 {
-    public class HomeController : Controller
+    public class MobileController : Controller
     {
-        // GET: Mobile/Home
+        // GET: Mobile/Mobile
         public ActionResult Index()
         {
             return View();
