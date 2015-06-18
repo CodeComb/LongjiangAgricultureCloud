@@ -17,7 +17,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile
             context.MapRoute(
                 "Mobile_default",
                 "Mobile/{controller}/{action}/{id}",
-                new { action = "Index", controller = "Home", id = UrlParameter.Optional }
+                new { action = "Index", controller = "Mobile", id = UrlParameter.Optional }
             );
         }
     }

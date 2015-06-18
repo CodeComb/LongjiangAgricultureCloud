@@ -1,0 +1,24 @@
+﻿<div class="header">
+    <table>
+        <tr>
+            <td style="width: 2em; text-align: left">
+                @if (ViewBag.Back)
+                {
+                    <a href="javascript: window.history.back()"><i class="fa icon fa-chevron-left"></i></a>
+                }
+                &nbsp;
+            </td>
+            <td style="text-align: center">@ViewBag.Title</td>
+            <td style="width: 2em; text-align: right">&nbsp;
+                @if (ViewBag.Refresh)
+                {
+                    <a href="javascript: window.history.back()"><i class="fa icon fa-repeat"></i></a>
+                }
+                @if (ViewBag.Menu)
+                {
+                    <a href="javascript: popMenu()"><i class="fa icon fa-list"></i></a>
+                }
+            </td>
+        </tr>
+    </table>
+</div>

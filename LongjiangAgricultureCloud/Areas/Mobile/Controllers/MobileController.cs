@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 {
-    public class MobileController : Controller
+    public class MobileController : BaseController
     {
         // GET: Mobile/Mobile
         public ActionResult Index()

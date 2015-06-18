@@ -126,6 +126,8 @@
     <Content Include="Areas\Mobile\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Mobile\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Mobile\Views\Mobile\Index.cshtml" />
+    <Content Include="Areas\Mobile\Views\Shared\Header.cshtml" />
+    <Content Include="Areas\Mobile\Views\Shared\ShopNav.cshtml" />
     <None Include="Properties\PublishProfiles\ChinaUnicom.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />
@@ -333,8 +335,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Mobile\Controllers\BaseController.cs" />
     <Compile Include="Areas\Mobile\Controllers\MobileController.cs" />
     <Compile Include="Areas\Mobile\MobileAreaRegistration.cs" />
+    <Compile Include="Areas\Mobile\Models\ProductListItem.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CKEditorController.cs" />
     <Compile Include="Controllers\GeneralController.cs" />
@@ -425,7 +429,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Mobile\Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
