@@ -193,3 +193,17 @@ table {
     width: 30%;
     display: inline-block;
 }
+
+.info {
+    padding: 1em;
+    background-color: rgb(252,248,227);
+    color: #d44950;
+    border: 0.08em solid rgb(227, 222, 198);
+    border-radius: 0.5em;
+}
+
+select {
+    min-width: 4em;
+    outline: 0;
+    border:none;
+}

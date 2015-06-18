@@ -131,6 +131,7 @@
     <Content Include="Areas\Mobile\Views\Shared\ShopNav.cshtml" />
     <Content Include="Areas\Mobile\Views\Mobile\Login.cshtml" />
     <Content Include="Areas\Mobile\Views\Mobile\Register.cshtml" />
+    <Content Include="Areas\Mobile\Views\Mobile\Message.cshtml" />
     <None Include="Properties\PublishProfiles\ChinaUnicom.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />
@@ -375,6 +376,7 @@
     <Compile Include="Schema\BaseAttribute.cs" />
     <Compile Include="Schema\CheckRoleAttribute.cs" />
     <Compile Include="Schema\CheckRoleEqual.cs" />
+    <Compile Include="Schema\MobileAuthorizeAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

@@ -112,7 +112,7 @@ namespace LongjiangAgricultureCloud.Controllers
             DB.SaveChanges();
             var lvl = Convert.ToInt32(area.Level) + 1;
             var id = area.ID;
-            while (lvl != 5)
+            while (lvl != 6)
             {
                 var a = new Area { Title = "-", FatherID = id, Level = (AreaLevel)lvl };
                 DB.Areas.Add(a);

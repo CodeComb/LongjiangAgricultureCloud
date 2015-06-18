@@ -43,7 +43,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 
         public ActionResult Msg(string msg)
         {
-            return RedirectToAction("Message", "Shared", new { msg = msg, sid = Session["sid"].ToString() });
+            return RedirectToAction("Message", "Mobile", new { msg = msg, sid = Session["sid"].ToString() });
         }
     }
 }
