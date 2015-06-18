@@ -145,3 +145,9 @@ table {
     border-top: 0.08em solid #ddd;
     padding: 0.5em;
 }
+
+.recommand-time {
+    float: right;
+    font-size: 0.7em;
+    color: #888;
+}

@@ -32,7 +32,7 @@ namespace LongjiangAgricultureCloud.Controllers
                               where c.Level == 3
                               && c.Type == CatalogType.农机服务分类
                               select c).ToList();
-            IEnumerable<Information> query = DB.Informations;
+            IEnumerable<Information> query = DB.Informations.Where(x => x.Type != InformationType.本地通信息 && x.Type != InformationType.农业信息);
             if (CatalogID.HasValue)
                 query = query.Where(x => x.CatalogID == CatalogID.Value);
             if (Begin.HasValue)
@@ -151,7 +151,7 @@ namespace LongjiangAgricultureCloud.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit(int id, string Title, string Description, int? CatalogID, string Name, string Phone, string Address)
+        public ActionResult Edit(int id, string Title, string Description, int? CatalogID, string Name, string Phone, string Address, bool Top)
         {
             var information = DB.Informations.Find(id);
             information.Title = Title;
@@ -160,6 +160,7 @@ namespace LongjiangAgricultureCloud.Controllers
             information.Name = Name;
             information.Phone = Phone;
             information.Address = Address;
+            information.Top = Top;
             var Picture = Request.Files["Picture"];
             if (Picture != null)
             {

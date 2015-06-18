@@ -108,12 +108,13 @@ namespace LongjiangAgricultureCloud.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit(int id, string Title, string Description, int? CatalogID)
+        public ActionResult Edit(int id, string Title, string Description, int? CatalogID, bool Top)
         {
             var information = DB.Informations.Find(id);
             information.Title = Title;
             information.Description = Description;
             information.CatalogID = CatalogID;
+            information.Top = Top;
             DB.SaveChanges();
             return RedirectToAction("Success", "Shared");
         }

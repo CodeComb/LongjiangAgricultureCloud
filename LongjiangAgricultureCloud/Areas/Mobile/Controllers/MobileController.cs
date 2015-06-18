@@ -11,6 +11,11 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
         // GET: Mobile/Mobile
         public ActionResult Index()
         {
+            ViewBag.Informations = (from i in DB.Informations
+                                    where i.Type == LongjiangAgricultureCloud.Models.InformationType.农业信息
+                                    && i.Top == true
+                                    orderby i.Time descending
+                                    select i).ToList();
             return View();
         }
     }

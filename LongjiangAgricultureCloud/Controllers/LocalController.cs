@@ -111,7 +111,7 @@ namespace LongjiangAgricultureCloud.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit(int id, string Title, string Description, int? CatalogID, string Name, string Phone, string Address, float Price, SupplyDemand SupplyDemand)
+        public ActionResult Edit(int id, string Title, string Description, int? CatalogID, string Name, string Phone, string Address, float Price, SupplyDemand SupplyDemand, bool Top)
         {
             var information = DB.Informations.Find(id);
             information.Title = Title;
@@ -119,6 +119,7 @@ namespace LongjiangAgricultureCloud.Controllers
             information.CatalogID = CatalogID;
             information.Name = Name;
             information.Phone = Phone;
+            information.Top = Top;
             information.Address = Address;
             information.SupplyDemand = SupplyDemand;
             information.Price = Price;
