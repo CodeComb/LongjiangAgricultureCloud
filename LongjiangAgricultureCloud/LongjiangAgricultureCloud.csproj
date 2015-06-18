@@ -129,6 +129,8 @@
     <Content Include="Areas\Mobile\Views\Mobile\Index.cshtml" />
     <Content Include="Areas\Mobile\Views\Shared\Header.cshtml" />
     <Content Include="Areas\Mobile\Views\Shared\ShopNav.cshtml" />
+    <Content Include="Areas\Mobile\Views\Mobile\Login.cshtml" />
+    <Content Include="Areas\Mobile\Views\Mobile\Register.cshtml" />
     <None Include="Properties\PublishProfiles\ChinaUnicom.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />

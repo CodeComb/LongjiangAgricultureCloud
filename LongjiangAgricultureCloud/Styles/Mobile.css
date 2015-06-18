@@ -42,7 +42,6 @@ table {
 
     .header table {
         height: 2.8em;
-        margin: 0 1em;
         padding: 0;
     }
 
@@ -150,4 +149,47 @@ table {
     float: right;
     font-size: 0.7em;
     color: #888;
+}
+
+.textbox-outer {
+    border-bottom: 0.08em solid #ddd;
+    padding: 0.5em;
+    background-color: #fff;
+    margin: 0;
+}
+
+.textbox {
+    outline: 0;
+    font-size: 1.2em;
+    line-height: 1.6em;
+    width: 90%;
+    border: none;
+    margin: 0;
+}
+
+.btn {
+    border-radius: 0.5em;
+    height: 1.5em;
+    background-color: rgb(239,124,30);
+    padding: 0.5em;
+    color: #fff;
+    text-align: center;
+    margin: 0.5em 0.8em;
+}
+
+.sub-menu {
+    padding: 0 0.8em;
+}
+
+    .sub-menu a {
+        color: #666;
+    }
+
+.textbox.form {
+    width: 65%;
+}
+
+.field {
+    width: 30%;
+    display: inline-block;
 }
