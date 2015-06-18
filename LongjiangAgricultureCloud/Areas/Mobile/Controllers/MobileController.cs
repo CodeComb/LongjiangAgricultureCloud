@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using LongjiangAgricultureCloud.Models;
+using LongjiangAgricultureCloud.Helpers;
 
 namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 {
@@ -53,7 +54,10 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             else
             {
                 FormsAuthentication.SetAuthCookie(Username, false);
-                return Redirect(returnUrl ?? "/");
+                if (string.IsNullOrEmpty(returnUrl))
+                    return Redirect(Request.UrlReferrer == null ? "/Mobile/Member" : Request.UrlReferrer.ToString());
+                else
+                    return Redirect(returnUrl);
             }
         }
 
@@ -71,6 +75,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                 return Msg("两次密码输入不一致！");
             if (DB.Users.Any(x => x.Username == User.Username))
                 return Msg("该手机号码已存在，请修改后重新尝试注册！");
+            User.Password = Security.SHA1(Confirm);
             DB.Users.Add(User);
             DB.SaveChanges();
             return Msg("注册成功！您可以使用该账号进行登录了！");

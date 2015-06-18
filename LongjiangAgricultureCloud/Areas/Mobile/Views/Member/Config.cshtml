@@ -1,0 +1,85 @@
+﻿@model User
+@{
+    ViewBag.Title = "修改个人资料";
+}
+
+@Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
+<div class="wrap-cont">
+    @using (Html.BeginForm("Config", "Member", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="textbox-outer">
+            <div class="field">密码</div>
+            <input type="password" name="Password" class="textbox form" placeholder="不修改请留空" />
+        </div>
+        <div class="textbox-outer">
+            <div class="field">密码重复</div>
+            <input type="password" name="Confirm" class="textbox form" placeholder="不修改请留空" />
+        </div>
+        <div class="textbox-outer">
+            <div class="field">省</div>
+            <select id="province">
+                @foreach (Area a in ViewBag.Provinces)
+                {
+                    <option @(Model.AreaID != null && Model.Area.Father.Father.Father.Father.FatherID == a.ID ? "selected" : "") value="@a.ID">@a.Title</option>
+                }
+            </select>
+        </div>
+        <div class="textbox-outer">
+            <div class="field">市</div>
+            <select id="city" data-parent-select="province">
+                @foreach (Area a in ViewBag.Cities)
+                {
+                    <option @(Model.AreaID != null && Model.Area.Father.Father.Father.FatherID == a.ID ? "selected" : "") data-parent-id="@a.FatherID" value="@a.ID">@a.Title</option>
+                }
+            </select>
+        </div>
+        <div class="textbox-outer">
+            <div class="field">区县</div>
+            <select id="district" data-parent-select="city">
+                @foreach (Area a in ViewBag.Districts)
+                {
+                    <option @(Model.AreaID != null && Model.Area.Father.Father.FatherID == a.ID ? "selected" : "") data-parent-id="@a.FatherID" value="@a.ID">@a.Title</option>
+                }
+            </select>
+        </div>
+        <div class="textbox-outer">
+            <div class="field">乡镇</div>
+            <select id="town" data-parent-select="district">
+                @foreach (Area a in ViewBag.Towns)
+                {
+                    <option @(Model.AreaID != null && Model.Area.Father.FatherID == a.ID ? "selected" : "") data-parent-id="@a.FatherID" value="@a.ID">@a.Title</option>
+                }
+            </select>
+        </div>
+        <div class="textbox-outer">
+            <div class="field">村</div>
+            <select id="hamlet" data-parent-select="town">
+                @foreach (Area a in ViewBag.Hamlets)
+                {
+                    <option @(Model.AreaID != null && Model.Area.FatherID == a.ID ? "selected" : "") data-parent-id="@a.FatherID" value="@a.ID">@a.Title</option>
+                }
+            </select>
+        </div>
+        <div class="textbox-outer">
+            <div class="field">屯</div>
+            <select id="village" data-parent-select="hamlet" name="AreaID">
+                @foreach (Area a in ViewBag.Villages)
+                {
+                    <option @(Model.AreaID != null && Model.AreaID == a.ID ? "selected" : "") data-parent-id="@a.FatherID" value="@a.ID">@a.Title</option>
+                }
+            </select>
+        </div>
+        <div class="textbox-outer">
+            <div class="field">详细地址</div>
+            <input type="text" name="Address" class="textbox form" value="@Model.Address" />
+        </div>
+        <div class="textbox-outer">
+            <div class="field">真实姓名</div>
+            <input type="text" name="Name" class="textbox form" value="@Model.Name" />
+        </div>
+        <a href="javascript: $('form').submit()">
+            <div class="btn">保存个人资料</div>
+        </a>
+    }
+</div>

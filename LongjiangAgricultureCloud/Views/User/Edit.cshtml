@@ -47,7 +47,7 @@
                 <select id="district" data-parent-select="city">
                     @foreach (Area a in ViewBag.Districts)
                     {
-                        <option @(Model.AreaID!=null&&Model.Area.Father.Father.FatherID == a.ID?"selected":"") data-parent-id="@a.FatherID" value="@a.ID">@a.Title</option@(Model.Area.Father.Father.Father.Father.FatherID>
+                        <option @(Model.AreaID!=null&&Model.Area.Father.Father.FatherID == a.ID?"selected":"") data-parent-id="@a.FatherID" value="@a.ID">@a.Title</option>
                     }
                 </select>
                 <select id="town" data-parent-select="district">
