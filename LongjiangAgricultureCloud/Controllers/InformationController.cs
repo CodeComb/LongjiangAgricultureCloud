@@ -40,6 +40,8 @@ namespace LongjiangAgricultureCloud.Controllers
             return View(query);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
             var information = DB.Informations.Find(id);
@@ -85,6 +87,7 @@ namespace LongjiangAgricultureCloud.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Create(string Title, string Description, int? CatalogID)
         {
             var Information = new Information
@@ -93,7 +96,8 @@ namespace LongjiangAgricultureCloud.Controllers
                 Description = Description,
                 CatalogID = CatalogID,
                 UserID = CurrentUser.ID,
-                Time = DateTime.Now
+                Time = DateTime.Now,
+                Type = InformationType.农业信息
             };
 
             DB.Informations.Add(Information);
@@ -103,6 +107,7 @@ namespace LongjiangAgricultureCloud.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Edit(int id, string Title, string Description, int? CatalogID)
         {
             var information = DB.Informations.Find(id);

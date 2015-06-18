@@ -16,21 +16,21 @@
                     <option>无</option>
                     @foreach (Catalog c in ViewBag.Level1)
                     {
-                        <option @(Model.Catalog.Father.FatherID == c.ID ? "selected" : "") value="@c.ID">@c.Title</option>
+                        <option value="@c.ID">@c.Title</option>
                     }
                 </select>
 
                 <select id="lvl2" data-parent-select="lvl1">
                     @foreach (Catalog c in ViewBag.Level2)
                     {
-                        <option @(Model.Catalog.FatherID == c.ID ? "selected" : "") data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
+                        <option data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
                     }
                 </select>
 
                 <select id="lvl3" data-parent-select="lvl2" name="CatalogID">
                     @foreach (Catalog c in ViewBag.Level3)
                     {
-                        <option @(Model.CatalogID == c.ID ? "selected" : "") data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
+                        <option  data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
                     }
                 </select>
             </td>

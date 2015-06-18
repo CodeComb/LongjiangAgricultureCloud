@@ -52,7 +52,7 @@
         @foreach (var i in Model)
         {
             <tr id="information-@i.ID">
-                <td>@(p.Top ? "[置顶] " : "")@i.Title</td>
+                <td>@(i.Top ? "[置顶] " : "")@i.Title</td>
                 <td>
                     @{ var j = i.Catalog; var str = ""; }
                     @while (j != null)

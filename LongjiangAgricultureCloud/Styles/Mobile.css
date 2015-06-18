@@ -129,3 +129,19 @@ table {
     font-size: 0.7em;
     margin-bottom: 2em;
 }
+
+.recommand {
+    background-color: #fff;
+}
+
+.recommand-title {
+    border-left: 0.5em solid rgb(239,124,30);
+    padding: 0.5em;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.recommand-item {
+    border-top: 0.08em solid #ddd;
+    padding: 0.5em;
+}

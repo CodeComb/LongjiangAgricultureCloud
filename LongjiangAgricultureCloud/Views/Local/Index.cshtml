@@ -61,7 +61,7 @@
         @foreach (var i in Model)
         {
             <tr id="information-@i.ID">
-                <td>@(p.Top ? "[置顶] " : "")@i.Title</td>
+                <td>@(i.Top ? "[置顶] " : "")@i.Title</td>
                 <td>@i.User.Name (@i.User.Username)</td>
                 <td>
                     @{ var j = i.Catalog; var str = ""; }

@@ -59,7 +59,7 @@ namespace LongjiangAgricultureCloud.Controllers
             var information = DB.Informations.Find(id);
             return View(information);
         }
-
+        
         public ActionResult Edit(int id)
         {
             ViewBag.Level1 = (from c in DB.Catalogs
@@ -84,6 +84,7 @@ namespace LongjiangAgricultureCloud.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Verify(int id, bool Verify)
         {
             var information = DB.Informations.Find(id);
@@ -115,6 +116,7 @@ namespace LongjiangAgricultureCloud.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Create(string Title, string Description, int? CatalogID, string Name, string Phone, string Address, InformationType Type)
         {
             var Information = new Information
@@ -148,6 +150,7 @@ namespace LongjiangAgricultureCloud.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Edit(int id, string Title, string Description, int? CatalogID, string Name, string Phone, string Address)
         {
             var information = DB.Informations.Find(id);
