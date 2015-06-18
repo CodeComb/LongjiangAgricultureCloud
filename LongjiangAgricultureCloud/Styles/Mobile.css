@@ -206,4 +206,33 @@ select {
     min-width: 4em;
     outline: 0;
     border:none;
+    background: none;
 }
+
+.name-bg {
+    height: 4em;
+    background-image: url(/Images/m-bg.png);
+    background-attachment: fixed;
+    font-size: 1em;
+    line-height: 4em;
+    padding: 1em;
+    color: #fff;
+    text-shadow: 0.03em 0.03em 0.08em rgba(0,0,0,0.5);
+}
+
+.list-outer {
+    border-bottom: 0.08em solid #ddd;
+    padding: 1em;
+    font-size: 1em;
+    background-color: #fff;
+    margin: 0;
+    color: #666;
+}
+
+    .list-outer a {
+        text-decoration: none;
+    }
+
+    .list-outer.red {
+        color: rgb(237, 137, 137);
+    }

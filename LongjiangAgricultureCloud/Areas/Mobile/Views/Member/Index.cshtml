@@ -1,0 +1,40 @@
+﻿@model User
+@{
+    ViewBag.Title = "我的帐户";
+    ViewBag.Back = true;
+    ViewBag.Refresh = true;
+}
+
+@Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
+<div class="wrap-cont">
+    <div class="name-bg">@Model.Name (@Model.Username)</div>
+    <a href="/Mobile/Member/Order">
+        <div class="list-outer">
+            <i class="fa fa-file"></i> 我的订单
+        </div>
+    </a>
+    <a href="/Mobile/Member/Service">
+        <div class="list-outer">
+            <i class="fa fa-truck"></i> 我的农机信息
+        </div>
+    </a>
+    <a href="/Mobile/Member/Local">
+        <div class="list-outer">
+            <i class="fa fa-location-arrow"></i> 我的本地通信息
+        </div>
+    </a>
+    <a href="/Mobile/Member/Local">
+        <div class="list-outer">
+            <i class="fa fa-cog"></i> 修改个人资料
+        </div>
+    </a>
+    <a href="javascript:('form').submit()">
+        <div class="list-outer red">
+            <i class="fa fa-sign-out"></i> 注销登录
+        </div>
+    </a>
+    @using (Html.BeginForm("Logout", "Mobile", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+    }
+</div>

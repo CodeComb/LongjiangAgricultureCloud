@@ -10,7 +10,7 @@ namespace LongjiangAgricultureCloud.Schema
     {
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
-            if (filterContext.HttpContext.Request.UrlReferrer.ToString() == "")
+            if (filterContext.HttpContext.Request.UrlReferrer == null)
                 filterContext.HttpContext.Response.Redirect("/Mobile/Mobile/Login");
             else
                 filterContext.HttpContext.Response.Redirect("/Mobile/Mobile/Login?returnUrl=" + HttpUtility.UrlEncode(filterContext.HttpContext.Request.UrlReferrer.ToString()));

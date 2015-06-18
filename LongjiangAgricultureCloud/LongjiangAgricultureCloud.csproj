@@ -132,6 +132,8 @@
     <Content Include="Areas\Mobile\Views\Mobile\Login.cshtml" />
     <Content Include="Areas\Mobile\Views\Mobile\Register.cshtml" />
     <Content Include="Areas\Mobile\Views\Mobile\Message.cshtml" />
+    <Content Include="Areas\Mobile\Views\Member\Index.cshtml" />
+    <Content Include="Images\m-bg.png" />
     <None Include="Properties\PublishProfiles\ChinaUnicom.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />
@@ -340,6 +342,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Mobile\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Mobile\Controllers\MemberController.cs" />
     <Compile Include="Areas\Mobile\Controllers\MobileController.cs" />
     <Compile Include="Areas\Mobile\MobileAreaRegistration.cs" />
     <Compile Include="Areas\Mobile\Models\ProductListItem.cs" />
