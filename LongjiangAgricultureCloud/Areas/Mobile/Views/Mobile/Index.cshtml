@@ -1,9 +1,67 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-    ViewBag.Back = true;
+﻿@{
+    ViewBag.Title = "龙江云农业";
 }
 
 @Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
-<div class="container"></div>
-@Html.Partial("~/Areas/Mobile/Views/Shared/ShopNav.cshtml");
+<div class="wrap-cont">
+    <div>
+        <img src="~/Images/banner.png" style="width: 100%" />
+    </div>
+    <div class="container">
+        <iframe name="sinaWeatherTool" src="http://weather.news.sina.com.cn/chajian/iframe/weatherStyle2.html?city=%E9%BD%90%E9%BD%90%E5%93%88%E5%B0%94" width="200" height="20" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no"></iframe>
+        <br /><br />
+        <table style="text-align: center">
+            <tr>
+                <td>
+                    <a href="#">
+                        <div class="function-item-outer">
+                            <div class="function-item"><i class="fa function-icon fa-gift"></i></div><div class="function-txt">商城</div>
+                        </div>
+                    </a>
+                </td>
+                <td>
+                    <a href="#">
+                        <div class="function-item-outer">
+                            <div class="function-item red"><i class="fa function-icon fa-cog"></i></div><div class="function-txt">农机服务</div>
+                        </div>
+                    </a>
+                </td>
+                <td>
+                    <a href="#">
+                        <div class="function-item-outer">
+                            <div class="function-item green"><i class="fa function-icon fa-map-marker"></i></div><div class="function-txt">本地通</div>
+                        </div>
+                    </a>
+                </td>
+                <td>
+                    <a href="#">
+                        <div class="function-item-outer">
+                            <div class="function-item purple"><i class="fa function-icon fa-cloud"></i></div><div class="function-txt">农业信息</div>
+                        </div>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="#">
+                        <div class="function-item-outer">
+                            <div class="function-item yellow"><i class="fa function-icon fa-user"></i></div><div class="function-txt">我的帐户</div>
+                        </div>
+                    </a>
+                </td>
+                <td>
+                    <a href="tel:@ViewBag.ServiceTel">
+                        <div class="function-item-outer">
+                            <div class="function-item cyan"><i class="fa function-icon fa-phone"></i></div><div class="function-txt">联系客服</div>
+                        </div>
+                    </a>
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+    <div>
+
+    </div>
+</div>

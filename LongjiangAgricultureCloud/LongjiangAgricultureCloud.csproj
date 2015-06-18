@@ -104,6 +104,7 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\banner.png" />
     <Content Include="Images\bg.png" />
     <Content Include="Images\go-hover.png" />
     <Content Include="Images\go.png" />

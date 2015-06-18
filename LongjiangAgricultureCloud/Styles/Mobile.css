@@ -4,10 +4,16 @@
     font-family: 'Microsoft YaHei';
 }
 
+a {
+    text-decoration: none;
+}
+
+.wrap-cont {
+    margin: 2.8em 0 2.8em 0;
+}
+
 .container {
     padding: 1em;
-    padding-top: 5em;
-    margin-bottom: 5em;
 }
 
 .nav {
@@ -15,7 +21,7 @@
     position: fixed;
     bottom: 0;
     background-color: rgba(255,255,255,0.8);
-    border-top: 0.1em solid #ccc; 
+    border-top: 0.08em solid #ddd; 
 }
 
 table {
@@ -27,20 +33,21 @@ table {
 
 .header {
     background-color: rgb(239,124,30);
-    height: 3em;
+    height: 2.8em;
     width: 100%;
     position: fixed;
-    border-bottom: 0.1em solid #ccc; 
+    border-bottom: 0.08em solid #ddd; 
+    top: 0;
 }
 
     .header table {
-        height: 3em;
+        height: 2.8em;
         margin: 0 1em;
         padding: 0;
     }
 
 .header table td {
-    font-size: 1.5em;
+    font-size: 1.3em;
     color: #fff!important;
     margin: 0;
     padding: 0;
@@ -68,4 +75,57 @@ table {
 
 .nav-txt {
     font-size: 0.7em;
+}
+
+.function-item-outer {
+    padding: 0 0 0.5em 0;
+    display: inline;
+    text-align: center;
+    color: #888;
+}
+
+.function-item {
+    padding: 0.5em;
+    text-align: center;
+    border-radius: 50%;
+    background-color: rgb(84, 99, 197);
+    color: #fff;
+    width: 2.2em!important;
+    height: 2.2em!important;
+    margin: 0 auto;
+}
+
+    .function-item.red {
+        background-color: rgb(255,128,128)!important;
+    }
+
+    .function-item.purple {
+        background-color: rgb(172, 98, 211)!important;
+    }
+    
+    .function-item.green {
+        background-color: rgb(63, 196, 120)!important;
+    }
+
+    .function-item.yellow {
+        background-color: rgb(226, 193, 56)!important;
+    }
+
+    .function-item.cyan {
+        background-color: rgb(71, 217, 223)!important;
+    }
+
+.function-icon {
+    margin-top: 0.1em;
+    font-size: 1.8em!important;
+}
+
+.clr {
+    clear: both;
+}
+
+.function-txt {
+    margin-top: 0.2em;
+    font-size: 0.7em;
+    margin-bottom: 2em;
 }
