@@ -344,6 +344,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Mobile\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Mobile\Controllers\MallController.cs" />
     <Compile Include="Areas\Mobile\Controllers\MemberController.cs" />
     <Compile Include="Areas\Mobile\Controllers\MobileController.cs" />
     <Compile Include="Areas\Mobile\MobileAreaRegistration.cs" />
@@ -439,6 +440,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Mobile\Views\Mall\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

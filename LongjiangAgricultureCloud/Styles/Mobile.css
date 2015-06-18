@@ -236,3 +236,7 @@ select {
     .list-outer.red {
         color: rgb(237, 137, 137);
     }
+
+.nav-active {
+    color: rgb(239,124,30)!important;
+}

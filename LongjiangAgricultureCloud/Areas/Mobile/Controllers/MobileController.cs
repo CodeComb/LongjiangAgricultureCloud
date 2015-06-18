@@ -101,7 +101,10 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                 else
                 {
                     if (catalog.Type == CatalogType.商品分类)
+                    {
                         ViewBag.ShopNav = true;
+                        ViewBag.Product = true;
+                    }
                     ViewBag.Title = catalog.Title;
                     return View(catalog.Catalogs.ToList());
                 }
@@ -109,7 +112,10 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             else
             {
                 if (Type == CatalogType.商品分类)
+                {
                     ViewBag.ShopNav = true;
+                    ViewBag.Product = true;
+                }
                 ViewBag.Title = Type.ToString();
                 return View(DB.Catalogs.Where(x => x.Type == Type && x.Level == 0).ToList());
             }
