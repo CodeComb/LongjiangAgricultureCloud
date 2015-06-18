@@ -83,6 +83,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 
         public ActionResult Catalog(string type, int? id)
         {
+            ViewBag.ShopNav = false;
             CatalogType Type;
             Enum.TryParse(type, out Type);
 
@@ -110,7 +111,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                 if (Type == CatalogType.商品分类)
                     ViewBag.ShopNav = true;
                 ViewBag.Title = Type.ToString();
-                return View(DB.Catalogs.Where(x => x.Type == Type).ToList());
+                return View(DB.Catalogs.Where(x => x.Type == Type && x.Level == 0).ToList());
             }
         }
     }
