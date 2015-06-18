@@ -69,6 +69,11 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             User.Role = UserRole.普通用户;
             if (User.Password != Confirm)
                 return Msg("两次密码输入不一致！");
+            if (DB.Users.Any(x => x.Username == User.Username))
+                return Msg("该手机号码已存在，请修改后重新尝试注册！");
+            DB.Users.Add(User);
+            DB.SaveChanges();
+            return Msg("注册成功！您可以使用该账号进行登录了！");
         }
     }
 }
