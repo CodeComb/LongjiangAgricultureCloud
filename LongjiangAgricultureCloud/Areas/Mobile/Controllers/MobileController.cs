@@ -80,5 +80,38 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             DB.SaveChanges();
             return Msg("注册成功！您可以使用该账号进行登录了！");
         }
+
+        public ActionResult Catalog(string type, int? id)
+        {
+            CatalogType Type;
+            Enum.TryParse(type, out Type);
+
+            if (id.HasValue)
+            {
+                var catalog = DB.Catalogs.Find(id);
+                if (catalog.Type == CatalogType.商品分类 && catalog.Level == 2)
+                    return RedirectToAction("Index", "Mall", new { cid = catalog.ID });
+                else if (catalog.Type == CatalogType.农业信息分类 && catalog.Level == 2)
+                    return RedirectToAction("Index", "MInformation", new { cid = catalog.ID });
+                else if (catalog.Type == CatalogType.农机服务分类 && catalog.Level == 3)
+                    return RedirectToAction("Index", "MService", new { cid = catalog.ID });
+                else if (catalog.Type == CatalogType.本地通分类 && catalog.Level == 2)
+                    return RedirectToAction("Index", "MLocal", new { cid = catalog.ID });
+                else
+                {
+                    if (catalog.Type == CatalogType.商品分类)
+                        ViewBag.ShopNav = true;
+                    ViewBag.Title = catalog.Title;
+                    return View(catalog.Catalogs.ToList());
+                }
+            }
+            else
+            {
+                if (Type == CatalogType.商品分类)
+                    ViewBag.ShopNav = true;
+                ViewBag.Title = Type.ToString();
+                return View(DB.Catalogs.Where(x => x.Type == Type).ToList());
+            }
+        }
     }
 }

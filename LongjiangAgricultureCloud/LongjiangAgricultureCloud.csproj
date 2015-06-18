@@ -135,6 +135,7 @@
     <Content Include="Areas\Mobile\Views\Member\Index.cshtml" />
     <Content Include="Images\m-bg.png" />
     <Content Include="Areas\Mobile\Views\Member\Config.cshtml" />
+    <Content Include="Areas\Mobile\Views\Mobile\Catalog.cshtml" />
     <None Include="Properties\PublishProfiles\ChinaUnicom.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />
