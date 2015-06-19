@@ -30,5 +30,11 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                                 select i).Skip(p * 20).Take(20).ToList();
             return View(informations);
         }
+
+        public ActionResult Show(int id)
+        {
+            var information = DB.Informations.Find(id);
+            return View(information);
+        }
     }
 }

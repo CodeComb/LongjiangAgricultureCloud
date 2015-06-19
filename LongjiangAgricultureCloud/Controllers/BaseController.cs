@@ -33,6 +33,7 @@ namespace LongjiangAgricultureCloud.Controllers
             ViewBag.VerifyProductComment = Convert.ToBoolean(ConfigurationManager.AppSettings["VerifyProductComment"]);
             ViewBag.VerifyService = Convert.ToBoolean(ConfigurationManager.AppSettings["VerifyService"]);
             ViewBag.VerifyLocalTong = Convert.ToBoolean(ConfigurationManager.AppSettings["VerifyLocalTong"]);
+            ViewBag.InformationComment = Convert.ToBoolean(ConfigurationManager.AppSettings["InformationComment"]);
             ViewBag.AlipayAppKey = ConfigurationManager.AppSettings["AlipayAppKey"];
             ViewBag.WeixinPayAppKey = ConfigurationManager.AppSettings["WeixinPayAppKey"];
             ViewBag.ServiceTel = ConfigurationManager.AppSettings["ServiceTel"];
