@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using LongjiangAgricultureCloud.Models;
 
 namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 {
@@ -11,7 +12,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
         // GET: Mobile/Mall
         public ActionResult Index()
         {
-            return RedirectToAction("Catalog", "Mobile", new { type = "商品分类" });
+            return RedirectToAction("Catalog", "Mobile", new { type = CatalogType.商品分类 });
         }
     }
 }

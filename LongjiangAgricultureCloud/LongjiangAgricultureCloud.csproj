@@ -136,6 +136,7 @@
     <Content Include="Images\m-bg.png" />
     <Content Include="Areas\Mobile\Views\Member\Config.cshtml" />
     <Content Include="Areas\Mobile\Views\Mobile\Catalog.cshtml" />
+    <Content Include="Areas\Mobile\Views\MService\Index.cshtml" />
     <None Include="Properties\PublishProfiles\ChinaUnicom.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />
@@ -446,7 +447,6 @@
     <Folder Include="Areas\Mobile\Views\Mall\" />
     <Folder Include="Areas\Mobile\Views\MInformation\" />
     <Folder Include="Areas\Mobile\Views\MLocal\" />
-    <Folder Include="Areas\Mobile\Views\MService\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
