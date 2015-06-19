@@ -10,22 +10,21 @@
         <a href="/Mobile/MService/Show/@i.ID">
             <div class="list-outer" id="info-@i.ID" data-lon="@i.Lon" data-lat="@i.Lat">
                 @i.Title<br />
-                <div class="sub-title">@i.Time.ToString("yyyy-MM-dd HH:mm") / <span class="distance">距离计算中...</span></div>
+                <div class="sub-title">时间：@i.Time.ToString("yyyy-MM-dd HH:mm") / 距离：<span class="distance">距离计算中...</span></div>
             </div>
         </a>
     }
 </div>
 <script>
-    var _lon, _lat;
     navigator.geolocation.getCurrentPosition(
-                function (position) {
-                    _lon = position.coords.longitude;
-                    _lat = position.coords.latitude;
-                    $(".list-outer").each(function () {
-                        var lon = $(this).attr('data-lon');
-                        var lat = $(this).attr('data-lat');
-                        var dis = (_lat, _lon, lat, lon);
-                        $(this).find('.distance').html(Distance(dis));
-                    });
-                });
+        function (position) {
+            var _lon = position.coords.longitude;
+            var _lat = position.coords.latitude;
+            $(".list-outer").each(function () {
+                var lon = $(this).attr('data-lon');
+                var lat = $(this).attr('data-lat');
+                var dis = getDistance(parseFloat(_lat), parseFloat(_lon), parseFloat(lat), parseFloat(lon));
+                $(this).find('.distance').html(Distance(dis));
+            });
+        });
 </script>
