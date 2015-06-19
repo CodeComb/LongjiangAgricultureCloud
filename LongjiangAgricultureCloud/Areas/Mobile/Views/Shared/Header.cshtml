@@ -18,6 +18,10 @@
                 {
                     <a href="javascript: popMenu()"><i class="fa icon fa-list"></i></a>
                 }
+                @if (ViewBag.Add)
+                {
+                    <a href="@ViewBag.Url"><i class="fa icon fa-plus"></i></a>
+                }
             </td>
         </tr>
     </table>

@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Provider>
+@{
+    ViewBag.Back = true;
+    ViewBag.Add = true;
+    ViewBag.Url = "/Mobile/Member/Join2";
+    ViewBag.Title = "加盟申请";
+}
+
+@Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
+
+<div class="wrap-cont">
+    <div class="list-outer">
+        哈尔滨市码锋科技有限责任公司 <br />
+        <div class="sub-title">审核状态：审核中</div>
+    </div>
+    @foreach (var p in Model)
+    {
+        <div class="list-outer">
+            @p.Title <br />
+            审核状态：审核中
+        </div>
+    }
+</div>

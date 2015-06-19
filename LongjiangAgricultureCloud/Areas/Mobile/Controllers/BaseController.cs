@@ -29,6 +29,8 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             ViewBag.Menu = false;
             ViewBag.Product = false;
             ViewBag.Cart = false;
+            ViewBag.Add = false;
+            ViewBag.Url = "#";
             ViewBag.Provinces = DB.Areas.Where(x => x.Level == AreaLevel.省).ToList();
             ViewBag.Cities = DB.Areas.Where(x => x.Level == AreaLevel.市).ToList();
             ViewBag.Districts = DB.Areas.Where(x => x.Level == AreaLevel.区县).ToList();

@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "加盟申请";
+    ViewBag.Back = true;
+}
+@Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
+<div class="wrap-cont">
+    @using (Html.BeginForm("Join2", "Member", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="textbox-outer">
+            <div class="field">商户名称</div>
+            <input type="text" name="Title" class="textbox form" />
+        </div>
+        <div class="textbox-outer">
+            <div class="field">商户简介</div>
+            <input type="text" name="Description" class="textbox form" />
+        </div>
+        <div class="textbox-outer">
+            <div class="field">商户地址</div>
+            <input type="text" name="Address" class="textbox form" />
+        </div>
+        <div class="textbox-outer">
+            <div class="field">联系人姓名</div>
+            <input type="text" name="Name" class="textbox form" />
+        </div>
+        <div class="textbox-outer">
+            <div class="field">手机号码</div>
+            <input type="text" name="Phone" class="textbox form" />
+        </div>
+        <div class="textbox-outer">
+            <div class="field">座机号码</div>
+            <input type="text" name="Tel" class="textbox form" />
+        </div>
+        <div class="textbox-outer">
+            <div class="field">电子邮箱</div>
+            <input type="text" name="Email" class="textbox form" />
+        </div>
+        <div class="textbox-outer">
+            <div class="field">商户环境或产品照</div>
+            <input type="file" name="Picture" />
+        </div>
+        <div class="textbox-outer">
+            <div class="field">营业执照</div>
+            <input type="file" name="BusinessLicence" />
+        </div>
+        <div class="textbox-outer">
+            <div class="field">组织机构代码证</div>
+            <input type="file" name="OrganizationRegistrationCodeCertificate" />
+        </div>
+        <div class="textbox-outer">
+            <div class="field">税务登记证</div>
+            <input type="file" name="TaxRegistrationCertificate" />
+        </div>
+        <div class="textbox-outer">
+            <div class="field">法定代表人身份证</div>
+            <input type="file" name="ArtificialPersonIdentityCard" />
+        </div>
+        <a href="javascript: $('form').submit()">
+            <div class="btn">提交申请</div>
+        </a>
+    }
+</div>
