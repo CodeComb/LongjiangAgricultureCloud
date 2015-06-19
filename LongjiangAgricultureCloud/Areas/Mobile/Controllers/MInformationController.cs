@@ -17,7 +17,18 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 
         public ActionResult List(int id)
         {
+            var catalog = DB.Catalogs.Find(id);
+            ViewBag.Title = catalog.Title;
+            return View();
+        }
 
+        public ActionResult ListRaw(int id, int p = 0)
+        {
+            var informations = (from i in DB.Informations
+                                where i.CatalogID == id
+                                orderby i.Time descending
+                                select i).Skip(p * 20).Take(20).ToList();
+            return View(informations);
         }
     }
 }

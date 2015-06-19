@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Information>
+@{
+    Layout = null;
+}
+@foreach (var i in Model)
+{
+    <a href="/Mobile/Information/Show/@i.ID">
+        <div class="list-outer">
+            @i.Title<div class="recommand-time">@i.Time.ToString("MM-dd")</div>
+        </div>
+    </a>
+}

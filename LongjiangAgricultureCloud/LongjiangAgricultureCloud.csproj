@@ -137,6 +137,8 @@
     <Content Include="Areas\Mobile\Views\Member\Config.cshtml" />
     <Content Include="Areas\Mobile\Views\Mobile\Catalog.cshtml" />
     <Content Include="Areas\Mobile\Views\MService\Index.cshtml" />
+    <Content Include="Areas\Mobile\Views\MInformation\ListRaw.cshtml" />
+    <Content Include="Areas\Mobile\Views\MInformation\List.cshtml" />
     <None Include="Properties\PublishProfiles\ChinaUnicom.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />
@@ -445,7 +447,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Mobile\Views\Mall\" />
-    <Folder Include="Areas\Mobile\Views\MInformation\" />
     <Folder Include="Areas\Mobile\Views\MLocal\" />
   </ItemGroup>
   <PropertyGroup>

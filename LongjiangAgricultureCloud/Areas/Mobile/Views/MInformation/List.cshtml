@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Back = true;
+    ViewBag.Refresh = true;
+}
+
+@Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
+<div class="wrap-cont" id="lstInformations">
+</div>
+<script>
+    id = @Html.ViewContext.RouteData.Values["id"];
+</script>

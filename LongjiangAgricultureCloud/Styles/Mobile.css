@@ -240,3 +240,10 @@ select {
 .nav-active {
     color: rgb(239,124,30)!important;
 }
+
+.no-more {
+    color: #888;
+    font-size: 0.9em;
+    text-align: center;
+    padding: 1.3em;
+}
