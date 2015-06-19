@@ -34,3 +34,26 @@ $(window).scroll(function () {
         Load();
     }
 });
+
+var EarthRadiusKm = 6378.137;
+
+function Distance(dis)
+{
+    if (dis > 1000)
+        return (dis / 1000).toFixed(1) + "公里";
+    else
+        return dis + '米';
+}
+
+function getDistance(p1Lat, p1Lng, p2Lat, p2Lng) {
+    var dLat1InRad = p1Lat * (Math.PI / 180);
+    var dLong1InRad = p1Lng * (Math.PI / 180);
+    var dLat2InRad = p2Lat * (Math.PI / 180);
+    var dLong2InRad = p2Lng * (Math.PI / 180);
+    var dLongitude = dLong2InRad - dLong1InRad;
+    var dLatitude = dLat2InRad - dLat1InRad;
+    var a = Math.pow(Math.sin(dLatitude / 2), 2) + Math.cos(dLat1InRad) * Math.cos(dLat2InRad) * Math.pow(Math.sin(dLongitude / 2), 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var dDistance = EarthRadiusKm * c;
+    return dDistance * 1000;
+}

@@ -81,7 +81,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return Msg("注册成功！您可以使用该账号进行登录了！");
         }
 
-        public ActionResult Catalog(string type, int? id)
+        public ActionResult Catalog(string type, int? id, InformationType? Service)
         {
             ViewBag.ShopNav = false;
             CatalogType Type;
@@ -95,7 +95,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                 else if (catalog.Type == CatalogType.农业信息分类 && catalog.Level == 3)
                     return RedirectToAction("List", "MInformation", new { id = catalog.ID });
                 else if (catalog.Type == CatalogType.农机服务分类 && catalog.Level == 3)
-                    return RedirectToAction("List", "MService", new { id = catalog.ID });
+                    return RedirectToAction("List", "MService", new { id = catalog.ID, Service = Service });
                 else if (catalog.Type == CatalogType.本地通分类 && catalog.Level == 2)
                     return RedirectToAction("List", "MLocal", new { id = catalog.ID });
                 else

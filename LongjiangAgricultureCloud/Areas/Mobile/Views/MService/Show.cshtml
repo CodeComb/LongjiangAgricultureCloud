@@ -1,0 +1,37 @@
+﻿@model Information
+@{
+    ViewBag.Back = true;
+}
+
+<div class="wrap-cont">
+    <div class="list-outer">
+        <div class="textbox-outer">
+            <div class="field">标题</div>
+            @Model.Title
+        </div>
+    </div>
+    <div class="list-outer">
+        <div class="textbox-outer">
+            <div class="field">描述</div>
+            @Model.Description
+        </div>
+    </div>
+    <div class="list-outer">
+        <div class="textbox-outer">
+            <div class="field">联系人</div>
+            @Model.Name
+        </div>
+    </div>
+    <div class="list-outer">
+        <div class="textbox-outer">
+            <div class="field">联系电话</div>
+            <a href="tel:@Model.Phone">@Model.Phone</a>
+        </div>
+    </div>
+    <div class="list-outer">
+        <div class="textbox-outer">
+            <div class="field">地址</div>
+            @Model.Address
+        </div>
+    </div>
+</div>

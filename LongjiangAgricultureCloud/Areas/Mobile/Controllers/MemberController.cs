@@ -63,6 +63,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             Provider.Phone = Phone;
             Provider.Tel = Tel;
             Provider.Email = Email;
+            Provider.UserID = CurrentUser.ID;
             Provider.Status = ProviderStatus.等待审核;
             #region 图片上传
             var Picture = Request.Files["Picture"];

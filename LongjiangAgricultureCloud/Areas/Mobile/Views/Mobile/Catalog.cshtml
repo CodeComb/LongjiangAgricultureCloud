@@ -9,7 +9,7 @@
 <div class="wrap-cont">
     @foreach (var c in Model)
     {
-        <a href="/Mobile/Mobile/Catalog/@c.ID">
+        <a href="/Mobile/Mobile/Catalog/@c.ID?Service=@Request.QueryString["Service"]">
             <div class="list-outer">@c.Title</div>
         </a>
     }

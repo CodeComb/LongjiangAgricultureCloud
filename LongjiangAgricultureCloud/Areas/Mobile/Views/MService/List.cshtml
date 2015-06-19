@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Information>
+@{
+    ViewBag.Back = true;
+    ViewBag.Refresh = true;
+}
+@Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
+<div class="wrap-cont">
+    @foreach (var i in Model)
+    {
+        <a href="/Mobile/MService/Show/@i.ID">
+            <div class="list-outer" id="info-@i.ID" data-lon="@i.Lon" data-lat="@i.Lat">
+                @i.Title<br />
+                <div class="sub-title">@i.Time.ToString("yyyy-MM-dd HH:mm") / <span class="distance">距离计算中...</span></div>
+            </div>
+        </a>
+    }
+</div>
+<script>
+    var _lon, _lat;
+    navigator.geolocation.getCurrentPosition(
+                function (position) {
+                    _lon = position.coords.longitude;
+                    _lat = position.coords.latitude;
+                    $(".list-outer").each(function () {
+                        var lon = $(this).attr('data-lon');
+                        var lat = $(this).attr('data-lat');
+                        var dis = (_lat, _lon, lat, lon);
+                        $(this).find('.distance').html(Distance(dis));
+                    });
+                });
+</script>

@@ -142,6 +142,8 @@
     <Content Include="Areas\Mobile\Views\MInformation\Show.cshtml" />
     <Content Include="Areas\Mobile\Views\Member\Join.cshtml" />
     <Content Include="Areas\Mobile\Views\Member\Join2.cshtml" />
+    <Content Include="Areas\Mobile\Views\MService\List.cshtml" />
+    <Content Include="Areas\Mobile\Views\MService\Show.cshtml" />
     <None Include="Properties\PublishProfiles\ChinaUnicom.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />
