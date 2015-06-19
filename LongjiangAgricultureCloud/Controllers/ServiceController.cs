@@ -141,6 +141,7 @@ namespace LongjiangAgricultureCloud.Controllers
                 CatalogID = CatalogID,
                 Type = Type,
                 UserID = CurrentUser.ID,
+                Verify = true,
                 Time = DateTime.Now
             };
             var Picture = Request.Files["Picture"];

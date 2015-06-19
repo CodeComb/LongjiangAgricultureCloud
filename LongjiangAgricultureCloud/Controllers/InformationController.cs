@@ -121,6 +121,7 @@ namespace LongjiangAgricultureCloud.Controllers
                 CatalogID = CatalogID,
                 UserID = CurrentUser.ID,
                 Time = DateTime.Now,
+                Verify = true,
                 Type = InformationType.农业信息
             };
 

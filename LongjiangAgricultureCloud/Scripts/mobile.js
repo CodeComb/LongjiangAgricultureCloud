@@ -6,6 +6,7 @@ function Load()
 {
     LoadInformations();
     LoadMachines();
+    LoadLocals();
 }
 
 function LoadInformations() {
@@ -32,6 +33,21 @@ function LoadMachines() {
                 $('#lstMachines').html('<div class="no-more">没有更多信息了！</div>');
             }
             $('#lstMachines').append(data);
+            p++;
+            lock = false;
+        });
+    }
+}
+
+function LoadLocals() {
+    if ($('#lstLocals').length > 0) {
+        if (lock) return;
+        lock = true;
+        $.get('/Mobile/Mlocal/ListRaw', { p: p, id: id }, function (data) {
+            if (data.length < 5) {
+                $('#lstLocals').html('<div class="no-more">没有更多信息了！</div>');
+            }
+            $('#lstLocals').append(data);
             p++;
             lock = false;
         });

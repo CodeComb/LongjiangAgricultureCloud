@@ -20,11 +20,12 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return View();
         }
 
-        public ActionResult ListRaw(int p = 0)
+        public ActionResult ListRaw(int id, int p = 0)
         {
             var informations = (from i in DB.Informations
                                 where i.Type == InformationType.本地通信息
                                 && i.Verify == true
+                                && i.CatalogID == id
                                 orderby i.Time descending
                                 select i).ToList();
             return View(informations);

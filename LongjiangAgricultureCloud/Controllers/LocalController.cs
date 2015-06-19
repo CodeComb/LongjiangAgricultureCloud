@@ -109,6 +109,7 @@ namespace LongjiangAgricultureCloud.Controllers
                 Time = DateTime.Now,
                 SupplyDemand = SupplyDemand,
                 Type = InformationType.本地通信息,
+                Verify = true,
                 Price = Price
             };
             
