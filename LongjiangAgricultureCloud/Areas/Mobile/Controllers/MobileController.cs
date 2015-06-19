@@ -33,7 +33,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
         public ActionResult Login()
         {
             if (User.Identity.IsAuthenticated)
-                return RedirectToAction("Index", "User");
+                return RedirectToAction("Index", "Member");
             return View();
         }
 
