@@ -14,5 +14,10 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
         {
             return RedirectToAction("Catalog", "Mobile", new { type = CatalogType.农业信息分类 });
         }
+
+        public ActionResult List(int id)
+        {
+
+        }
     }
 }

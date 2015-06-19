@@ -31,5 +31,8 @@ namespace LongjiangAgricultureCloud.Models
         public virtual Catalog Father { get; set; }
 
         public virtual ICollection<Catalog> Catalogs { get; set; }
+
+        [Index]
+        public bool Delete { get; set; }
     }
 }

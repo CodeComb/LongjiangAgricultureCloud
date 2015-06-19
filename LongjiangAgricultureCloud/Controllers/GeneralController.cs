@@ -43,7 +43,7 @@ namespace LongjiangAgricultureCloud.Controllers
             if (id == null)
             {
                 ViewBag.Level = 0;
-                return View(DB.Catalogs.Where(x => x.Level == 0).OrderBy(x => x.Type).ToList());
+                return View(DB.Catalogs.Where(x => x.Level == 0 && !x.Delete).OrderBy(x => x.Type).ToList());
             }
             else
             {
@@ -52,7 +52,7 @@ namespace LongjiangAgricultureCloud.Controllers
                 ViewBag.FatherID = catalog.ID;
                 ViewBag.FatherTitle = catalog.Title;
                 ViewBag.Type = catalog.Type;
-                return View(DB.Catalogs.Where(x => x.FatherID == id.Value).OrderBy(x => x.Type).ToList());
+                return View(DB.Catalogs.Where(x => x.FatherID == id.Value && !x.Delete).OrderBy(x => x.Type).ToList());
             }
         }
         
@@ -86,7 +86,7 @@ namespace LongjiangAgricultureCloud.Controllers
         public ActionResult DeleteCatalog(int id)
         {
             var catalog = DB.Catalogs.Find(id);
-            DB.Catalogs.Remove(catalog);
+            catalog.Delete = true;
             DB.SaveChanges();
             return Content("ok");
         }

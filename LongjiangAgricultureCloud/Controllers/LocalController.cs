@@ -18,14 +18,17 @@ namespace LongjiangAgricultureCloud.Controllers
         {
             ViewBag.Level1 = (from c in DB.Catalogs
                               where c.Level == 0
+                              && !c.Delete
                               && c.Type == CatalogType.本地通分类
                               select c).ToList();
             ViewBag.Level2 = (from c in DB.Catalogs
                               where c.Level == 1
+                              && !c.Delete
                               && c.Type == CatalogType.本地通分类
                               select c).ToList();
             ViewBag.Level3 = (from c in DB.Catalogs
                               where c.Level == 2
+                              && !c.Delete
                               && c.Type == CatalogType.本地通分类
                               select c).ToList();
             IEnumerable<Information> query = DB.Informations.Where(x => x.Type == InformationType.本地通信息);
@@ -52,14 +55,17 @@ namespace LongjiangAgricultureCloud.Controllers
         {
             ViewBag.Level1 = (from c in DB.Catalogs
                               where c.Level == 0
+                              && !c.Delete
                               && c.Type == CatalogType.本地通分类
                               select c).ToList();
             ViewBag.Level2 = (from c in DB.Catalogs
                               where c.Level == 1
+                              && !c.Delete
                               && c.Type == CatalogType.本地通分类
                               select c).ToList();
             ViewBag.Level3 = (from c in DB.Catalogs
                               where c.Level == 2
+                              && !c.Delete
                               && c.Type == CatalogType.本地通分类
                               select c).ToList();
             var information = DB.Informations.Find(id);
@@ -70,14 +76,17 @@ namespace LongjiangAgricultureCloud.Controllers
         {
             ViewBag.Level1 = (from c in DB.Catalogs
                               where c.Level == 0
+                              && !c.Delete
                               && c.Type == CatalogType.本地通分类
                               select c).ToList();
             ViewBag.Level2 = (from c in DB.Catalogs
                               where c.Level == 1
+                              && !c.Delete
                               && c.Type == CatalogType.本地通分类
                               select c).ToList();
             ViewBag.Level3 = (from c in DB.Catalogs
                               where c.Level == 2
+                              && !c.Delete
                               && c.Type == CatalogType.本地通分类
                               select c).ToList();
             return View();

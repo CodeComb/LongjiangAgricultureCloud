@@ -91,13 +91,13 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             {
                 var catalog = DB.Catalogs.Find(id);
                 if (catalog.Type == CatalogType.商品分类 && catalog.Level == 2)
-                    return RedirectToAction("Index", "Mall", new { cid = catalog.ID });
-                else if (catalog.Type == CatalogType.农业信息分类 && catalog.Level == 2)
-                    return RedirectToAction("Index", "MInformation", new { cid = catalog.ID });
+                    return RedirectToAction("List", "Mall", new { id = catalog.ID });
+                else if (catalog.Type == CatalogType.农业信息分类 && catalog.Level == 3)
+                    return RedirectToAction("List", "MInformation", new { id = catalog.ID });
                 else if (catalog.Type == CatalogType.农机服务分类 && catalog.Level == 3)
-                    return RedirectToAction("Index", "MService", new { cid = catalog.ID });
+                    return RedirectToAction("List", "MService", new { id = catalog.ID });
                 else if (catalog.Type == CatalogType.本地通分类 && catalog.Level == 2)
-                    return RedirectToAction("Index", "MLocal", new { cid = catalog.ID });
+                    return RedirectToAction("List", "MLocal", new { id = catalog.ID });
                 else
                 {
                     if (catalog.Type == CatalogType.商品分类)
@@ -106,7 +106,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                         ViewBag.Product = true;
                     }
                     ViewBag.Title = catalog.Title;
-                    return View(catalog.Catalogs.ToList());
+                    return View(catalog.Catalogs.Where(x => !x.Delete).ToList());
                 }
             }
             else
@@ -117,7 +117,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                     ViewBag.Product = true;
                 }
                 ViewBag.Title = Type.ToString();
-                return View(DB.Catalogs.Where(x => x.Type == Type && x.Level == 0).ToList());
+                return View(DB.Catalogs.Where(x => x.Type == Type && x.Level == 0 && !x.Delete).ToList());
             }
         }
     }
