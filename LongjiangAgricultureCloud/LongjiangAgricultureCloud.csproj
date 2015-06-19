@@ -144,6 +144,11 @@
     <Content Include="Areas\Mobile\Views\Member\Join2.cshtml" />
     <Content Include="Areas\Mobile\Views\MService\List.cshtml" />
     <Content Include="Areas\Mobile\Views\MService\Show.cshtml" />
+    <Content Include="Areas\Mobile\Views\MService\Station.cshtml" />
+    <Content Include="Areas\Mobile\Views\MService\ShowStation.cshtml" />
+    <Content Include="Areas\Mobile\Views\Mobile\Machine.cshtml" />
+    <Content Include="Areas\Mobile\Views\MService\MachineRaw.cshtml" />
+    <Content Include="Areas\Mobile\Views\MService\ShowMachine.cshtml" />
     <None Include="Properties\PublishProfiles\ChinaUnicom.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />

@@ -31,6 +31,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                                 where i.CatalogID == id
                                 && i.Type == Service
                                 && i.Time >= time
+                                && i.Verify == true
                                 orderby i.Time descending
                                 select i).ToList();
             ViewBag.Title = Service.ToString();
@@ -41,6 +42,54 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
         {
             var information = DB.Informations.Find(id);
             ViewBag.Title = information.Type.ToString();
+            return View(information);
+        }
+
+        public ActionResult Station()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult GetStations()
+        {
+            var informations = (from i in DB.Informations
+                                where i.Type == InformationType.维修站
+                                && i.Verify == true
+                                select new
+                                {
+                                    ID = i.ID,
+                                    Title = i.Title,
+                                    Lon = i.Lon,
+                                    Lat = i.Lat
+                                }).ToList();
+            return Json(informations, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult ShowStation(int id)
+        {
+            var station = DB.Informations.Find(id);
+            return View(station);
+        }
+
+        public ActionResult Machine()
+        {
+            return View();
+        }
+
+        public ActionResult MachineRaw(int p = 0)
+        {
+            var informations = (from i in DB.Informations
+                                where i.Type == InformationType.二手农机
+                                && i.Verify == true
+                                orderby i.Time descending
+                                select i).Skip(20 * p).Take(20).ToList();
+            return View(informations);
+        }
+
+        public ActionResult ShowMachine(int id)
+        {
+            var information = DB.Informations.Find(id);
             return View(information);
         }
     }

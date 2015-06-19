@@ -5,12 +5,11 @@ var id = null
 function Load()
 {
     LoadInformations();
+    LoadMachines();
 }
 
-function LoadInformations()
-{
-    if ($('#lstInformations').length > 0)
-    {
+function LoadInformations() {
+    if ($('#lstInformations').length > 0) {
         if (lock) return;
         lock = true;
         $.get('/Mobile/MInformation/ListRaw', { p: p, id: id }, function (data) {
@@ -20,7 +19,22 @@ function LoadInformations()
             $('#lstInformations').append(data);
             p++;
             lock = false;
-        }); 
+        });
+    }
+}
+
+function LoadMachines() {
+    if ($('#lstMachines').length > 0) {
+        if (lock) return;
+        lock = true;
+        $.get('/Mobile/MService/MachineRaw', { p: p }, function (data) {
+            if (data.length < 5) {
+                $('#lstMachines').html('<div class="no-more">没有更多信息了！</div>');
+            }
+            $('#lstMachines').append(data);
+            p++;
+            lock = false;
+        });
     }
 }
 

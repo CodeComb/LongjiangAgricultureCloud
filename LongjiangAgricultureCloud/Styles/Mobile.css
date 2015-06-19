@@ -256,3 +256,7 @@ select {
 img {
     max-width: 100%;
 }
+
+a {
+    color: #1d76c7;
+}

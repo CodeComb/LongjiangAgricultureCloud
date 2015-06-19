@@ -4,34 +4,28 @@
 }
 @Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
 <div class="wrap-cont">
-    <div class="textbox-outer">
-        <div class="textbox-outer">
-            <div class="field">标题</div>
-            @Model.Title
-        </div>
+    <div class="list-outer">
+        <div class="field">标题</div>
+        @Model.Title
     </div>
-    <div class="textbox-outer">
-        <div class="textbox-outer">
-            <div class="field">描述</div>
-            @Model.Description
-        </div>
+    <div class="list-outer">
+        <div class="field">描述</div>
+        @Model.Description
     </div>
-    <div class="textbox-outer">
-        <div class="textbox-outer">
-            <div class="field">联系人</div>
-            @Model.Name
-        </div>
+    <div class="list-outer">
+        <div class="field">发布时间</div>
+        @Model.Time.ToString("yyyy-MM-dd HH:mm")
     </div>
-    <div class="textbox-outer">
-        <div class="textbox-outer">
-            <div class="field">联系电话</div>
-            <a href="tel:@Model.Phone">@Model.Phone</a>
-        </div>
+    <div class="list-outer">
+        <div class="field">联系人</div>
+        @Model.Name
     </div>
-    <div class="textbox-outer">
-        <div class="textbox-outer">
-            <div class="field">地址</div>
-            @Model.Address
-        </div>
+    <div class="list-outer">
+        <div class="field">联系电话</div>
+        <a href="tel:@Model.Phone">@Model.Phone</a>
+    </div>
+    <div class="list-outer">
+        <div class="field">地址</div>
+        @Model.Address
     </div>
 </div>
