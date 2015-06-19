@@ -65,7 +65,7 @@
             <div class="recommand-title">热点关注</div>
             @foreach (Information i in ViewBag.Informations)
             {
-                <div class="recommand-item"><a href="/Mobile/Information/Show/@i.ID" style="width: 90%; overflow: hidden; color: #555;">@i.Title</a><span class="recommand-time">@i.Time.ToString("MM-dd")</span></div>
+                <div class="recommand-item"><a href="/Mobile/MInformation/Show/@i.ID" style="width: 90%; overflow: hidden; color: #555;">@i.Title</a><span class="recommand-time">@i.Time.ToString("MM-dd")</span></div>
             }
         </div>
     </div>

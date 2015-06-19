@@ -338,6 +338,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\site.js" />
     <Content Include="Styles\datetimepicker.css" />
+    <Content Include="Styles\duoshuo.css" />
     <Content Include="Styles\icons.css" />
     <Content Include="Styles\Mobile.css" />
     <Content Include="Styles\Site.css" />
