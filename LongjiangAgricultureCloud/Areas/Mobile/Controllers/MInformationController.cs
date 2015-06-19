@@ -6,12 +6,12 @@ using System.Web.Mvc;
 
 namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 {
-    public class MallController : BaseController
+    public class MInformationController : BaseController
     {
-        // GET: Mobile/Mall
+        // GET: Mobile/MInformation
         public ActionResult Index()
         {
-            return RedirectToAction("Catalog", "Mobile", new { type = "商品分类" });
+            return View();
         }
     }
 }

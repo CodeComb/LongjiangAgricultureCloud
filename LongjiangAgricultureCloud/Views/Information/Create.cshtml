@@ -27,10 +27,17 @@
                     }
                 </select>
 
-                <select id="lvl3" data-parent-select="lvl2" name="CatalogID">
+                <select id="lvl3" data-parent-select="lvl2">
                     @foreach (Catalog c in ViewBag.Level3)
                     {
-                        <option  data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
+                        <option data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
+                    }
+                </select>
+
+                <select id="lvl4" data-parent-select="lvl3" name="CatalogID">
+                    @foreach (Catalog c in ViewBag.Level3)
+                    {
+                        <option data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
                     }
                 </select>
             </td>

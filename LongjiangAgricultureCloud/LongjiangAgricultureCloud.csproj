@@ -346,7 +346,10 @@
     <Compile Include="Areas\Mobile\Controllers\BaseController.cs" />
     <Compile Include="Areas\Mobile\Controllers\MallController.cs" />
     <Compile Include="Areas\Mobile\Controllers\MemberController.cs" />
+    <Compile Include="Areas\Mobile\Controllers\MInformationController.cs" />
+    <Compile Include="Areas\Mobile\Controllers\MLocalController.cs" />
     <Compile Include="Areas\Mobile\Controllers\MobileController.cs" />
+    <Compile Include="Areas\Mobile\Controllers\MServiceController.cs" />
     <Compile Include="Areas\Mobile\MobileAreaRegistration.cs" />
     <Compile Include="Areas\Mobile\Models\ProductListItem.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -441,6 +444,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Mobile\Views\Mall\" />
+    <Folder Include="Areas\Mobile\Views\MInformation\" />
+    <Folder Include="Areas\Mobile\Views\MLocal\" />
+    <Folder Include="Areas\Mobile\Views\MService\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

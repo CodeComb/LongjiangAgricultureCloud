@@ -28,6 +28,10 @@ namespace LongjiangAgricultureCloud.Controllers
                               where c.Level == 2
                               && c.Type == CatalogType.农业信息分类
                               select c).ToList();
+            ViewBag.Level4 = (from c in DB.Catalogs
+                              where c.Level == 3
+                              && c.Type == CatalogType.农业信息分类
+                              select c).ToList();
             IEnumerable<Information> query = DB.Informations.Where(x => x.Type == InformationType.农业信息);
             if (CatalogID.HasValue)
                 query = query.Where(x => x.CatalogID == CatalogID.Value);
@@ -64,6 +68,10 @@ namespace LongjiangAgricultureCloud.Controllers
                               where c.Level == 2
                               && c.Type == CatalogType.农业信息分类
                               select c).ToList();
+            ViewBag.Level4 = (from c in DB.Catalogs
+                              where c.Level == 3
+                              && c.Type == CatalogType.农业信息分类
+                              select c).ToList();
             var information = DB.Informations.Find(id);
             return View(information);
         }
@@ -80,6 +88,10 @@ namespace LongjiangAgricultureCloud.Controllers
                               select c).ToList();
             ViewBag.Level3 = (from c in DB.Catalogs
                               where c.Level == 2
+                              && c.Type == CatalogType.农业信息分类
+                              select c).ToList();
+            ViewBag.Level4 = (from c in DB.Catalogs
+                              where c.Level == 3
                               && c.Type == CatalogType.农业信息分类
                               select c).ToList();
             return View();
