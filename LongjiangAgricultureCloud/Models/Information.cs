@@ -43,7 +43,7 @@ namespace LongjiangAgricultureCloud.Models
 
         public decimal? Lat { get; set; }
 
-        public float Price { get; set; }
+        public string Price { get; set; }
 
         public byte[] Picture { get; set; }
 

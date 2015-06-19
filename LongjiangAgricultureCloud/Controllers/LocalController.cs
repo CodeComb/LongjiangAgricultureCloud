@@ -95,7 +95,7 @@ namespace LongjiangAgricultureCloud.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create(string Title, string Description, int? CatalogID, string Name, string Phone, string Address, float Price, SupplyDemand SupplyDemand)
+        public ActionResult Create(string Title, string Description, int? CatalogID, string Name, string Phone, string Address, string  Price, SupplyDemand SupplyDemand)
         {
             var Information = new Information
             {
@@ -120,7 +120,7 @@ namespace LongjiangAgricultureCloud.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit(int id, string Title, string Description, int? CatalogID, string Name, string Phone, string Address, float Price, SupplyDemand SupplyDemand, bool Top)
+        public ActionResult Edit(int id, string Title, string Description, int? CatalogID, string Name, string Phone, string Address, string Price, SupplyDemand SupplyDemand, bool Top)
         {
             var information = DB.Informations.Find(id);
             information.Title = Title;

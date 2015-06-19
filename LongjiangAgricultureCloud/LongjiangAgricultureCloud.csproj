@@ -149,6 +149,9 @@
     <Content Include="Areas\Mobile\Views\Mobile\Machine.cshtml" />
     <Content Include="Areas\Mobile\Views\MService\MachineRaw.cshtml" />
     <Content Include="Areas\Mobile\Views\MService\ShowMachine.cshtml" />
+    <Content Include="Areas\Mobile\Views\MLocal\List.cshtml" />
+    <Content Include="Areas\Mobile\Views\MLocal\ListRaw.cshtml" />
+    <Content Include="Areas\Mobile\Views\MLocal\Show.cshtml" />
     <None Include="Properties\PublishProfiles\ChinaUnicom.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />
@@ -458,7 +461,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Mobile\Views\Mall\" />
-    <Folder Include="Areas\Mobile\Views\MLocal\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
