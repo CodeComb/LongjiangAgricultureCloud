@@ -10,6 +10,7 @@ function Load()
     LoadProducts();
     LoadOrders();
     LoadMyLocals();
+    LoadProductComments();
 }
 
 function LoadInformations() {
@@ -36,6 +37,21 @@ function LoadMachines() {
                 $('#lstMachines').html('<div class="no-more">没有更多信息了！</div>');
             }
             $('#lstMachines').append(data);
+            p++;
+            lock = false;
+        });
+    }
+}
+
+function LoadProductComments() {
+    if ($('#lstProductComments').length > 0) {
+        if (lock) return;
+        lock = true;
+        $.get('/Mobile/Mall/CommentRaw', { p: p, id: id }, function (data) {
+            if (data.length < 5) {
+                $('#lstProductComments').html('<div class="no-more">没有更多信息了！</div>');
+            }
+            $('#lstProductComments').append(data);
             p++;
             lock = false;
         });

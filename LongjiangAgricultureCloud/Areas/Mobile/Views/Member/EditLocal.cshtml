@@ -1,0 +1,69 @@
+﻿@model Information
+@{
+    ViewBag.Title = "编辑本地通信息";
+    ViewBag.Back = true;
+}
+
+<div class="wrap-cont">
+    @using (Html.BeginForm("EditLocal", "Member", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="textbox-outer">
+            <div class="field">标题</div>
+            @Html.TextBoxFor(x => x.Title, new { @class = "textbox form" })
+        </div>
+        <div class="textbox-outer">
+            <div class="field">描述</div>
+            @Html.TextBoxFor(x => x.Description, new { @class = "textbox form" })
+        </div>
+        <div class="textbox-outer">
+            <div class="field">供求类型</div>
+            @Html.EnumDropDownListFor(x => x.SupplyDemand)
+        </div>
+        <div class="textbox-outer">
+            <div class="field">分类1</div>
+            <select id="lvl1" class="form">
+                <option>无</option>
+                @foreach (Catalog c in ViewBag.Level1)
+                {
+                    <option @(Model.Catalog.Father.FatherID == c.ID ? "selected" : "") value="@c.ID">@c.Title</option>
+                }
+            </select>
+        </div>
+        <div class="textbox-outer">
+            <div class="field">分类2</div>
+            <select id="lvl2" class="form" data-parent-select="lvl1">
+                <option>无</option>
+                @foreach (Catalog c in ViewBag.Level2)
+                {
+                    <option @(Model.Catalog.FatherID == c.ID ? "selected" : "") value="@c.ID">@c.Title</option>
+                }
+            </select>
+        </div>
+        <div class="textbox-outer">
+            <div class="field">分类3</div>
+            <select id="lvl3" class="form" data-parent-select="lvl2">
+                <option>无</option>
+                @foreach (Catalog c in ViewBag.Level3)
+                {
+                    <option @(Model.CatalogID == c.ID ? "selected" : "") value="@c.ID">@c.Title</option>
+                }
+            </select>
+        </div>
+        <div class="textbox-outer">
+            <div class="field">联系人</div>
+            @Html.TextBoxFor(x => x.Name, new { @class = "textbox form" })
+        </div>
+        <div class="textbox-outer">
+            <div class="field">电话</div>
+            @Html.TextBoxFor(x => x.Phone, new { @class = "textbox form" })
+        </div>
+        <div class="textbox-outer">
+            <div class="field">地址</div>
+            @Html.TextBoxFor(x => x.Address, new { @class = "textbox form" })
+        </div>
+        <a href="javascript: $('form').submit();">
+            <div class="btn">发布信息</div>
+        </a>
+                }
+</div>

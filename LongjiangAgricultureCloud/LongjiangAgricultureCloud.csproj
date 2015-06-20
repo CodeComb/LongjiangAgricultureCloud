@@ -163,6 +163,10 @@
     <Content Include="Areas\Mobile\Views\Member\Comment.cshtml" />
     <Content Include="Areas\Mobile\Views\Member\Local.cshtml" />
     <Content Include="Areas\Mobile\Views\Member\LocalRaw.cshtml" />
+    <Content Include="Areas\Mobile\Views\Member\CreateLocal.cshtml" />
+    <Content Include="Areas\Mobile\Views\Member\EditLocal.cshtml" />
+    <Content Include="Areas\Mobile\Views\Mall\Comment.cshtml" />
+    <Content Include="Areas\Mobile\Views\Mall\CommentRaw.cshtml" />
     <None Include="Properties\PublishProfiles\ChinaUnicom.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />

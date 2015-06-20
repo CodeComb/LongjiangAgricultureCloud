@@ -1,0 +1,10 @@
+﻿@{
+    ViewBag.Title = "商品评论";
+    ViewBag.Refresh = true;
+    ViewBag.Back = true;
+}
+@Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
+<div class="wrap-cont" id="lstProductComments"></div>
+<script>
+    id = @Html.ViewContext.RouteData.Values["id"];
+</script>

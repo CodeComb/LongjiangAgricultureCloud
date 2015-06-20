@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Comment>
+@{
+    Layout = null;
+}
+@foreach (var c in Model)
+{
+    <div class="list-outer">
+        @c.User.Name (@c.Score 分) @c.Time.ToString("yyyy-MM-dd")
+        <br />
+        <div class="sub-title">@(c.Content ?? "好评")</div>
+    </div>
+}

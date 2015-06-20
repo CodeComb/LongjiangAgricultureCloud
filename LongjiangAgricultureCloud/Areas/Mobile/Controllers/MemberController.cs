@@ -246,11 +246,41 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 
         public ActionResult CreateLocal()
         {
+            ViewBag.Level1 = (from c in DB.Catalogs
+                              where c.Level == 0
+                              && !c.Delete
+                              && c.Type == CatalogType.本地通分类
+                              select c).ToList();
+            ViewBag.Level2 = (from c in DB.Catalogs
+                              where c.Level == 1
+                              && !c.Delete
+                              && c.Type == CatalogType.本地通分类
+                              select c).ToList();
+            ViewBag.Level3 = (from c in DB.Catalogs
+                              where c.Level == 2
+                              && !c.Delete
+                              && c.Type == CatalogType.本地通分类
+                              select c).ToList();
             return View();
         }
 
         public ActionResult EditLocal(int id)
         {
+            ViewBag.Level1 = (from c in DB.Catalogs
+                              where c.Level == 0
+                              && !c.Delete
+                              && c.Type == CatalogType.本地通分类
+                              select c).ToList();
+            ViewBag.Level2 = (from c in DB.Catalogs
+                              where c.Level == 1
+                              && !c.Delete
+                              && c.Type == CatalogType.本地通分类
+                              select c).ToList();
+            ViewBag.Level3 = (from c in DB.Catalogs
+                              where c.Level == 2
+                              && !c.Delete
+                              && c.Type == CatalogType.本地通分类
+                              select c).ToList();
             var information = DB.Informations.Find(id);
             if (information.UserID != CurrentUser.ID)
                 return Msg("非法操作");
@@ -271,6 +301,28 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             DB.Informations.Add(Information);
             DB.SaveChanges();
             return Msg("本地通信息已提交");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditLocal(int id, Information Information)
+        {
+            var information = DB.Informations.Find(id);
+            if (information.UserID != CurrentUser.ID)
+                return Msg("非法操作");
+            information.Title = Information.Title;
+            information.Description = Information.Description;
+            information.Name = Information.Name;
+            information.Address = Information.Address;
+            information.Phone = Information.Phone;
+            information.CatalogID = Information.CatalogID;
+            information.SupplyDemand = Information.SupplyDemand;
+            if (ViewBag.VerifyLocalTong)
+                information.Verify = false;
+            else
+                information.Verify = true;
+            DB.SaveChanges();
+            return Msg("本地通信息编辑成功");
         }
     }
 }

@@ -152,5 +152,21 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             DB.SaveChanges();
             return RedirectToAction("Pay", "Mall", new { id = Order.ID });
         }
+
+        public ActionResult Comment(int id)
+        {
+            var product = DB.Products.Find(id);
+            return View(product);
+        }
+
+        public ActionResult CommentRaw(int id, int p = 0)
+        {
+            var comments = (from c in DB.Comments
+                            where c.Type == CommentType.商品评论
+                            && c.TargetID == id
+                            orderby c.Time descending
+                            select c).Skip(p * 20).Take(20).ToList();
+            return View(comments);
+        }
     }
 }
