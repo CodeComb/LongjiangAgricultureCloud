@@ -7,12 +7,12 @@
 @using (Html.BeginForm("Cancel", "Member", null, FormMethod.Post, new { id = "frmCancel" }))
 {
     @Html.AntiForgeryToken()
-    <input type="hidden" id="CancelOrderID" />
+    <input type="hidden" name="id" id="CancelOrderID" />
 }
 @using (Html.BeginForm("Verify", "Member", null, FormMethod.Post, new { id = "frmVerify" }))
 {
     @Html.AntiForgeryToken()
-    <input type="hidden" id="VerifyOrderID" />
+    <input type="hidden" name="id" id="VerifyOrderID" />
 }
 @Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
 <div class="wrap-cont" id="lstOrders">
