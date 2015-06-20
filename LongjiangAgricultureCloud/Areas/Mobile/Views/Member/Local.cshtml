@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "我的本地通";
+    ViewBag.Back = true;
+    ViewBag.Add = true;
+    ViewBag.Url = "/Mobile/Member/CreateLocal";
+}
+@Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
+<div class="wrap-cont" id="lstMyLocals">
+</div>
+@using (Html.BeginForm("DeleteLocal", "Member", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="id" id="DeleteInformationID" />
+}

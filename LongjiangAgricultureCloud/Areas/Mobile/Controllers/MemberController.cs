@@ -228,5 +228,49 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             DB.SaveChanges();
             return Msg("评价成功！");
         }
+
+        public ActionResult Local()
+        {
+            return View();
+        }
+
+        public ActionResult LocalRaw(int p = 0)
+        {
+            var informations = (from i in DB.Informations
+                                where i.Type == InformationType.本地通信息
+                                && i.UserID == CurrentUser.ID
+                                orderby i.Time descending
+                                select i).Skip(p * 20).Take(20).ToList();
+            return View(informations);
+        }
+
+        public ActionResult CreateLocal()
+        {
+            return View();
+        }
+
+        public ActionResult EditLocal(int id)
+        {
+            var information = DB.Informations.Find(id);
+            if (information.UserID != CurrentUser.ID)
+                return Msg("非法操作");
+            return View(information);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateLocal(Information Information)
+        {
+            Information.Time = DateTime.Now;
+            Information.Type = InformationType.本地通信息;
+            Information.UserID = CurrentUser.ID;
+            if (ViewBag.VerifyLocalTong)
+                Information.Verify = false;
+            else
+                Information.Verify = true;
+            DB.Informations.Add(Information);
+            DB.SaveChanges();
+            return Msg("本地通信息已提交");
+        }
     }
 }

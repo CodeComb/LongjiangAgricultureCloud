@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Information>
+@{
+    Layout = null;
+}
+@foreach (var i in Model)
+{
+    <div class="list-outer">
+        @i.Title<br />
+        <div class="sub-title">@i.Time.ToString("yyyy-MM-dd HH:mm") / @i.SupplyDemand</div>
+    </div>
+    <div class="list-outer">
+        <a href="/Mobile/Member/Edit/@i.ID">编辑信息</a>
+        <a href="javascript: $('DeleteInformationID').val(@i.ID); $('form').submit()">编辑信息</a>
+    </div>
+    <br />
+}

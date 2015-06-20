@@ -9,6 +9,7 @@ function Load()
     LoadLocals();
     LoadProducts();
     LoadOrders();
+    LoadMyLocals();
 }
 
 function LoadInformations() {
@@ -50,6 +51,21 @@ function LoadLocals() {
                 $('#lstLocals').html('<div class="no-more">没有更多信息了！</div>');
             }
             $('#lstLocals').append(data);
+            p++;
+            lock = false;
+        });
+    }
+}
+
+function LoadMyLocals() {
+    if ($('#lstMyLocals').length > 0) {
+        if (lock) return;
+        lock = true;
+        $.get('/Mobile/Member/LocalRaw', { p: p }, function (data) {
+            if (data.length < 5) {
+                $('#lstMyLocals').html('<div class="no-more">没有更多信息了！</div>');
+            }
+            $('#lstMyLocals').append(data);
             p++;
             lock = false;
         });
