@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "商城结算";
+    ViewBag.Refresh = true;
+    ViewBag.Back = true;
+    ViewBag.Cart = true;
+}
+
+@Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
+<div class="wrap-cont">
+    <h3 style="text-align: center; margin-top:0.3em">共计 <span style="color: orange">￥@Convert.ToDouble(ViewBag.Price).ToString("0.00")</span></h3>
+    <a href="#">
+        <div class="list-outer">
+            支付宝支付（未开通）
+        </div>
+    </a>
+    <a href="#">
+        <div class="list-outer">
+            微信支付（未开通）
+        </div>
+    </a>
+</div>
+@Html.Partial("~/Areas/Mobile/Views/Shared/ShopNav.cshtml")

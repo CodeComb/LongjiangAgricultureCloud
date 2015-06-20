@@ -62,6 +62,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                 return Msg("库存不足，无法加入购物车！");
             var OrderDetail = new OrderDetail
             {
+                ID = Guid.NewGuid(),
                 OrderID = null,
                 ProductID = id,
                 Price = product.ID,
@@ -102,11 +103,11 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return RedirectToAction("Cart", "Mall");
         }
 
-        public ActionResult Buy()
+        public ActionResult Pay(Guid id)
         {
             var orders = (from od in DB.OrderDetails
                           where od.UserID == CurrentUser.ID
-                          && od.OrderID == null
+                          && od.OrderID == id
                           orderby od.ID descending
                           select od).ToList();
             foreach (var od in orders)
@@ -115,7 +116,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                     od.Count = od.Product.StoreCount;
                 od.Price = od.Product.Price * od.Count;
             }
-            ViewBag.Price = orders.Sum(x => x.Price);
+            ViewBag.Price = orders.Sum(x => x.Price).ToString("0.00");
             return View();
         }
 
@@ -123,6 +124,14 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Buy(Order Order)
         {
+            Order.ID = Guid.NewGuid();
+            Order.UserID = CurrentUser.ID;
+            Order.Time = DateTime.Now;
+            Order.Status = OrderStatus.待付款;
+            Order.PayMethod = PayMethod.支付宝;
+            Order.PayCode = "";
+            DB.Orders.Add(Order);
+            DB.SaveChanges();
             var orders = (from od in DB.OrderDetails
                           where od.UserID == CurrentUser.ID
                           && od.OrderID == null
@@ -134,14 +143,8 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                     od.Count = od.Product.StoreCount;
                 od.Price = od.Product.Price * od.Count;
                 od.Product.StoreCount -= od.Count;
+                od.OrderID = Order.ID;
             }
-            DB.SaveChanges();
-            Order.UserID = CurrentUser.ID;
-            Order.Time = DateTime.Now;
-            Order.Status = OrderStatus.待付款;
-            Order.PayMethod = PayMethod.支付宝;
-            Order.PayCode = "";
-            DB.Orders.Add(Order);
             DB.SaveChanges();
             return RedirectToAction("Pay", "Mall", new { id = Order.ID });
         }

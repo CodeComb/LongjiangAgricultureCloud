@@ -15,6 +15,7 @@ namespace LongjiangAgricultureCloud.Models
         待收货,
         待评价,
         退款中,
+        已退货,
         已完成
     }
 

@@ -337,6 +337,9 @@ a {
 .remove-cart {
     float: right;
     padding: 0.3em;
-    background-color: #ccc;
+    background-color: #eee;
     border-radius: 0.5em;
+    margin: 0.3em;
+    color: #555;
+    font-size: 0.7em;
 }

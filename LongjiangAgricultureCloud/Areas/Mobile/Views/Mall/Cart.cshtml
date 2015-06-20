@@ -3,23 +3,99 @@
     ViewBag.Title = "购物车";
     ViewBag.Refresh = true;
     ViewBag.Back = true;
+    ViewBag.Cart = true;
 }
 @Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
 
-@using (Html.BeginForm("RemoveCart", "Mall", FormMethod.Post))
+@using (Html.BeginForm("RemoveCart", "Mall",null, FormMethod.Post,new { id="frmRemoveCart" }))
 {
     @Html.AntiForgeryToken()
     <input type="hidden" name="id" id="ProductID" />
 }
 
-@foreach (var od in Model)
-{
-    <div class="product-item">
-        <img src="/Shared/ProductImg/@od.ProductID?index=1" class="product-img" alt="商品展示" />
-        <div class="product-title">@od.Product.Title</div>
-        <div class="product-price">总金额：￥@od.Price.ToString("0.00")<div class="product-sale">数量：@od.Count</div></div>
-    </div>
-    <p><a class="remove-cart" href="javascript: $('#ProductID').val('@od.ID'); $('form').submit();">从购物车中移除</a></p>
-}
+<div class="wrap-cont">
+    @foreach (var od in Model)
+    {
+        <div class="product-item">
+            <img src="/Shared/ProductImg/@od.ProductID?index=1" class="product-img" alt="商品展示" />
+            <div class="product-title">@od.Product.Title</div>
+            <div class="product-price">总金额：￥@od.Price.ToString("0.00")<div class="product-sale">数量：@od.Count</div><a class="remove-cart" href="javascript: $('#ProductID').val('@od.ID'); $('#frmRemoveCart').submit();">从购物车中移除</a></div>
+        </div>
+    }
+    @if (Model.Count() > 0)
+    {
+        <p style="color: #888;padding-left: 0.5em">结算</p>
+        using (Html.BeginForm("Buy", "Mall", null, FormMethod.Post, new { id = "frmBuy" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="textbox-outer">
+                <div class="field">收货人姓名</div>
+                <input type="text" class="textbox form" name="Name" value="@ViewBag.CurrentUser.Name" />
+            </div>
+            <div class="textbox-outer">
+                <div class="field">联系方式</div>
+                <input type="text" class="textbox form" name="Phone" value="@ViewBag.CurrentUser.Username" />
+            </div>
+            <div class="textbox-outer">
+                <div class="field">详细地址</div>
+                @{
+                    var addr = "";
+                    if (ViewBag.CurrentUser.AreaID != null)
+                    {
+                        if (ViewBag.CurrentUser.Area.Father.Father.Father.Father.Father.Title != "-")
+                        {
+                            addr += ViewBag.CurrentUser.Area.Father.Father.Father.Father.Father.Title;
+                        }
+
+                        if (ViewBag.CurrentUser.Area.Father.Father.Father.Father.Title != "-")
+                        {
+                            addr += ViewBag.CurrentUser.Area.Father.Father.Father.Father.Title;
+                        }
+
+                        if (ViewBag.CurrentUser.Area.Father.Father.Father.Title != "-")
+                        {
+                            addr += ViewBag.CurrentUser.Area.Father.Father.Father.Title;
+                        }
+
+                        if (ViewBag.CurrentUser.Area.Father.Father.Title != "-")
+                        {
+                            addr += ViewBag.CurrentUser.Area.Father.Father.Title;
+                        }
+
+                        if (ViewBag.CurrentUser.Area.Father.Title != "-")
+                        {
+                            addr += ViewBag.CurrentUser.Area.Father.Title;
+                        }
+
+                        if (ViewBag.CurrentUser.Area.Title != "-")
+                        {
+                            addr += ViewBag.CurrentUser.Area.Title;
+                        }
+                    }
+                 }
+                <input type="text" class="textbox form" name="Address" value="@addr@ViewBag.CurrentUser.Address" />
+            </div>
+            <div class="textbox-outer">
+                <div class="field">备注</div>
+                <input type="text" class="textbox form" name="Hint" value="" placeholder="您的特殊要求" />
+            </div>
+            <div class="textbox-outer">
+                <div class="field">发票姓名</div>
+                <input type="text" class="textbox form" name="InvoiceName" value="@ViewBag.CurrentUser.Name" />
+            </div>
+            <div class="textbox-outer">
+                <div class="field">发票姓名</div>
+                <input type="text" class="textbox form" name="InvoiceAddress" value="@addr@ViewBag.CurrentUser.Address" />
+            </div>
+            <a href="javascript:$('#frmBuy').submit()">
+                <div class="btn">立即结算</div>
+            </a>
+        }
+    }
+    else
+    {
+        <div class="no-more">没有任何商品放入了购物车！</div>
+    }
+</div>
 
 @Html.Partial("~/Areas/Mobile/Views/Shared/ShopNav.cshtml")

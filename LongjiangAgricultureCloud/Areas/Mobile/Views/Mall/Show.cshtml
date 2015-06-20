@@ -41,6 +41,7 @@
      <br />
     @using (Html.BeginForm("Cart", "Mall", new { id = Model.ID }, FormMethod.Post, null))
     {
+        @Html.AntiForgeryToken()
         <div class="list-outer">
             <div class="field">订购数量</div>
             <input type="text" class="textbox" name="Count" style="width:65%" value="1" />

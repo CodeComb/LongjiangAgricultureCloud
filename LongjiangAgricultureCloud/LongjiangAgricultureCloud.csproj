@@ -156,6 +156,7 @@
     <Content Include="Areas\Mobile\Views\Mall\ListRaw.cshtml" />
     <Content Include="Areas\Mobile\Views\Mall\Show.cshtml" />
     <Content Include="Areas\Mobile\Views\Mall\Cart.cshtml" />
+    <Content Include="Areas\Mobile\Views\Mall\Pay.cshtml" />
     <None Include="Properties\PublishProfiles\ChinaUnicom.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />
