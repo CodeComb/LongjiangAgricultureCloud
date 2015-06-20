@@ -13,6 +13,11 @@
     </select>
     <input type="text" class="textbox datetime" name="Begin" placeholder="起始时间" value="@Request.QueryString["Begin"]" />
     <input type="text" class="textbox datetime" name="End" placeholder="结束时间" value="@Request.QueryString["End"]" />
+    <select name="Verify">
+        <option value="">审核</option>
+        <option value="1" @(Request.QueryString["Verify"]=="1" ? "selected":"")>通过审核</option>
+        <option value="0" @(Request.QueryString["Verify"]=="0" ? "selected":"")>尚未审核</option>
+    </select>
     <input type="submit" class="btn blue" value="检索" />
 </form>
 
@@ -24,6 +29,7 @@
             <th>内容</th>
             <th>发表者</th>
             <th>时间</th>
+            <th>审核标识</th>
             <th>操作</th>
         </tr>
     </thead>
@@ -38,7 +44,12 @@
                 <td>@c.Content</td>
                 <td>@c.User.Username</td>
                 <td>@c.Time.ToString("yyyy-MM-dd HH:mm")</td>
+                <td class="verify">@(c.Verify ? "审核通过" : "等待审核")</td>
                 <td>
+                    @if (!c.Verify)
+                    {
+                        <a href="javascript: $('#comment-@c.ID').find('.verify').html('审核通过');$.post('/General/VerifyComment/@c.ID',{},function(){});">通过审核</a>
+                    }
                     <a href="javascript: deleteDialog('/General/DeleteComment/@c.ID', 'comment-@c.ID')">删除</a>
                 </td>
             </tr>

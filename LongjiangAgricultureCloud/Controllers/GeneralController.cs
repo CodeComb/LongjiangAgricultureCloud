@@ -104,7 +104,7 @@ namespace LongjiangAgricultureCloud.Controllers
             return Content("ok");
         }
         
-        public ActionResult Comment(CommentType? Type, DateTime? Begin, DateTime? End, int p = 1)
+        public ActionResult Comment(CommentType? Type, DateTime? Begin, DateTime? End, bool? Verify, int p = 1)
         {
             IEnumerable<Comment> query = DB.Comments;
             if (Begin.HasValue)
@@ -113,6 +113,8 @@ namespace LongjiangAgricultureCloud.Controllers
                 query = query.Where(x => x.Time <= End.Value);
             if (Type.HasValue)
                 query = query.Where(x => x.Type == Type);
+            if (Verify.HasValue)
+                query = query.Where(x => x.Verify == Verify.Value);
             ViewBag.PageInfo = PagerHelper.Do(ref query, 50, p);
             return View(query);
         }
@@ -140,6 +142,15 @@ namespace LongjiangAgricultureCloud.Controllers
         {
             System.IO.File.WriteAllText(Server.MapPath("~/Files/License.html"), Content);
             return RedirectToAction("Success", "Shared");
+        }
+
+        [HttpPost]
+        public ActionResult VerifyComment(int id)
+        {
+            var comment = DB.Comments.Find(id);
+            comment.Verify = true;
+            DB.SaveChanges();
+            return Content("ok");
         }
     }
 }
