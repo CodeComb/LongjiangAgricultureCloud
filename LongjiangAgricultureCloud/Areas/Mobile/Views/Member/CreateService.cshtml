@@ -10,6 +10,9 @@
     }
 </style>
 <div class="wrap-cont">
+@using (Html.BeginForm("CreateService", "Member", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
     <div class="textbox-outer">
         <div class="field">类型</div>
         <select name="Type" class="form" id="lstTypes">
@@ -23,6 +26,43 @@
     <div class="textbox-outer">
         <div class="field">标题</div>
         @Html.TextBoxFor(x => x.Title, new { @class = "textbox form" })
+    </div>
+    <div class="textbox-outer">
+        <div class="field">分类1</div>
+        <select id="lvl1" class="form">
+            <option>无</option>
+            @foreach (Catalog c in ViewBag.Level1)
+            {
+                <option value="@c.ID">@c.Title</option>
+            }
+        </select>
+    </div>
+    <div class="textbox-outer">
+        <div class="field">分类2</div>
+        <select id="lvl2" data-parent-select="lvl1" class="form">
+            @foreach (Catalog c in ViewBag.Level2)
+            {
+                <option data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
+            }
+        </select>
+    </div>
+    <div class="textbox-outer">
+        <div class="field">分类3</div>
+        <select id="lvl3" data-parent-select="lvl2" class="form">
+            @foreach (Catalog c in ViewBag.Level3)
+            {
+                <option data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
+            }
+        </select>
+    </div>
+    <div class="textbox-outer">
+        <div class="field">分类4</div>
+        <select id="lvl4" data-parent-select="lvl3" name="CatalogID" class="form">
+            @foreach (Catalog c in ViewBag.Level4)
+            {
+                <option data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
+            }
+        </select>
     </div>
     <div class="textbox-outer">
         <div class="field">描述</div>
@@ -82,6 +122,7 @@
     <a href="javascript: $('form').submit();">
         <div class="btn">发布信息</div>
     </a>
+            }
 </div>
 <script>
     function FileUploadDisplay()

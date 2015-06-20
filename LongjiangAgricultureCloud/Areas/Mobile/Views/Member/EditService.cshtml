@@ -1,0 +1,82 @@
+﻿@model Information
+@{
+    ViewBag.Title = "编辑农机服务";
+    ViewBag.Back = true;
+}
+@Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
+<style>
+    .station {
+        display: none;
+    }
+</style>
+<div class="wrap-cont">
+    @using (Html.BeginForm("EditService", "Member", new { id = Model.ID }, FormMethod.Post, null))
+    {
+        @Html.AntiForgeryToken()
+        <div class="textbox-outer">
+            <div class="field">标题</div>
+            @Html.TextBoxFor(x => x.Title, new { @class = "textbox form" })
+        </div>
+        <div class="textbox-outer">
+            <div class="field">描述</div>
+            @Html.TextBoxFor(x => x.Description, new { @class = "textbox form" })
+        </div>
+        <div class="textbox-outer">
+            <div class="field">联系人</div>
+            @Html.TextBoxFor(x => x.Name, new { @class = "textbox form", value = ViewBag.CurrentUser.Name })
+        </div>
+        <div class="textbox-outer">
+            <div class="field">电话</div>
+            @Html.TextBoxFor(x => x.Phone, new { @class = "textbox form", value = ViewBag.CurrentUser.Username })
+        </div>
+        <div class="textbox-outer">
+            <div class="field">地址</div>
+            @{
+                var addr = "";
+                if (ViewBag.CurrentUser.AreaID != null)
+                {
+                    if (ViewBag.CurrentUser.Area.Father.Father.Father.Father.Father.Title != "-")
+                    {
+                        addr += ViewBag.CurrentUser.Area.Father.Father.Father.Father.Father.Title;
+                    }
+
+                    if (ViewBag.CurrentUser.Area.Father.Father.Father.Father.Title != "-")
+                    {
+                        addr += ViewBag.CurrentUser.Area.Father.Father.Father.Father.Title;
+                    }
+
+                    if (ViewBag.CurrentUser.Area.Father.Father.Father.Title != "-")
+                    {
+                        addr += ViewBag.CurrentUser.Area.Father.Father.Father.Title;
+                    }
+
+                    if (ViewBag.CurrentUser.Area.Father.Father.Title != "-")
+                    {
+                        addr += ViewBag.CurrentUser.Area.Father.Father.Title;
+                    }
+
+                    if (ViewBag.CurrentUser.Area.Father.Title != "-")
+                    {
+                        addr += ViewBag.CurrentUser.Area.Father.Title;
+                    }
+
+                    if (ViewBag.CurrentUser.Area.Title != "-")
+                    {
+                        addr += ViewBag.CurrentUser.Area.Title;
+                    }
+                }
+            }
+            @Html.TextBoxFor(x => x.Address, new { @class = "textbox form", value = addr })
+        </div>
+                if (Model.Type == InformationType.维修站)
+                {
+                    <div class="textbox-outer station">
+                        <div class="field">资质照片</div>
+                        <input type="file" name="Picture" />
+                    </div>
+                }
+                <a href="javascript: $('form').submit();">
+                    <div class="btn">保存修改</div>
+                </a>
+                }
+</div>

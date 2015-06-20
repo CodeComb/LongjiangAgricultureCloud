@@ -356,14 +356,64 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 
         public ActionResult CreateService()
         {
+            ViewBag.Level1 = (from c in DB.Catalogs
+                              where c.Level == 0
+                              && !c.Delete
+                              && c.Type == CatalogType.农机服务分类
+                              select c).ToList();
+            ViewBag.Level2 = (from c in DB.Catalogs
+                              where c.Level == 1
+                              && !c.Delete
+                              && c.Type == CatalogType.农机服务分类
+                              select c).ToList();
+            ViewBag.Level3 = (from c in DB.Catalogs
+                              where c.Level == 2
+                              && !c.Delete
+                              && c.Type == CatalogType.农机服务分类
+                              select c).ToList();
+            ViewBag.Level4 = (from c in DB.Catalogs
+                              where c.Level == 3
+                              && !c.Delete
+                              && c.Type == CatalogType.农机服务分类
+                              select c).ToList();
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateService(Information Information)
+        public ActionResult CreateService(string Title, InformationType Type, int? CatalogID, decimal Lat, decimal Lon, string Name, string Address, string Description, string Phone)
         {
-            return View();
+            var service = new Information
+            {
+                Title = Title,
+                CatalogID = CatalogID,
+                Lat = Lat,
+                Lon = Lon,
+                Name = Name,
+                Address = Address,
+                Description = Description,
+                Phone = Phone,
+                UserID = CurrentUser.ID,
+                Type = Type,
+                Time = DateTime.Now,
+                Verify = ViewBag.VerifyService ? false : true
+            };
+
+            if (Type == InformationType.维修站)
+            {
+                var Picture = Request.Files["Picture"];
+                if (Picture != null)
+                {
+                    using (var binaryReader = new BinaryReader(Picture.InputStream))
+                    {
+                        service.Picture = binaryReader.ReadBytes(Picture.ContentLength);
+                    }
+                }
+            }
+
+            DB.Informations.Add(service);
+            DB.SaveChanges();
+            return Msg("农机信息发布成功");
         }
 
         public ActionResult EditService(int id)
@@ -376,18 +426,18 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditService(int id, Information Information)
+        public ActionResult EditService(int id, string Title, decimal Lat, decimal Lon, string Name, string Address, string Description, string Phone)
         {
             var service = DB.Informations.Find(id);
             if (service.UserID != CurrentUser.ID)
                 return Msg("非法操作");
-            service.Title = Information.Title;
-            service.Lat = Information.Lat;
-            service.Lon = Information.Lon;
-            service.Name = Information.Name;
-            service.Address = Information.Address;
-            service.Description = Information.Description;
-            service.Phone = Information.Phone;
+            service.Title = Title;
+            service.Lat = Lat;
+            service.Lon = Lon;
+            service.Name = Name;
+            service.Address = Address;
+            service.Description = Description;
+            service.Phone = Phone;
             DB.SaveChanges();
             return Msg("农机信息编辑成功");
         }
