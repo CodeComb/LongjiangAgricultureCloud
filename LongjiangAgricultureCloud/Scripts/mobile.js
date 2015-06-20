@@ -7,6 +7,7 @@ function Load()
     LoadInformations();
     LoadMachines();
     LoadLocals();
+    LoadProducts();
 }
 
 function LoadInformations() {
@@ -48,6 +49,21 @@ function LoadLocals() {
                 $('#lstLocals').html('<div class="no-more">没有更多信息了！</div>');
             }
             $('#lstLocals').append(data);
+            p++;
+            lock = false;
+        });
+    }
+}
+
+function LoadProducts() {
+    if ($('#lstProducts').length > 0) {
+        if (lock) return;
+        lock = true;
+        $.get('/Mobile/Mall/ListRaw', { p: p, id: id, Key: Key, Desc: Desc, Title: $('#txtProductTitle').val() }, function (data) {
+            if (data.length < 5) {
+                $('#lstProducts').html('<div class="no-more">没有更多商品了！</div>');
+            }
+            $('#lstProducts').append(data);
             p++;
             lock = false;
         });

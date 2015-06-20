@@ -2,12 +2,33 @@
 @{
     ViewBag.Refresh = true;
     ViewBag.Back = true;
+    ViewBag.Product = true;
 }
 @Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
 <div class="wrap-cont">
     <div class="search">
-        <input type="text" class="textbox" placeholder="搜索商品" />
-        <a href="javascript:;"><i class="fa fa-search" style="color: orange;float:right;font-size:1.1em"></i></a>
+        <input type="text" class="textbox" id="txtProductTitle" placeholder="搜索商品" />
+        <a href="javascript:$('#lstProducts').html('');p=0;lock=false;Load();"><i class="fa fa-search" style="color: orange;float:right;font-size:1.4em"></i></a>
     </div>
+    <div class="sort-bar">
+        <a id="btnBySale" class="sort" href="javascript:Key='Sale';Desc=!Desc;Reset();$('#lstProducts').html('');p=0;lock=false;Load();">按销量</a>
+        <a id="btnByPrice" class="sort" href="javascript:Key='Price';Desc=!Desc;Reset();$('#lstProducts').html('');p=0;lock=false;Load();">按价格</a>
+    </div>
+    <div id="lstProducts"></div>
 </div>
+<script>
+    id = @Html.ViewContext.RouteData.Values["id"];
+    var Desc = false;
+    var Key = null;
+    function Reset()
+    {
+        $("#btnBySale").html("按销量");
+        $("#btnByPrice").html("按价格");
+        var tmp = '<i class="fa fa-angle-up"></i>';
+        if (Desc)
+            tmp = '<i class="fa fa-angle-down"></i>';
+        if (Key == "Sale") $("#btnBySale").append(tmp);
+        else $("#btnByPrice").append(tmp);
+    }
+</script>
 @Html.Partial("~/Areas/Mobile/Views/Shared/ShopNav.cshtml")

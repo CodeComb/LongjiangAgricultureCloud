@@ -262,13 +262,68 @@ a {
 }
 
 .search {
-    padding: 0.8em;
+    padding: 0.5em;
     background-color: #eee;
+}
+
+.sort-bar {
+    padding: 0.5em;
+    background-color: #fafafa;
+    border-bottom: 0.08em solid #ddd;
 }
 
     .search .textbox {
         border-radius:0.5em;
-        width: calc(100% - 2.4em);
+        width: calc(100% - 2.7em);
         padding: 0.3em;
-        font-size: 1.1em;
+        font-size: 0.8em;
     }
+
+.product-item {
+    height: 6em;
+    border-bottom: 0.08em solid #ddd;
+    background-color: #fff;
+    color: #777;
+    width: 100%;
+}
+
+.product-img {
+    width: 6em;
+    height: 6em;
+    float: left;
+    margin-right: 0.8em;
+}
+
+.product-title {
+    padding: 0.3em;
+    top: 0;
+    font-size: 1.2em;
+    height: 2.8em;
+    color: #777;
+    overflow: hidden;
+}
+
+.product-price {
+    color: orange;
+    font-size: 1em;
+    padding: 0.3em;
+}
+
+.sort {
+    width: 48%;
+    display: inline-block;
+    text-align: center;
+    color: #888;
+    font-size: 0.8em;
+}
+
+#btnBySale {
+    border-right: 0.08em solid #ddd;
+}
+
+.product-sale {
+    color: #888;
+    margin-left: 1.5em;
+    font-size: 0.8em;
+    display: inline;
+}

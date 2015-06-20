@@ -24,7 +24,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 
         public ActionResult ListRaw(int id, string Title, string Key, bool Desc = false, int p = 0)
         {
-            IEnumerable<Product> products = DB.Products.Where(x => x.CatalogID == id);
+            IEnumerable<Product> products = DB.Products.Where(x => x.CatalogID == id && x.StoreCount > 0);
             if (!string.IsNullOrEmpty(Title))
                 products = products.Where(x => x.Title.Contains(Key));
             if (Key == "Price")
