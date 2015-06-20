@@ -1,0 +1,25 @@
+﻿@model IEnumerable<OrderDetail>
+@{
+    ViewBag.Title = "购物车";
+    ViewBag.Refresh = true;
+    ViewBag.Back = true;
+}
+@Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
+
+@using (Html.BeginForm("RemoveCart", "Mall", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="id" id="ProductID" />
+}
+
+@foreach (var od in Model)
+{
+    <div class="product-item">
+        <img src="/Shared/ProductImg/@od.ProductID?index=1" class="product-img" alt="商品展示" />
+        <div class="product-title">@od.Product.Title</div>
+        <div class="product-price">总金额：￥@od.Price.ToString("0.00")<div class="product-sale">数量：@od.Count</div></div>
+    </div>
+    <p><a class="remove-cart" href="javascript: $('#ProductID').val('@od.ID'); $('form').submit();">从购物车中移除</a></p>
+}
+
+@Html.Partial("~/Areas/Mobile/Views/Shared/ShopNav.cshtml")

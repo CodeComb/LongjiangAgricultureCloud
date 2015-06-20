@@ -65,11 +65,85 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                 OrderID = null,
                 ProductID = id,
                 Price = product.ID,
-                Count = Count
+                Count = Count,
+                UserID = CurrentUser.ID
             };
             DB.OrderDetails.Add(OrderDetail);
             DB.SaveChanges();
             return Msg("该商品已经成功加入到购物车！");
+        }
+
+        public ActionResult Cart()
+        {
+            var orders = (from od in DB.OrderDetails
+                          where od.UserID == CurrentUser.ID
+                          && od.OrderID == null
+                          orderby od.ID descending
+                          select od).ToList();
+            foreach (var od in orders)
+            {
+                od.Price = od.Product.Price;
+                if (od.Count > od.Product.StoreCount)
+                    od.Count = od.Product.StoreCount;
+            }
+            DB.SaveChanges();
+            return View(orders);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveCart(Guid id)
+        {
+            var od = DB.OrderDetails.Find(id);
+            if (od.UserID != CurrentUser.ID)
+                return Msg("非法操作！");
+            DB.OrderDetails.Remove(od);
+            DB.SaveChanges();
+            return RedirectToAction("Cart", "Mall");
+        }
+
+        public ActionResult Buy()
+        {
+            var orders = (from od in DB.OrderDetails
+                          where od.UserID == CurrentUser.ID
+                          && od.OrderID == null
+                          orderby od.ID descending
+                          select od).ToList();
+            foreach (var od in orders)
+            {
+                if (od.Count > od.Product.StoreCount)
+                    od.Count = od.Product.StoreCount;
+                od.Price = od.Product.Price * od.Count;
+            }
+            ViewBag.Price = orders.Sum(x => x.Price);
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Buy(Order Order)
+        {
+            var orders = (from od in DB.OrderDetails
+                          where od.UserID == CurrentUser.ID
+                          && od.OrderID == null
+                          orderby od.ID descending
+                          select od).ToList();
+            foreach (var od in orders)
+            {
+                if (od.Count > od.Product.StoreCount)
+                    od.Count = od.Product.StoreCount;
+                od.Price = od.Product.Price * od.Count;
+                od.Product.StoreCount -= od.Count;
+            }
+            DB.SaveChanges();
+            Order.UserID = CurrentUser.ID;
+            Order.Time = DateTime.Now;
+            Order.Status = OrderStatus.待付款;
+            Order.PayMethod = PayMethod.支付宝;
+            Order.PayCode = "";
+            DB.Orders.Add(Order);
+            DB.SaveChanges();
+            return RedirectToAction("Pay", "Mall", new { id = Order.ID });
         }
     }
 }
