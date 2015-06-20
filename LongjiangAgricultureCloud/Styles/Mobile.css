@@ -189,6 +189,10 @@ table {
     width: 65%;
 }
 
+select.form {
+    width: 65%;
+}
+
 .field {
     width: 30%;
     display: inline-block;

@@ -72,6 +72,12 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return View(station);
         }
 
+        public ActionResult ShowFammer(int id)
+        {
+            var fammer = DB.Informations.Find(id);
+            return View(fammer);
+        }
+
         public ActionResult Machine()
         {
             return View();

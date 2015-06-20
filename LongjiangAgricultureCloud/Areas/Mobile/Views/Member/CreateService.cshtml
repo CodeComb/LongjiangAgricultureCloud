@@ -29,7 +29,7 @@
         <div class="field">标题</div>
         @Html.TextBoxFor(x => x.Title, new { @class = "textbox form" })
     </div>
-    <div class="textbox-outer">
+    <div class="textbox-outer catalog">
         <div class="field">分类1</div>
         <select id="lvl1" class="form">
             <option>无</option>
@@ -39,7 +39,7 @@
             }
         </select>
     </div>
-    <div class="textbox-outer">
+    <div class="textbox-outer catalog">
         <div class="field">分类2</div>
         <select id="lvl2" data-parent-select="lvl1" class="form">
             @foreach (Catalog c in ViewBag.Level2)
@@ -48,7 +48,7 @@
             }
         </select>
     </div>
-    <div class="textbox-outer">
+    <div class="textbox-outer catalog">
         <div class="field">分类3</div>
         <select id="lvl3" data-parent-select="lvl2" class="form">
             @foreach (Catalog c in ViewBag.Level3)
@@ -57,7 +57,7 @@
             }
         </select>
     </div>
-    <div class="textbox-outer">
+    <div class="textbox-outer catalog">
         <div class="field">分类4</div>
         <select id="lvl4" data-parent-select="lvl3" name="CatalogID" class="form">
             @foreach (Catalog c in ViewBag.Level4)
@@ -134,6 +134,13 @@
         }
         else {
             $('.station').hide();
+        }
+
+        if ($("#lstTypes").val() == "农机找活" || $("#lstTypes").val() == "土地找机手") {
+            $('.catalog').show();
+        }
+        else {
+            $('.catalog').hide();
         }
     }
 
