@@ -324,5 +324,72 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             DB.SaveChanges();
             return Msg("本地通信息编辑成功");
         }
+
+        public ActionResult Service()
+        {
+            return View();
+        }
+
+        public ActionResult ServiceRaw(int id, int p = 0)
+        {
+            var informations = (from i in DB.Informations
+                                where (i.Type == InformationType.二手农机
+                                || i.Type == InformationType.农机找活
+                                || i.Type == InformationType.土地找机手
+                                || i.Type == InformationType.维修站)
+                                && i.UserID == CurrentUser.ID
+                                select i).Skip(p * 20).Take(20).ToList();
+            return View(informations);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteService(int id)
+        {
+            var service = DB.Informations.Find(id);
+            if (service.UserID != CurrentUser.ID)
+                return Msg("非法操作");
+            DB.Informations.Remove(service);
+            DB.SaveChanges();
+            return Msg("农机信息删除成功！");
+        }
+
+        public ActionResult CreateService()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateService(Information Information)
+        {
+            return View();
+        }
+
+        public ActionResult EditService(int id)
+        {
+            var service = DB.Informations.Find(id);
+            if (service.UserID != CurrentUser.ID)
+                return Msg("非法操作");
+            return View(service);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditService(int id, Information Information)
+        {
+            var service = DB.Informations.Find(id);
+            if (service.UserID != CurrentUser.ID)
+                return Msg("非法操作");
+            service.Title = Information.Title;
+            service.Lat = Information.Lat;
+            service.Lon = Information.Lon;
+            service.Name = Information.Name;
+            service.Address = Information.Address;
+            service.Description = Information.Description;
+            service.Phone = Information.Phone;
+            DB.SaveChanges();
+            return Msg("农机信息编辑成功");
+        }
     }
 }

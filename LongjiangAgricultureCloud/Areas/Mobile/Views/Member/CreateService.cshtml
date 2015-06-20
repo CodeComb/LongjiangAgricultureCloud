@@ -1,0 +1,100 @@
+﻿@model Information
+@{
+    ViewBag.Title = "发布农机服务";
+    ViewBag.Back = true;
+}
+@Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
+<style>
+    .station {
+        display: none;
+    }
+</style>
+<div class="wrap-cont">
+    <div class="textbox-outer">
+        <div class="field">类型</div>
+        <select name="Type" class="form" id="lstTypes">
+            <option>农机找活</option>
+            <option>附近农手</option>
+            <option>土地找机手</option>
+            <option>二手农机</option>
+            <option>维修站</option>
+        </select>
+    </div>
+    <div class="textbox-outer">
+        <div class="field">标题</div>
+        @Html.TextBoxFor(x => x.Title, new { @class = "textbox form" })
+    </div>
+    <div class="textbox-outer">
+        <div class="field">描述</div>
+        @Html.TextBoxFor(x => x.Description, new { @class = "textbox form" })
+    </div>
+    <div class="textbox-outer">
+        <div class="field">联系人</div>
+        @Html.TextBoxFor(x => x.Name, new { @class = "textbox form", value = ViewBag.CurrentUser.Name })
+    </div>
+    <div class="textbox-outer">
+        <div class="field">电话</div>
+        @Html.TextBoxFor(x => x.Phone, new { @class = "textbox form", value = ViewBag.CurrentUser.Username })
+    </div>
+    <div class="textbox-outer">
+        <div class="field">地址</div>
+        @{
+            var addr = "";
+            if (ViewBag.CurrentUser.AreaID != null)
+            {
+                if (ViewBag.CurrentUser.Area.Father.Father.Father.Father.Father.Title != "-")
+                {
+                    addr += ViewBag.CurrentUser.Area.Father.Father.Father.Father.Father.Title;
+                }
+
+                if (ViewBag.CurrentUser.Area.Father.Father.Father.Father.Title != "-")
+                {
+                    addr += ViewBag.CurrentUser.Area.Father.Father.Father.Father.Title;
+                }
+
+                if (ViewBag.CurrentUser.Area.Father.Father.Father.Title != "-")
+                {
+                    addr += ViewBag.CurrentUser.Area.Father.Father.Father.Title;
+                }
+
+                if (ViewBag.CurrentUser.Area.Father.Father.Title != "-")
+                {
+                    addr += ViewBag.CurrentUser.Area.Father.Father.Title;
+                }
+
+                if (ViewBag.CurrentUser.Area.Father.Title != "-")
+                {
+                    addr += ViewBag.CurrentUser.Area.Father.Title;
+                }
+
+                if (ViewBag.CurrentUser.Area.Title != "-")
+                {
+                    addr += ViewBag.CurrentUser.Area.Title;
+                }
+            }
+        }
+        @Html.TextBoxFor(x => x.Address, new { @class = "textbox form", value = addr })
+    </div>
+    <div class="textbox-outer station">
+        <div class="field">资质照片</div>
+        <input type="file" name="Picture" />
+    </div>
+    <a href="javascript: $('form').submit();">
+        <div class="btn">发布信息</div>
+    </a>
+</div>
+<script>
+    function FileUploadDisplay()
+    {
+        if ($("#lstTypes").val() == "维修站") {
+            $('.station').show();
+        }
+        else {
+            $('.station').hide();
+        }
+    }
+
+    $("#lstTypes").change(function () {
+        FileUploadDisplay();
+    });
+</script>
