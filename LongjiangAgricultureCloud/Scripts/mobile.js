@@ -43,7 +43,7 @@ function LoadLocals() {
     if ($('#lstLocals').length > 0) {
         if (lock) return;
         lock = true;
-        $.get('/Mobile/Mlocal/ListRaw', { p: p, id: id }, function (data) {
+        $.get('/Mobile/MLocal/ListRaw', { p: p, id: id }, function (data) {
             if (data.length < 5) {
                 $('#lstLocals').html('<div class="no-more">没有更多信息了！</div>');
             }

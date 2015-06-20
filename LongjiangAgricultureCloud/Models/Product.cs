@@ -18,6 +18,7 @@ namespace LongjiangAgricultureCloud.Models
         /// 标题
         /// </summary>
         [StringLength(256)]
+        [Index]
         public string Title { get; set; }
 
         /// <summary>
@@ -33,6 +34,7 @@ namespace LongjiangAgricultureCloud.Models
         /// <summary>
         /// 单价
         /// </summary>
+        [Index]
         public float Price { get; set; }
 
         /// <summary>
@@ -78,5 +80,7 @@ namespace LongjiangAgricultureCloud.Models
 
         [Index]
         public bool Top { get; set; }
+
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }
