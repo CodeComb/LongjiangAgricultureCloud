@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "附近农手";
+    ViewBag.Refresh = true;
+    ViewBag.Back = true;
+}
+@Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
+<div class="wrap-cont" id="lstFammers">
+    <div class="no-more">正在加载，请稍候</div>
+</div>
+<script>
+    navigator.geolocation.getCurrentPosition(
+        function (position) {
+            var _lon = position.coords.longitude;
+            var _lat = position.coords.latitude;
+            $.getJSON("/Mobile/MService/FammerRaw", {}, function (data) {
+                $('.wrap-cont').html('');
+                for (var i = 0; i < data.length; i++)
+                    data[i].dis = getDistance(parseFloat(_lat), parseFloat(_lon), parseFloat(data[i].Lat), parseFloat(data[i].Lon));
+                data.sort(function (a, b) {
+                    return a.dis - b.dis;
+                });
+                for (var i = 0; i < data.length; i++)
+                    $('.wrap-cont').append('<a href="/Mobile/MService/ShowFarmmer/' + data[i].ID + '">' + '<div class="list-outer">' + data[i].Title + '<br /><div class="sub-title">' + Distance(data[i].dis) + '</div></div></a>');
+            });
+        });
+</script>

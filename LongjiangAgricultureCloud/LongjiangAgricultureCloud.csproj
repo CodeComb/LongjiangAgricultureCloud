@@ -171,6 +171,7 @@
     <Content Include="Areas\Mobile\Views\Member\ServiceRaw.cshtml" />
     <Content Include="Areas\Mobile\Views\Member\CreateService.cshtml" />
     <Content Include="Areas\Mobile\Views\Member\EditService.cshtml" />
+    <Content Include="Areas\Mobile\Views\MService\Fammer.cshtml" />
     <None Include="Properties\PublishProfiles\ChinaUnicom.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />

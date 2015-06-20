@@ -13,6 +13,8 @@
 @using (Html.BeginForm("CreateService", "Member", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
+    <input type="hidden" name="Lon" />
+    <input type="hidden" name="Lat" />
     <div class="textbox-outer">
         <div class="field">类型</div>
         <select name="Type" class="form" id="lstTypes">
@@ -138,4 +140,10 @@
     $("#lstTypes").change(function () {
         FileUploadDisplay();
     });
+
+    navigator.geolocation.getCurrentPosition(
+        function (position) {
+            $('input[name="Lon"]').val(position.coords.longitude);
+            $('input[name="Lat"]').val(position.coords.latitude);
+        });
 </script>

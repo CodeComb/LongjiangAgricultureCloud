@@ -438,6 +438,17 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             service.Address = Address;
             service.Description = Description;
             service.Phone = Phone;
+            if (service.Type == InformationType.维修站)
+            {
+                var Picture = Request.Files["Picture"];
+                if (Picture != null)
+                {
+                    using (var binaryReader = new BinaryReader(Picture.InputStream))
+                    {
+                        service.Picture = binaryReader.ReadBytes(Picture.ContentLength);
+                    }
+                }
+            }
             DB.SaveChanges();
             return Msg("农机信息编辑成功");
         }

@@ -77,6 +77,26 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return View();
         }
 
+        public ActionResult Fammer()
+        {
+            return View();
+        }
+
+        public ActionResult FammerRaw()
+        {
+            var fammers = (from i in DB.Informations
+                           where i.Type == InformationType.附近农手
+                           orderby i.Time descending
+                           select new
+                           {
+                               ID = i.ID,
+                               Title = i.Title,
+                               Lon = i.Lon,
+                               Lat = i.Lat
+                           }).Take(100).ToList();
+            return Json(fammers, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult MachineRaw(int p = 0)
         {
             var informations = (from i in DB.Informations
