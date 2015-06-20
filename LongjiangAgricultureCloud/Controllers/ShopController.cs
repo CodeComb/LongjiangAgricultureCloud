@@ -56,12 +56,15 @@ namespace LongjiangAgricultureCloud.Controllers
             ViewBag.Providers = DB.Providers.Where(x => x.Status == ProviderStatus.审核通过).ToList();
             ViewBag.Level1 = (from c in DB.Catalogs
                               where c.Level == 0
+                              && c.Type == CatalogType.商品分类
                               select c).ToList();
             ViewBag.Level2 = (from c in DB.Catalogs
                               where c.Level == 1
+                              && c.Type == CatalogType.商品分类
                               select c).ToList();
             ViewBag.Level3 = (from c in DB.Catalogs
                               where c.Level == 2
+                              && c.Type == CatalogType.商品分类
                               select c).ToList();
             return View();
         }
@@ -80,6 +83,7 @@ namespace LongjiangAgricultureCloud.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult CreateProduct(string Title, int CatalogID, string Description, string ProductCode, string Standard, string Unit, float Price, int StoreID, int StoreCount, int? ProviderID)
         {
             var Product = new Product();
@@ -176,12 +180,15 @@ namespace LongjiangAgricultureCloud.Controllers
             ViewBag.Providers = DB.Providers.Where(x => x.Status == ProviderStatus.审核通过).ToList();
             ViewBag.Level1 = (from c in DB.Catalogs
                               where c.Level == 0
+                              && c.Type == CatalogType.商品分类
                               select c).ToList();
             ViewBag.Level2 = (from c in DB.Catalogs
                               where c.Level == 1
+                              && c.Type == CatalogType.商品分类
                               select c).ToList();
             ViewBag.Level3 = (from c in DB.Catalogs
                               where c.Level == 2
+                              && c.Type == CatalogType.商品分类
                               select c).ToList();
             return View(product);
         }

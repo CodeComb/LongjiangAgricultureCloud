@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Refresh = true;
+    ViewBag.Back = true;
+}
+@Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
+<div class="wrap-cont">
+    <div class="search">
+        <input type="text" class="textbox" placeholder="搜索商品" />
+        <a href="javascript:;"><i class="fa fa-search" style="color: orange;float:right;font-size:1.1em"></i></a>
+    </div>
+</div>
+@Html.Partial("~/Areas/Mobile/Views/Shared/ShopNav.cshtml")

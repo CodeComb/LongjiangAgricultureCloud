@@ -260,3 +260,15 @@ img {
 a {
     color: #1d76c7;
 }
+
+.search {
+    padding: 0.8em;
+    background-color: #eee;
+}
+
+    .search .textbox {
+        border-radius:0.5em;
+        width: calc(100% - 2.4em);
+        padding: 0.3em;
+        font-size: 1.1em;
+    }
