@@ -11,6 +11,22 @@ function Load()
     LoadOrders();
     LoadMyLocals();
     LoadProductComments();
+    LoadMyServices();
+}
+
+function LoadMyServices() {
+    if ($('#lstMyServices').length > 0) {
+        if (lock) return;
+        lock = true;
+        $.get('/Mobile/Member/ServiceRaw', { p: p }, function (data) {
+            if (data.length < 5) {
+                $('#lstMyServices').html('<div class="no-more">没有更多信息了！</div>');
+            }
+            $('#lstMyServices').append(data);
+            p++;
+            lock = false;
+        });
+    }
 }
 
 function LoadInformations() {

@@ -3,7 +3,7 @@
     ViewBag.Title = "发布本地通信息";
     ViewBag.Back = true;
 }
-
+@Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
 <div class="wrap-cont">
     @using (Html.BeginForm("CreateLocal", "Member", FormMethod.Post))
     {
