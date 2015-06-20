@@ -221,7 +221,8 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                     TargetID = od.ProductID,
                     Type = CommentType.商品评论,
                     Content = Request.Form["Content-" + od.ID].ToString(),
-                    Score = Convert.ToInt32(Request.Form["Score-" + od.ID])
+                    Score = Convert.ToInt32(Request.Form["Score-" + od.ID]),
+                    Verify = ViewBag.VerifyProductComment ? false : true
                 };
                 DB.Comments.Add(comment);
             }

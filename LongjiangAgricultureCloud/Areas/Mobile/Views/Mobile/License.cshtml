@@ -1,0 +1,8 @@
+﻿@{
+    ViewBag.Title = "服务条款";
+    ViewBag.Back = true;
+}
+@Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
+<div class="wrap-cont">
+    @Html.Sanitized((string)ViewBag.Content)
+</div>

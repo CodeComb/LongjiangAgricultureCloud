@@ -1,4 +1,5 @@
-﻿@{
+﻿@model vConfig
+@{
     ViewBag.Title = "站点参数";
 }
 
@@ -9,15 +10,23 @@
     <table class="detail-table">
         <tr>
             <td class="row-title">商品评论审核开关</td>
-            <td><input type="checkbox" name="VerifyProductComment" @(ViewBag.VerifyProductComment == true ? "checked" : "") /> 勾选后开启审核</td>
+            <td>@Html.CheckBoxFor(x => x.VerifyProductComment) 勾选后开启审核</td>
         </tr>
         <tr>
             <td class="row-title">农机服务信息审核开关</td>
-            <td><input type="checkbox" name="VerifyService" @(ViewBag.VerifyService == true ? "checked" : "") /> 勾选后开启审核</td>
+            <td>@Html.CheckBoxFor(x => x.VerifyService) 勾选后开启审核</td>
         </tr>
         <tr>
             <td class="row-title">本地通信息审核开关</td>
-            <td><input type="checkbox" name="VerifyLocalTong" @(ViewBag.VerifyLocalTong == true ? "checked" : "") /> 勾选后开启审核</td>
+            <td>@Html.CheckBoxFor(x => x.VerifyLocalTong) 勾选后开启审核</td>
+        </tr>
+        <tr>
+            <td class="row-title">本地通评论审核开关</td>
+            <td>@Html.CheckBoxFor(x => x.VerifyLocalTongComment) 勾选后开启审核</td>
+        </tr>
+        <tr>
+            <td class="row-title">农业信息评论开关</td>
+            <td>@Html.CheckBoxFor(x => x.InformationComment) 勾选后开启审核</td>
         </tr>
         <tr>
             <td class="row-title">客服电话</td>

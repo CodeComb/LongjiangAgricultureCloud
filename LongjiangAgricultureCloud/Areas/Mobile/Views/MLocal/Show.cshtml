@@ -22,4 +22,31 @@
     <div class="list-outer">
         <div class="field">地址</div>@Model.Address
     </div>
+    <p style="color: #888;margin-left: 0.6em">
+        评论
+    </p>
+    @foreach (Comment c in ViewBag.Comments)
+    {
+        <div class="lst-outer">
+            @c.User.Name (@c.Time.ToString("yyyy-MM-dd")):
+            <div class="sub-title">@c.Content</div>
+        </div>
+    }
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p style="color: #888;margin-left: 0.6em">
+            发表评论
+        </p>
+        using (Html.BeginForm("Comment", "MLocal", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="id" value="@Model.ID" />
+            <div class="list-outer">
+                <textarea name="Content" class="textbox" style="height: 5em" placeholder="请在此处填写评论内容"></textarea>
+            </div>
+            <a href="javascript: $('form').submit()">
+                <div class="btn">发表评论</div>
+            </a>
+        }
+    }
 </div>

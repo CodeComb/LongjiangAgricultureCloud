@@ -81,6 +81,12 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return Msg("注册成功！您可以使用该账号进行登录了！");
         }
 
+        public ActionResult License()
+        {
+            ViewBag.Content = System.IO.File.ReadAllText(Server.MapPath("~/Files/License.html"));
+            return View();
+        }
+
         public ActionResult Catalog(string type, int? id, InformationType? Service)
         {
             ViewBag.ShopNav = false;

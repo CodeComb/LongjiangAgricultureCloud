@@ -38,6 +38,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             ViewBag.Hamlets = DB.Areas.Where(x => x.Level == AreaLevel.村).ToList();
             ViewBag.Villages = DB.Areas.Where(x => x.Level == AreaLevel.屯).ToList();
             ViewBag.VerifyProductComment = Convert.ToBoolean(ConfigurationManager.AppSettings["VerifyProductComment"]);
+            ViewBag.VerifyLocalTongComment = Convert.ToBoolean(ConfigurationManager.AppSettings["VerifyLocalTongComment"]);
             ViewBag.VerifyService = Convert.ToBoolean(ConfigurationManager.AppSettings["VerifyService"]);
             ViewBag.VerifyLocalTong = Convert.ToBoolean(ConfigurationManager.AppSettings["VerifyLocalTong"]);
             ViewBag.InformationComment = Convert.ToBoolean(ConfigurationManager.AppSettings["InformationComment"]);

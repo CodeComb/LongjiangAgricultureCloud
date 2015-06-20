@@ -164,6 +164,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             var comments = (from c in DB.Comments
                             where c.Type == CommentType.商品评论
                             && c.TargetID == id
+                            && c.Verify
                             orderby c.Time descending
                             select c).Skip(p * 20).Take(20).ToList();
             return View(comments);

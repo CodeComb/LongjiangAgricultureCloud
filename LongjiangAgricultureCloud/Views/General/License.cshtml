@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "服务条款";
+}
+
+<h2>服务条款</h2>
+
+@using (Html.BeginForm("License", "General", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <p><textarea name="Content" class="ckeditor">@Html.Sanitized((string)ViewBag.Content)</textarea></p>
+    <p><input type="submit" value="保存" class="btn inverse" /></p>
+}

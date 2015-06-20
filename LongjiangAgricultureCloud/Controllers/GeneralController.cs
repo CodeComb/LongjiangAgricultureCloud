@@ -4,6 +4,7 @@ using System.Linq;
 using System.Configuration;
 using System.Web;
 using System.Web.Mvc;
+using System.IO;
 using LongjiangAgricultureCloud.Models;
 using LongjiangAgricultureCloud.Schema;
 using LongjiangAgricultureCloud.Helpers;
@@ -16,16 +17,28 @@ namespace LongjiangAgricultureCloud.Controllers
         // GET: General
         public ActionResult Index()
         {
-            return View();
+            var config = new vConfig
+            {
+                InformationComment = ViewBag.InformationComment,
+                ServiceTel = ViewBag.ServiceTel,
+                VerifyLocalTong = ViewBag.VerifyLocalTong,
+                VerifyLocalTongComment = ViewBag.VerifyLocalTongComment,
+                VerifyProductComment = ViewBag.VerifyProductComment,
+                VerifyService = ViewBag.VerifyService
+            };
+            return View(config);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Base(bool VerifyProductComment, bool VerifyService, bool VerifyLocalTong)
+        public ActionResult Base(vConfig Config)
         {
-            ConfigurationManager.AppSettings["VerifyProductComment"] = VerifyProductComment.ToString();
-            ConfigurationManager.AppSettings["VerifyService"] = VerifyService.ToString();
-            ConfigurationManager.AppSettings["VerifyLocalTong"] = VerifyLocalTong.ToString();
+            ConfigurationManager.AppSettings["VerifyProductComment"] = Config.VerifyProductComment ? "true" : "false";
+            ConfigurationManager.AppSettings["VerifyService"] = Config.VerifyService ? "true" : "false";
+            ConfigurationManager.AppSettings["VerifyLocalTong"] = Config.VerifyLocalTong ? "true" : "false";
+            ConfigurationManager.AppSettings["VerifyLocalTongComment"] = Config.VerifyLocalTongComment ? "true" : "false";
+            ConfigurationManager.AppSettings["InformationComment"] = Config.InformationComment ? "true" : "false";
+            ConfigurationManager.AppSettings["ServiceTel"] = Config.ServiceTel;
             return RedirectToAction("Success", "Shared", null);
         }
 
@@ -112,6 +125,21 @@ namespace LongjiangAgricultureCloud.Controllers
             DB.Comments.Remove(comment);
             DB.SaveChanges();
             return Content("ok");
+        }
+
+        public ActionResult License()
+        {
+            ViewBag.Content = System.IO.File.ReadAllText(Server.MapPath("~/Files/License.html"));
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult License(string Content)
+        {
+            System.IO.File.WriteAllText(Server.MapPath("~/Files/License.html"), Content);
+            return RedirectToAction("Success", "Shared");
         }
     }
 }

@@ -101,6 +101,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Files\License.html" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -172,6 +173,7 @@
     <Content Include="Areas\Mobile\Views\Member\CreateService.cshtml" />
     <Content Include="Areas\Mobile\Views\Member\EditService.cshtml" />
     <Content Include="Areas\Mobile\Views\MService\Fammer.cshtml" />
+    <Content Include="Areas\Mobile\Views\Mobile\License.cshtml" />
     <None Include="Properties\PublishProfiles\ChinaUnicom.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />
@@ -418,6 +420,7 @@
     <Compile Include="Models\Provider.cs" />
     <Compile Include="Models\Store.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\vConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schema\BaseAttribute.cs" />
     <Compile Include="Schema\CheckRoleAttribute.cs" />
@@ -471,6 +474,7 @@
     <Content Include="Views\Shop\Finance.cshtml" />
     <Content Include="Views\Shared\NoAccess.cshtml" />
     <Content Include="Views\Shared\Message.cshtml" />
+    <Content Include="Views\General\License.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -34,5 +34,8 @@ namespace LongjiangAgricultureCloud.Models
 
         [Index]
         public CommentType Type { get; set; }
+
+        [Index]
+        public bool Verify { get; set; }
     }
 }
