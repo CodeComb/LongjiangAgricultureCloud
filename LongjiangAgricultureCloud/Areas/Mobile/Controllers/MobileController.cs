@@ -160,7 +160,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Login", "Shared");
+            return RedirectToAction("Index", "Mobile");
         }
     }
 }

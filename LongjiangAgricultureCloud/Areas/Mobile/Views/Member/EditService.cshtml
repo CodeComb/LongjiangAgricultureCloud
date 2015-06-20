@@ -21,52 +21,24 @@
             <div class="field">描述</div>
             @Html.TextBoxFor(x => x.Description, new { @class = "textbox form" })
         </div>
+        @if (Model.Type == InformationType.二手农机)
+        {
+            <div class="textbox-outer">
+                <div class="field">价格</div>
+                @Html.TextBoxFor(x => x.Price, new { @class = "textbox form" })
+            </div>
+        }
         <div class="textbox-outer">
             <div class="field">联系人</div>
-            @Html.TextBoxFor(x => x.Name, new { @class = "textbox form", value = ViewBag.CurrentUser.Name })
+            @Html.TextBoxFor(x => x.Name, new { @class = "textbox form" })
         </div>
         <div class="textbox-outer">
             <div class="field">电话</div>
-            @Html.TextBoxFor(x => x.Phone, new { @class = "textbox form", value = ViewBag.CurrentUser.Username })
+            @Html.TextBoxFor(x => x.Phone, new { @class = "textbox form" })
         </div>
         <div class="textbox-outer">
             <div class="field">地址</div>
-            @{
-                var addr = "";
-                if (ViewBag.CurrentUser.AreaID != null)
-                {
-                    if (ViewBag.CurrentUser.Area.Father.Father.Father.Father.Father.Title != "-")
-                    {
-                        addr += ViewBag.CurrentUser.Area.Father.Father.Father.Father.Father.Title;
-                    }
-
-                    if (ViewBag.CurrentUser.Area.Father.Father.Father.Father.Title != "-")
-                    {
-                        addr += ViewBag.CurrentUser.Area.Father.Father.Father.Father.Title;
-                    }
-
-                    if (ViewBag.CurrentUser.Area.Father.Father.Father.Title != "-")
-                    {
-                        addr += ViewBag.CurrentUser.Area.Father.Father.Father.Title;
-                    }
-
-                    if (ViewBag.CurrentUser.Area.Father.Father.Title != "-")
-                    {
-                        addr += ViewBag.CurrentUser.Area.Father.Father.Title;
-                    }
-
-                    if (ViewBag.CurrentUser.Area.Father.Title != "-")
-                    {
-                        addr += ViewBag.CurrentUser.Area.Father.Title;
-                    }
-
-                    if (ViewBag.CurrentUser.Area.Title != "-")
-                    {
-                        addr += ViewBag.CurrentUser.Area.Title;
-                    }
-                }
-            }
-            @Html.TextBoxFor(x => x.Address, new { @class = "textbox form", value = addr })
+            @Html.TextBoxFor(x => x.Address, new { @class = "textbox form" })
         </div>
                 if (Model.Type == InformationType.维修站)
                 {
