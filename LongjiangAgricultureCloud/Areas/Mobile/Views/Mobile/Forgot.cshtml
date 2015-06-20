@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "忘记密码";
+    ViewBag.Back = true;
+}
+@Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
+<div class="wrap-cont">
+    <form method="get" action="/Mobile/Mobile/Forgot2">
+        <div class="list-outer">
+            <input type="text" class="textbox" name="Username" placeholder="手机号码" />
+        </div>
+        <a href="javascript: $('form').submit();">
+            <div class="btn">下一步</div>
+        </a>
+    </form>
+</div>

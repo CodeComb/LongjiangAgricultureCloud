@@ -1,0 +1,26 @@
+﻿@model User
+@{
+    ViewBag.Title = "忘记密码";
+    ViewBag.Back = true;
+}
+@Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
+<div class="wrap-cont">
+    <form method="post" action="/Mobile/Mobile/Forgot3">
+        @Html.AntiForgeryToken()
+        <div class="list-outer">
+            @Model.Question
+        </div>
+        <div class="list-outer">
+            <input type="text" class="textbox" name="Answer" placeholder="问题答案" />
+        </div>
+        <div class="list-outer">
+            <input type="text" class="textbox" name="Password" placeholder="新密码" />
+        </div>
+        <div class="list-outer">
+            <input type="text" class="textbox" name="Confirm" placeholder="密码重复" />
+        </div>
+        <a href="javascript: $('form').submit();">
+            <div class="btn">下一步</div>
+        </a>
+    </form>
+</div>

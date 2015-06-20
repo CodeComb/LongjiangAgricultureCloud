@@ -126,5 +126,33 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                 return View(DB.Catalogs.Where(x => x.Type == Type && x.Level == 0 && !x.Delete).ToList());
             }
         }
+
+        public ActionResult Forgot()
+        {
+            return View();
+        }
+
+
+        public ActionResult Forgot2(string Username)
+        {
+            var user = DB.Users.Where(x => x.Username == Username).SingleOrDefault();
+            if (user == null) return Msg("没有找到该用户");
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Forgot3(string Username, string Answer, string Password, string Confirm)
+        {
+            var user = DB.Users.Where(x => x.Username == Username).SingleOrDefault();
+            if (user == null) return Msg("没有找到该用户");
+            if (Answer != user.Answer)
+                return Msg("问题回答错误，无法找回密码");
+            if (Password != Confirm)
+                return Msg("两次密码输入不一致");
+            user.Password = Security.SHA1(Confirm);
+            DB.SaveChanges();
+            return Msg("密码已经成功重置！");
+        }
     }
 }
