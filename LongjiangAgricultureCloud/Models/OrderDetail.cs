@@ -11,7 +11,7 @@ namespace LongjiangAgricultureCloud.Models
         public Guid ID { get; set; }
 
         [ForeignKey("Order")]
-        public Guid OrderID { get; set; }
+        public Guid? OrderID { get; set; }
 
         public virtual Order Order { get; set; }
 

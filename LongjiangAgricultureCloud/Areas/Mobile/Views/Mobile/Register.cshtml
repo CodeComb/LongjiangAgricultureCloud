@@ -22,7 +22,7 @@
         </div>
         <div class="textbox-outer">
             <div class="field">省</div>
-            <select id="province">
+            <select id="province" style="width:65%">
                 @foreach (Area a in ViewBag.Provinces)
                 {
                     <option value="@a.ID">@a.Title</option>
@@ -31,7 +31,7 @@
         </div>
         <div class="textbox-outer">
             <div class="field">市</div>
-            <select id="city" data-parent-select="province">
+            <select id="city" data-parent-select="province" style="width:65%">
                 @foreach (Area a in ViewBag.Cities)
                 {
                     <option data-parent-id="@a.FatherID" value="@a.ID">@a.Title</option>
@@ -40,7 +40,7 @@
         </div>
         <div class="textbox-outer">
             <div class="field">区县</div>
-            <select id="district" data-parent-select="city">
+            <select id="district" data-parent-select="city" style="width:65%">
                 @foreach (Area a in ViewBag.Districts)
                 {
                     <option data-parent-id="@a.FatherID" value="@a.ID">@a.Title</option>
@@ -49,7 +49,7 @@
         </div>
         <div class="textbox-outer">
             <div class="field">乡镇</div>
-            <select id="town" data-parent-select="district">
+            <select id="town" data-parent-select="district" style="width:65%">
                 @foreach (Area a in ViewBag.Towns)
                 {
                     <option data-parent-id="@a.FatherID" value="@a.ID">@a.Title</option>
@@ -58,7 +58,7 @@
         </div>
         <div class="textbox-outer">
             <div class="field">村</div>
-            <select id="hamlet" data-parent-select="town">
+            <select id="hamlet" data-parent-select="town" style="width:65%">
                 @foreach (Area a in ViewBag.Hamlets)
                 {
                     <option data-parent-id="@a.FatherID" value="@a.ID">@a.Title</option>
@@ -67,7 +67,7 @@
         </div>
         <div class="textbox-outer">
             <div class="field">屯</div>
-            <select id="village" data-parent-select="hamlet" name="AreaID">
+            <select id="village" data-parent-select="hamlet" name="AreaID" style="width:65%">
                 @foreach (Area a in ViewBag.Villages)
                 {
                     <option data-parent-id="@a.FatherID" value="@a.ID">@a.Title</option>

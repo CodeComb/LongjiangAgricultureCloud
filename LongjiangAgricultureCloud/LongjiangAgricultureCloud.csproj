@@ -152,9 +152,9 @@
     <Content Include="Areas\Mobile\Views\MLocal\List.cshtml" />
     <Content Include="Areas\Mobile\Views\MLocal\ListRaw.cshtml" />
     <Content Include="Areas\Mobile\Views\MLocal\Show.cshtml" />
-    <Content Include="Areas\Mobile\Views\Mall\Index.cshtml" />
     <Content Include="Areas\Mobile\Views\Mall\List.cshtml" />
     <Content Include="Areas\Mobile\Views\Mall\ListRaw.cshtml" />
+    <Content Include="Areas\Mobile\Views\Mall\Show.cshtml" />
     <None Include="Properties\PublishProfiles\ChinaUnicom.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />

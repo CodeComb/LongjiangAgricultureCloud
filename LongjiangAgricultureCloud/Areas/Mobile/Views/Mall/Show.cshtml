@@ -1,0 +1,85 @@
+﻿@model Product
+@{
+    ViewBag.Title = Model.Title;
+    ViewBag.Refresh = true;
+    ViewBag.Back = true;
+    ViewBag.Product = true;
+}
+
+@Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
+<div class="wrap-cont">
+    <img src="/Shared/ProductImg/@Model.ID?index=1" alt="商品图片展示" id="product-img" />
+    <div class="sort-bar">
+        <a href="/Mobile/Mall/Show/@Model.ID" class="sort">商品详情</a>
+        <a href="/Mobile/Mall/Comment/@Model.ID" class="sort">商品评价</a>
+    </div>
+    <div class="list-outer">@Html.Sanitized(Model.Description)</div>
+    <div class="list-outer">
+        <div class="field">商品编码</div>@Model.ProductCode
+    </div>
+    @if (Model.ProviderID != null)
+    {
+        <div class="list-outer">
+            <div class="field">供应商</div>@Model.Provider.Title
+        </div>
+        <div class="list-outer">
+            <div class="field">联系电话</div><a href="tel:@Model.Provider.Phone">@Model.Provider.Phone</a>
+        </div>
+    }
+    <div class="list-outer">
+        <div class="field">规格</div>@Model.Standard
+    </div>
+    <div class="list-outer">
+        <div class="field">单位</div>@Model.Unit
+    </div>
+    <div class="list-outer">
+        <div class="field">单价</div>￥@Model.Price.ToString("0.00")
+    </div>
+    <div class="list-outer">
+        <div class="field">剩余库存</div>@Model.StoreCount
+    </div>
+     <br />
+    @using (Html.BeginForm("Cart", "Mall", new { id = Model.ID }, FormMethod.Post, null))
+    {
+        <div class="list-outer">
+            <div class="field">订购数量</div>
+            <input type="text" class="textbox" name="Count" style="width:65%" value="1" />
+        </div>
+        <a href="javascript: $('form').submit()">
+            <div class="btn">加入购物车</div>
+        </a>
+        <br />
+    }
+</div>
+
+<script>
+    var pictures = [];
+    @if (Model.Picture1 != null)
+    {
+        @("pictures.push('/Shared/ProductImg/" + Model.ID + "?index=1')")
+    }
+    @if (Model.Picture2 != null)
+    {
+        @("pictures.push('/Shared/ProductImg/" + Model.ID + "?index=2')")
+    }
+    @if (Model.Picture3 != null)
+    {
+        @("pictures.push('/Shared/ProductImg/" + Model.ID + "?index=3')")
+    }
+    @if (Model.Picture4 != null)
+    {
+        @("pictures.push('/Shared/ProductImg/" + Model.ID + "?index=4')")
+    }
+    @if (Model.Picture5 != null)
+    {
+        @("pictures.push('/Shared/ProductImg/" + Model.ID + "?index=5')")
+    }
+    var index = 0;
+    setInterval(function () {
+        $('#product-img').attr('src', pictures[index++]);
+        if (index == pictures.length)
+            index = 0;
+    }, 5000);
+</script>
+
+@Html.Partial("~/Areas/Mobile/Views/Shared/ShopNav.cshtml")

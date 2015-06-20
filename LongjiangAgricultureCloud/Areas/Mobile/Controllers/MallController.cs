@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using LongjiangAgricultureCloud.Models;
+using LongjiangAgricultureCloud.Schema;
 
 namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 {
@@ -26,7 +27,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
         {
             IEnumerable<Product> products = DB.Products.Where(x => x.CatalogID == id && x.StoreCount > 0);
             if (!string.IsNullOrEmpty(Title))
-                products = products.Where(x => x.Title.Contains(Key));
+                products = products.Where(x => x.Title.Contains(Key) || Key.Contains(x.Title));
             if (Key == "Price")
             {
                 if (Desc)
@@ -43,6 +44,32 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             }
             products = products.Skip(p * 20).Take(20).ToList();
             return View(products);
+        }
+
+        public ActionResult Show(int id)
+        {
+            var product = DB.Products.Find(id);
+            return View(product);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [MobileAuthorize]
+        public ActionResult Cart(int id, int Count)
+        {
+            var product = DB.Products.Find(id);
+            if (Count > product.StoreCount)
+                return Msg("库存不足，无法加入购物车！");
+            var OrderDetail = new OrderDetail
+            {
+                OrderID = null,
+                ProductID = id,
+                Price = product.ID,
+                Count = Count
+            };
+            DB.OrderDetails.Add(OrderDetail);
+            DB.SaveChanges();
+            return Msg("该商品已经成功加入到购物车！");
         }
     }
 }
