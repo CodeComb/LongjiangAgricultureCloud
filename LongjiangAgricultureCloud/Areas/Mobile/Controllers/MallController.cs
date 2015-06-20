@@ -74,6 +74,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return Msg("该商品已经成功加入到购物车！");
         }
 
+        [MobileAuthorize]
         public ActionResult Cart()
         {
             var orders = (from od in DB.OrderDetails
@@ -93,6 +94,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [MobileAuthorize]
         public ActionResult RemoveCart(Guid id)
         {
             var od = DB.OrderDetails.Find(id);
@@ -103,6 +105,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return RedirectToAction("Cart", "Mall");
         }
 
+        [MobileAuthorize]
         public ActionResult Pay(Guid id)
         {
             var orders = (from od in DB.OrderDetails
@@ -122,6 +125,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [MobileAuthorize]
         public ActionResult Buy(Order Order)
         {
             Order.ID = Guid.NewGuid();

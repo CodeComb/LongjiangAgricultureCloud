@@ -8,6 +8,7 @@ function Load()
     LoadMachines();
     LoadLocals();
     LoadProducts();
+    LoadOrders();
 }
 
 function LoadInformations() {
@@ -49,6 +50,21 @@ function LoadLocals() {
                 $('#lstLocals').html('<div class="no-more">没有更多信息了！</div>');
             }
             $('#lstLocals').append(data);
+            p++;
+            lock = false;
+        });
+    }
+}
+
+function LoadOrders() {
+    if ($('#lstOrders').length > 0) {
+        if (lock) return;
+        lock = true;
+        $.get('/Mobile/Member/OrderRaw', { p: p }, function (data) {
+            if (data.length < 5) {
+                $('#lstOrders').html('<div class="no-more">没有更多订单了！</div>');
+            }
+            $('#lstOrders').append(data);
             p++;
             lock = false;
         });

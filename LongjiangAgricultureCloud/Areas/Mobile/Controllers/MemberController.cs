@@ -137,5 +137,96 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             DB.SaveChanges();
             return Msg("申请提交成功！请耐心等待管理员审核，在此期间请确保登记的联系方式畅通，切勿重复提交申请。");
         }
+
+        public ActionResult Order()
+        {
+            return View();
+        }
+
+        public ActionResult OrderRaw(int p = 0)
+        {
+            var orders = (from o in DB.Orders
+                          where o.UserID == CurrentUser.ID
+                          orderby o.Time descending
+                          select o).Skip(p * 10).Take(10).ToList();
+            return View(orders);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Cancel(Guid id)
+        {
+            var order = DB.Orders.Find(id);
+            if (order.UserID != CurrentUser.ID || order.Status != OrderStatus.待付款)
+                return Msg("非法操作");
+            order.Status = OrderStatus.已取消;
+            DB.SaveChanges();
+            return Msg("订单取消成功！");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Verify(Guid id)
+        {
+            var order = DB.Orders.Find(id);
+            if (order.UserID != CurrentUser.ID || order.Status != OrderStatus.待收货)
+                return Msg("非法操作");
+            order.Status = OrderStatus.待评价;
+            DB.SaveChanges();
+            return Msg("确认收货成功！");
+        }
+
+        public ActionResult GiveBack(Guid id)
+        {
+            var order = DB.Orders.Find(id);
+            if (order.UserID != CurrentUser.ID || order.Status != OrderStatus.待评价)
+                return Msg("非法操作");
+            return View(order);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult GiveBack(Guid id, string Reason)
+        {
+            var order = DB.Orders.Find(id);
+            if (order.UserID != CurrentUser.ID || order.Status != OrderStatus.待评价)
+                return Msg("非法操作");
+            order.GiveBackReason = Reason;
+            order.Status = OrderStatus.退款中;
+            DB.SaveChanges();
+            return Msg("退款申请已提交，请耐心等待，客服将与您联系！");
+        }
+
+        public ActionResult Comment(Guid id)
+        {
+            var order = DB.Orders.Find(id);
+            if (order.UserID != CurrentUser.ID || order.Status != OrderStatus.待评价)
+                return Msg("非法操作");
+            return View(order);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Comment(Guid id, bool? Dif)
+        {
+            var order = DB.Orders.Find(id);
+            if (order.UserID != CurrentUser.ID || order.Status != OrderStatus.待评价)
+                return Msg("非法操作");
+            order.Status = OrderStatus.已完成;
+            foreach (var od in order.OrderDetails)
+            {
+                var comment = new Comment
+                {
+                    UserID = CurrentUser.ID,
+                    TargetID = od.ProductID,
+                    Type = CommentType.商品评论,
+                    Content = Request.Form["Content-" + od.ID].ToString(),
+                    Score = Convert.ToInt32(Request.Form["Score-" + od.ID])
+                };
+                DB.Comments.Add(comment);
+            }
+            DB.SaveChanges();
+            return Msg("评价成功！");
+        }
     }
 }

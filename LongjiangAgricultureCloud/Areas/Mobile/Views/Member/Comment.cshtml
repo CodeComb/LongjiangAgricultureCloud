@@ -1,0 +1,39 @@
+﻿@model Order
+@{
+    ViewBag.Title = "评价订单";
+}
+
+@Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
+
+<div class="wrap-cont">
+    @using (Html.BeginForm("Comment", "Member", FormMethod.Post))
+    {
+        <input type="hidden" value="@Model.ID" name="id" />
+        foreach (var od in Model.OrderDetails)
+        {
+            <div class="product-item">
+                <img src="/Shared/ProductImg/@od.ProductID?index=1" class="product-img" alt="商品展示" />
+                <div class="product-title">@od.Product.Title</div>
+                <div class="product-price">总金额：￥@od.Price.ToString("0.00")<div class="product-sale">数量：@od.Count</div></div>
+            </div>
+            <div class="list-outer">
+                <textarea class="textbox" name="Content-@od.ID" placeholder="请在此处填写对商品的评价"></textarea>
+            </div>
+            <div class="list-outer">
+                <input type="radio" name="Score-@od.ID" value="5" checked />5分
+                &nbsp;&nbsp;
+                <input type="radio" name="Score-@od.ID" value="4" checked />4分
+                &nbsp;&nbsp;
+                <input type="radio" name="Score-@od.ID" value="3" checked />3分
+                &nbsp;&nbsp;
+                <input type="radio" name="Score-@od.ID" value="2" checked />2分
+                &nbsp;&nbsp;
+                <input type="radio" name="Score-@od.ID" value="1" checked />1分
+            </div>
+            <br />
+        }
+        <a href="javascript:$('form').submit()">
+            <div class="btn">提交评价</div>
+        </a>
+    }
+</div>

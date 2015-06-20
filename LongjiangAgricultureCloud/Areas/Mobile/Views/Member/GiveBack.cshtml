@@ -1,0 +1,17 @@
+﻿@model Order
+@{
+    ViewBag.Title = "退款申请";
+}
+@Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
+<div class="wrap-cont">
+    @using (Html.BeginForm("GiveBack", "Member", FormMethod.Post))
+    {
+        <input type="hidden" name="id" value="@Model.ID" />
+        <div class="list-outer">
+            <textarea class="textbox" name="Reason" placeholder="请在此处填写退款原因，以及希望得到的处理结果"></textarea>
+        </div>
+        <a href="javascript:$('form').submit()">
+            <div class="btn">提交退款申请</div>
+        </a>
+    }
+</div>
