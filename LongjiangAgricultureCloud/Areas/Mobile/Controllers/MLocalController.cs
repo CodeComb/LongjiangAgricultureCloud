@@ -39,11 +39,13 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
         {
             var comment = new Comment
             {
+                ID = Guid.NewGuid(),
                 Type = CommentType.本地通评论,
                 TargetID = id,
                 Time = DateTime.Now,
                 Content = Content,
-                Verify = ViewBag.VerifyLocalTongComment ? false : true
+                Verify = ViewBag.VerifyLocalTongComment ? false : true,
+                UserID = CurrentUser.ID
             };
             DB.Comments.Add(comment);
             DB.SaveChanges();

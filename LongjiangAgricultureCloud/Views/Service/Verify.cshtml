@@ -5,8 +5,6 @@
 
 <h2>@ViewBag.Title</h2>
 
-<h2>@ViewBag.Title</h2>
-
 @using (Html.BeginForm("Verify", "Service", new { id = Model.ID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
@@ -57,5 +55,6 @@
             </tr>
         }
     </table>
+    <input type="hidden" value="" name="Verify" />
     <p><input type="submit" class="btn inverse" value="通过审核" /></p>
                     }

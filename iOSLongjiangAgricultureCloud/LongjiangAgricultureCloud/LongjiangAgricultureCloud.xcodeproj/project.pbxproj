@@ -1,0 +1,437 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2F0F9E2C1B368A190065D3E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F9E2B1B368A190065D3E3 /* AppDelegate.swift */; };
+		2F0F9E2E1B368A190065D3E3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F9E2D1B368A190065D3E3 /* ViewController.swift */; };
+		2F0F9E311B368A190065D3E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F0F9E2F1B368A190065D3E3 /* Main.storyboard */; };
+		2F0F9E331B368A190065D3E3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F0F9E321B368A190065D3E3 /* Images.xcassets */; };
+		2F0F9E361B368A190065D3E3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F0F9E341B368A190065D3E3 /* LaunchScreen.xib */; };
+		2F0F9E421B368A190065D3E3 /* LongjiangAgricultureCloudTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F9E411B368A190065D3E3 /* LongjiangAgricultureCloudTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2F0F9E3C1B368A190065D3E3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2F0F9E1E1B368A190065D3E3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2F0F9E251B368A190065D3E3;
+			remoteInfo = LongjiangAgricultureCloud;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2F0F9E261B368A190065D3E3 /* LongjiangAgricultureCloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LongjiangAgricultureCloud.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F0F9E2A1B368A190065D3E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2F0F9E2B1B368A190065D3E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2F0F9E2D1B368A190065D3E3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2F0F9E301B368A190065D3E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2F0F9E321B368A190065D3E3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		2F0F9E351B368A190065D3E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		2F0F9E3B1B368A190065D3E3 /* LongjiangAgricultureCloudTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LongjiangAgricultureCloudTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F0F9E401B368A190065D3E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2F0F9E411B368A190065D3E3 /* LongjiangAgricultureCloudTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongjiangAgricultureCloudTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2F0F9E231B368A190065D3E3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F0F9E381B368A190065D3E3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2F0F9E1D1B368A190065D3E3 = {
+			isa = PBXGroup;
+			children = (
+				2F0F9E281B368A190065D3E3 /* LongjiangAgricultureCloud */,
+				2F0F9E3E1B368A190065D3E3 /* LongjiangAgricultureCloudTests */,
+				2F0F9E271B368A190065D3E3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2F0F9E271B368A190065D3E3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2F0F9E261B368A190065D3E3 /* LongjiangAgricultureCloud.app */,
+				2F0F9E3B1B368A190065D3E3 /* LongjiangAgricultureCloudTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2F0F9E281B368A190065D3E3 /* LongjiangAgricultureCloud */ = {
+			isa = PBXGroup;
+			children = (
+				2F0F9E2B1B368A190065D3E3 /* AppDelegate.swift */,
+				2F0F9E2D1B368A190065D3E3 /* ViewController.swift */,
+				2F0F9E2F1B368A190065D3E3 /* Main.storyboard */,
+				2F0F9E321B368A190065D3E3 /* Images.xcassets */,
+				2F0F9E341B368A190065D3E3 /* LaunchScreen.xib */,
+				2F0F9E291B368A190065D3E3 /* Supporting Files */,
+			);
+			path = LongjiangAgricultureCloud;
+			sourceTree = "<group>";
+		};
+		2F0F9E291B368A190065D3E3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2F0F9E2A1B368A190065D3E3 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2F0F9E3E1B368A190065D3E3 /* LongjiangAgricultureCloudTests */ = {
+			isa = PBXGroup;
+			children = (
+				2F0F9E411B368A190065D3E3 /* LongjiangAgricultureCloudTests.swift */,
+				2F0F9E3F1B368A190065D3E3 /* Supporting Files */,
+			);
+			path = LongjiangAgricultureCloudTests;
+			sourceTree = "<group>";
+		};
+		2F0F9E3F1B368A190065D3E3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2F0F9E401B368A190065D3E3 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2F0F9E251B368A190065D3E3 /* LongjiangAgricultureCloud */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F0F9E451B368A190065D3E3 /* Build configuration list for PBXNativeTarget "LongjiangAgricultureCloud" */;
+			buildPhases = (
+				2F0F9E221B368A190065D3E3 /* Sources */,
+				2F0F9E231B368A190065D3E3 /* Frameworks */,
+				2F0F9E241B368A190065D3E3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LongjiangAgricultureCloud;
+			productName = LongjiangAgricultureCloud;
+			productReference = 2F0F9E261B368A190065D3E3 /* LongjiangAgricultureCloud.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2F0F9E3A1B368A190065D3E3 /* LongjiangAgricultureCloudTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F0F9E481B368A190065D3E3 /* Build configuration list for PBXNativeTarget "LongjiangAgricultureCloudTests" */;
+			buildPhases = (
+				2F0F9E371B368A190065D3E3 /* Sources */,
+				2F0F9E381B368A190065D3E3 /* Frameworks */,
+				2F0F9E391B368A190065D3E3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2F0F9E3D1B368A190065D3E3 /* PBXTargetDependency */,
+			);
+			name = LongjiangAgricultureCloudTests;
+			productName = LongjiangAgricultureCloudTests;
+			productReference = 2F0F9E3B1B368A190065D3E3 /* LongjiangAgricultureCloudTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2F0F9E1E1B368A190065D3E3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "龙江县超越现代玉米种植农民专业合作社";
+				TargetAttributes = {
+					2F0F9E251B368A190065D3E3 = {
+						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = FU9P3S69Y7;
+					};
+					2F0F9E3A1B368A190065D3E3 = {
+						CreatedOnToolsVersion = 6.3.1;
+						TestTargetID = 2F0F9E251B368A190065D3E3;
+					};
+				};
+			};
+			buildConfigurationList = 2F0F9E211B368A190065D3E3 /* Build configuration list for PBXProject "LongjiangAgricultureCloud" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2F0F9E1D1B368A190065D3E3;
+			productRefGroup = 2F0F9E271B368A190065D3E3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2F0F9E251B368A190065D3E3 /* LongjiangAgricultureCloud */,
+				2F0F9E3A1B368A190065D3E3 /* LongjiangAgricultureCloudTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2F0F9E241B368A190065D3E3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F0F9E311B368A190065D3E3 /* Main.storyboard in Resources */,
+				2F0F9E361B368A190065D3E3 /* LaunchScreen.xib in Resources */,
+				2F0F9E331B368A190065D3E3 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F0F9E391B368A190065D3E3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2F0F9E221B368A190065D3E3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F0F9E2E1B368A190065D3E3 /* ViewController.swift in Sources */,
+				2F0F9E2C1B368A190065D3E3 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F0F9E371B368A190065D3E3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F0F9E421B368A190065D3E3 /* LongjiangAgricultureCloudTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2F0F9E3D1B368A190065D3E3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2F0F9E251B368A190065D3E3 /* LongjiangAgricultureCloud */;
+			targetProxy = 2F0F9E3C1B368A190065D3E3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2F0F9E2F1B368A190065D3E3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2F0F9E301B368A190065D3E3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2F0F9E341B368A190065D3E3 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2F0F9E351B368A190065D3E3 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2F0F9E431B368A190065D3E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2F0F9E441B368A190065D3E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2F0F9E461B368A190065D3E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Yisheng Zheng (FU9P3S69Y7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Yisheng Zheng (FU9P3S69Y7)";
+				INFOPLIST_FILE = LongjiangAgricultureCloud/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "535af694-cb56-48af-a158-f8ece414f581";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2F0F9E471B368A190065D3E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Yisheng Zheng (FU9P3S69Y7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Yisheng Zheng (FU9P3S69Y7)";
+				INFOPLIST_FILE = LongjiangAgricultureCloud/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "535af694-cb56-48af-a158-f8ece414f581";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		2F0F9E491B368A190065D3E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = LongjiangAgricultureCloudTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LongjiangAgricultureCloud.app/LongjiangAgricultureCloud";
+			};
+			name = Debug;
+		};
+		2F0F9E4A1B368A190065D3E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = LongjiangAgricultureCloudTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LongjiangAgricultureCloud.app/LongjiangAgricultureCloud";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2F0F9E211B368A190065D3E3 /* Build configuration list for PBXProject "LongjiangAgricultureCloud" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F0F9E431B368A190065D3E3 /* Debug */,
+				2F0F9E441B368A190065D3E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2F0F9E451B368A190065D3E3 /* Build configuration list for PBXNativeTarget "LongjiangAgricultureCloud" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F0F9E461B368A190065D3E3 /* Debug */,
+				2F0F9E471B368A190065D3E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2F0F9E481B368A190065D3E3 /* Build configuration list for PBXNativeTarget "LongjiangAgricultureCloudTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F0F9E491B368A190065D3E3 /* Debug */,
+				2F0F9E4A1B368A190065D3E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2F0F9E1E1B368A190065D3E3 /* Project object */;
+}

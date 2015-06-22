@@ -16,28 +16,28 @@
                     <option>无分类</option>
                     @foreach (Catalog c in ViewBag.Level1)
                     {
-                        <option @(Model.Catalog.Father.Father.FatherID == c.ID ? "selected" : "") value="@c.ID">@c.Title</option>
+                        <option @(Model.CatalogID != null && Model.Catalog.Father.Father.FatherID == c.ID ? "selected" : "") value="@c.ID">@c.Title</option>
                     }
                 </select>
 
                 <select id="lvl2" data-parent-select="lvl1">
                     @foreach (Catalog c in ViewBag.Level2)
                     {
-                        <option @(Model.Catalog.Father.FatherID == c.ID ? "selected" : "") data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
+                        <option @(Model.CatalogID != null &&Model.Catalog.Father.FatherID == c.ID ? "selected" : "") data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
                     }
                 </select>
 
                 <select id="lvl3" data-parent-select="lvl2">
                     @foreach (Catalog c in ViewBag.Level3)
                     {
-                        <option @(Model.Catalog.FatherID == c.ID ? "selected" : "") data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
+                        <option @(Model.CatalogID != null &&Model.Catalog.FatherID == c.ID ? "selected" : "") data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
                     }
                 </select>
 
                 <select id="lvl4" data-parent-select="lvl3" name="CatalogID">
                     @foreach (Catalog c in ViewBag.Level4)
                     {
-                        <option @(Model.CatalogID == c.ID ? "selected" : "") data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
+                        <option @(Model.CatalogID != null &&Model.CatalogID == c.ID ? "selected" : "") data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
                     }
                 </select>
             </td>

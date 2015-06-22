@@ -382,7 +382,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateService(string Title, InformationType Type, int? CatalogID, decimal Lat, decimal Lon, string Name, string Address, string Description, string Phone)
+        public ActionResult CreateService(string Title, InformationType Type, int? CatalogID, decimal? Lat, decimal? Lon, string Name, string Address, string Description, string Phone)
         {
             var service = new Information
             {
@@ -427,14 +427,12 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditService(int id, string Title, string Price, decimal Lat, decimal Lon, string Name, string Address, string Description, string Phone)
+        public ActionResult EditService(int id, string Title, string Price, string Name, string Address, string Description, string Phone)
         {
             var service = DB.Informations.Find(id);
             if (service.UserID != CurrentUser.ID)
                 return Msg("非法操作");
             service.Title = Title;
-            service.Lat = Lat;
-            service.Lon = Lon;
             service.Name = Name;
             service.Address = Address;
             service.Description = Description;

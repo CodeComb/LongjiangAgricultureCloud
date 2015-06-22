@@ -61,6 +61,7 @@ table {
     text-align: center;
     margin: 0.25em 0;
     line-height: 0.9em;
+    width: 100%;
 }
 
     .nav-table a {

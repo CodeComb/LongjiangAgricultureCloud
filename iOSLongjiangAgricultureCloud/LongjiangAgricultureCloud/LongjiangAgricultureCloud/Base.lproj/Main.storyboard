@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="LongjiangAgricultureCloud" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
+                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" suppressesIncrementalRendering="YES" translatesAutoresizingMaskIntoConstraints="NO" id="owG-Ww-7Wy">
+                                <rect key="frame" x="-4" y="20" width="608" height="580"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="owG-Ww-7Wy" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-20" id="DnZ-J9-0V6"/>
+                            <constraint firstItem="owG-Ww-7Wy" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="Dui-Z6-rID"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="owG-Ww-7Wy" secondAttribute="trailing" constant="-16" id="KL9-6H-7k2"/>
+                            <constraint firstItem="owG-Ww-7Wy" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="Q2Q-Gl-udG"/>
+                            <constraint firstItem="owG-Ww-7Wy" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="VIk-Pr-gdE"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="owG-Ww-7Wy" secondAttribute="bottom" id="dph-oc-mDm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="owG-Ww-7Wy" secondAttribute="trailing" constant="-20" id="xfr-ws-ae3"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="owG-Ww-7Wy" secondAttribute="bottom" id="ynm-UH-aZ1"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Dui-Z6-rID"/>
+                                <exclude reference="KL9-6H-7k2"/>
+                                <exclude reference="VIk-Pr-gdE"/>
+                                <exclude reference="dph-oc-mDm"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="owG-Ww-7Wy" id="3Ck-AB-VCU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="443" y="480"/>
+        </scene>
+    </scenes>
+</document>

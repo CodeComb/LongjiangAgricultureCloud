@@ -27,7 +27,7 @@
     </p>
     @foreach (Comment c in ViewBag.Comments)
     {
-        <div class="lst-outer">
+        <div class="list-outer">
             @c.User.Name (@c.Time.ToString("yyyy-MM-dd")):
             <div class="sub-title">@c.Content</div>
         </div>

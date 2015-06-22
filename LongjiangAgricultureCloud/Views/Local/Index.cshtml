@@ -12,13 +12,6 @@
     检索：
     <input type="text" name="Begin" class="textbox w-0-8 datetime" placeholder="发布时间(大于)" value="@Request.QueryString["Begin"]" />
     <input type="text" name="End" class="textbox w-0-8 datetime" placeholder="发布时间(小于)" value="@Request.QueryString["End"]" />
-    <select name="Type">
-        <option value="">信息类型</option>
-        <option @(Request.QueryString["Type"] == "农机找活" ? "selected" : "")>农机找活</option>
-        <option @(Request.QueryString["Type"] == "附近农手" ? "selected" : "")>附近农手</option>
-        <option @(Request.QueryString["Type"] == "土地找机手" ? "selected" : "")>土地找机手</option>
-        <option @(Request.QueryString["Type"] == "二手农机" ? "selected" : "")>二手农机</option>
-    </select>
     信息分类
     <select id="lvl1">
         <option>不限制</option>

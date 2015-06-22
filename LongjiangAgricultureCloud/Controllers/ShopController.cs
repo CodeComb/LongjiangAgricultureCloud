@@ -181,14 +181,17 @@ namespace LongjiangAgricultureCloud.Controllers
             ViewBag.Level1 = (from c in DB.Catalogs
                               where c.Level == 0
                               && c.Type == CatalogType.商品分类
+                              && !c.Delete
                               select c).ToList();
             ViewBag.Level2 = (from c in DB.Catalogs
                               where c.Level == 1
                               && c.Type == CatalogType.商品分类
+                              && !c.Delete
                               select c).ToList();
             ViewBag.Level3 = (from c in DB.Catalogs
                               where c.Level == 2
                               && c.Type == CatalogType.商品分类
+                              && !c.Delete
                               select c).ToList();
             return View(product);
         }
@@ -608,7 +611,7 @@ namespace LongjiangAgricultureCloud.Controllers
         /// <returns></returns>
         public ActionResult Store(int p = 1)
         {
-            IEnumerable<Store> query = DB.Stores;
+            IEnumerable<Store> query = DB.Stores.Where(x => !x.Delete);
             ViewBag.PageInfo = PagerHelper.Do(ref query, 50, p);
             return View(query);
         }

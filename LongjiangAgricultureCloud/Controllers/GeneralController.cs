@@ -89,6 +89,10 @@ namespace LongjiangAgricultureCloud.Controllers
                 catalog.FatherID = null;
             }
             catalog.Title = Title;
+            if (DB.Catalogs.Any(x => x.Type == catalog.Type && catalog.FatherID == x.FatherID && catalog.Title == x.Title))
+            {
+                return Msg("请勿创建名称相同的分类！");
+            }
             DB.Catalogs.Add(catalog);
             DB.SaveChanges();
             return RedirectToAction("Success", "Shared");

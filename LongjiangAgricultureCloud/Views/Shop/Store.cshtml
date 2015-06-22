@@ -25,7 +25,7 @@
                 <td>@s.Title</td>
                 <td>@s.User.Name (@s.User.Username)</td>
                 <td>
-                    <a href="/Shop/EditStore">编辑仓库</a>
+                    <a href="/Shop/EditStore/@s.ID">编辑仓库</a>
                     <a href="javascript:deleteDialog('/Shop/DeleteStore/@s.ID', 'store-@s.ID')">删除仓库</a>
                 </td>
             </tr>

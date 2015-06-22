@@ -93,7 +93,7 @@ namespace LongjiangAgricultureCloud.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Verify(int id, bool Verify)
+        public ActionResult Verify(int id, bool Verify = true)
         {
             var information = DB.Informations.Find(id);
             information.Verify = true;
