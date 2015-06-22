@@ -68,16 +68,28 @@ namespace LongjiangAgricultureCloud.Models
         [StringLength(256)]
         public string ProductCode { get; set; }
 
+        /// <summary>
+        /// 删除标识
+        /// </summary>
         [Index]
         public bool Delete { get; set; }
 
+        /// <summary>
+        /// 仓库ID
+        /// </summary>
         [ForeignKey("Store")]
         public int StoreID { get; set; }
 
         public virtual Store Store { get; set; }
 
+        /// <summary>
+        /// 详细说明
+        /// </summary>
         public string Description { get; set; }
 
+        /// <summary>
+        /// 置顶标识
+        /// </summary>
         [Index]
         public bool Top { get; set; }
 

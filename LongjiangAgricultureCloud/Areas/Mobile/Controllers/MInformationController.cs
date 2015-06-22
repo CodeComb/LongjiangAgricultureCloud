@@ -9,12 +9,20 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 {
     public class MInformationController : BaseController
     {
-        // GET: Mobile/MInformation
+        /// <summary>
+        /// 农业信息分类
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return RedirectToAction("Catalog", "Mobile", new { type = CatalogType.农业信息分类 });
         }
 
+        /// <summary>
+        /// 农业信息列表
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult List(int id)
         {
             var catalog = DB.Catalogs.Find(id);
@@ -22,6 +30,12 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 农业信息列表
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public ActionResult ListRaw(int id, int p = 0)
         {
             var informations = (from i in DB.Informations
@@ -31,6 +45,11 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return View(informations);
         }
 
+        /// <summary>
+        /// 农业信息详情展示
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Show(int id)
         {
             var information = DB.Informations.Find(id);

@@ -10,17 +10,30 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 {
     public class MLocalController : BaseController
     {
-        // GET: Mobile/MLocal
+        /// <summary>
+        /// 本地通分类
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return RedirectToAction("Catalog", "Mobile", new { type = CatalogType.本地通分类 });
         }
 
+        /// <summary>
+        /// 本地通信息列表
+        /// </summary>
+        /// <returns></returns>
         public ActionResult List()
         {
             return View();
         }
 
+        /// <summary>
+        /// 本地通信息列表
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public ActionResult ListRaw(int id, int p = 0)
         {
             var informations = (from i in DB.Informations
@@ -32,6 +45,12 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return View(informations);
         }
 
+        /// <summary>
+        /// 本地通评论
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="Content"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [MobileAuthorize]
@@ -52,6 +71,11 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return Msg("评论发表成功");
         }
 
+        /// <summary>
+        /// 本地通信息展示
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Show(int id)
         {
             var information = DB.Informations.Find(id);

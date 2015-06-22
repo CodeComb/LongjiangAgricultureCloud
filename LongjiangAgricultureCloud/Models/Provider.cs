@@ -8,6 +8,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LongjiangAgricultureCloud.Models
 {
+    /// <summary>
+    /// 供应商状态
+    /// </summary>
     public enum ProviderStatus
     {
         等待审核,
@@ -19,12 +22,21 @@ namespace LongjiangAgricultureCloud.Models
     {
         public int ID { get; set; }
 
+        /// <summary>
+        /// 供应商名称
+        /// </summary>
         [StringLength(128)]
         [Index]
         public string Title { get; set; }
 
+        /// <summary>
+        /// 供应商介绍
+        /// </summary>
         public string Description { get; set; }
 
+        /// <summary>
+        /// 供应商地址
+        /// </summary>
         [StringLength(256)]
         [Index]
         public string Address { get; set; }
@@ -49,11 +61,20 @@ namespace LongjiangAgricultureCloud.Models
         /// </summary>
         public byte[] ArtificialPersonIdentityCard { get; set; }
 
+        /// <summary>
+        /// 供应商状态
+        /// </summary>
         [Index]
         public ProviderStatus Status { get; set; }
 
+        /// <summary>
+        /// 驳回原因
+        /// </summary>
         public string Reason { get; set; }
 
+        /// <summary>
+        /// 申请时间
+        /// </summary>
         [Index]
         public DateTime Time { get; set; }
 
@@ -82,11 +103,17 @@ namespace LongjiangAgricultureCloud.Models
         /// </summary>
         public byte[] Picture { get; set; }
 
+        /// <summary>
+        /// 申请者ID
+        /// </summary>
         [ForeignKey("User")]
         public int? UserID { get; set; }
 
         public virtual User User { get; set; }
            
+        /// <summary>
+        /// 删除标识
+        /// </summary>
         [Index]
         public bool Delete { get; set; }
 

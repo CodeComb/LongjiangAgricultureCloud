@@ -9,13 +9,22 @@ namespace LongjiangAgricultureCloud.Controllers
 {
     public class SharedController : BaseController
     {
-        // GET: Shared
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <returns></returns>
         [Route("Login")]
         public ActionResult Login()
         {
             return View();
         }
 
+        /// <summary>
+        /// 提示信息
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="sid"></param>
+        /// <returns></returns>
         [Route("Message")]
         public ActionResult Message(string msg, string sid)
         {
@@ -25,6 +34,13 @@ namespace LongjiangAgricultureCloud.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="Username"></param>
+        /// <param name="Password"></param>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         [Route("Login")]
         [ValidateAntiForgeryToken]
         [HttpPost]
@@ -51,6 +67,10 @@ namespace LongjiangAgricultureCloud.Controllers
             }
         }
 
+        /// <summary>
+        /// 注销
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Logout()
@@ -59,16 +79,30 @@ namespace LongjiangAgricultureCloud.Controllers
             return RedirectToAction("Login", "Shared");
         }
 
+        /// <summary>
+        /// 操作成功
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Success()
         {
             return View();
         }
 
+        /// <summary>
+        /// 权限不足
+        /// </summary>
+        /// <returns></returns>
         public ActionResult NoAccess()
         {
             return View();
         }
 
+        /// <summary>
+        /// 商品图片
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public ActionResult ProductImg(int id, int index)
         {
             var product = DB.Products.Find(id);

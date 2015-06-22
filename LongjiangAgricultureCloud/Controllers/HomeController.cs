@@ -10,7 +10,10 @@ namespace LongjiangAgricultureCloud.Controllers
     [CheckRole(Models.UserRole.大区经理)]
     public class HomeController : BaseController
     {
-        // GET: Home
+        /// <summary>
+        /// 后台首页
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return View();

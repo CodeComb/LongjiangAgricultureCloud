@@ -7,6 +7,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LongjiangAgricultureCloud.Models
 {
+    /// <summary>
+    /// 用户角色
+    /// </summary>
     public enum UserRole
     {
         普通用户,
@@ -23,27 +26,54 @@ namespace LongjiangAgricultureCloud.Models
     {
         public int ID { get; set; }
 
+        /// <summary>
+        /// 用户名/手机号
+        /// </summary>
         [Index(IsUnique = true)]
         [StringLength(32)]
         public string Username { get; set; }
 
+        /// <summary>
+        /// 密码SHA1
+        /// </summary>
         public string Password { get; set; }
 
+        /// <summary>
+        /// 密码提示问题
+        /// </summary>
         public string Question { get; set; }
 
+        /// <summary>
+        /// 密码问题答案
+        /// </summary>
         public string Answer { get; set; }
 
+        /// <summary>
+        /// 真实姓名
+        /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// 地区ID
+        /// </summary>
         [ForeignKey("Area")]
         public int? AreaID { get; set; }
 
         public virtual Area Area { get; set; }
 
+        /// <summary>
+        /// 详细地址
+        /// </summary>
         public string Address { get; set; }
 
+        /// <summary>
+        /// 邮政编码
+        /// </summary>
         public string PostCode { get; set; }
 
+        /// <summary>
+        /// 用户角色
+        /// </summary>
         public UserRole Role { get; set; }
 
         public virtual ICollection<Provider> Providers { get; set; }

@@ -13,7 +13,14 @@ namespace LongjiangAgricultureCloud.Controllers
     [CheckRoleEqual(UserRole.信息审核员)]
     public class LocalController : BaseController
     {
-        // GET: Local
+        /// <summary>
+        /// 本地通信息列表
+        /// </summary>
+        /// <param name="CatalogID"></param>
+        /// <param name="Begin"></param>
+        /// <param name="End"></param>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public ActionResult Index(int? CatalogID, DateTime? Begin, DateTime? End, int p = 0)
         {
             ViewBag.Level1 = (from c in DB.Catalogs
@@ -43,6 +50,11 @@ namespace LongjiangAgricultureCloud.Controllers
             return View(query);
         }
 
+        /// <summary>
+        /// 删除本地通信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Delete(int id)
         {
             var information = DB.Informations.Find(id);
@@ -51,6 +63,11 @@ namespace LongjiangAgricultureCloud.Controllers
             return Content("ok");
         }
 
+        /// <summary>
+        /// 编辑本地通信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Edit(int id)
         {
             ViewBag.Level1 = (from c in DB.Catalogs
@@ -72,6 +89,10 @@ namespace LongjiangAgricultureCloud.Controllers
             return View(information);
         }
 
+        /// <summary>
+        /// 创建本地通信息
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Create()
         {
             ViewBag.Level1 = (from c in DB.Catalogs
@@ -92,6 +113,18 @@ namespace LongjiangAgricultureCloud.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 创建本地通信息
+        /// </summary>
+        /// <param name="Title"></param>
+        /// <param name="Description"></param>
+        /// <param name="CatalogID"></param>
+        /// <param name="Name"></param>
+        /// <param name="Phone"></param>
+        /// <param name="Address"></param>
+        /// <param name="Price"></param>
+        /// <param name="SupplyDemand"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
@@ -118,6 +151,20 @@ namespace LongjiangAgricultureCloud.Controllers
             return RedirectToAction("Success", "Shared");
         }
 
+        /// <summary>
+        /// 编辑本地通信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="Title"></param>
+        /// <param name="Description"></param>
+        /// <param name="CatalogID"></param>
+        /// <param name="Name"></param>
+        /// <param name="Phone"></param>
+        /// <param name="Address"></param>
+        /// <param name="Price"></param>
+        /// <param name="SupplyDemand"></param>
+        /// <param name="Top"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]

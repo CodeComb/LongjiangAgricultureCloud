@@ -12,7 +12,14 @@ namespace LongjiangAgricultureCloud.Controllers
     [CheckRole(UserRole.系统管理员)]
     public class UserController : BaseController
     {
-        // GET: User
+        /// <summary>
+        /// 用户列表
+        /// </summary>
+        /// <param name="Username"></param>
+        /// <param name="Role"></param>
+        /// <param name="Name"></param>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public ActionResult Index(string Username, UserRole? Role, string Name, int p = 0)
         {
             IEnumerable<User> query = DB.Users;
@@ -26,6 +33,11 @@ namespace LongjiangAgricultureCloud.Controllers
             return View(query);
         }
 
+        /// <summary>
+        /// 删除用户
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
@@ -36,12 +48,23 @@ namespace LongjiangAgricultureCloud.Controllers
             return Content("ok");
         }
 
+        /// <summary>
+        /// 编辑用户
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Edit(int id)
         {
             var user = DB.Users.Find(id);
             return View(user);
         }
 
+        /// <summary>
+        /// 编辑用户
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="User"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, User User)
@@ -61,11 +84,21 @@ namespace LongjiangAgricultureCloud.Controllers
             return RedirectToAction("Success", "Shared");
         }
 
+        /// <summary>
+        /// 创建用户
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Create()
         {
             return View();
         }
 
+        /// <summary>
+        /// 创建用户
+        /// </summary>
+        /// <param name="User"></param>
+        /// <param name="Confirm"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(User User, string Confirm)
@@ -78,6 +111,11 @@ namespace LongjiangAgricultureCloud.Controllers
             return RedirectToAction("Success", "Shared");
         }
 
+        /// <summary>
+        /// 地区管理
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Area(int? id)
         {
             IEnumerable<Area> query = DB.Areas;
@@ -92,6 +130,12 @@ namespace LongjiangAgricultureCloud.Controllers
             return View(query.ToList());
         }
 
+        /// <summary>
+        /// 创建地区
+        /// </summary>
+        /// <param name="Title"></param>
+        /// <param name="FatherID"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateArea(string Title, int? FatherID)
@@ -123,6 +167,11 @@ namespace LongjiangAgricultureCloud.Controllers
             return RedirectToAction("Success", "Shared");
         }
 
+        /// <summary>
+        /// 删除地区
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteArea(int id)

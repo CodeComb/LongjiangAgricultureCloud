@@ -9,12 +9,20 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 {
     public class MServiceController : BaseController
     {
-        // GET: Mobile/MService
+        /// <summary>
+        /// 农机服务首页
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// 分类列表
+        /// </summary>
+        /// <param name="Machine"></param>
+        /// <returns></returns>
         public ActionResult Service(bool Machine)
         {
             if (Machine)
@@ -22,7 +30,13 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             else
                 return RedirectToAction("Catalog", "Mobile", new { type = CatalogType.农机服务分类, Service = InformationType.土地找机手 });
         }
-
+        
+        /// <summary>
+        /// 农机服务信息列表
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="Service"></param>
+        /// <returns></returns>
         public ActionResult List(int id, InformationType Service)
         {
             var time = DateTime.Now;
@@ -38,6 +52,11 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return View(informations);
         }
 
+        /// <summary>
+        /// 农机服务信息展示
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Show(int id)
         {
             var information = DB.Informations.Find(id);
@@ -45,11 +64,19 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return View(information);
         }
 
+        /// <summary>
+        /// 维修站
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Station()
         {
             return View();
         }
 
+        /// <summary>
+        /// 获取维修站
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult GetStations()
         {
@@ -66,28 +93,50 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return Json(informations, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// 展示维修站
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult ShowStation(int id)
         {
             var station = DB.Informations.Find(id);
             return View(station);
         }
 
+        /// <summary>
+        /// 展示农手
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult ShowFammer(int id)
         {
             var fammer = DB.Informations.Find(id);
             return View(fammer);
         }
 
+        /// <summary>
+        /// 二手农机列表
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Machine()
         {
             return View();
         }
 
+        /// <summary>
+        /// 附近农手列表
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Fammer()
         {
             return View();
         }
 
+        /// <summary>
+        /// 附近农手
+        /// </summary>
+        /// <returns></returns>
         public ActionResult FammerRaw()
         {
             var fammers = (from i in DB.Informations
@@ -103,6 +152,11 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return Json(fammers, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// 二手农机
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public ActionResult MachineRaw(int p = 0)
         {
             var informations = (from i in DB.Informations
@@ -113,6 +167,11 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return View(informations);
         }
 
+        /// <summary>
+        /// 展示二手农机
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult ShowMachine(int id)
         {
             var information = DB.Informations.Find(id);

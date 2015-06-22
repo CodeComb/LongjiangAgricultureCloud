@@ -14,7 +14,10 @@ namespace LongjiangAgricultureCloud.Controllers
     [CheckRole(Models.UserRole.系统管理员)]
     public class GeneralController : BaseController
     {
-        // GET: General
+        /// <summary>
+        /// 基本信息设置
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             var config = new vConfig
@@ -29,6 +32,11 @@ namespace LongjiangAgricultureCloud.Controllers
             return View(config);
         }
 
+        /// <summary>
+        /// 基本信息设置
+        /// </summary>
+        /// <param name="Config"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Base(vConfig Config)
@@ -42,6 +50,12 @@ namespace LongjiangAgricultureCloud.Controllers
             return RedirectToAction("Success", "Shared", null);
         }
 
+        /// <summary>
+        /// 支付信息设置
+        /// </summary>
+        /// <param name="AlipayAppKey"></param>
+        /// <param name="WeixinPayAppKey"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Pay(string AlipayAppKey, string WeixinPayAppKey)
@@ -51,6 +65,11 @@ namespace LongjiangAgricultureCloud.Controllers
             return RedirectToAction("Success", "Shared", null);
         }
         
+        /// <summary>
+        /// 分类设置
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Catalog(int? id)
         {
             if (id == null)
@@ -69,6 +88,13 @@ namespace LongjiangAgricultureCloud.Controllers
             }
         }
         
+        /// <summary>
+        /// 创建分类
+        /// </summary>
+        /// <param name="FatherID"></param>
+        /// <param name="Title"></param>
+        /// <param name="Type"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateCatalog(int? FatherID, string Title, CatalogType? Type)
@@ -98,6 +124,11 @@ namespace LongjiangAgricultureCloud.Controllers
             return RedirectToAction("Success", "Shared");
         }
         
+        /// <summary>
+        /// 删除分类
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteCatalog(int id)
@@ -108,6 +139,15 @@ namespace LongjiangAgricultureCloud.Controllers
             return Content("ok");
         }
         
+        /// <summary>
+        /// 评论管理
+        /// </summary>
+        /// <param name="Type"></param>
+        /// <param name="Begin"></param>
+        /// <param name="End"></param>
+        /// <param name="Verify"></param>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public ActionResult Comment(CommentType? Type, DateTime? Begin, DateTime? End, bool? Verify, int p = 1)
         {
             IEnumerable<Comment> query = DB.Comments;
@@ -123,6 +163,11 @@ namespace LongjiangAgricultureCloud.Controllers
             return View(query);
         }
         
+        /// <summary>
+        /// 删除评论
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteComment(int id)
@@ -133,12 +178,21 @@ namespace LongjiangAgricultureCloud.Controllers
             return Content("ok");
         }
 
+        /// <summary>
+        /// 服务条款管理
+        /// </summary>
+        /// <returns></returns>
         public ActionResult License()
         {
             ViewBag.Content = System.IO.File.ReadAllText(Server.MapPath("~/Files/License.html"));
             return View();
         }
 
+        /// <summary>
+        /// 服务条款管理
+        /// </summary>
+        /// <param name="Content"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
@@ -148,6 +202,11 @@ namespace LongjiangAgricultureCloud.Controllers
             return RedirectToAction("Success", "Shared");
         }
 
+        /// <summary>
+        /// 审核评论
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult VerifyComment(int id)
         {

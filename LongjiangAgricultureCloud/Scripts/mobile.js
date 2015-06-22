@@ -152,7 +152,7 @@ function Distance(dis)
     if (dis > 1000)
         return (dis / 1000).toFixed(1) + "公里";
     else
-        return dis + '米';
+        return dis.toFixed(1) + '米';
 }
 
 function getDistance(p1Lat, p1Lng, p2Lat, p2Lng) {

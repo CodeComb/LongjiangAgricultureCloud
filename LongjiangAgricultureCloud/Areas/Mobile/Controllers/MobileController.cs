@@ -11,7 +11,12 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 {
     public class MobileController : BaseController
     {
-        // GET: Mobile/Mobile
+        /// <summary>
+        /// 提示信息
+        /// </summary>
+        /// <param name="sid"></param>
+        /// <param name="msg"></param>
+        /// <returns></returns>
         public ActionResult Message(string sid, string msg)
         {
             if (Session["sid"].ToString() != sid)
@@ -20,6 +25,10 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 手机端首页
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             ViewBag.Informations = (from i in DB.Informations
@@ -30,6 +39,10 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Login()
         {
             if (User.Identity.IsAuthenticated)
@@ -37,6 +50,13 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="Username"></param>
+        /// <param name="Password"></param>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(string Username, string Password, string returnUrl)
@@ -61,11 +81,21 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             }
         }
 
+        /// <summary>
+        /// 注册
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Register()
         {
             return View();
         }
 
+        /// <summary>
+        /// 注册
+        /// </summary>
+        /// <param name="User"></param>
+        /// <param name="Confirm"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Register(User User, string Confirm)
@@ -81,12 +111,23 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return Msg("注册成功！您可以使用该账号进行登录了！");
         }
 
+        /// <summary>
+        /// 服务条款
+        /// </summary>
+        /// <returns></returns>
         public ActionResult License()
         {
             ViewBag.Content = System.IO.File.ReadAllText(Server.MapPath("~/Files/License.html"));
             return View();
         }
 
+        /// <summary>
+        /// 分类列表
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="id"></param>
+        /// <param name="Service"></param>
+        /// <returns></returns>
         public ActionResult Catalog(string type, int? id, InformationType? Service)
         {
             ViewBag.ShopNav = false;
@@ -127,12 +168,20 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             }
         }
 
+        /// <summary>
+        /// 忘记密码
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Forgot()
         {
             return View();
         }
 
-
+        /// <summary>
+        /// 忘记密码
+        /// </summary>
+        /// <param name="Username"></param>
+        /// <returns></returns>
         public ActionResult Forgot2(string Username)
         {
             var user = DB.Users.Where(x => x.Username == Username).SingleOrDefault();
@@ -140,6 +189,14 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return View(user);
         }
 
+        /// <summary>
+        /// 忘记密码
+        /// </summary>
+        /// <param name="Username"></param>
+        /// <param name="Answer"></param>
+        /// <param name="Password"></param>
+        /// <param name="Confirm"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Forgot3(string Username, string Answer, string Password, string Confirm)
@@ -155,6 +212,10 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return Msg("密码已经成功重置！");
         }
 
+        /// <summary>
+        /// 注销登录
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Logout()

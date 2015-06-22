@@ -176,6 +176,7 @@
     <Content Include="Areas\Mobile\Views\Mobile\License.cshtml" />
     <Content Include="Areas\Mobile\Views\Mobile\Forgot.cshtml" />
     <Content Include="Areas\Mobile\Views\Mobile\Forgot2.cshtml" />
+    <Content Include="Areas\Mobile\Views\MService\ShowFammer.cshtml" />
     <None Include="Properties\PublishProfiles\ChinaUnicom.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />

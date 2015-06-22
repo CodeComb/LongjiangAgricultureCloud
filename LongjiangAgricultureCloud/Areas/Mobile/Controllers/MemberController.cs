@@ -13,17 +13,30 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
     [MobileAuthorize]
     public class MemberController : BaseController
     {
-        // GET: Mobile/Member
+        /// <summary>
+        /// 会员中心首页
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return View(CurrentUser);
         }
 
+        /// <summary>
+        /// 个人资料设定
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Config()
         {
             return View(CurrentUser);
         }
 
+        /// <summary>
+        /// 个人资料设定
+        /// </summary>
+        /// <param name="User"></param>
+        /// <param name="Confirm"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Config(User User, string Confirm)
@@ -41,16 +54,35 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return Msg("个人资料保存成功！");
         }
 
+        /// <summary>
+        /// 商城加盟申请
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Join()
         {
             return View(CurrentUser.Providers);
         }
 
+        /// <summary>
+        /// 商城加盟申请
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Join2()
         {
             return View();
         }
 
+        /// <summary>
+        /// 商城加盟申请
+        /// </summary>
+        /// <param name="Title"></param>
+        /// <param name="Description"></param>
+        /// <param name="Address"></param>
+        /// <param name="Name"></param>
+        /// <param name="Phone"></param>
+        /// <param name="Tel"></param>
+        /// <param name="Email"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Join2(string Title, string Description, string Address, string Name, string Phone, string Tel, string Email)
@@ -138,11 +170,20 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return Msg("申请提交成功！请耐心等待管理员审核，在此期间请确保登记的联系方式畅通，切勿重复提交申请。");
         }
 
+        /// <summary>
+        /// 我的订单
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Order()
         {
             return View();
         }
 
+        /// <summary>
+        /// 我的订单
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public ActionResult OrderRaw(int p = 0)
         {
             var orders = (from o in DB.Orders
@@ -152,6 +193,11 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return View(orders);
         }
 
+        /// <summary>
+        /// 取消订单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Cancel(Guid id)
@@ -164,6 +210,11 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return Msg("订单取消成功！");
         }
 
+        /// <summary>
+        /// 确认收货
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Verify(Guid id)
@@ -176,6 +227,11 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return Msg("确认收货成功！");
         }
 
+        /// <summary>
+        /// 退款申请
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult GiveBack(Guid id)
         {
             var order = DB.Orders.Find(id);
@@ -184,6 +240,12 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return View(order);
         }
 
+        /// <summary>
+        /// 退款申请
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="Reason"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GiveBack(Guid id, string Reason)
@@ -197,6 +259,11 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return Msg("退款申请已提交，请耐心等待，客服将与您联系！");
         }
 
+        /// <summary>
+        /// 商品评价
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Comment(Guid id)
         {
             var order = DB.Orders.Find(id);
@@ -205,6 +272,12 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return View(order);
         }
 
+        /// <summary>
+        /// 商品评价
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="Dif"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Comment(Guid id, bool? Dif)
@@ -230,11 +303,20 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return Msg("评价成功！");
         }
 
+        /// <summary>
+        /// 我的本地通
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Local()
         {
             return View();
         }
 
+        /// <summary>
+        /// 我的本地通
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public ActionResult LocalRaw(int p = 0)
         {
             var informations = (from i in DB.Informations
@@ -245,6 +327,10 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return View(informations);
         }
 
+        /// <summary>
+        /// 发布本地通信息
+        /// </summary>
+        /// <returns></returns>
         public ActionResult CreateLocal()
         {
             ViewBag.Level1 = (from c in DB.Catalogs
@@ -265,6 +351,11 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 编辑本地通信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult EditLocal(int id)
         {
             ViewBag.Level1 = (from c in DB.Catalogs
@@ -288,6 +379,11 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return View(information);
         }
 
+        /// <summary>
+        /// 发布本地通信息
+        /// </summary>
+        /// <param name="Information"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateLocal(Information Information)
@@ -304,6 +400,12 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return Msg("本地通信息已提交");
         }
 
+        /// <summary>
+        /// 编辑本地通信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="Information"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditLocal(int id, Information Information)
@@ -326,11 +428,21 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return Msg("本地通信息编辑成功");
         }
 
+        /// <summary>
+        /// 我的农机服务信息
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Service()
         {
             return View();
         }
 
+        /// <summary>
+        /// 我的农机服务信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public ActionResult ServiceRaw(int id, int p = 0)
         {
             var informations = (from i in DB.Informations
@@ -343,6 +455,11 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return View(informations);
         }
 
+        /// <summary>
+        /// 删除农机服务信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteService(int id)
@@ -355,6 +472,10 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return Msg("农机信息删除成功！");
         }
 
+        /// <summary>
+        /// 发布农机服务信息
+        /// </summary>
+        /// <returns></returns>
         public ActionResult CreateService()
         {
             ViewBag.Level1 = (from c in DB.Catalogs
@@ -380,6 +501,19 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 发布农机服务信息
+        /// </summary>
+        /// <param name="Title"></param>
+        /// <param name="Type"></param>
+        /// <param name="CatalogID"></param>
+        /// <param name="Lat"></param>
+        /// <param name="Lon"></param>
+        /// <param name="Name"></param>
+        /// <param name="Address"></param>
+        /// <param name="Description"></param>
+        /// <param name="Phone"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateService(string Title, InformationType Type, int? CatalogID, decimal? Lat, decimal? Lon, string Name, string Address, string Description, string Phone)
@@ -417,6 +551,11 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return Msg("农机信息发布成功");
         }
 
+        /// <summary>
+        /// 编辑农机服务信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult EditService(int id)
         {
             var service = DB.Informations.Find(id);
@@ -425,6 +564,17 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return View(service);
         }
 
+        /// <summary>
+        /// 编辑农机服务信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="Title"></param>
+        /// <param name="Price"></param>
+        /// <param name="Name"></param>
+        /// <param name="Address"></param>
+        /// <param name="Description"></param>
+        /// <param name="Phone"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditService(int id, string Title, string Price, string Name, string Address, string Description, string Phone)

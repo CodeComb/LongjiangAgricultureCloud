@@ -10,12 +10,20 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 {
     public class MallController : BaseController
     {
-        // GET: Mobile/Mall
+        /// <summary>
+        /// 商品分类
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return RedirectToAction("Catalog", "Mobile", new { type = CatalogType.商品分类 });
         }
 
+        /// <summary>
+        /// 商品列表
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult List(int id)
         {
             var catalog = DB.Catalogs.Find(id);
@@ -23,6 +31,15 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 商品列表
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="Title"></param>
+        /// <param name="Key"></param>
+        /// <param name="Desc"></param>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public ActionResult ListRaw(int id, string Title, string Key, bool Desc = false, int p = 0)
         {
             IEnumerable<Product> products = DB.Products.Where(x => x.CatalogID == id && x.StoreCount > 0);
@@ -47,12 +64,23 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return View(products);
         }
 
+        /// <summary>
+        /// 商品展示
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Show(int id)
         {
             var product = DB.Products.Find(id);
             return View(product);
         }
 
+        /// <summary>
+        /// 购物车
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="Count"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [MobileAuthorize]
@@ -75,6 +103,10 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return Msg("该商品已经成功加入到购物车！");
         }
 
+        /// <summary>
+        /// 购物车
+        /// </summary>
+        /// <returns></returns>
         [MobileAuthorize]
         public ActionResult Cart()
         {
@@ -93,6 +125,11 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return View(orders);
         }
 
+        /// <summary>
+        /// 移除购物车
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [MobileAuthorize]
@@ -106,6 +143,11 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return RedirectToAction("Cart", "Mall");
         }
 
+        /// <summary>
+        /// 支付
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [MobileAuthorize]
         public ActionResult Pay(Guid id)
         {
@@ -124,6 +166,11 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 结算
+        /// </summary>
+        /// <param name="Order"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [MobileAuthorize]
@@ -154,12 +201,23 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return RedirectToAction("Pay", "Mall", new { id = Order.ID });
         }
 
+        /// <summary>
+        /// 商品评论
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Comment(int id)
         {
             var product = DB.Products.Find(id);
             return View(product);
         }
 
+        /// <summary>
+        /// 商品评论
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public ActionResult CommentRaw(int id, int p = 0)
         {
             var comments = (from c in DB.Comments
