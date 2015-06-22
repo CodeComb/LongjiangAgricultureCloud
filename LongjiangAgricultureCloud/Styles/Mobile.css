@@ -348,3 +348,7 @@ a {
     color: #555;
     font-size: 0.7em;
 }
+
+.nav-block {
+    display: block;
+}
