@@ -607,6 +607,7 @@
     <Content Include="Views\Shared\NoAccess.cshtml" />
     <Content Include="Views\Shared\Message.cshtml" />
     <Content Include="Views\General\License.cshtml" />
+    <Content Include="Views\Local\Verify.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -616,6 +617,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Files\Video\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

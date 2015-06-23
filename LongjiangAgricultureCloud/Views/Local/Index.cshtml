@@ -46,7 +46,11 @@
             <th>发布者</th>
             <th>分类</th>
             <th>供求</th>
-            <th>时间</th>
+            <th>时间</th>            
+             @if (ViewBag.VerifyService)
+            {
+                <th>审核</th>
+            }
             <th>操作</th>
         </tr>
     </thead>
@@ -67,7 +71,11 @@
                 </td>
                 <td>@i.SupplyDemand</td>
                 <td>@i.Time.ToString("yyyy-MM-dd HH:mm")</td>
-                <td>
+                <td>                    
+                    @if (ViewBag.VerifyLocalTong)
+                    {
+                        <a href="/Local/Verify/@i.ID" target="_blank">审核</a>
+                    }
                     <a href="/Local/Edit/@i.ID">编辑</a>
                     <a href="javascript: deleteDialog('/Local/Delete/@i.ID', 'information-@i.ID')">删除</a>
                 </td>

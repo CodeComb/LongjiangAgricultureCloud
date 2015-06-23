@@ -174,7 +174,7 @@ a.dark:focus, a.dark:hover {
     height: calc(100% - 60px);
     overflow: auto;
     position: absolute;
-    left: 320px;
+    *left: 320px;
     width: calc(100% - 320px);
     *width: 900px;
     behavior: url(/Styles/PIE.htc);

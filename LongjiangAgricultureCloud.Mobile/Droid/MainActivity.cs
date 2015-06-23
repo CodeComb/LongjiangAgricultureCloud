@@ -10,7 +10,7 @@ using Android.OS;
 
 namespace LongjiangAgricultureCloud.Mobile.Droid
 {
-	[Activity (Label = "龙江云农业", MainLauncher = true, Icon = "@drawable/icon")]
+	[Activity (Label = "龙江云农业", MainLauncher = true, Icon = "@drawable/icon", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
 	public class MainActivity : Activity
 	{
 		WebView WebView;

@@ -183,5 +183,33 @@ namespace LongjiangAgricultureCloud.Controllers
             DB.SaveChanges();
             return RedirectToAction("Success", "Shared");
         }
+
+        /// <summary>
+        /// 审核本地通信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Verify(int id)
+        {
+            var information = DB.Informations.Find(id);
+            return View(information);
+        }
+
+        /// <summary>
+        /// 审核本地通信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="Verify"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult Verify(int id, bool Verify = true)
+        {
+            var information = DB.Informations.Find(id);
+            information.Verify = true;
+            DB.SaveChanges();
+            return RedirectToAction("Success", "Shared");
+        }
     }
 }

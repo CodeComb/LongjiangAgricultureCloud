@@ -64,6 +64,12 @@
             <td>@Html.TextBoxFor(x => x.Address, new { @class = "textbox w-3" })</td>
         </tr>
         <tr>
+            <td class="row-title">视频（可选）</td>
+            <td>
+                <input type="file" name="Video" />
+            </td>
+        </tr>
+        <tr>
             <td class="row-title">置顶</td>
             <td>@Html.CheckBoxFor(x => x.Top)</td>
         </tr>

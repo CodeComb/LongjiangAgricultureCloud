@@ -22,10 +22,7 @@ namespace LongjiangAgricultureCloud.Mobile.Droid
 
 		public override void OnReceivedError (WebView view, ClientError errorCode, string description, string failingUrl)
 		{
-			if (view.CanGoBack ())
-				view.GoBack ();
-			else
-				view.LoadUrl ("file:///android_asset/nonetwork.html");
+			view.LoadUrl ("file:///android_asset/nonetwork.html");
 		}
 
 		public override bool ShouldOverrideUrlLoading (WebView view, string url)
