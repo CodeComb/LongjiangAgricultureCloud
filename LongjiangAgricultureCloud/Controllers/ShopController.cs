@@ -29,7 +29,7 @@ namespace LongjiangAgricultureCloud.Controllers
         public ActionResult Index(string Title, string ProductCode, string Provider, int? Store, int? StoreGte, int? StoreLte, int p = 0)
         {
             ViewBag.Stores = DB.Stores.ToList();
-            IEnumerable<Product> query = DB.Products;
+            IEnumerable<Product> query = DB.Products.Where(x => !x.Delete);
             if (!string.IsNullOrEmpty(Title))
                 query = query.Where(x => x.Title.Contains(Title) || Title.Contains(x.Title));
             if (!string.IsNullOrEmpty(ProductCode))
@@ -56,14 +56,17 @@ namespace LongjiangAgricultureCloud.Controllers
             ViewBag.Providers = DB.Providers.Where(x => x.Status == ProviderStatus.审核通过).ToList();
             ViewBag.Level1 = (from c in DB.Catalogs
                               where c.Level == 0
+                              && !c.Delete
                               && c.Type == CatalogType.商品分类
                               select c).ToList();
             ViewBag.Level2 = (from c in DB.Catalogs
                               where c.Level == 1
+                              && !c.Delete
                               && c.Type == CatalogType.商品分类
                               select c).ToList();
             ViewBag.Level3 = (from c in DB.Catalogs
                               where c.Level == 2
+                              && !c.Delete
                               && c.Type == CatalogType.商品分类
                               select c).ToList();
             return View();
@@ -214,8 +217,10 @@ namespace LongjiangAgricultureCloud.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult EditProduct(int id, string Title, int CatalogID, string Description, string ProductCode, string Standard, string Unit, float Price, int StoreID, int StoreCount, int? ProviderID)
+        public ActionResult EditProduct(int id, string Title, int? CatalogID, string Description, string ProductCode, string Standard, string Unit, float Price, int StoreID, int StoreCount, int? ProviderID)
         {
+            if (CatalogID == null)
+                return Msg("请选择一个商品分类");
             var Product = DB.Products.Find(id);
             Product.Title = Title;
             Product.ProductCode = ProductCode;
@@ -226,7 +231,7 @@ namespace LongjiangAgricultureCloud.Controllers
             Product.StoreCount = StoreCount;
             Product.ProviderID = ProviderID;
             Product.Description = Description;
-            Product.CatalogID = CatalogID;
+            Product.CatalogID = CatalogID.Value;
             #region 处理5张图片
             var Picture1 = Request.Files["Picture1"];
             if (Picture1 != null)
@@ -285,9 +290,11 @@ namespace LongjiangAgricultureCloud.Controllers
         /// <param name="Name"></param>
         /// <param name="p"></param>
         /// <returns></returns>
-        public ActionResult Provider(string Title, string Phone, string Name, int p = 1)
+        public ActionResult Provider(string Title, string Phone, string Name, ProviderStatus? Status ,int p = 1)
         {
             IEnumerable<Provider> query = DB.Providers.Where(x => !x.Delete);
+            if (!Status.HasValue)
+                query = query.Where(x => x.Status == Status.Value);
             if (!string.IsNullOrEmpty(Title))
                 query = query.Where(x => x.Title.Contains(Title) || Title.Contains(x.Title));
             if (!string.IsNullOrEmpty(Phone))
@@ -704,7 +711,7 @@ namespace LongjiangAgricultureCloud.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult ShowOrder(int id)
+        public ActionResult ShowOrder(Guid id)
         {
             var order = DB.Orders.Find(id);
             return View(order);
@@ -715,7 +722,7 @@ namespace LongjiangAgricultureCloud.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult EditOrder(int id)
+        public ActionResult EditOrder(Guid id)
         {
             var order = DB.Orders.Find(id);
             return View(order);
@@ -729,7 +736,7 @@ namespace LongjiangAgricultureCloud.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditOrder(int id, OrderStatus Status)
+        public ActionResult EditOrder(Guid id, OrderStatus Status)
         {
             var order = DB.Orders.Find(id);
             if (order.Status == OrderStatus.已取消 && Status != OrderStatus.已取消)

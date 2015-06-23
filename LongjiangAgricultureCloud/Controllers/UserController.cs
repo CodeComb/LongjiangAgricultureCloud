@@ -103,6 +103,8 @@ namespace LongjiangAgricultureCloud.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(User User, string Confirm)
         {
+            if (DB.Users.Any(x => x.Username == User.Username))
+                return Msg("已经存在用户名(手机号)为\"" + User.Username + "\"的用户，请修改后重试！");
             if (User.Password != Confirm)
                 return Msg("两次密码输入不一致，请返回重新尝试！");
             User.Password = Security.SHA1(Confirm);

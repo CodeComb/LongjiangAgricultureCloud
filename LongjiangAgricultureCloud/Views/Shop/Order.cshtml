@@ -39,7 +39,7 @@
         {
             <tr>
                 <td>@o.ID</td>
-                <td>@o.User.Name (o.User.Username)</td>
+                <td>@o.User.Name @(o.User.Username)</td>
                 <td>@o.Time</td>
                 <td>@o.Status</td>
                 <td>￥@o.OrderDetails.Sum(x => x.Price).ToString("0.00")</td>
