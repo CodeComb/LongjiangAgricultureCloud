@@ -116,6 +116,8 @@ h6 {
     height: calc(100% - 40px);
     position: absolute;
     overflow-y: auto;
+    left: 0;
+    behavior: url(/Styles/PIE.htc);
 }
 
 .sidebar-subtitle {
@@ -172,7 +174,10 @@ a.dark:focus, a.dark:hover {
     height: calc(100% - 60px);
     overflow: auto;
     position: absolute;
+    left: 320px;
     width: calc(100% - 320px);
+    *width: 900px;
+    behavior: url(/Styles/PIE.htc);
 }
 
 .detail-table {
@@ -493,6 +498,7 @@ select {
     position: absolute;
     opacity: 0;
     transition: opacity 0.2s linear;
+    behavior: url(/Styles/PIE.htc);
 }
 
     .message-bg.active {
@@ -507,6 +513,7 @@ select {
     opacity: 0;
     transform: scale(1.2);
     transition: opacity 0.2s linear, transform 0.2s linear;
+    behavior: url(/Styles/PIE.htc);
 }
 
 .message-outer {

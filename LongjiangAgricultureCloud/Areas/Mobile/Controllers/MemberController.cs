@@ -440,10 +440,9 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
         /// <summary>
         /// 我的农机服务信息
         /// </summary>
-        /// <param name="id"></param>
         /// <param name="p"></param>
         /// <returns></returns>
-        public ActionResult ServiceRaw(int id, int p = 0)
+        public ActionResult ServiceRaw(int p = 0)
         {
             var informations = (from i in DB.Informations
                                 where (i.Type == InformationType.二手农机
@@ -451,6 +450,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                                 || i.Type == InformationType.土地找机手
                                 || i.Type == InformationType.维修站)
                                 && i.UserID == CurrentUser.ID
+                                orderby i.Time descending
                                 select i).Skip(p * 20).Take(20).ToList();
             return View(informations);
         }

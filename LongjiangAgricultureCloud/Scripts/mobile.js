@@ -19,8 +19,14 @@ function LoadMyServices() {
         if (lock) return;
         lock = true;
         $.get('/Mobile/Member/ServiceRaw', { p: p }, function (data) {
-            if (data.length < 5) {
+            if (data.length < 5 && p == 0) {
                 $('#lstMyServices').html('<div class="no-more">没有更多信息了！</div>');
+                return;
+            }
+            else if (data.length < 5 && p != 0)
+            {
+                $('#lstMyServices').append('<div class="no-more">没有更多信息了！</div>');
+                return;
             }
             $('#lstMyServices').append(data);
             p++;
@@ -34,8 +40,13 @@ function LoadInformations() {
         if (lock) return;
         lock = true;
         $.get('/Mobile/MInformation/ListRaw', { p: p, id: id }, function (data) {
-            if (data.length < 5) {
+            if (data.length < 5 && p == 0) {
                 $('#lstInformations').html('<div class="no-more">没有更多信息了！</div>');
+                return;
+            }
+            else if (data.length < 5 && p != 0) {
+                $('#lstInformations').append('<div class="no-more">没有更多信息了！</div>');
+                return;
             }
             $('#lstInformations').append(data);
             p++;
@@ -49,8 +60,13 @@ function LoadMachines() {
         if (lock) return;
         lock = true;
         $.get('/Mobile/MService/MachineRaw', { p: p }, function (data) {
-            if (data.length < 5) {
+            if (data.length < 5 && p == 0) {
                 $('#lstMachines').html('<div class="no-more">没有更多信息了！</div>');
+                return;
+            }
+            else if (data.length < 5 && p != 0) {
+                $('#lstMachines').append('<div class="no-more">没有更多信息了！</div>');
+                return;
             }
             $('#lstMachines').append(data);
             p++;
@@ -64,8 +80,13 @@ function LoadProductComments() {
         if (lock) return;
         lock = true;
         $.get('/Mobile/Mall/CommentRaw', { p: p, id: id }, function (data) {
-            if (data.length < 5) {
+            if (data.length < 5 && p == 0) {
                 $('#lstProductComments').html('<div class="no-more">没有更多信息了！</div>');
+                return;
+            }
+            else if (data.length < 5 && p != 0) {
+                $('#lstProductComments').append('<div class="no-more">没有更多信息了！</div>');
+                return;
             }
             $('#lstProductComments').append(data);
             p++;
@@ -79,8 +100,13 @@ function LoadLocals() {
         if (lock) return;
         lock = true;
         $.get('/Mobile/MLocal/ListRaw', { p: p, id: id }, function (data) {
-            if (data.length < 5) {
+            if (data.length < 5 && p == 0) {
                 $('#lstLocals').html('<div class="no-more">没有更多信息了！</div>');
+                return;
+            }
+            else if (data.length < 5 && p != 0) {
+                $('#lstLocals').append('<div class="no-more">没有更多信息了！</div>');
+                return;
             }
             $('#lstLocals').append(data);
             p++;
@@ -94,8 +120,13 @@ function LoadMyLocals() {
         if (lock) return;
         lock = true;
         $.get('/Mobile/Member/LocalRaw', { p: p }, function (data) {
-            if (data.length < 5) {
+            if (data.length < 5 && p == 0) {
                 $('#lstMyLocals').html('<div class="no-more">没有更多信息了！</div>');
+                return;
+            }
+            else if (data.length < 5 && p != 0) {
+                $('#lstMyLocals').append('<div class="no-more">没有更多信息了！</div>');
+                return;
             }
             $('#lstMyLocals').append(data);
             p++;
@@ -109,8 +140,13 @@ function LoadOrders() {
         if (lock) return;
         lock = true;
         $.get('/Mobile/Member/OrderRaw', { p: p }, function (data) {
-            if (data.length < 5) {
-                $('#lstOrders').html('<div class="no-more">没有更多订单了！</div>');
+            if (data.length < 5 && p == 0) {
+                $('#lstOrders').html('<div class="no-more">没有更多信息了！</div>');
+                return;
+            }
+            else if (data.length < 5 && p != 0) {
+                $('#lstOrders').append('<div class="no-more">没有更多信息了！</div>');
+                return;
             }
             $('#lstOrders').append(data);
             p++;
@@ -124,8 +160,13 @@ function LoadProducts() {
         if (lock) return;
         lock = true;
         $.get('/Mobile/Mall/ListRaw', { p: p, id: id, Key: Key, Desc: Desc, Title: $('#txtProductTitle').val() }, function (data) {
-            if (data.length < 5) {
-                $('#lstProducts').html('<div class="no-more">没有更多商品了！</div>');
+            if (data.length < 5 && p == 0) {
+                $('#lstProducts').html('<div class="no-more">没有更多信息了！</div>');
+                return;
+            }
+            else if (data.length < 5 && p != 0) {
+                $('#lstProducts').append('<div class="no-more">没有更多信息了！</div>');
+                return;
             }
             $('#lstProducts').append(data);
             p++;

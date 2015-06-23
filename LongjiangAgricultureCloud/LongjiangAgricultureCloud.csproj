@@ -368,16 +368,21 @@
     <Content Include="Scripts\ckeditor\styles.js" />
     <Content Include="Scripts\codecomb.cascade-1.0.3.js" />
     <Content Include="Scripts\codecomb.cascade-1.0.3.min.js" />
+    <Content Include="Scripts\jplaceholder.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery.datetimepicker.js" />
+    <Content Include="Scripts\json2.js" />
     <Content Include="Scripts\mobile.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\pie.js" />
+    <Content Include="Scripts\png.js" />
     <Content Include="Scripts\site.js" />
     <Content Include="Styles\datetimepicker.css" />
     <Content Include="Styles\duoshuo.css" />
     <Content Include="Styles\icons.css" />
     <Content Include="Styles\Mobile.css" />
+    <Content Include="Styles\PIE.htc" />
     <Content Include="Styles\Site.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
