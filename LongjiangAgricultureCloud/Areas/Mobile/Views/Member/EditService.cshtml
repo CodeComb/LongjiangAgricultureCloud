@@ -21,7 +21,7 @@
             <div class="field">描述</div>
             @Html.TextBoxFor(x => x.Description, new { @class = "textbox form" })
         </div>
-        @if (Model.Type == InformationType.二手农机)
+        if (Model.Type == InformationType.二手农机)
         {
             <div class="textbox-outer">
                 <div class="field">价格</div>
