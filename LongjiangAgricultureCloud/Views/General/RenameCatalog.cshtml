@@ -1,0 +1,22 @@
+﻿@model Catalog
+@{
+    ViewBag.Title = Model.Title + " - 重命名分类";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("RenameCatalog", "General", new { id = Model.ID }, FormMethod.Post, null))
+{
+    @Html.AntiForgeryToken()
+    <table class="detail-table">
+        <tr>
+            <td class="row-title">原名称</td>
+            <td>@Model.Title</td>
+        </tr>
+        <tr>
+            <td class="row-title">新名称</td>
+            <td>@Html.TextBox("Title", "", new { @class = "textbox w-3" })</td>
+        </tr>
+    </table>
+    <p><input type="submit" class="btn inverse" value="创建" /> <a href="javascript: history.back();" class="btn">返回</a></p>
+}

@@ -64,7 +64,7 @@ namespace LongjiangAgricultureCloud.Controllers
             ConfigurationManager.AppSettings["WeixinPayAppKey"] = WeixinPayAppKey;
             return RedirectToAction("Success", "Shared", null);
         }
-        
+
         /// <summary>
         /// 分类设置
         /// </summary>
@@ -87,7 +87,7 @@ namespace LongjiangAgricultureCloud.Controllers
                 return View(DB.Catalogs.Where(x => x.FatherID == id.Value && !x.Delete).OrderBy(x => x.Type).ToList());
             }
         }
-        
+
         /// <summary>
         /// 创建分类
         /// </summary>
@@ -123,7 +123,7 @@ namespace LongjiangAgricultureCloud.Controllers
             DB.SaveChanges();
             return RedirectToAction("Success", "Shared");
         }
-        
+
         /// <summary>
         /// 删除分类
         /// </summary>
@@ -138,7 +138,7 @@ namespace LongjiangAgricultureCloud.Controllers
             DB.SaveChanges();
             return Content("ok");
         }
-        
+
         /// <summary>
         /// 评论管理
         /// </summary>
@@ -162,7 +162,7 @@ namespace LongjiangAgricultureCloud.Controllers
             ViewBag.PageInfo = PagerHelper.Do(ref query, 50, p);
             return View(query);
         }
-        
+
         /// <summary>
         /// 删除评论
         /// </summary>
@@ -214,6 +214,22 @@ namespace LongjiangAgricultureCloud.Controllers
             comment.Verify = true;
             DB.SaveChanges();
             return Content("ok");
+        }
+
+        public ActionResult RenameCatalog(int id)
+        {
+            var catalog = DB.Catalogs.Find(id);
+            return View(catalog);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RenameCatalog(int id, string Title)
+        {
+            var catalog = DB.Catalogs.Find(id);
+            catalog.Title = Title;
+            DB.SaveChanges();
+            return RedirectToAction("Success", "Shared");
         }
     }
 }

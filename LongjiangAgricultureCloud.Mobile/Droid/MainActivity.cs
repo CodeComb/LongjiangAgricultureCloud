@@ -41,8 +41,8 @@ namespace LongjiangAgricultureCloud.Mobile.Droid
 				mUploadMessage = uploadMsg;
 				var i = new Intent (Intent.ActionGetContent);
 				i.AddCategory (Intent.CategoryOpenable);
-				i.SetType ("image/*");
-				StartActivityForResult (Intent.CreateChooser (i, "选择图片"), FILECHOOSER_RESULTCODE);	
+				i.SetType ("video/*;image/*");
+				StartActivityForResult (Intent.CreateChooser (i, "文件选择"), FILECHOOSER_RESULTCODE);	
 			});
 			WebView.Settings.JavaScriptEnabled = true;
 			WebView.Settings.CacheMode = CacheModes.Normal;
@@ -52,6 +52,7 @@ namespace LongjiangAgricultureCloud.Mobile.Droid
 			WebView.Settings.AllowFileAccessFromFileURLs = true;
 			WebView.Settings.JavaScriptCanOpenWindowsAutomatically = true;
 			WebView.Settings.LoadWithOverviewMode = true;
+
 			WebView.SetWebViewClient (wvc);
 			WebView.SetWebChromeClient (chrome);
 			WebView.LoadUrl ("http://221.208.208.32:7532/Mobile");

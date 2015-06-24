@@ -5,7 +5,7 @@
 }
 @Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
 <div class="wrap-cont">
-    @using (Html.BeginForm("CreateLocal", "Member", FormMethod.Post))
+    @using (Html.BeginForm("CreateLocal", "Member", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <div class="textbox-outer">
@@ -17,8 +17,12 @@
             @Html.TextBoxFor(x => x.Description, new { @class = "textbox form" })
         </div>
         <div class="textbox-outer">
+            <div class="field">价格</div>
+            @Html.TextBoxFor(x => x.Price, new { @class = "textbox form" })
+        </div>
+        <div class="textbox-outer">
             <div class="field">供求类型</div>
-            @Html.EnumDropDownListFor(x => x.SupplyDemand)
+            @Html.EnumDropDownListFor(x => x.SupplyDemand, new { @class="form" })
         </div>
         <div class="textbox-outer">
             <div class="field">分类1</div>
@@ -94,6 +98,10 @@
                 }
             }
             @Html.TextBoxFor(x => x.Address, new { @class = "textbox form", value = addr })
+        </div>
+        <div class="textbox-outer">
+            <div class="field">视频上传（可选）</div>
+            <input type="file" name="Video" class="form" />
         </div>
         <a href="javascript: $('form').submit();">
             <div class="btn">发布信息</div>

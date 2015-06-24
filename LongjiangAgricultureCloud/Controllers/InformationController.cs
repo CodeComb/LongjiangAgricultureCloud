@@ -142,6 +142,7 @@ namespace LongjiangAgricultureCloud.Controllers
         [ValidateInput(false)]
         public ActionResult Create(string Title, string Description, int? CatalogID)
         {
+           
             var Information = new Information
             {
                 Title = Title,
@@ -152,6 +153,14 @@ namespace LongjiangAgricultureCloud.Controllers
                 Verify = true,
                 Type = InformationType.农业信息
             };
+
+            var Video = Request.Files["Video"];
+            if (Video != null)
+            {
+                var fname = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(Video.FileName);
+                Video.SaveAs(Server.MapPath("~/Files/Video/" + fname));
+                Information.VideoURL = fname;
+            }
 
             DB.Informations.Add(Information);
             DB.SaveChanges();
@@ -177,6 +186,13 @@ namespace LongjiangAgricultureCloud.Controllers
             information.Description = Description;
             information.CatalogID = CatalogID;
             information.Top = Top;
+            var Video = Request.Files["Video"];
+            if (Video != null)
+            {
+                var fname = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(Video.FileName);
+                Video.SaveAs(Server.MapPath("~/Files/Video/" + fname));
+                information.VideoURL = fname;
+            }
             DB.SaveChanges();
             return RedirectToAction("Success", "Shared");
         }

@@ -260,7 +260,7 @@ select {
     font-size: 0.8em;
 }
 
-img {
+img, video {
     max-width: 100%;
 }
 

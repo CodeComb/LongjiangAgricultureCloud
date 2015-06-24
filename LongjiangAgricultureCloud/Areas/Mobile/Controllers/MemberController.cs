@@ -395,6 +395,13 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                 Information.Verify = false;
             else
                 Information.Verify = true;
+            var Video = Request.Files["Video"];
+            if (Video != null)
+            {
+                var fname = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(Video.FileName);
+                Video.SaveAs(Server.MapPath("~/Files/Video/" + fname));
+                Information.VideoURL = fname;
+            }
             DB.Informations.Add(Information);
             DB.SaveChanges();
             return Msg("本地通信息已提交");
@@ -424,6 +431,13 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                 information.Verify = false;
             else
                 information.Verify = true;
+            var Video = Request.Files["Video"];
+            if (Video != null)
+            {
+                var fname = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(Video.FileName);
+                Video.SaveAs(Server.MapPath("~/Files/Video/" + fname));
+                information.VideoURL = fname;
+            }
             DB.SaveChanges();
             return Msg("本地通信息编辑成功");
         }

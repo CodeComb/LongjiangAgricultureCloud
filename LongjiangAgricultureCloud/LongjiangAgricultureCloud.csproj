@@ -608,6 +608,7 @@
     <Content Include="Views\Shared\Message.cshtml" />
     <Content Include="Views\General\License.cshtml" />
     <Content Include="Views\Local\Verify.cshtml" />
+    <Content Include="Views\General\RenameCatalog.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

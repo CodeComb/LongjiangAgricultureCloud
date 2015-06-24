@@ -17,6 +17,10 @@
             @Html.TextBoxFor(x => x.Description, new { @class = "textbox form" })
         </div>
         <div class="textbox-outer">
+            <div class="field">价格</div>
+            @Html.TextBoxFor(x => x.Price, new { @class = "textbox form" })
+        </div>
+        <div class="textbox-outer">
             <div class="field">供求类型</div>
             @Html.EnumDropDownListFor(x => x.SupplyDemand)
         </div>

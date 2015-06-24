@@ -145,7 +145,15 @@ namespace LongjiangAgricultureCloud.Controllers
                 Verify = true,
                 Price = Price
             };
-            
+
+            var Video = Request.Files["Video"];
+            if (Video != null)
+            {
+                var fname = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(Video.FileName);
+                Video.SaveAs(Server.MapPath("~/Files/Video/" + fname));
+                Information.VideoURL = fname;
+            }
+
             DB.Informations.Add(Information);
             DB.SaveChanges();
             return RedirectToAction("Success", "Shared");
@@ -180,6 +188,15 @@ namespace LongjiangAgricultureCloud.Controllers
             information.Address = Address;
             information.SupplyDemand = SupplyDemand;
             information.Price = Price;
+
+            var Video = Request.Files["Video"];
+            if (Video != null)
+            {
+                var fname = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(Video.FileName);
+                Video.SaveAs(Server.MapPath("~/Files/Video/" + fname));
+                information.VideoURL = fname;
+            }
+             
             DB.SaveChanges();
             return RedirectToAction("Success", "Shared");
         }

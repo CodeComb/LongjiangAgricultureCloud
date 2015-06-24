@@ -6,7 +6,12 @@
 @Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
 <div class="wrap-cont">
     <div class="list-outer">@Model.Title</div>
-    <div class="list-outer">@Model.Description</div>
+    @if (!string.IsNullOrEmpty(Model.VideoURL))
+    {
+        <div class="list-outer">
+            <video src="/Files/Video/@Model.VideoURL" controls="controls"></video>
+        </div>
+    }
     <div class="list-outer">
         <div class="field">类型</div>@Model.SupplyDemand
     </div>
