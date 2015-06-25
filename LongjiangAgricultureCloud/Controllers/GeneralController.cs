@@ -148,7 +148,7 @@ namespace LongjiangAgricultureCloud.Controllers
         /// <param name="Verify"></param>
         /// <param name="p"></param>
         /// <returns></returns>
-        public ActionResult Comment(CommentType? Type, DateTime? Begin, DateTime? End, bool? Verify, int p = 1)
+        public ActionResult Comment(CommentType? Type, DateTime? Begin, DateTime? End, int? Verify, int p = 1)
         {
             IEnumerable<Comment> query = DB.Comments;
             if (Begin.HasValue)
@@ -158,7 +158,7 @@ namespace LongjiangAgricultureCloud.Controllers
             if (Type.HasValue)
                 query = query.Where(x => x.Type == Type);
             if (Verify.HasValue)
-                query = query.Where(x => x.Verify == Verify.Value);
+                query = query.Where(x => x.Verify == (Verify.Value == 1 ? true : false));
             ViewBag.PageInfo = PagerHelper.Do(ref query, 50, p);
             return View(query);
         }
@@ -170,7 +170,7 @@ namespace LongjiangAgricultureCloud.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteComment(int id)
+        public ActionResult DeleteComment(Guid id)
         {
             var comment = DB.Comments.Find(id);
             DB.Comments.Remove(comment);
@@ -208,7 +208,7 @@ namespace LongjiangAgricultureCloud.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult VerifyComment(int id)
+        public ActionResult VerifyComment(Guid id)
         {
             var comment = DB.Comments.Find(id);
             comment.Verify = true;

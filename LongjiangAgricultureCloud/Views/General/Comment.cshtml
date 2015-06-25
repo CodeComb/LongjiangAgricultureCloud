@@ -48,7 +48,7 @@
                 <td>
                     @if (!c.Verify)
                     {
-                        <a href="javascript: $('#comment-@c.ID').find('.verify').html('审核通过');$.post('/General/VerifyComment/@c.ID',{},function(){});">通过审核</a>
+                        <a href="javascript: verifyComment('@c.ID')">通过审核</a>
                     }
                     <a href="javascript: deleteDialog('/General/DeleteComment/@c.ID', 'comment-@c.ID')">删除</a>
                 </td>
@@ -57,3 +57,10 @@
     </tbody>
 </table>
 @Html.MakePager()
+<script>
+    function verifyComment(id)
+    {
+        $('#comment-' + id + '').find('.verify').html('审核通过');
+        $.post('/General/VerifyComment/' + id, {}, function () { });
+    }
+</script>
