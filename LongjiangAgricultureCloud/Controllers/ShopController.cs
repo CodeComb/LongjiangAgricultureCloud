@@ -236,7 +236,7 @@ namespace LongjiangAgricultureCloud.Controllers
             Product.CatalogID = CatalogID.Value;
             #region 处理5张图片
             var Picture1 = Request.Files["Picture1"];
-            if (Picture1 != null)
+            if (Picture1 != null && Picture1.ContentLength > 0)
             {
                 using (var binaryReader = new BinaryReader(Picture1.InputStream))
                 {
@@ -245,7 +245,7 @@ namespace LongjiangAgricultureCloud.Controllers
             }
 
             var Picture2 = Request.Files["Picture2"];
-            if (Picture2 != null)
+            if (Picture2 != null && Picture2.ContentLength > 0)
             {
                 using (var binaryReader = new BinaryReader(Picture2.InputStream))
                 {
@@ -254,7 +254,7 @@ namespace LongjiangAgricultureCloud.Controllers
             }
 
             var Picture3 = Request.Files["Picture3"];
-            if (Picture3 != null)
+            if (Picture3 != null && Picture3.ContentLength > 0)
             {
                 using (var binaryReader = new BinaryReader(Picture3.InputStream))
                 {
@@ -263,7 +263,7 @@ namespace LongjiangAgricultureCloud.Controllers
             }
 
             var Picture4 = Request.Files["Picture4"];
-            if (Picture4 != null)
+            if (Picture4 != null && Picture4.ContentLength > 0)
             {
                 using (var binaryReader = new BinaryReader(Picture4.InputStream))
                 {
@@ -272,7 +272,7 @@ namespace LongjiangAgricultureCloud.Controllers
             }
 
             var Picture5 = Request.Files["Picture5"];
-            if (Picture5 != null)
+            if (Picture5 != null && Picture5.ContentLength > 0)
             {
                 using (var binaryReader = new BinaryReader(Picture5.InputStream))
                 {
@@ -460,68 +460,48 @@ namespace LongjiangAgricultureCloud.Controllers
             var provider = DB.Providers.Find(id);
             #region 图片上传
             var Picture = Request.Files["Picture"];
-            if (Picture != null)
+            if (Picture != null && Picture.ContentLength > 0)
             {
                 using (var binaryReader = new BinaryReader(Picture.InputStream))
                 {
                     provider.Picture = binaryReader.ReadBytes(Picture.ContentLength);
                 }
             }
-            else
-            {
-                provider.Picture = null;
-            }
 
             var BusinessLicence = Request.Files["BusinessLicence"];
-            if (BusinessLicence != null)
+            if (BusinessLicence != null && BusinessLicence.ContentLength > 0)
             {
                 using (var binaryReader = new BinaryReader(BusinessLicence.InputStream))
                 {
                     provider.BusinessLicence = binaryReader.ReadBytes(BusinessLicence.ContentLength);
                 }
             }
-            else
-            {
-                provider.BusinessLicence = null;
-            }
 
             var OrganizationRegistrationCodeCertificate = Request.Files["OrganizationRegistrationCodeCertificate"];
-            if (OrganizationRegistrationCodeCertificate != null)
+            if (OrganizationRegistrationCodeCertificate != null && OrganizationRegistrationCodeCertificate.ContentLength > 0)
             {
                 using (var binaryReader = new BinaryReader(OrganizationRegistrationCodeCertificate.InputStream))
                 {
                     provider.OrganizationRegistrationCodeCertificate = binaryReader.ReadBytes(OrganizationRegistrationCodeCertificate.ContentLength);
                 }
             }
-            else
-            {
-                provider.OrganizationRegistrationCodeCertificate = null;
-            }
 
             var TaxRegistrationCertificate = Request.Files["TaxRegistrationCertificate"];
-            if (TaxRegistrationCertificate != null)
+            if (TaxRegistrationCertificate != null && TaxRegistrationCertificate.ContentLength > 0)
             {
                 using (var binaryReader = new BinaryReader(TaxRegistrationCertificate.InputStream))
                 {
                     provider.TaxRegistrationCertificate = binaryReader.ReadBytes(TaxRegistrationCertificate.ContentLength);
                 }
             }
-            else
-            {
-                provider.TaxRegistrationCertificate = null;
-            }
 
             var ArtificialPersonIdentityCard = Request.Files["ArtificialPersonIdentityCard"];
-            if (ArtificialPersonIdentityCard != null)
+            if (ArtificialPersonIdentityCard != null && ArtificialPersonIdentityCard.ContentLength > 0)
             {
                 using (var binaryReader = new BinaryReader(ArtificialPersonIdentityCard.InputStream))
                 {
                     provider.ArtificialPersonIdentityCard = binaryReader.ReadBytes(ArtificialPersonIdentityCard.ContentLength);
                 }
-            }
-            else
-            {
-                provider.ArtificialPersonIdentityCard = null;
             }
             #endregion
             provider.Title = Title;
