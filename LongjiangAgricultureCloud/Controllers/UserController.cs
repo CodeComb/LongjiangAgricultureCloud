@@ -76,6 +76,7 @@ namespace LongjiangAgricultureCloud.Controllers
             user.AreaID = User.AreaID; //TODO: 选择地区
             user.Question = User.Question;
             user.Answer = User.Answer;
+            user.PostCode = User.PostCode;
             if (!string.IsNullOrEmpty(User.Password))
                 user.Password = Security.SHA1(User.Password);
             user.AreaID = User.AreaID;
