@@ -628,7 +628,7 @@ namespace LongjiangAgricultureCloud.Controllers
         public ActionResult EditStore(int id)
         {
             ViewBag.Managers = (from u in DB.Users
-                                where u.Role >= UserRole.库存管理员
+                                where u.Role == UserRole.库存管理员 || u.Role == UserRole.系统管理员
                                 select u).ToList();
             var store = DB.Stores.Find(id);
             return View(store);
@@ -641,7 +641,7 @@ namespace LongjiangAgricultureCloud.Controllers
         public ActionResult CreateStore()
         {
             ViewBag.Managers = (from u in DB.Users
-                                where u.Role >= UserRole.库存管理员
+                                where u.Role == UserRole.库存管理员 || u.Role == UserRole.系统管理员
                                 select u).ToList();
             return View();
         }
