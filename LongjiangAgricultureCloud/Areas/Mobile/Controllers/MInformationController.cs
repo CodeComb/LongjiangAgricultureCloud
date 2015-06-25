@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.IO;
 using LongjiangAgricultureCloud.Models;
+using LongjiangAgricultureCloud.Schema;
 
 namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 {
@@ -53,7 +55,39 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
         public ActionResult Show(int id)
         {
             var information = DB.Informations.Find(id);
+            ViewBag.Comments = (from c in DB.Comments
+                                where c.TargetID == id
+                                && c.Type == CommentType.农业信息评论
+                                orderby c.Time descending
+                                select c).ToList();
             return View(information);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [MobileAuthorize]
+        public ActionResult Comment(int id, string Content)
+        {
+            var comment = new Comment
+            {
+                ID = Guid.NewGuid(),
+                Type = CommentType.本地通评论,
+                TargetID = id,
+                Time = DateTime.Now,
+                Content = Content,
+                Verify = ViewBag.VerifyLocalTongComment ? false : true,
+                UserID = CurrentUser.ID
+            };
+            var Video = Request.Files["Video"];
+            if (Video != null)
+            {
+                var fname = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(Video.FileName);
+                Video.SaveAs(Server.MapPath("~/Files/Video/" + fname));
+                comment.VideoURL = fname;
+            }
+            DB.Comments.Add(comment);
+            DB.SaveChanges();
+            return Msg("评论发表成功");
         }
     }
 }

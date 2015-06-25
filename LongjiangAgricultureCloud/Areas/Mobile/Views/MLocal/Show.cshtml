@@ -34,7 +34,13 @@
     {
         <div class="list-outer">
             @c.User.Name (@c.Time.ToString("yyyy-MM-dd")):
-            <div class="sub-title">@c.Content</div>
+            <div class="sub-title">
+                @if (!string.IsNullOrEmpty(c.VideoURL))
+                {
+                    <p><video src="/Files/Video/@Model.VideoURL" controls="controls"></video></p>
+                }
+                @c.Content
+            </div>
         </div>
     }
     @if (User.Identity.IsAuthenticated)
@@ -42,12 +48,15 @@
         <p style="color: #888;margin-left: 0.6em">
             发表评论
         </p>
-        using (Html.BeginForm("Comment", "MLocal", FormMethod.Post))
+        using (Html.BeginForm("Comment", "MLocal",null, FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
             <input type="hidden" name="id" value="@Model.ID" />
             <div class="list-outer">
                 <textarea name="Content" class="textbox" style="height: 5em" placeholder="请在此处填写评论内容"></textarea>
+            </div>
+            <div class="list-outer">
+                <div class="field">上传视频</div><input type="file" name="Video" />
             </div>
             <a href="javascript: $('form').submit()">
                 <div class="btn">发表评论</div>

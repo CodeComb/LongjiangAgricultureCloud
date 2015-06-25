@@ -12,7 +12,8 @@ namespace LongjiangAgricultureCloud.Models
     public enum CommentType
     {
         商品评论,
-        本地通评论
+        本地通评论,
+        农业信息评论
     }
 
     public class Comment
@@ -64,5 +65,10 @@ namespace LongjiangAgricultureCloud.Models
         /// </summary>
         [Index]
         public bool Verify { get; set; }
+
+        /// <summary>
+        /// 音视频URL
+        /// </summary>
+        public string VideoURL { get; set; }
     }
 }

@@ -10,7 +10,7 @@
     }
 </style>
 <div class="wrap-cont">
-@using (Html.BeginForm("CreateService", "Member", FormMethod.Post))
+@using (Html.BeginForm("CreateService", "Member", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <input type="hidden" name="Lon" />
