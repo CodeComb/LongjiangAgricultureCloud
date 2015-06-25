@@ -5,7 +5,7 @@
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm("Create", "Service", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Edit", "Service", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <table class="detail-table">

@@ -22,7 +22,6 @@
     </select>
 
     <select id="lvl2" data-parent-select="lvl1">
-        <option>信息分类</option>
         @foreach (Catalog c in ViewBag.Level2)
         {
             <option data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
@@ -30,7 +29,6 @@
     </select>
 
     <select id="lvl3" data-parent-select="lvl2">
-        <option>信息分类</option>
         @foreach (Catalog c in ViewBag.Level3)
         {
             <option data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
@@ -38,7 +36,6 @@
     </select>
 
     <select id="lvl4" data-parent-select="lvl3" name="CatalogID">
-        <option value="">信息分类</option>
         @foreach (Catalog c in ViewBag.Level4)
         {
             <option data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
