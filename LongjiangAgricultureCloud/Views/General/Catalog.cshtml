@@ -27,7 +27,7 @@
                 <td>@(c.Level == 0 ? "-" : c.Father.Title)</td>
                 <td>
                     <a href="/General/Catalog/@c.ID">管理子类别</a>
-                    <a href="javascript: /General/RenameCatalog/@c.ID">重命名</a>
+                    <a href="/General/RenameCatalog/@c.ID">重命名</a>
                     <a href="javascript: deleteDialog('/General/DeleteCatalog/@c.ID', 'catalog-@c.ID')">删除</a>
                 </td>
             </tr>
