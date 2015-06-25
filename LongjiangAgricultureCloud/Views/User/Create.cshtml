@@ -75,6 +75,10 @@
             <td class="row-title">详细位置</td>
             <td>@Html.TextBoxFor(x => x.Address, new { @class = "textbox w-3 nullable" })</td>
         </tr>
+        <tr>
+            <td class="row-title">邮政编码</td>
+            <td>@Html.TextBoxFor(x => x.PostCode, new { @class = "textbox w-3 nullable" })</td>
+        </tr>
     </table>
     <p><input type="submit" value="保存" class="btn inverse" /></p>
 }
