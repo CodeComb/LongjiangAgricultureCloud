@@ -295,7 +295,7 @@ namespace LongjiangAgricultureCloud.Controllers
         public ActionResult Provider(string Title, string Phone, string Name, ProviderStatus? Status ,int p = 1)
         {
             IEnumerable<Provider> query = DB.Providers.Where(x => !x.Delete);
-            if (!Status.HasValue)
+            if (Status.HasValue)
                 query = query.Where(x => x.Status == Status.Value);
             if (!string.IsNullOrEmpty(Title))
                 query = query.Where(x => x.Title.Contains(Title) || Title.Contains(x.Title));
