@@ -13,7 +13,6 @@
             <td class="row-title">分类</td>
             <td>
                 <select id="lvl1">
-                    <option>无</option>
                     @foreach (Catalog c in ViewBag.Level1)
                     {
                         <option @(Model.CatalogID!=null&&Model.Catalog.Father.Father.FatherID == c.ID ? "selected" : "") value="@c.ID">@c.Title</option>
@@ -30,7 +29,7 @@
                 <select id="lvl3" data-parent-select="lvl2">
                     @foreach (Catalog c in ViewBag.Level3)
                     {
-                        <option  @(Model.CatalogID!=null&&Model.Catalog.FatherID == c.ID ? "selected" : "")data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
+                        <option  @(Model.CatalogID!=null&&Model.Catalog.FatherID == c.ID ? "selected" : "") data-parent-id="@c.FatherID" value="@c.ID">@c.Title</option>
                     }
                 </select>
 
