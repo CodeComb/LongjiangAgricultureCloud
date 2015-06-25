@@ -27,7 +27,8 @@ namespace LongjiangAgricultureCloud.Controllers
                 VerifyLocalTong = ViewBag.VerifyLocalTong,
                 VerifyLocalTongComment = ViewBag.VerifyLocalTongComment,
                 VerifyProductComment = ViewBag.VerifyProductComment,
-                VerifyService = ViewBag.VerifyService
+                VerifyService = ViewBag.VerifyService,
+                VerifyInformationComment = ViewBag.VerifyInformationComment
             };
             return View(config);
         }
@@ -46,6 +47,7 @@ namespace LongjiangAgricultureCloud.Controllers
             ConfigurationManager.AppSettings["VerifyLocalTong"] = Config.VerifyLocalTong ? "true" : "false";
             ConfigurationManager.AppSettings["VerifyLocalTongComment"] = Config.VerifyLocalTongComment ? "true" : "false";
             ConfigurationManager.AppSettings["InformationComment"] = Config.InformationComment ? "true" : "false";
+            ConfigurationManager.AppSettings["VerifyInformationComment"] = Config.VerifyInformationComment ? "true" : "false";
             ConfigurationManager.AppSettings["ServiceTel"] = Config.ServiceTel;
             return RedirectToAction("Success", "Shared", null);
         }

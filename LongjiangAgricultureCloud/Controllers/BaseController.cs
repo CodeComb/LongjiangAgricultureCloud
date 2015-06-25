@@ -38,6 +38,7 @@ namespace LongjiangAgricultureCloud.Controllers
             ViewBag.AlipayAppKey = ConfigurationManager.AppSettings["AlipayAppKey"];
             ViewBag.WeixinPayAppKey = ConfigurationManager.AppSettings["WeixinPayAppKey"];
             ViewBag.ServiceTel = ConfigurationManager.AppSettings["ServiceTel"];
+            ViewBag.VerifyInformationComment = Convert.ToBoolean(ConfigurationManager.AppSettings["VerifyInformationComment"]);
             ViewBag.NewComment = DB.Comments.Where(x => !x.Verify).Count();
         }
 

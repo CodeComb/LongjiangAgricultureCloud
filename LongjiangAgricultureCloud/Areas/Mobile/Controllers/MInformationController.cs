@@ -71,11 +71,11 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             var comment = new Comment
             {
                 ID = Guid.NewGuid(),
-                Type = CommentType.本地通评论,
+                Type = CommentType.农业信息评论,
                 TargetID = id,
                 Time = DateTime.Now,
                 Content = Content,
-                Verify = ViewBag.VerifyLocalTongComment ? false : true,
+                Verify = ViewBag.VerifyInformationComment ? false : true,
                 UserID = CurrentUser.ID
             };
             var Video = Request.Files["Video"];

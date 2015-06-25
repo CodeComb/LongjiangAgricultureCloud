@@ -44,6 +44,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             ViewBag.InformationComment = Convert.ToBoolean(ConfigurationManager.AppSettings["InformationComment"]);
             ViewBag.AlipayAppKey = ConfigurationManager.AppSettings["AlipayAppKey"];
             ViewBag.WeixinPayAppKey = ConfigurationManager.AppSettings["WeixinPayAppKey"];
+            ViewBag.VerifyInformationComment = Convert.ToBoolean(ConfigurationManager.AppSettings["VerifyInformationComment"]);
             ViewBag.ServiceTel = ConfigurationManager.AppSettings["ServiceTel"];
         }
 

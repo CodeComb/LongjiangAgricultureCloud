@@ -616,5 +616,15 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             DB.SaveChanges();
             return Msg("农机信息编辑成功");
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteLocal(int id)
+        {
+            var info = DB.Informations.Find(id);
+            DB.Informations.Remove(info);
+            DB.SaveChanges();
+            return Msg("删除本地通信息成功");
+        }
     }
 }
