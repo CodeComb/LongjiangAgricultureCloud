@@ -432,7 +432,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             else
                 information.Verify = true;
             var Video = Request.Files["Video"];
-            if (Video != null)
+            if (Video != null && Video.ContentLength > 0)
             {
                 var fname = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(Video.FileName);
                 Video.SaveAs(Server.MapPath("~/Files/Video/" + fname));
@@ -605,7 +605,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             if (service.Type == InformationType.维修站)
             {
                 var Picture = Request.Files["Picture"];
-                if (Picture != null)
+                if (Picture != null && Picture.ContentLength > 0)
                 {
                     using (var binaryReader = new BinaryReader(Picture.InputStream))
                     {

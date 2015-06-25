@@ -44,7 +44,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
         {
             IEnumerable<Product> products = DB.Products.Where(x => x.CatalogID == id && x.StoreCount > 0 && !x.Delete);
             if (!string.IsNullOrEmpty(Title))
-                products = products.Where(x => x.Title.Contains(Key) || Key.Contains(x.Title));
+                products = products.Where(x => x.Title.Contains(Title) || Title.Contains(x.Title));
             products = products.OrderByDescending(x => x.Top);
             if (Key == "Price")
             {

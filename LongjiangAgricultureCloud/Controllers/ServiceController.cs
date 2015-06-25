@@ -220,7 +220,7 @@ namespace LongjiangAgricultureCloud.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit(int id, string Title, string Description, int? CatalogID, string Name, string Phone, string Address, bool Top)
+        public ActionResult Edit(int id, string Title, InformationType Type, string Description, int? CatalogID, string Name, string Phone, string Address, bool Top)
         {
             var information = DB.Informations.Find(id);
             information.Title = Title;
@@ -230,8 +230,9 @@ namespace LongjiangAgricultureCloud.Controllers
             information.Phone = Phone;
             information.Address = Address;
             information.Top = Top;
+            information.Type = Type;
             var Picture = Request.Files["Picture"];
-            if (Picture != null)
+            if (Picture != null && Picture.ContentLength > 0)
             {
                 using (var binaryReader = new BinaryReader(Picture.InputStream))
                 {
@@ -240,6 +241,12 @@ namespace LongjiangAgricultureCloud.Controllers
             }
             DB.SaveChanges();
             return RedirectToAction("Success", "Shared");
+        }
+
+        public ActionResult InformationImg(int id)
+        {
+            var information = DB.Informations.Find(id);
+            return File(information.Picture, "image/jpg");
         }
     }
 }

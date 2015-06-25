@@ -155,7 +155,7 @@ namespace LongjiangAgricultureCloud.Controllers
             };
 
             var Video = Request.Files["Video"];
-            if (Video != null)
+            if (Video != null && Video.ContentLength > 0)
             {
                 var fname = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(Video.FileName);
                 Video.SaveAs(Server.MapPath("~/Files/Video/" + fname));
@@ -186,8 +186,9 @@ namespace LongjiangAgricultureCloud.Controllers
             information.Description = Description;
             information.CatalogID = CatalogID;
             information.Top = Top;
+
             var Video = Request.Files["Video"];
-            if (Video != null)
+            if (Video != null && Video.ContentLength > 0)
             {
                 var fname = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(Video.FileName);
                 Video.SaveAs(Server.MapPath("~/Files/Video/" + fname));

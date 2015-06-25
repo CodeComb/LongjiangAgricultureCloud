@@ -190,7 +190,7 @@ namespace LongjiangAgricultureCloud.Controllers
             information.Price = Price;
 
             var Video = Request.Files["Video"];
-            if (Video != null)
+            if (Video != null && Video.ContentLength > 0)
             {
                 var fname = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(Video.FileName);
                 Video.SaveAs(Server.MapPath("~/Files/Video/" + fname));
