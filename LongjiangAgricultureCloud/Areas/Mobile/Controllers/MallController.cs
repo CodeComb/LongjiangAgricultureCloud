@@ -42,7 +42,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
         /// <returns></returns>
         public ActionResult ListRaw(int id, string Title, string Key, bool Desc = false, int p = 0)
         {
-            IEnumerable<Product> products = DB.Products.Where(x => x.CatalogID == id && x.StoreCount > 0);
+            IEnumerable<Product> products = DB.Products.Where(x => x.CatalogID == id && x.StoreCount > 0 && !x.Delete);
             if (!string.IsNullOrEmpty(Title))
                 products = products.Where(x => x.Title.Contains(Key) || Key.Contains(x.Title));
             products = products.OrderByDescending(x => x.Top);

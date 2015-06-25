@@ -57,23 +57,23 @@
     var pictures = [];
     @if (Model.Picture1 != null)
     {
-        @("pictures.push('/Shared/ProductImg/" + Model.ID + "?index=1')")
+        @MvcHtmlString.Create("pictures.push('/Shared/ProductImg/" + Model.ID + "?index=1');")
     }
     @if (Model.Picture2 != null)
     {
-        @("pictures.push('/Shared/ProductImg/" + Model.ID + "?index=2')")
+        @MvcHtmlString.Create("pictures.push('/Shared/ProductImg/" + Model.ID + "?index=2');")
     }
     @if (Model.Picture3 != null)
     {
-        @("pictures.push('/Shared/ProductImg/" + Model.ID + "?index=3')")
+        @MvcHtmlString.Create("pictures.push('/Shared/ProductImg/" + Model.ID + "?index=3');")
     }
     @if (Model.Picture4 != null)
     {
-        @("pictures.push('/Shared/ProductImg/" + Model.ID + "?index=4')")
+        @MvcHtmlString.Create("pictures.push('/Shared/ProductImg/" + Model.ID + "?index=4');")
     }
     @if (Model.Picture5 != null)
     {
-        @("pictures.push('/Shared/ProductImg/" + Model.ID + "?index=5')")
+        @MvcHtmlString.Create("pictures.push('/Shared/ProductImg/" + Model.ID + "?index=5');")
     }
     var index = 0;
     setInterval(function () {

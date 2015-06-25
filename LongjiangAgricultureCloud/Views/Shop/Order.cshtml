@@ -17,7 +17,7 @@
         <option value="">订单状态</option>
         @foreach (var s in Enum.GetNames(typeof(OrderStatus)))
         {
-            <option>@s</option>
+            <option @(Request.QueryString["Status"] == s ? "selected" : "")>@s</option>
         }
     </select>
     <input type="submit" value="检索" class="btn" />
