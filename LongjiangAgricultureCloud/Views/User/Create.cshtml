@@ -20,10 +20,21 @@
         <tr>
             <td class="row-title">密码重复</td>
             <td>@Html.Password("Confirm", "", new { @class = "textbox w-3" })</td>
-        </tr>
+        </tr>        
         <tr>
             <td class="row-title">角色</td>
             <td>@Html.EnumDropDownListFor(x => x.Role)</td>
+        </tr>
+        <tr class="manager">
+            <td class="row-title">所属大区经理</td>
+            <td>
+                <select name="ManagerID">
+                    @foreach (User m in ViewBag.Managers)
+                {
+                        <option value="@m.ID">@m.Name (@m.Username)</option>
+                    }
+                </select>
+            </td>
         </tr>
         <tr>
             <td class="row-title">真实姓名</td>
@@ -82,3 +93,19 @@
     </table>
     <p><input type="submit" value="保存" class="btn inverse" /></p>
 }
+
+<script>
+    function display()
+    {
+        if ($("#Role").val() == "1") {
+            $(".manager").show();
+        }
+        else {
+            $(".manager").hide();
+        }
+    }
+    display();
+    $("#Role").change(function () {
+        display();
+    });
+</script>

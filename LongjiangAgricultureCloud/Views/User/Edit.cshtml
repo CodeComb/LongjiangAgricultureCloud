@@ -25,6 +25,17 @@
             <td class="row-title">角色</td>
             <td>@Html.EnumDropDownListFor(x => x.Role)</td>
         </tr>
+        <tr class="manager">
+            <td class="row-title">所属大区经理</td>
+            <td>
+                <select name="ManagerID">
+                    @foreach (User m in ViewBag.Managers)
+                    {
+                        <option @(m.ID == Model.ManagerID ? "selected" : "") value="@m.ID">@m.Name (@m.Username)</option>
+                    }
+                </select>
+            </td>
+        </tr>
         <tr>
             <td class="row-title">真实姓名</td>
             <td>@Html.TextBoxFor(x => x.Name, new { @class = "textbox w-3" })</td>
@@ -75,9 +86,25 @@
             <td>@Html.TextBoxFor(x => x.Address, new { @class = "textbox w-3 nullable" })</td>
         </tr>
         <tr>
-            <td class="row-title">邮政编码</td>
+            <td class="row-title">邮政编码</td> 
             <td>@Html.TextBoxFor(x => x.PostCode, new { @class = "textbox w-3 nullable" })</td>
         </tr>
     </table>
     <p><input type="submit" value="保存" class="btn inverse" /></p>
 }
+
+<script>
+    function display()
+    {
+        if ($("#Role").val() == "1") {
+            $(".manager").show();
+        }
+        else {
+            $(".manager").hide();
+        }
+    }
+    display();
+    $("#Role").change(function () {
+        display();
+    });
+</script>

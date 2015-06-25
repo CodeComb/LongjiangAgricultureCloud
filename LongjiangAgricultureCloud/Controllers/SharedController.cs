@@ -58,7 +58,7 @@ namespace LongjiangAgricultureCloud.Controllers
             }
             else
             {
-                if (user.Role < Models.UserRole.大区经理)
+                if (user.Role <= Models.UserRole.大区经理)
                 {
                     return RedirectToAction("NoAccess", "Shared");
                 }

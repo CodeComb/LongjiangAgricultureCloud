@@ -53,6 +53,8 @@ namespace LongjiangAgricultureCloud.Controllers
         public ActionResult CreateProduct()
         {
             ViewBag.Stores = DB.Stores.Where(x => !x.Delete).ToList();
+            if (ViewBag.Stores.Count == 0)
+                return Msg("请先添加仓库！");
             ViewBag.Providers = DB.Providers.Where(x => x.Status == ProviderStatus.审核通过).ToList();
             ViewBag.Level1 = (from c in DB.Catalogs
                               where c.Level == 0

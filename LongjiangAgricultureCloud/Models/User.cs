@@ -75,6 +75,9 @@ namespace LongjiangAgricultureCloud.Models
         /// 用户角色
         /// </summary>
         public UserRole Role { get; set; }
+        
+        [Index]
+        public int? ManagerID { get; set; }
 
         public virtual ICollection<Provider> Providers { get; set; }
 

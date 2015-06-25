@@ -9,7 +9,7 @@ using LongjiangAgricultureCloud.Helpers;
 
 namespace LongjiangAgricultureCloud.Controllers
 {
-    [CheckRole(UserRole.系统管理员)]
+    [CheckRoleEqual(UserRole.大区经理)]
     public class UserController : BaseController
     {
         /// <summary>
@@ -29,6 +29,8 @@ namespace LongjiangAgricultureCloud.Controllers
                 query = query.Where(x => x.Name.Contains(Name));
             if (Role.HasValue)
                 query = query.Where(x => x.Role == Role.Value);
+            if (CurrentUser.Role == UserRole.大区经理)
+                query = query.Where(x => x.ManagerID == CurrentUser.ID);
             ViewBag.PageInfo = PagerHelper.Do(ref query, 50, p);
             return View(query);
         }
@@ -43,6 +45,8 @@ namespace LongjiangAgricultureCloud.Controllers
         public ActionResult Delete(int id)
         {
             var user = DB.Users.Find(id);
+            if (user.ManagerID != CurrentUser.ID && CurrentUser.Role != UserRole.系统管理员)
+                return RedirectToAction("NoAccess", "Shared");
             DB.Users.Remove(user);
             DB.SaveChanges();
             return Content("ok");
@@ -56,6 +60,11 @@ namespace LongjiangAgricultureCloud.Controllers
         public ActionResult Edit(int id)
         {
             var user = DB.Users.Find(id);
+            ViewBag.Managers = (from u in DB.Users
+                                where u.Role == UserRole.大区经理
+                                select u).ToList();
+            if (user.ManagerID != CurrentUser.ID && CurrentUser.Role != UserRole.系统管理员)
+                return RedirectToAction("NoAccess", "Shared");
             return View(user);
         }
 
@@ -72,11 +81,16 @@ namespace LongjiangAgricultureCloud.Controllers
             var user = DB.Users.Find(id);
             if (user.Username != User.Username && DB.Users.Any(x => x.Username == User.Username))
                 return Msg("已经存在用户名(手机号)为\"" + User.Username + "\"的用户，请修改后重试！");
+            if (user.ManagerID != CurrentUser.ID && CurrentUser.Role != UserRole.系统管理员)
+                return RedirectToAction("NoAccess", "Shared");
             user.Name = User.Name;
             user.AreaID = User.AreaID; //TODO: 选择地区
             user.Question = User.Question;
             user.Answer = User.Answer;
             user.PostCode = User.PostCode;
+            if (CurrentUser.Role == UserRole.系统管理员)
+                user.Role = User.Role;
+            user.ManagerID = User.ManagerID;
             if (!string.IsNullOrEmpty(User.Password))
                 user.Password = Security.SHA1(User.Password);
             user.AreaID = User.AreaID;
@@ -91,6 +105,9 @@ namespace LongjiangAgricultureCloud.Controllers
         /// <returns></returns>
         public ActionResult Create()
         {
+            ViewBag.Managers = (from u in DB.Users
+                                where u.Role == UserRole.大区经理
+                                select u).ToList();
             return View();
         }
 
@@ -108,6 +125,12 @@ namespace LongjiangAgricultureCloud.Controllers
                 return Msg("已经存在用户名(手机号)为\"" + User.Username + "\"的用户，请修改后重试！");
             if (User.Password != Confirm)
                 return Msg("两次密码输入不一致，请返回重新尝试！");
+            if (CurrentUser.Role == UserRole.大区经理)
+            {
+                User.Role = UserRole.服务站;
+                User.ManagerID = CurrentUser.ID;
+            }
+       
             User.Password = Security.SHA1(Confirm);
             DB.Users.Add(User);
             DB.SaveChanges();
@@ -119,6 +142,7 @@ namespace LongjiangAgricultureCloud.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [CheckRole(UserRole.系统管理员)]
         public ActionResult Area(int? id)
         {
             IEnumerable<Area> query = DB.Areas;
@@ -141,6 +165,7 @@ namespace LongjiangAgricultureCloud.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CheckRole(UserRole.系统管理员)]
         public ActionResult CreateArea(string Title, int? FatherID)
         {
             var area = new Area();
@@ -154,6 +179,10 @@ namespace LongjiangAgricultureCloud.Controllers
             else
             {
                 area.Level = AreaLevel.省;
+            }
+            if (DB.Areas.Any(x => x.Title == Title && x.Level == area.Level))
+            {
+                return Msg("请勿重复创建地区");
             }
             DB.Areas.Add(area);
             DB.SaveChanges();
@@ -177,6 +206,7 @@ namespace LongjiangAgricultureCloud.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CheckRole(UserRole.系统管理员)]
         public ActionResult DeleteArea(int id)
         {
             var area = DB.Areas.Find(id);

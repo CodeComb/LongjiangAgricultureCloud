@@ -34,13 +34,23 @@
             <a href="/General/Comment"><div class="sidebar-menu"><i class="fa fa-comment icon ico"></i>评论管理</div></a>
             <a href="/General/Comment?Verify=0"><div class="sidebar-menu"><i class="fa fa-comment icon ico"></i>新评论 (@ViewBag.NewComment)</div></a>
             <a href="/General/License"><div class="sidebar-menu"><i class="fa fa-file icon ico"></i>服务条款</div></a>
+        }
+        @if (ViewBag.CurrentUser.Role == UserRole.大区经理 || ViewBag.CurrentUser.Role == UserRole.系统管理员)
+        {
             <div class="sidebar-subtitle">用户管理</div>
             <a href="/User"><div class="sidebar-menu"><i class="fa fa-group icon ico"></i>用户管理</div></a>
-            <a href="/User/Area"><div class="sidebar-menu"><i class="fa fa-globe icon ico"></i>地区管理</div></a>
+            if (ViewBag.CurrentUser.Role == UserRole.系统管理员)
+            {
+                <a href="/User/Area"><div class="sidebar-menu"><i class="fa fa-globe icon ico"></i>地区管理</div></a>
+            }
+            if (ViewBag.CurrentUser.Role == UserRole.大区经理)
+            {
+                <a href="/User/Create"><div class="sidebar-menu"><i class="fa fa-globe icon ico"></i>创建服务站</div></a>
+            }
         }
-        <div class="sidebar-subtitle">商城管理</div>
         @if (ViewBag.CurrentUser.Role == UserRole.库存管理员 || ViewBag.CurrentUser.Role == UserRole.系统管理员)
         {
+            <div class="sidebar-subtitle">商城管理</div>
             <a href="/Shop"><div class="sidebar-menu"><i class="fa fa-gift icon ico"></i>商品管理</div></a>
         }
         @if (ViewBag.CurrentUser.Role == UserRole.系统管理员)
