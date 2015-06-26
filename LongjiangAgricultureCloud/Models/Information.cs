@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LongjiangAgricultureCloud.Models
@@ -37,6 +38,8 @@ namespace LongjiangAgricultureCloud.Models
         /// <summary>
         /// 信息标题
         /// </summary>
+        [StringLength(256)]
+        [Index]
         public string Title { get; set; }
 
         /// <summary>

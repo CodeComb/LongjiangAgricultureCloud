@@ -4,7 +4,12 @@
 }
 
 @Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
-<div class="wrap-cont" id="lstInformations">
+<div class="wrap-cont">
+    <div class="search">
+        <input type="text" class="textbox" id="txtTitle" placeholder="搜索消息" />
+        <a href="javascript:$('#lstInformations').html('');p=0;lock=false;Load();"><i class="fa fa-search" style="color: orange;float:right;font-size:1.4em"></i></a>
+    </div>
+    <div id="lstInformations"></div>
 </div>
 <script>
     id = @Html.ViewContext.RouteData.Values["id"];

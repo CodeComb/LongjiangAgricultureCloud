@@ -38,10 +38,11 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
         /// <param name="id"></param>
         /// <param name="p"></param>
         /// <returns></returns>
-        public ActionResult ListRaw(int id, int p = 0)
+        public ActionResult ListRaw(int id, string Title, int p = 0)
         {
             var informations = (from i in DB.Informations
                                 where i.CatalogID == id
+                                && (i.Title.Contains(Title) || Title.Contains(i.Title))
                                 orderby i.Time descending
                                 select i).Skip(p * 20).Take(20).ToList();
             return View(informations);

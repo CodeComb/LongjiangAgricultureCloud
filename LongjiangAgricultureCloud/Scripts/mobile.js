@@ -39,7 +39,7 @@ function LoadInformations() {
     if ($('#lstInformations').length > 0) {
         if (lock) return;
         lock = true;
-        $.get('/Mobile/MInformation/ListRaw', { p: p, id: id }, function (data) {
+        $.get('/Mobile/MInformation/ListRaw', { p: p, id: id, Title: $('#txtTitle').val() }, function (data) {
             if (data.length < 5 && p == 0) {
                 $('#lstInformations').html('<div class="no-more">没有更多信息了！</div>');
                 return;
@@ -99,7 +99,7 @@ function LoadLocals() {
     if ($('#lstLocals').length > 0) {
         if (lock) return;
         lock = true;
-        $.get('/Mobile/MLocal/ListRaw', { p: p, id: id }, function (data) {
+        $.get('/Mobile/MLocal/ListRaw', { p: p, id: id, Title: $('#txtTitle').val() }, function (data) {
             if (data.length < 5 && p == 0) {
                 $('#lstLocals').html('<div class="no-more">没有更多信息了！</div>');
                 return;
