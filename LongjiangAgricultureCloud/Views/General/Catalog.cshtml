@@ -69,6 +69,18 @@
                 <td class="row-title">所属模块</td>
                 <td>@ViewBag.Type</td>
             </tr>
+            if (ViewBag.Level == 3 && ViewBag.Info)
+            {
+                <tr>
+                    <td class="row-title">评论功能</td>
+                    <td>
+                        <select name="Commentable">
+                            <option value="0">禁止评论</option>
+                            <option value="1">允许评论</option>
+                        </select>
+                    </td>
+                </tr>
+            }
         }
     </table>
     <p><input type="submit" class="btn inverse" value="创建" /> <a href="javascript: history.back();" class="btn">返回</a></p>

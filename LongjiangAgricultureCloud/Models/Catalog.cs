@@ -55,5 +55,7 @@ namespace LongjiangAgricultureCloud.Models
         /// </summary>
         [Index]
         public bool Delete { get; set; }
+
+        public bool Commentable { get; set; }
     }
 }

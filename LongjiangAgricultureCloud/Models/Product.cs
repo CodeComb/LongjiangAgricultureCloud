@@ -93,6 +93,9 @@ namespace LongjiangAgricultureCloud.Models
         [Index]
         public bool Top { get; set; }
 
+        [Index]
+        public bool Recommend { get; set; }
+
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

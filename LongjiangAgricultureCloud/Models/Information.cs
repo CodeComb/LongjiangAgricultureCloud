@@ -126,6 +126,9 @@ namespace LongjiangAgricultureCloud.Models
         [Index]
         public bool Top { get; set; }
 
+        [Index]
+        public bool Recommend { get; set; }
+
         public string VideoURL { get; set; }
     }
 }

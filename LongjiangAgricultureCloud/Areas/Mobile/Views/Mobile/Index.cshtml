@@ -67,6 +67,16 @@
             {
                 <div class="recommand-item"><a href="/Mobile/MInformation/Show/@i.ID" style="width: 90%; overflow: hidden; color: #555;">@i.Title</a><span class="recommand-time">@i.Time.ToString("MM-dd")</span></div>
             }
+            @foreach (Product p in ViewBag.Products)
+            {
+                <a href="/Mobile/Mall/Show/@p.ID">
+                    <div class="product-item">
+                        <img src="/Shared/ProductImg/@p.ID?index=1" class="product-img" alt="商品展示" />
+                        <div class="product-title">@p.Title</div>
+                        <div class="product-price">￥@p.Price.ToString("0.00")<div class="product-sale">销量：@p.OrderDetails.Sum(x => x.Count)</div></div>
+                    </div>
+                </a>
+            }
         </div>
     </div>
 </div>

@@ -179,13 +179,14 @@ namespace LongjiangAgricultureCloud.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit(int id, string Title, string Description, int? CatalogID, bool Top)
+        public ActionResult Edit(int id, string Title, string Description, int? CatalogID, bool Top, bool Recommend)
         {
             var information = DB.Informations.Find(id);
             information.Title = Title;
             information.Description = Description;
             information.CatalogID = CatalogID;
             information.Top = Top;
+            information.Recommend = Recommend;
 
             var Video = Request.Files["Video"];
             if (Video != null && Video.ContentLength > 0)

@@ -33,9 +33,14 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
         {
             ViewBag.Informations = (from i in DB.Informations
                                     where i.Type == LongjiangAgricultureCloud.Models.InformationType.农业信息
-                                    && i.Top == true
+                                    && i.Recommend == true
                                     orderby i.Time descending
                                     select i).ToList();
+            ViewBag.Products = (from p in DB.Products
+                                where p.Recommend
+                                && !p.Delete
+                                orderby p.ID descending
+                                select p);
             return View();
         }
 

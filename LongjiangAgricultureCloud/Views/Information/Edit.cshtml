@@ -60,6 +60,10 @@
             <td class="row-title">置顶</td>
             <td>@Html.CheckBoxFor(x => x.Top)</td>
         </tr>
+        <tr>
+            <td class="row-title">首页推荐</td>
+            <td>@Html.CheckBoxFor(x => x.Recommand)</td>
+        </tr>
     </table>
     <p><input type="submit" class="btn inverse" value="创建" /> <a href="javascript: history.back();" class="btn">返回</a></p>
 }

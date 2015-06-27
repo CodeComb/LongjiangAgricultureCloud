@@ -74,6 +74,7 @@ namespace LongjiangAgricultureCloud.Controllers
         /// <returns></returns>
         public ActionResult Catalog(int? id)
         {
+            ViewBag.Info = false;
             if (id == null)
             {
                 ViewBag.Level = 0;
@@ -86,6 +87,7 @@ namespace LongjiangAgricultureCloud.Controllers
                 ViewBag.FatherID = catalog.ID;
                 ViewBag.FatherTitle = catalog.Title;
                 ViewBag.Type = catalog.Type;
+                ViewBag.Info = catalog.Type == CatalogType.农业信息分类;
                 return View(DB.Catalogs.Where(x => x.FatherID == id.Value && !x.Delete).OrderBy(x => x.Type).ToList());
             }
         }
@@ -99,7 +101,7 @@ namespace LongjiangAgricultureCloud.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateCatalog(int? FatherID, string Title, CatalogType? Type)
+        public ActionResult CreateCatalog(int? FatherID, string Title, CatalogType? Type, bool? Commentable)
         {
             var catalog = new Catalog();
             Catalog father = null;
@@ -109,6 +111,7 @@ namespace LongjiangAgricultureCloud.Controllers
                 catalog.FatherID = FatherID.Value;
                 catalog.Level = father.Level + 1;
                 catalog.Type = father.Type;
+                catalog.Commentable = Commentable.Value;
             }
             else
             {

@@ -219,7 +219,7 @@ namespace LongjiangAgricultureCloud.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult EditProduct(int id, string Title, int? CatalogID, string Description, string ProductCode, string Standard, string Unit, float Price, int StoreID, int StoreCount, int? ProviderID)
+        public ActionResult EditProduct(int id, string Title, bool Top, bool Recommend, int? CatalogID, string Description, string ProductCode, string Standard, string Unit, float Price, int StoreID, int StoreCount, int? ProviderID)
         {
             if (CatalogID == null)
                 return Msg("请选择一个商品分类");
@@ -234,6 +234,8 @@ namespace LongjiangAgricultureCloud.Controllers
             Product.ProviderID = ProviderID;
             Product.Description = Description;
             Product.CatalogID = CatalogID.Value;
+            Product.Top = Top;
+            Product.Recommend = Recommend;
             #region 处理5张图片
             var Picture1 = Request.Files["Picture1"];
             if (Picture1 != null && Picture1.ContentLength > 0)

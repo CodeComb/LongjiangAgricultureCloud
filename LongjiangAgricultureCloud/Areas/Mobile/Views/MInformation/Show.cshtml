@@ -12,11 +12,11 @@
         <div>
             @if (!string.IsNullOrEmpty(Model.VideoURL))
             {
-                <p><video src="/Files/Video/@Model.VideoURL" controls="controls"></video></p>
+                @Html.VideoOrImg(Model.VideoURL)
             }
             @Html.Sanitized(Model.Description)
         </div>
-        @if (ViewBag.InformationComment)
+        @if (Model.Catalog.Commentable)
         {
             <p style="color: #888;margin-left: 0.6em">
                 评论
@@ -28,7 +28,7 @@
                     <div class="sub-title">
                         @if (!string.IsNullOrEmpty(c.VideoURL))
                         {
-                            <p><video src="/Files/Video/@Model.VideoURL" controls="controls"></video></p>
+                            @Html.VideoOrImg(c.VideoURL)
                         }
                         @c.Content
                     </div>
@@ -48,7 +48,7 @@
                     <textarea name="Content" class="textbox" style="height: 5em" placeholder="请在此处填写评论内容"></textarea>
                 </div>
                 <div class="list-outer">
-                    <div class="field">上传视频</div><input type="file" name="Video" />
+                    <div class="field">上传视频/图片</div><input type="file" name="Video" />
                 </div>
                 <a href="javascript: $('form').submit()">
                     <div class="btn">发表评论</div>

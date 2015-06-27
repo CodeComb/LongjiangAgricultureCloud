@@ -38,7 +38,17 @@ namespace LongjiangAgricultureCloud.Helpers
         {
             return new MvcHtmlString(Helpers.Time.ToTimeStamp(time).ToString());
         }
-        
+
+        public static MvcHtmlString VideoOrImg<TModel>(this HtmlHelper<TModel> self, string URL)
+        {
+            var ext = System.IO.Path.GetExtension(URL);
+            string[] pic = { ".png", ".jpg", ".bmp", ".gif", ".jpeg" };
+            if (pic.Contains(ext))
+                return MvcHtmlString.Create("<p><img src='/Files/Video/" + URL + "' /></p>");
+            else
+                return MvcHtmlString.Create("<p><video src='"+ URL +"' controls='controls'></video></p>");
+        }
+
         public static MvcHtmlString MakePager<TModel>(this HtmlHelper<TModel> self)
         {
             var tmp = (PagerInfo)self.ViewBag.PageInfo;

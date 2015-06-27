@@ -139,6 +139,14 @@
                 <p>图片5：<input type="file" name="Picture5" /></p>
             </td>
         </tr>
+        <tr>
+            <td class="row-title">置顶</td>
+            <td>@Html.CheckBoxFor(x => x.Top)</td>
+        </tr>
+        <tr>
+            <td class="row-title">首页推荐</td>
+            <td>@Html.CheckBoxFor(x => x.Recommend)</td>
+        </tr>
     </table>
     <p><input type="submit" class="btn inverse" value="保存" /> <a href="javascript: history.back();" class="btn">返回</a></p>
 }
