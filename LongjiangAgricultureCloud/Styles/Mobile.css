@@ -140,6 +140,7 @@ table {
     padding: 0.5em;
     font-size: 1.2em;
     color: #333;
+    border-bottom: 0.08em solid #ddd;
 }
 
 .recommand-item {

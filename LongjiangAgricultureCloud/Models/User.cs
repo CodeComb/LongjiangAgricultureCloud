@@ -79,6 +79,21 @@ namespace LongjiangAgricultureCloud.Models
         [Index]
         public int? ManagerID { get; set; }
 
+        [NotMapped]
+        public User Manager
+        {
+            get
+            {
+                using (LongjiangAgricultureCloudContext DB = new LongjiangAgricultureCloudContext())
+                {
+                    if (ManagerID.HasValue)
+                        return DB.Users.Find(ManagerID);
+                    else
+                        return null;
+                }
+            }
+        } 
+
         public virtual ICollection<Provider> Providers { get; set; }
 
         public virtual ICollection<Store> Stores { get; set; }

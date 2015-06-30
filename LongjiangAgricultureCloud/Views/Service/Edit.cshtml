@@ -85,8 +85,8 @@
             </td>
         </tr>
         <tr>
-            <td class="row-title">置顶</td>
-            <td>@Html.CheckBoxFor(x => x.Top)</td>
+            <td class="row-title">置顶 (优先级越大越靠前)</td>
+            <td>@Html.TextBoxFor(x => x.Top, new { @class = "w-3 textbox" })</td>
         </tr>
     </table>
     <p><input type="submit" class="btn inverse" value="保存" /></p>

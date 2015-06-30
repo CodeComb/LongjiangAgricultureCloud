@@ -40,7 +40,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                                 where p.Recommend
                                 && !p.Delete
                                 orderby p.ID descending
-                                select p);
+                                select p).ToList();
             return View();
         }
 

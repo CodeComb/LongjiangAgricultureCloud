@@ -1,0 +1,75 @@
+﻿@model IEnumerable<OrderDetail>
+@{
+    Layout = null;
+}
+
+<table style="border-collapse: collapse; border-spacing: 0">
+    <tr><td>财务详单</td></tr>
+    <tr>
+        <td style="border: 1px solid #ccc">地址</td>
+        <td style="border: 1px solid #ccc">产品编码</td>
+        <td style="border: 1px solid #ccc">产品名</td>
+        <td style="border: 1px solid #ccc">供应商</td>
+        <td style="border: 1px solid #ccc">数量</td>
+        <td style="border: 1px solid #ccc">规格</td>
+        <td style="border: 1px solid #ccc">单位</td>
+        <td style="border: 1px solid #ccc">总金额</td>
+        <td style="border: 1px solid #ccc">付款时间</td>
+    </tr>
+        @foreach (var od in Model)
+        {
+            <tr>
+                <td style="border: 1px solid #ccc">@od.Order.Address</td>
+                <td style="border: 1px solid #ccc">@od.Product.ProductCode</td>
+                <td style="border: 1px solid #ccc">@od.Product.Title</td>
+                <td style="border: 1px solid #ccc">@(od.Product.ProviderID == null ? "无" : od.Product.Provider.Title)</td>
+                <td style="border: 1px solid #ccc">@od.Count</td>
+                <td style="border: 1px solid #ccc">@od.Product.Standard</td>
+                <td style="border: 1px solid #ccc">@od.Product.Unit</td>
+                <td style="border: 1px solid #ccc">￥@od.Price.ToString("0.00")</td>
+                <td style="border: 1px solid #ccc">@od.Order.PayTime.Value.ToString("yyyy-MM-dd")</td>
+            </tr>
+        }
+    <tr>
+        <td>总计</td>
+        <td>￥@Model.Sum(x => x.Price).ToString("0.00")</td>
+    </tr>
+    <tr></tr>
+    <tr><td>供应商报表</td></tr>
+    @foreach (var i in (from od in Model where od.Product.ProviderID != null group od by od.Product.Provider.Title into g select new { Title = g.Key, Price = g.Sum(x => x.Price) }))
+    {
+        <tr>
+            <td style="border: 1px solid #ccc">@i.Title</td>
+            <td style="border: 1px solid #ccc">￥@i.Price.ToString("0.00")</td>
+        </tr>
+    }
+    <tr></tr>
+    <tr><td>大区经理/服务站报表</td></tr>
+    <tr>
+        <td style="border: 1px solid #ccc">大区经理</td>
+        @foreach (vArea a in ViewBag.Area)
+        {
+            <td style="text-align:center;border: 1px solid #ccc" colspan="@a.Service.Count">@a.Manager</td>
+        }
+    </tr>
+    <tr>
+        <td style="border: 1px solid #ccc">服务站</td>
+        @foreach (vArea a in ViewBag.Area)
+        {
+            foreach (var b in a.Service)
+            {
+                <td style="text-align:center;border: 1px solid #ccc">@b.Service</td>
+            }
+        }
+    </tr>
+    <tr>
+        <td style="border: 1px solid #ccc">金额</td>
+        @foreach (vArea a in ViewBag.Area)
+        {
+            foreach (var b in a.Service)
+            {
+                <td style="text-align:center;border: 1px solid #ccc">￥@b.Price.ToString("0.00")</td>
+            }
+        }
+    </tr>
+</table>

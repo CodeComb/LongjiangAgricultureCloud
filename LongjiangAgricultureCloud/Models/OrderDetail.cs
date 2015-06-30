@@ -45,5 +45,11 @@ namespace LongjiangAgricultureCloud.Models
         public int UserID { get; set; }
 
         public virtual User User { get; set; }
+
+        /// <summary>
+        /// 发货标记
+        /// </summary>
+        [Index]
+        public bool DistributeFlag { get; set; }
     }
 }

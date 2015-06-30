@@ -1,21 +1,25 @@
 ﻿@model IEnumerable<OrderDetail>
 @{
-    ViewBag.Title = "财务报表";
+    Layout = null; 
 }
 
-<h2>@ViewBag.Title</h2>
+<style>
+    td, th {
+        padding: 3px;
+    }
 
-<form class="search">
-    检索：
-    <input type="text" name="Begin" class="textbox w-0-8 datetime" placeholder="时间(大于)" value="@Request.QueryString["Begin"]" />
-    <input type="text" name="End" class="textbox w-0-8 datetime" placeholder="时间(小于)" value="@Request.QueryString["End"]" />
-    <input type="text" name="Username" class="textbox w-0-8" placeholder="手机号" value="@Request.QueryString["Username"]" />
-    <input type="text" name="Name" class="textbox w-0-8" placeholder="姓名" value="@Request.QueryString["Name"]" />
-    <input type="text" name="ProductCode" class="textbox w-0-8" placeholder="产品编码" value="@Request.QueryString["ProductCode"]" />
-    <input type="submit" class="btn" value="检索" />
-    <a class="btn" target="_blank" href="/Shop/Finance?raw=true&Begin=@Request.QueryString["Begin"]&End=@Request.QueryString["End"]&Name=@Request.QueryString["Name"]&Username=@Request.QueryString["Username"]&ProductCode=@Request.QueryString["ProductCode"]">打印</a>
-    <a class="btn" href="/Shop/Finance?xls=true&Begin=@Request.QueryString["Begin"]&End=@Request.QueryString["End"]&Name=@Request.QueryString["Name"]&Username=@Request.QueryString["Username"]&ProductCode=@Request.QueryString["ProductCode"]">导出</a>
-</form>
+    table {
+        font-size: 9px;
+        text-align: left;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    td {
+        border: 1px solid #ccc;
+    }
+</style>
+<button onclick="window.print()">打印</button>
 
 <h2>财务详情</h2>
 <table class="table">
@@ -54,7 +58,7 @@
 
 <h2>供应商报表</h2>
 <table class="detail-table">
-    @foreach (var i in (from od in Model where od.Product.ProviderID != null group od by od.Product.Provider.Title into g select new { Title = g.Key, Price = g.Sum(x => x.Price) }).ToList())
+    @foreach (var i in (from od in Model where od.Product.ProviderID != null group od by od.Product.Provider.Title into g select new { Title = g.Key, Price = g.Sum(x => x.Price) }))
     {
         <tr>
             <td>@i.Title</td>
@@ -66,14 +70,14 @@
 <h2>大区经理报表</h2>
 <table class="detail-table" style="text-align: center">
     <tr>
-        <td class="row-title" style="text-align: left">大区经理</td>
+        <td style="text-align: left">大区经理</td>
         @foreach (vArea a in ViewBag.Area)
         {
             <td colspan="@a.Service.Count">@a.Manager</td>
         }
     </tr>
     <tr>
-        <td class="row-title" style="text-align: left">服务站</td>
+        <td style="text-align: left">服务站</td>
         @foreach (vArea a in ViewBag.Area)
         {
             foreach (var b in a.Service)
@@ -83,7 +87,7 @@
         }
     </tr>
     <tr>
-        <td class="row-title" style="text-align: left">金额</td>
+        <td style="text-align: left">金额</td>
         @foreach (vArea a in ViewBag.Area)
         {
             foreach (var b in a.Service)

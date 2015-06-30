@@ -45,7 +45,7 @@ namespace LongjiangAgricultureCloud.Controllers
                 query = query.Where(x => x.Time >= Begin.Value);
             if (End.HasValue)
                 query = query.Where(x => x.Time <= End.Value);
-            query = query.OrderByDescending(x => x.Time);
+            query = query.OrderByDescending(x => x.Top).ThenByDescending(x => x.Time);
             ViewBag.PageInfo = PagerHelper.Do(ref query, 50, p);
             return View(query);
         }
@@ -176,7 +176,7 @@ namespace LongjiangAgricultureCloud.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit(int id, string Title, string Description, int? CatalogID, string Name, string Phone, string Address, string Price, SupplyDemand SupplyDemand, bool Top)
+        public ActionResult Edit(int id, string Title, string Description, int? CatalogID, string Name, string Phone, string Address, string Price, SupplyDemand SupplyDemand, int Top)
         {
             var information = DB.Informations.Find(id);
             information.Title = Title;

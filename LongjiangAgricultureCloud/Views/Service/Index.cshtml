@@ -70,7 +70,7 @@
         @foreach (var i in Model)
         {
             <tr id="information-@i.ID">
-                <td>@(i.Top ? "[置顶] " : "")@i.Title</td>
+                <td>@(i.Top > 0 ? "[置顶" + i.Top + "] " : "")@i.Title</td>
                 <td>@i.User.Name (@i.User.Username)</td>
                 @if (ViewBag.VerifyService)
                 {

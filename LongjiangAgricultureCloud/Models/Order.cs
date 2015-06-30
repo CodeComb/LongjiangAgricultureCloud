@@ -43,6 +43,24 @@ namespace LongjiangAgricultureCloud.Models
         public DateTime Time { get; set; }
 
         /// <summary>
+        /// 付款时间
+        /// </summary>
+        [Index]
+        public DateTime? PayTime { get; set; }
+
+        /// <summary>
+        /// 确认收货时间
+        /// </summary>
+        [Index]
+        public DateTime? VerifyTime { get; set; }
+
+        /// <summary>
+        /// 发货时间
+        /// </summary>
+        [Index]
+        public DateTime? DistributeTime { get; set; }
+
+        /// <summary>
         /// 订单状态
         /// </summary>
         [Index]

@@ -10,7 +10,7 @@ using LongjiangAgricultureCloud.Helpers;
 
 namespace LongjiangAgricultureCloud.Controllers
 {
-    [CheckRole(UserRole.系统管理员)]
+    [CheckRole(UserRole.库存管理员)]
     public class ShopController : BaseController
     {
         // GET: Shop
@@ -42,6 +42,7 @@ namespace LongjiangAgricultureCloud.Controllers
                 query = query.Where(x => x.StoreCount <= StoreLte.Value);
             if (Store.HasValue)
                 query = query.Where(x => x.StoreID == Store.Value);
+            query = query.OrderByDescending(x => x.Top);
             ViewBag.PageInfo = PagerHelper.Do(ref query, 50, p);
             return View(query);
         }
@@ -219,7 +220,7 @@ namespace LongjiangAgricultureCloud.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult EditProduct(int id, string Title, bool Top, bool Recommend, int? CatalogID, string Description, string ProductCode, string Standard, string Unit, float Price, int StoreID, int StoreCount, int? ProviderID)
+        public ActionResult EditProduct(int id, string Title, int Top, bool Recommend, int? CatalogID, string Description, string ProductCode, string Standard, string Unit, float Price, int StoreID, int StoreCount, int? ProviderID)
         {
             if (CatalogID == null)
                 return Msg("请选择一个商品分类");
@@ -585,14 +586,94 @@ namespace LongjiangAgricultureCloud.Controllers
             return View(query);
         }
 
-        public ActionResult Distribute()
+        public ActionResult Distribute(DateTime? Begin, DateTime? End, bool? Raw, bool? Xls, string Status)
         {
-            return View();
+            IEnumerable<OrderDetail> orders = (from od in DB.OrderDetails
+                          where od.OrderID != null
+                          select od).ToList();
+            if (string.IsNullOrEmpty(Status) || Status == "待发货")
+                orders = orders.Where(x => x.Order.Status == OrderStatus.待发货);
+            else
+                orders = orders.Where(x => x.Order.Status == OrderStatus.待收货 || x.Order.Status == OrderStatus.待评价 || x.Order.Status == OrderStatus.已完成);
+            if (Begin.HasValue)
+                orders = orders.Where(x => {
+                    if (x.Order.Status == OrderStatus.待发货)
+                        return x.Order.PayTime.Value >= Begin.Value;
+                    else
+                        return x.Order.DistributeTime.Value >= Begin.Value;
+                });
+            if (End.HasValue)
+                orders = orders.Where(x => {
+                    if (x.Order.Status == OrderStatus.待发货)
+                        return x.Order.PayTime.Value<= End.Value;
+                    else
+                        return x.Order.DistributeTime.Value <= End.Value;
+                });
+            if (CurrentUser.Role == UserRole.库存管理员)
+            {
+                var stores = (from s in DB.Stores
+                              where s.UserID == CurrentUser.ID
+                              select s.ID).ToList();
+                orders = orders.Where(x => stores.Contains(x.Product.StoreID));
+            }
+            orders = orders.OrderBy(x => x.Order.Address).ThenBy(x => x.UserID).ToList();
+            if (Raw.HasValue && Raw.Value == true)
+                return View("DistributeRaw", orders);
+            if (Xls.HasValue && Xls.Value == true)
+            {
+                HttpContext.Response.AddHeader("content-disposition", "attachment;filename=\"distribute.xls\"");
+                Response.ContentType = "application/x-xls";
+                return View("DistributeXls", orders);
+            }
+            return View(orders);
         }
 
-        public ActionResult Finance()
+        /// <summary>
+        /// 财务报表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Finance(DateTime? Begin, DateTime? End, bool? Raw, bool? Xls, string ProductCode, string Name, string Username)
         {
-            return View();
+            IEnumerable<OrderDetail> orders = DB.OrderDetails.Where(x => x.Order.Status == OrderStatus.待评价 || x.Order.Status == OrderStatus.已完成).ToList();
+            if (Begin.HasValue)
+                orders = orders.Where(x => x.Order.PayTime != null && x.Order.PayTime.Value >= Begin.Value).ToList();
+            if (End.HasValue)
+                orders = orders.Where(x => x.Order.PayTime != null && x.Order.PayTime.Value <= End.Value).ToList();
+            if (!string.IsNullOrEmpty(ProductCode))
+                orders = orders.Where(x => x.Product.ProductCode == ProductCode).ToList();
+            if (!string.IsNullOrEmpty(Name))
+                orders = orders.Where(x => x.User.Name == Name).ToList();
+            if (!string.IsNullOrEmpty(Username))
+                orders = orders.Where(x => x.User.Username == Username).ToList();
+            orders = orders.OrderBy(x => x.UserID).ToList();
+
+            var service = (from od in orders.Where(x => x.User.Role == UserRole.服务站 && x.User.ManagerID != null)
+                           group od by od.User into g
+                           select new vService {
+                               Service = g.Key.Name,
+                               Price = g.Sum(x => x.Price),
+                               Manager = g.Key.Manager.Name + " " + g.Key.Manager.Username
+                           }).ToList();
+
+            var area = (from s in service
+                        group s by s.Manager into g
+                        select new vArea {
+                            Manager = g.Key,
+                            Price = g.Sum(x => x.Price),
+                            Service = g.ToList()
+                        }).ToList();
+
+            ViewBag.Area = area;
+
+            if (Raw.HasValue && Raw.Value == true)
+                return View("FinanceRaw", orders);
+            if (Xls.HasValue && Xls.Value == true)
+            {
+                HttpContext.Response.AddHeader("content-disposition", "attachment;filename=\"finance.xls\"");
+                Response.ContentType = "application/x-xls";
+                return View("FinanceXls", orders);
+            }
+            return View(orders);
         }
 
         /// <summary>
@@ -733,9 +814,26 @@ namespace LongjiangAgricultureCloud.Controllers
                 foreach (var od in order.OrderDetails)
                     od.Product.StoreCount += od.Count;
             }
+            if (Status == OrderStatus.待评价 && order.Status != OrderStatus.待评价 || Status == OrderStatus.已完成 && order.Status != OrderStatus.已完成)
+                order.PayTime = DateTime.Now;
             order.Status = Status;
             DB.SaveChanges();
             return RedirectToAction("Success", "Shared");
+        }
+
+        /// <summary>
+        /// 改变子订单状态
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult StatusChange(Guid id)
+        {
+            var order = DB.OrderDetails.Find(id);
+            order.DistributeFlag = true;
+            if (order.Order.OrderDetails.All(x => x.DistributeFlag))
+                order.Order.Status = OrderStatus.待收货;
+            DB.SaveChanges();
+            return Content("ok");
         }
     }
 }

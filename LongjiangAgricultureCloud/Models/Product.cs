@@ -91,7 +91,7 @@ namespace LongjiangAgricultureCloud.Models
         /// 置顶标识
         /// </summary>
         [Index]
-        public bool Top { get; set; }
+        public int Top { get; set; }
 
         [Index]
         public bool Recommend { get; set; }

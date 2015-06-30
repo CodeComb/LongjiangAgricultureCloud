@@ -57,12 +57,12 @@
             </td>
         </tr>
         <tr>
-            <td class="row-title">置顶</td>
-            <td>@Html.CheckBoxFor(x => x.Top)</td>
+            <td class="row-title">置顶 (优先级越大越靠前)</td>
+            <td>@Html.TextBoxFor(x => x.Top, new { @class = "w-3 textbox" })</td>
         </tr>
         <tr>
             <td class="row-title">首页推荐</td>
-            <td>@Html.CheckBoxFor(x => x.Recommand)</td>
+            <td>@Html.CheckBoxFor(x => x.Recommend)</td>
         </tr>
     </table>
     <p><input type="submit" class="btn inverse" value="创建" /> <a href="javascript: history.back();" class="btn">返回</a></p>

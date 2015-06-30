@@ -48,9 +48,12 @@
                 <a href="/User/Create"><div class="sidebar-menu"><i class="fa fa-globe icon ico"></i>创建服务站</div></a>
             }
         }
-        @if (ViewBag.CurrentUser.Role == UserRole.库存管理员 || ViewBag.CurrentUser.Role == UserRole.系统管理员)
+        @if (ViewBag.CurrentUser.Role == UserRole.库存管理员 || ViewBag.CurrentUser.Role == UserRole.系统管理员 || ViewBag.CurrentUser.Role == UserRole.报表统计员)
         {
             <div class="sidebar-subtitle">商城管理</div>
+        }
+        @if (ViewBag.CurrentUser.Role == UserRole.库存管理员 || ViewBag.CurrentUser.Role == UserRole.系统管理员)
+        {
             <a href="/Shop"><div class="sidebar-menu"><i class="fa fa-gift icon ico"></i>商品管理</div></a>
         }
         @if (ViewBag.CurrentUser.Role == UserRole.系统管理员)
@@ -59,7 +62,7 @@
             <a href="/Shop/Order"><div class="sidebar-menu"><i class="fa fa-barcode icon ico"></i>订单管理</div></a>
             <a href="/Shop/Store"><div class="sidebar-menu"><i class="fa fa-inbox icon ico"></i>仓库管理</div></a>
         }
-        @if (ViewBag.CurrentUser.Role == UserRole.配送管理员 || ViewBag.CurrentUser.Role == UserRole.系统管理员)
+        @if (ViewBag.CurrentUser.Role == UserRole.配送管理员 || ViewBag.CurrentUser.Role == UserRole.报表统计员 || ViewBag.CurrentUser.Role == UserRole.库存管理员 || ViewBag.CurrentUser.Role == UserRole.系统管理员)
         {
             <a href="/Shop/Distribute"><div class="sidebar-menu"><i class="fa fa-truck icon ico"></i>配送报表</div></a>
         }

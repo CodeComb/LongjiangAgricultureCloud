@@ -45,7 +45,7 @@
             <th>分类</th>
             <th>供求</th>
             <th>时间</th>            
-             @if (ViewBag.VerifyService)
+             @if (ViewBag.VerifyLocalTong)
             {
                 <th>审核</th>
             }
@@ -56,7 +56,7 @@
         @foreach (var i in Model)
         {
             <tr id="information-@i.ID">
-                <td>@(i.Top ? "[置顶] " : "")@i.Title</td>
+                <td>@(i.Top > 0 ? "[置顶" + i.Top + "] " : "")@i.Title</td>
                 <td>@i.User.Name (@i.User.Username)</td>
                 <td>
                     @{ var j = i.Catalog; var str = ""; }
@@ -69,6 +69,10 @@
                 </td>
                 <td>@i.SupplyDemand</td>
                 <td>@i.Time.ToString("yyyy-MM-dd HH:mm")</td>
+                @if (ViewBag.VerifyLocalTong)
+                {
+                    <td>@(i.Verify ? "通过" : "未通过")</td>
+                }
                 <td>                    
                     @if (ViewBag.VerifyLocalTong)
                     {

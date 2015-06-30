@@ -53,7 +53,7 @@ namespace LongjiangAgricultureCloud.Controllers
                 query = query.Where(x => x.Time <= End.Value);
             if (Type.HasValue)
                 query = query.Where(x => x.Type == Type.Value);
-            query = query.OrderByDescending(x => x.Time);
+            query = query.OrderByDescending(x => x.Top).ThenByDescending(x => x.Time);
             ViewBag.PageInfo = PagerHelper.Do(ref query, 50, p);
             return View(query);
         }
@@ -220,7 +220,7 @@ namespace LongjiangAgricultureCloud.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit(int id, string Title, InformationType Type, string Description, int? CatalogID, string Name, string Phone, string Address, bool Top)
+        public ActionResult Edit(int id, string Title, InformationType Type, string Description, int? CatalogID, string Name, string Phone, string Address, int Top)
         {
             var information = DB.Informations.Find(id);
             information.Title = Title;
@@ -243,6 +243,11 @@ namespace LongjiangAgricultureCloud.Controllers
             return RedirectToAction("Success", "Shared");
         }
 
+        /// <summary>
+        /// 维修站图片
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult InformationImg(int id)
         {
             var information = DB.Informations.Find(id);

@@ -1,7 +1,76 @@
-﻿
+﻿@model IEnumerable<OrderDetail>
 @{
     ViewBag.Title = "配送报表";
 }
 
 <h2>@ViewBag.Title</h2>
-<p>没有订单信息</p>
+
+<form class="search">
+    检索：
+    <input type="text" name="Begin" class="textbox w-0-8 datetime" placeholder="时间(大于)" value="@Request.QueryString["Begin"]" />
+    <input type="text" name="End" class="textbox w-0-8 datetime" placeholder="时间(小于)" value="@Request.QueryString["End"]" />
+    <select name="Status">
+        <option @(Request.QueryString["Status"] == "待发货" ? "selected" : "")>待发货</option>
+        <option @(Request.QueryString["Status"] == "已发货" ? "selected" : "")>已发货</option>
+    </select>
+    <input type="submit" class="btn" value="检索" />
+    <a class="btn" target="_blank" href="/Shop/Distribute?raw=true&Begin=@Request.QueryString["Begin"]&End=@Request.QueryString["End"]&Status=@Request.QueryString["Status"]">打印</a>
+    <a class="btn" href="/Shop/Distribute?xls=true&Begin=@Request.QueryString["Begin"]&End=@Request.QueryString["End"]&Status=@Request.QueryString["Status"]">导出</a>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>订单号</th>
+            <th>详细地址</th>
+            <th>买家</th>
+            <th>商品编码</th>
+            <th>商品名</th>
+            <th>仓库</th>
+            <th>购买数量</th>
+            <th>规格</th>
+            <th>单位</th>
+            <th>下单时间</th>
+            <th>发票姓名</th>
+            <th>发票地址</th>
+            <th>总金额</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var od in Model)
+        {
+            <tr id="od-@od.ID">
+                <td>@od.OrderID.ToString().Substring(0, 8)</td>
+                <td>@od.Order.Address</td>
+                <td>@od.Order.User.Name (@od.Order.User.Username)</td>
+                <td>@od.Product.ProductCode</td>
+                <td>@od.Product.Title</td>
+                <td>@od.Product.Store.Title</td>
+                <td>@od.Count</td>
+                <td>@od.Product.Standard</td>
+                <td>@od.Product.Unit</td>
+                <td>@od.Order.Time.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>@od.Order.InvoiceName</td>
+                <td>@od.Order.InvoiceAddress</td>
+                <td>￥@od.Price.ToString("0.00")</td>
+                <td class="status">@od.Order.Status</td>
+                <td class="control">
+                    @if (od.Order.Status == OrderStatus.待发货)
+                    {
+                        <a href="javascript: Distribute('@od.ID');">标记为已发货</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    function Distribute(id)
+    {
+        $("#od-" + id).children('.status').html("待收货");
+        $("#od-" + id).children('.control').hide();
+        $.post('/Shop/StatusChange/' + id, {}, function () { });
+    }
+</script>

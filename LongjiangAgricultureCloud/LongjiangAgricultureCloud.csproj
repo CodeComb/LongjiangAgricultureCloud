@@ -539,6 +539,7 @@
     <Compile Include="Helpers\HtmlFilter.cs" />
     <Compile Include="Helpers\MvcHtmlHelperExt.cs" />
     <Compile Include="Helpers\PagerHelper.cs" />
+    <Compile Include="Helpers\Render.cs" />
     <Compile Include="Helpers\Security.cs" />
     <Compile Include="Helpers\Time.cs" />
     <Compile Include="Models\Area.cs" />
@@ -553,6 +554,7 @@
     <Compile Include="Models\Store.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\vConfig.cs" />
+    <Compile Include="Models\vFinance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schema\BaseAttribute.cs" />
     <Compile Include="Schema\CheckRoleAttribute.cs" />
@@ -609,6 +611,10 @@
     <Content Include="Views\General\License.cshtml" />
     <Content Include="Views\Local\Verify.cshtml" />
     <Content Include="Views\General\RenameCatalog.cshtml" />
+    <Content Include="Views\Shop\DistributeRaw.cshtml" />
+    <Content Include="Views\Shop\DistributeXls.cshtml" />
+    <Content Include="Views\Shop\FinanceRaw.cshtml" />
+    <Content Include="Views\Shop\FinanceXls.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
