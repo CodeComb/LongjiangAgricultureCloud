@@ -10,10 +10,7 @@ namespace LongjiangAgricultureCloud
 {
     public class MvcApplication : System.Web.HttpApplication
     {
-<<<<<<< Updated upstream
-=======
         public static string Path;
->>>>>>> Stashed changes
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -24,10 +21,7 @@ namespace LongjiangAgricultureCloud
             timer.Enabled = true;
             ClearCart();
             timer.Start();
-<<<<<<< Updated upstream
-=======
             Path = Server.MapPath("~/");
->>>>>>> Stashed changes
         }
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
