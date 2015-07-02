@@ -398,12 +398,19 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                 Information.Verify = true;
             var Video = Request.Files["Video"];
             if (Video != null && Video.ContentLength > 0)
-            { 
+            {
                 var fname = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(Video.FileName);
-                var destname = Guid.NewGuid().ToString().Replace("-", "") + ".mp4";
-                Video.SaveAs(Server.MapPath("~/Files/Video/" + fname));
-                Helpers.Video.ChangeFilePhy(fname, destname, "480", "320");
-                Information.VideoURL = destname;
+                if (Path.GetExtension(Video.FileName) == ".3gp")
+                {
+                    var destname = Guid.NewGuid().ToString().Replace("-", "") + ".mp4";
+                    Video.SaveAs(Server.MapPath("~/Files/Video/" + fname));
+                    Helpers.Video.ChangeFilePhy(Server.MapPath("~/Files/Video/" + fname), Server.MapPath("~/Files/Video/" + destname), "480", "320");
+                    Information.VideoURL = destname;
+                }
+                else
+                {
+                    Information.VideoURL = fname;
+                }
             }
             DB.Informations.Add(Information);
             DB.SaveChanges();
@@ -438,10 +445,17 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             if (Video != null && Video.ContentLength > 0)
             {
                 var fname = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(Video.FileName);
-                var destname = Guid.NewGuid().ToString().Replace("-", "") + ".mp4";
-                Video.SaveAs(Server.MapPath("~/Files/Video/" + fname));
-                Helpers.Video.ChangeFilePhy(fname, destname, "480", "320");
-                information.VideoURL = destname;
+                if (Path.GetExtension(Video.FileName) == ".3gp")
+                {
+                    var destname = Guid.NewGuid().ToString().Replace("-", "") + ".mp4";
+                    Video.SaveAs(Server.MapPath("~/Files/Video/" + fname));
+                    Helpers.Video.ChangeFilePhy(Server.MapPath("~/Files/Video/" + fname), Server.MapPath("~/Files/Video/" + destname), "480", "320");
+                    information.VideoURL = destname;
+                }
+                else
+                {
+                    information.VideoURL = fname;
+                }
             }
             DB.SaveChanges();
             return Msg("本地通信息编辑成功");

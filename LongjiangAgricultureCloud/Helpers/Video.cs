@@ -19,11 +19,15 @@ namespace LongjiangAgricultureCloud.Helpers
         public static bool ChangeFilePhy(string fileName, string playFile, string widthSize, string heightSize)
         {
             //ffmpeg.exe flv转换工具
-            string ffmpeg = MvcApplication.Path + "shell/ffmpeg.exe";
+            string ffmpeg = MvcApplication.Path + "Shell\\ffmpeg.exe";
             //判断转换工具，转换文件是否存在
-            if ((!System.IO.File.Exists(ffmpeg)) || (!System.IO.File.Exists(fileName)))
+            if (!System.IO.File.Exists(ffmpeg))
             {
-                throw new Exception("没有找到ffmpeg");
+                throw new Exception("没有找到ffmpeg从位置：" + ffmpeg);
+            }
+            if (!System.IO.File.Exists(fileName))
+            {
+                throw new Exception("没有找到视频从位置：" + fileName);
             }
             //获得(.mp4)文件
             string flv_file = System.IO.Path.ChangeExtension(playFile, ".mp4");
