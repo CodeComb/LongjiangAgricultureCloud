@@ -150,8 +150,10 @@ namespace LongjiangAgricultureCloud.Controllers
             if (Video != null)
             {
                 var fname = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(Video.FileName);
+                var destname = Guid.NewGuid().ToString().Replace("-", "") + ".mp4";
                 Video.SaveAs(Server.MapPath("~/Files/Video/" + fname));
-                Information.VideoURL = fname;
+                Helpers.Video.ChangeFilePhy(fname, destname, "480", "320");
+                Information.VideoURL = destname;
             }
 
             DB.Informations.Add(Information);

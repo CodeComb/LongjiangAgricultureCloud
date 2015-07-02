@@ -504,6 +504,12 @@
     <Content Include="Scripts\pie.js" />
     <Content Include="Scripts\png.js" />
     <Content Include="Scripts\site.js" />
+    <Content Include="Shell\ffmpeg.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Shell\pthreadGC2.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Styles\datetimepicker.css" />
     <Content Include="Styles\duoshuo.css" />
     <Content Include="Styles\icons.css" />
@@ -544,6 +550,7 @@
     <Compile Include="Helpers\Render.cs" />
     <Compile Include="Helpers\Security.cs" />
     <Compile Include="Helpers\Time.cs" />
+    <Compile Include="Helpers\Video.cs" />
     <Compile Include="Models\Area.cs" />
     <Compile Include="Models\Catalog.cs" />
     <Compile Include="Models\Comment.cs" />

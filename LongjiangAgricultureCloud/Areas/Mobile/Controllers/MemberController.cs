@@ -400,8 +400,10 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             if (Video != null && Video.ContentLength > 0)
             { 
                 var fname = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(Video.FileName);
+                var destname = Guid.NewGuid().ToString().Replace("-", "") + ".mp4";
                 Video.SaveAs(Server.MapPath("~/Files/Video/" + fname));
-                Information.VideoURL = fname;
+                Helpers.Video.ChangeFilePhy(fname, destname, "480", "320");
+                Information.VideoURL = destname;
             }
             DB.Informations.Add(Information);
             DB.SaveChanges();
@@ -436,8 +438,10 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             if (Video != null && Video.ContentLength > 0)
             {
                 var fname = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(Video.FileName);
+                var destname = Guid.NewGuid().ToString().Replace("-", "") + ".mp4";
                 Video.SaveAs(Server.MapPath("~/Files/Video/" + fname));
-                information.VideoURL = fname;
+                Helpers.Video.ChangeFilePhy(fname, destname, "480", "320");
+                information.VideoURL = destname;
             }
             DB.SaveChanges();
             return Msg("本地通信息编辑成功");
