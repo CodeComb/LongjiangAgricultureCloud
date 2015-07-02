@@ -46,7 +46,7 @@ namespace LongjiangAgricultureCloud.Helpers
             if (pic.Contains(ext))
                 return MvcHtmlString.Create("<p><img src='/Files/Video/" + URL + "' /></p>");
             else
-                return MvcHtmlString.Create("<p><video src='"+ URL +"' controls='controls'></video></p>");
+                return MvcHtmlString.Create("<p><video src='/Files/Video/" + URL +"' controls='controls'></video></p>");
         }
 
         public static MvcHtmlString MakePager<TModel>(this HtmlHelper<TModel> self)

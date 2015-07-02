@@ -400,10 +400,10 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             if (Video != null && Video.ContentLength > 0)
             {
                 var fname = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(Video.FileName);
+                Video.SaveAs(Server.MapPath("~/Files/Video/" + fname));
                 if (Path.GetExtension(Video.FileName) == ".3gp")
                 {
                     var destname = Guid.NewGuid().ToString().Replace("-", "") + ".mp4";
-                    Video.SaveAs(Server.MapPath("~/Files/Video/" + fname));
                     Helpers.Video.ChangeFilePhy(Server.MapPath("~/Files/Video/" + fname), Server.MapPath("~/Files/Video/" + destname), "480", "320");
                     Information.VideoURL = destname;
                 }
@@ -445,16 +445,16 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             if (Video != null && Video.ContentLength > 0)
             {
                 var fname = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(Video.FileName);
+                Video.SaveAs(Server.MapPath("~/Files/Video/" + fname));
                 if (Path.GetExtension(Video.FileName) == ".3gp")
                 {
                     var destname = Guid.NewGuid().ToString().Replace("-", "") + ".mp4";
-                    Video.SaveAs(Server.MapPath("~/Files/Video/" + fname));
                     Helpers.Video.ChangeFilePhy(Server.MapPath("~/Files/Video/" + fname), Server.MapPath("~/Files/Video/" + destname), "480", "320");
-                    information.VideoURL = destname;
+                    Information.VideoURL = destname;
                 }
                 else
                 {
-                    information.VideoURL = fname;
+                    Information.VideoURL = fname;
                 }
             }
             DB.SaveChanges();
