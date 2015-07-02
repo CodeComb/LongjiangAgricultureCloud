@@ -6,6 +6,7 @@
 <style>
     td, th {
         padding: 3px;
+        font-size: 12px;
     }
 
     table {
@@ -25,6 +26,7 @@
         <td>购买数量</td>
         <td>规格</td>
         <td>单位</td>
+        <td>单价</td>
         <td>下单时间</td>
         <td>发票姓名</td>
         <td>发票地址</td>
@@ -43,6 +45,7 @@
             <td>@od.Count</td>
             <td>@od.Product.Standard</td>
             <td>@od.Product.Unit</td>
+            <td>￥@((od.Price / od.Count).ToString("0.00"))</td>
             <td>@od.Order.Time.ToString("yyyy-MM-dd HH:mm")</td>
             <td>@od.Order.InvoiceName</td>
             <td>@od.Order.InvoiceAddress</td>

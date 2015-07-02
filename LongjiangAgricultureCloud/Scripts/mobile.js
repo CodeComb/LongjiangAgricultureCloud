@@ -177,6 +177,9 @@ function LoadProducts() {
 
 $(document).ready(function () {
     Load();
+    $("img").click(function () {
+        window.location = "/Mobile/Mobile/Image?src=" + $(this).attr("src");
+    });
 });
 
 $(window).scroll(function () {

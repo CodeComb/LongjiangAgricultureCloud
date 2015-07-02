@@ -42,8 +42,8 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                                 && i.Verify == true
                                 && i.CatalogID == id
                                 && (i.Title.Contains(Title) || Title.Contains(i.Title))
-                                orderby i.Time descending
-                                select i).ToList();
+                                orderby i.Top descending, i.Time descending
+                                select i).Skip(20 * p).Take(20).ToList();
             return View(informations);
         }
 
@@ -69,7 +69,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                 UserID = CurrentUser.ID
             };
             var Video = Request.Files["Video"];
-            if (Video != null)
+            if (Video != null && Video.ContentLength > 0)
             {
                 var fname = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(Video.FileName);
                 Video.SaveAs(Server.MapPath("~/Files/Video/" + fname));
@@ -92,7 +92,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                             where c.Type == CommentType.本地通评论
                             && c.TargetID == id
                             && c.Verify
-                            orderby c.Time descending
+                            orderby c.Time ascending
                             select c).Take(20).ToList();
             ViewBag.Comments = comments;
             return View(information);

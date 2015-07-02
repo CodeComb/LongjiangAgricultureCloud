@@ -60,7 +60,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
         /// <returns></returns>
         public ActionResult Join()
         {
-            return View(CurrentUser.Providers);
+            return View(DB.Providers.Where(x => x.UserID == CurrentUser.ID).ToList());
         }
 
         /// <summary>
@@ -164,7 +164,6 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             }
             #endregion
             Provider.Time = DateTime.Now;
-            Provider.UserID = null;
             DB.Providers.Add(Provider);
             DB.SaveChanges();
             return Msg("申请提交成功！请耐心等待管理员审核，在此期间请确保登记的联系方式畅通，切勿重复提交申请。");
@@ -206,6 +205,8 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             if (order.UserID != CurrentUser.ID || order.Status != OrderStatus.待付款)
                 return Msg("非法操作");
             order.Status = OrderStatus.已取消;
+            foreach (var od in order.OrderDetails)
+                od.Product.StoreCount += od.Count;
             DB.SaveChanges();
             return Msg("订单取消成功！");
         }
@@ -235,7 +236,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
         public ActionResult GiveBack(Guid id)
         {
             var order = DB.Orders.Find(id);
-            if (order.UserID != CurrentUser.ID || order.Status != OrderStatus.待评价)
+            if (order.UserID != CurrentUser.ID || order.Status != OrderStatus.待评价 && order.Status != OrderStatus.已完成)
                 return Msg("非法操作");
             return View(order);
         }
@@ -251,7 +252,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
         public ActionResult GiveBack(Guid id, string Reason)
         {
             var order = DB.Orders.Find(id);
-            if (order.UserID != CurrentUser.ID || order.Status != OrderStatus.待评价)
+            if (order.UserID != CurrentUser.ID || order.Status != OrderStatus.待评价 && order.Status != OrderStatus.已完成)
                 return Msg("非法操作");
             order.GiveBackReason = Reason;
             order.Status = OrderStatus.退款中;
@@ -396,8 +397,8 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             else
                 Information.Verify = true;
             var Video = Request.Files["Video"];
-            if (Video != null)
-            {
+            if (Video != null && Video.ContentLength > 0)
+            { 
                 var fname = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(Video.FileName);
                 Video.SaveAs(Server.MapPath("~/Files/Video/" + fname));
                 Information.VideoURL = fname;

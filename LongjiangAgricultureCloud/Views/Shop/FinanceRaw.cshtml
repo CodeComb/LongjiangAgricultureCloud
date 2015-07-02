@@ -4,8 +4,11 @@
 }
 
 <style>
+    
+
     td, th {
         padding: 3px;
+        font-size: 13px;
     }
 
     table {
@@ -32,6 +35,7 @@
             <th>数量</th>
             <th>规格</th>
             <th>单位</th>
+            <th>单价</th>
             <th>总金额</th>
             <th>付款时间</th>
         </tr>
@@ -47,6 +51,7 @@
                 <td>@od.Count</td>
                 <td>@od.Product.Standard</td>
                 <td>@od.Product.Unit</td>
+                <td>￥@((od.Price / od.Count).ToString("0.00"))</td>
                 <td>￥@od.Price.ToString("0.00")</td>
                 <td>@od.Order.PayTime.Value.ToString("yyyy-MM-dd")</td>
             </tr>
@@ -68,32 +73,31 @@
 </table>
 
 <h2>大区经理报表</h2>
-<table class="detail-table" style="text-align: center">
+<table>
     <tr>
-        <td style="text-align: left">大区经理</td>
-        @foreach (vArea a in ViewBag.Area)
-        {
-            <td colspan="@a.Service.Count">@a.Manager</td>
-        }
+        <td>大区经理</td>
+        <td>服务站</td>
+        <td>金额</td>
     </tr>
-    <tr>
-        <td style="text-align: left">服务站</td>
-        @foreach (vArea a in ViewBag.Area)
-        {
-            foreach (var b in a.Service)
+    @foreach (vArea a in ViewBag.Area)
+    {
+        <tr>
+            <td rowspan="@a.Service.Count">@a.Manager (￥@(a.Service.Sum(x => x.Price).ToString("0.00")))</td>
+            @if(a.Service.Count > 0)
             {
-                <td>@b.Service</td>
+            <td>@a.Service[0].Service</td>
+            <td>@a.Service[0].Price.ToString("0.00")</td>
             }
-        }
-    </tr>
-    <tr>
-        <td style="text-align: left">金额</td>
-        @foreach (vArea a in ViewBag.Area)
-        {
-            foreach (var b in a.Service)
-            {
-                <td>￥@b.Price.ToString("0.00")</td>
-            }
-        }
-    </tr>
+        </tr>
+        for(var i = 1; i < a.Service.Count; i++)
+{
+<tr>
+
+
+            <td>@a.Service[i].Service</td>
+            <td>@a.Service[i].Price.ToString("0.00")</td>
+</tr>
+}
+    }
+       
 </table>

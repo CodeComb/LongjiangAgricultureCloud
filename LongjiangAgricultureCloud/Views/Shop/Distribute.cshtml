@@ -9,13 +9,14 @@
     检索：
     <input type="text" name="Begin" class="textbox w-0-8 datetime" placeholder="时间(大于)" value="@Request.QueryString["Begin"]" />
     <input type="text" name="End" class="textbox w-0-8 datetime" placeholder="时间(小于)" value="@Request.QueryString["End"]" />
+    <input type="text" name="Name" class="textbox w-0-8" placeholder="服务站名" value="@Request.QueryString["Name"]" />
     <select name="Status">
         <option @(Request.QueryString["Status"] == "待发货" ? "selected" : "")>待发货</option>
         <option @(Request.QueryString["Status"] == "已发货" ? "selected" : "")>已发货</option>
     </select>
     <input type="submit" class="btn" value="检索" />
-    <a class="btn" target="_blank" href="/Shop/Distribute?raw=true&Begin=@Request.QueryString["Begin"]&End=@Request.QueryString["End"]&Status=@Request.QueryString["Status"]">打印</a>
-    <a class="btn" href="/Shop/Distribute?xls=true&Begin=@Request.QueryString["Begin"]&End=@Request.QueryString["End"]&Status=@Request.QueryString["Status"]">导出</a>
+    <a class="btn" target="_blank" href="/Shop/Distribute?raw=true&Begin=@Request.QueryString["Begin"]&End=@Request.QueryString["End"]&Status=@Request.QueryString["Status"]&Name=@Request.QueryString["Name"]">打印</a>
+    <a class="btn" href="/Shop/Distribute?xls=true&Begin=@Request.QueryString["Begin"]&End=@Request.QueryString["End"]&Status=@Request.QueryString["Status"]&Name=@Request.QueryString["Name"]">导出</a>
 </form>
 
 <table class="table">
@@ -30,6 +31,7 @@
             <th>购买数量</th>
             <th>规格</th>
             <th>单位</th>
+            <th>单价</th>
             <th>下单时间</th>
             <th>发票姓名</th>
             <th>发票地址</th>
@@ -51,6 +53,7 @@
                 <td>@od.Count</td>
                 <td>@od.Product.Standard</td>
                 <td>@od.Product.Unit</td>
+                <td>￥@((od.Price / od.Count).ToString("0.00"))</td>
                 <td>@od.Order.Time.ToString("yyyy-MM-dd HH:mm")</td>
                 <td>@od.Order.InvoiceName</td>
                 <td>@od.Order.InvoiceAddress</td>

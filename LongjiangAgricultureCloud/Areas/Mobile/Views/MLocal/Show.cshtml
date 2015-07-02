@@ -37,7 +37,7 @@
             <div class="sub-title">
                 @if (!string.IsNullOrEmpty(c.VideoURL))
                 {
-                    <p><video src="/Files/Video/@Model.VideoURL" controls="controls"></video></p>
+                    @Html.VideoOrImg(c.VideoURL)
                 }
                 @c.Content
             </div>

@@ -59,7 +59,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             ViewBag.Comments = (from c in DB.Comments
                                 where c.TargetID == id
                                 && c.Type == CommentType.农业信息评论
-                                orderby c.Time descending
+                                orderby c.Time ascending
                                 select c).ToList();
             return View(information);
         }

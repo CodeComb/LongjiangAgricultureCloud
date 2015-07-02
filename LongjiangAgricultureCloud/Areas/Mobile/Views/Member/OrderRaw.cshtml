@@ -39,6 +39,12 @@
             <a href="javascript:$('#VerifyOrderID').val('@o.ID');$('#frmVerify').submit()">确认收货</a>
         </div>
     }
+    if (o.Status == OrderStatus.已完成)
+    {
+        <div class="list-outer">
+            <a href="/Mobile/Member/GiveBack/@o.ID">申请退货</a>
+        </div>
+    }
     if (o.Status == OrderStatus.待评价)
     {
         <div class="list-outer">

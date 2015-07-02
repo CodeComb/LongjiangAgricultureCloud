@@ -42,6 +42,14 @@
         <td class="row-title">买家备注</td>
         <td>@Model.Hint</td>
     </tr>
+@if (Model.Status == OrderStatus.退款中)
+{
+
+    <tr>
+        <td class="row-title">退款理由</td>
+        <td>@Model.GiveBackReason</td>
+    </tr>
+}
     <tr>
         <td class="row-title">订单内容</td>
         <td>

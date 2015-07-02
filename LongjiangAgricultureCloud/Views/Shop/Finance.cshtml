@@ -11,10 +11,11 @@
     <input type="text" name="End" class="textbox w-0-8 datetime" placeholder="时间(小于)" value="@Request.QueryString["End"]" />
     <input type="text" name="Username" class="textbox w-0-8" placeholder="手机号" value="@Request.QueryString["Username"]" />
     <input type="text" name="Name" class="textbox w-0-8" placeholder="姓名" value="@Request.QueryString["Name"]" />
+    <input type="text" name="Address" class="textbox w-0-8" placeholder="地址" value="@Request.QueryString["Address"]" />
     <input type="text" name="ProductCode" class="textbox w-0-8" placeholder="产品编码" value="@Request.QueryString["ProductCode"]" />
     <input type="submit" class="btn" value="检索" />
-    <a class="btn" target="_blank" href="/Shop/Finance?raw=true&Begin=@Request.QueryString["Begin"]&End=@Request.QueryString["End"]&Name=@Request.QueryString["Name"]&Username=@Request.QueryString["Username"]&ProductCode=@Request.QueryString["ProductCode"]">打印</a>
-    <a class="btn" href="/Shop/Finance?xls=true&Begin=@Request.QueryString["Begin"]&End=@Request.QueryString["End"]&Name=@Request.QueryString["Name"]&Username=@Request.QueryString["Username"]&ProductCode=@Request.QueryString["ProductCode"]">导出</a>
+    <a class="btn" target="_blank" href="/Shop/Finance?raw=true&Begin=@Request.QueryString["Begin"]&End=@Request.QueryString["End"]&Name=@Request.QueryString["Name"]&Username=@Request.QueryString["Username"]&ProductCode=@Request.QueryString["ProductCode"]&Address=@Request.QueryString["Address"]">打印</a>
+    <a class="btn" href="/Shop/Finance?xls=true&Begin=@Request.QueryString["Begin"]&End=@Request.QueryString["End"]&Name=@Request.QueryString["Name"]&Username=@Request.QueryString["Username"]&ProductCode=@Request.QueryString["ProductCode"]&Address=@Request.QueryString["Address"]">导出</a>
 </form>
 
 <h2>财务详情</h2>
@@ -28,6 +29,7 @@
             <th>数量</th>
             <th>规格</th>
             <th>单位</th>
+            <th>单价</th>
             <th>总金额</th>
             <th>付款时间</th>
         </tr>
@@ -44,6 +46,7 @@
                 <td>@od.Product.Standard</td>
                 <td>@od.Product.Unit</td>
                 <td>￥@od.Price.ToString("0.00")</td>
+                <td>￥@((od.Price / od.Count).ToString("0.00"))</td>
                 <td>@od.Order.PayTime.Value.ToString("yyyy-MM-dd")</td>
             </tr>
         }
@@ -69,7 +72,7 @@
         <td class="row-title" style="text-align: left">大区经理</td>
         @foreach (vArea a in ViewBag.Area)
         {
-            <td colspan="@a.Service.Count">@a.Manager</td>
+            <td colspan="@a.Service.Count">@a.Manager (￥@(a.Service.Sum(x => x.Price).ToString("0.00")))</td>
         }
     </tr>
     <tr>

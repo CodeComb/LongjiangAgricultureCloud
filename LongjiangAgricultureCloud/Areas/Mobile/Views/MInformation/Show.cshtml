@@ -35,7 +35,7 @@
                 </div>
             }
         }
-        @if (User.Identity.IsAuthenticated)
+        @if (User.Identity.IsAuthenticated && Model.Catalog.Commentable)
         {
             <p style="color: #888;margin-left: 0.6em">
                 发表评论

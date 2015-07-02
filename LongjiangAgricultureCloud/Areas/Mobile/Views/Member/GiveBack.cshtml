@@ -6,6 +6,7 @@
 <div class="wrap-cont">
     @using (Html.BeginForm("GiveBack", "Member", FormMethod.Post))
     {
+        @Html.AntiForgeryToken()
         <input type="hidden" name="id" value="@Model.ID" />
         <div class="list-outer">
             <textarea class="textbox" name="Reason" placeholder="请在此处填写退款原因，以及希望得到的处理结果"></textarea>

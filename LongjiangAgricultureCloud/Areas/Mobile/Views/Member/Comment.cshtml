@@ -9,6 +9,7 @@
 <div class="wrap-cont">
     @using (Html.BeginForm("Comment", "Member", FormMethod.Post))
     {
+        @Html.AntiForgeryToken()
         <input type="hidden" value="@Model.ID" name="id" />
         foreach (var od in Model.OrderDetails)
         {

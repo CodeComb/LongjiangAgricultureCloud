@@ -228,5 +228,15 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Mobile");
         }
+
+        /// <summary>
+        /// 图片
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Image()
+        {
+            return View();
+        }
+
     }
 }

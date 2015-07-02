@@ -13,6 +13,7 @@
         <td style="border: 1px solid #ccc">数量</td>
         <td style="border: 1px solid #ccc">规格</td>
         <td style="border: 1px solid #ccc">单位</td>
+        <td style="border: 1px solid #ccc">单价</td>
         <td style="border: 1px solid #ccc">总金额</td>
         <td style="border: 1px solid #ccc">付款时间</td>
     </tr>
@@ -26,6 +27,7 @@
                 <td style="border: 1px solid #ccc">@od.Count</td>
                 <td style="border: 1px solid #ccc">@od.Product.Standard</td>
                 <td style="border: 1px solid #ccc">@od.Product.Unit</td>
+                <td style="border: 1px solid #ccc">￥@((od.Price / od.Count).ToString("0.00"))</td>
                 <td style="border: 1px solid #ccc">￥@od.Price.ToString("0.00")</td>
                 <td style="border: 1px solid #ccc">@od.Order.PayTime.Value.ToString("yyyy-MM-dd")</td>
             </tr>
@@ -49,7 +51,7 @@
         <td style="border: 1px solid #ccc">大区经理</td>
         @foreach (vArea a in ViewBag.Area)
         {
-            <td style="text-align:center;border: 1px solid #ccc" colspan="@a.Service.Count">@a.Manager</td>
+            <td style="text-align:center;border: 1px solid #ccc" colspan="@a.Service.Count">@a.Manager (￥@(a.Service.Sum(x => x.Price).ToString("0.00")))</td>
         }
     </tr>
     <tr>

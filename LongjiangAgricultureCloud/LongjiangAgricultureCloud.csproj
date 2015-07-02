@@ -169,6 +169,8 @@
     <Content Include="Areas\Mobile\Views\Mobile\Forgot.cshtml" />
     <Content Include="Areas\Mobile\Views\Mobile\Forgot2.cshtml" />
     <Content Include="Areas\Mobile\Views\MService\ShowFammer.cshtml" />
+    <Content Include="Areas\Mobile\Views\Shared\_LayoutSizeable.cshtml" />
+    <Content Include="Areas\Mobile\Views\Mobile\Image.cshtml" />
     <None Include="Properties\PublishProfiles\ChinaUnicom.pubxml" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\ckeditor.js" />

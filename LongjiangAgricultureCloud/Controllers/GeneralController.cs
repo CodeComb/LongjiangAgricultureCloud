@@ -101,7 +101,7 @@ namespace LongjiangAgricultureCloud.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateCatalog(int? FatherID, string Title, CatalogType? Type, bool? Commentable)
+        public ActionResult CreateCatalog(int? FatherID, string Title, CatalogType? Type, bool Commentable = true)
         {
             var catalog = new Catalog();
             Catalog father = null;
@@ -111,7 +111,7 @@ namespace LongjiangAgricultureCloud.Controllers
                 catalog.FatherID = FatherID.Value;
                 catalog.Level = father.Level + 1;
                 catalog.Type = father.Type;
-                catalog.Commentable = Commentable.Value;
+                catalog.Commentable = Commentable;
             }
             else
             {

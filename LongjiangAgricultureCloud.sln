@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.22823.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LongjiangAgricultureCloud", "LongjiangAgricultureCloud\LongjiangAgricultureCloud.csproj", "{47ABF126-2E4F-4339-B8AB-9906E8D5C718}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B397955D-AC1A-4DA1-B65C-234559B7B8B0}"
@@ -11,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TodoList.txt = TodoList.txt
 		文件组织结构.docx = 文件组织结构.docx
 		需求文档.docx = 需求文档.docx
+		..\龙江运农业说明书.docx = ..\龙江运农业说明书.docx
+		..\龙江运农业说明书.pdf = ..\龙江运农业说明书.pdf
 	EndProjectSection
 EndProject
 Global

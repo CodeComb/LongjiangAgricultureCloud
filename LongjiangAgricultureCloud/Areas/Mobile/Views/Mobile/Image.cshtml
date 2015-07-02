@@ -1,0 +1,10 @@
+﻿@{
+    ViewBag.Title = "图片";
+    ViewBag.Back = true;
+    Layout = "~/Areas/Mobile/Views/Shared/_LayoutSizeable.cshtml";
+}
+
+@Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
+<div class="wrap-cont">
+    <img src="@Request.QueryString["src"]" style="width: 100%" />
+</div>

@@ -586,7 +586,7 @@ namespace LongjiangAgricultureCloud.Controllers
             return View(query);
         }
 
-        public ActionResult Distribute(DateTime? Begin, DateTime? End, bool? Raw, bool? Xls, string Status)
+        public ActionResult Distribute(DateTime? Begin, DateTime? End, string Name, string Status, bool Raw = false, bool Xls = false)
         {
             IEnumerable<OrderDetail> orders = (from od in DB.OrderDetails
                           where od.OrderID != null
@@ -609,6 +609,8 @@ namespace LongjiangAgricultureCloud.Controllers
                     else
                         return x.Order.DistributeTime.Value <= End.Value;
                 });
+            if (!string.IsNullOrEmpty(Name))
+                orders = orders.Where(x => !string.IsNullOrEmpty(x.User.Name) && x.User.Name.Contains(Name));
             if (CurrentUser.Role == UserRole.库存管理员)
             {
                 var stores = (from s in DB.Stores
@@ -617,9 +619,9 @@ namespace LongjiangAgricultureCloud.Controllers
                 orders = orders.Where(x => stores.Contains(x.Product.StoreID));
             }
             orders = orders.OrderBy(x => x.Order.Address).ThenBy(x => x.UserID).ToList();
-            if (Raw.HasValue && Raw.Value == true)
+            if (Raw == true)
                 return View("DistributeRaw", orders);
-            if (Xls.HasValue && Xls.Value == true)
+            if (Xls == true)
             {
                 HttpContext.Response.AddHeader("content-disposition", "attachment;filename=\"distribute.xls\"");
                 Response.ContentType = "application/x-xls";
@@ -632,7 +634,7 @@ namespace LongjiangAgricultureCloud.Controllers
         /// 财务报表
         /// </summary>
         /// <returns></returns>
-        public ActionResult Finance(DateTime? Begin, DateTime? End, bool? Raw, bool? Xls, string ProductCode, string Name, string Username)
+        public ActionResult Finance(DateTime? Begin, DateTime? End, string Address, string ProductCode, string Name, string Username, bool Raw = false, bool Xls = false)
         {
             IEnumerable<OrderDetail> orders = DB.OrderDetails.Where(x => x.Order.Status == OrderStatus.待评价 || x.Order.Status == OrderStatus.已完成).ToList();
             if (Begin.HasValue)
@@ -640,11 +642,13 @@ namespace LongjiangAgricultureCloud.Controllers
             if (End.HasValue)
                 orders = orders.Where(x => x.Order.PayTime != null && x.Order.PayTime.Value <= End.Value).ToList();
             if (!string.IsNullOrEmpty(ProductCode))
-                orders = orders.Where(x => x.Product.ProductCode == ProductCode).ToList();
+                orders = orders.Where(x => x.Product.ProductCode.IndexOf(ProductCode) == 0).ToList();
             if (!string.IsNullOrEmpty(Name))
                 orders = orders.Where(x => x.User.Name == Name).ToList();
             if (!string.IsNullOrEmpty(Username))
                 orders = orders.Where(x => x.User.Username == Username).ToList();
+            if (!string.IsNullOrEmpty(Address))
+                orders = orders.Where(x => x.Order.Address.Contains(Address)).ToList();
             orders = orders.OrderBy(x => x.UserID).ToList();
 
             var service = (from od in orders.Where(x => x.User.Role == UserRole.服务站 && x.User.ManagerID != null)
@@ -665,9 +669,9 @@ namespace LongjiangAgricultureCloud.Controllers
 
             ViewBag.Area = area;
 
-            if (Raw.HasValue && Raw.Value == true)
+            if (Raw == true)
                 return View("FinanceRaw", orders);
-            if (Xls.HasValue && Xls.Value == true)
+            if (Xls == true)
             {
                 HttpContext.Response.AddHeader("content-disposition", "attachment;filename=\"finance.xls\"");
                 Response.ContentType = "application/x-xls";
