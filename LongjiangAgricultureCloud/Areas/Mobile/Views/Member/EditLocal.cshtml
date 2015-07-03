@@ -39,7 +39,7 @@
                 <option>无</option>
                 @foreach (Catalog c in ViewBag.Level2)
                 {
-                    <option @(Model.CatalogID != null && Model.Catalog.FatherID == c.ID ? "selected" : "") value="@c.ID">@c.Title</option>
+                    <option data-parent-id="@c.FatherID" @(Model.CatalogID != null && Model.Catalog.FatherID == c.ID ? "selected" : "") value="@c.ID">@c.Title</option>
                 }
             </select>
         </div>
@@ -49,7 +49,7 @@
                 <option>无</option>
                 @foreach (Catalog c in ViewBag.Level3)
                 {
-                    <option @(Model.CatalogID != null && Model.CatalogID == c.ID ? "selected" : "") value="@c.ID">@c.Title</option>
+                    <option data-parent-id="@c.FatherID" @(Model.CatalogID != null && Model.CatalogID == c.ID ? "selected" : "") value="@c.ID">@c.Title</option>
                 }
             </select>
         </div>

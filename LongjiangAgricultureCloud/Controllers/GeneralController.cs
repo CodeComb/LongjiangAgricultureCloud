@@ -221,18 +221,30 @@ namespace LongjiangAgricultureCloud.Controllers
             return Content("ok");
         }
 
+        /// <summary>
+        /// 编辑分类
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult RenameCatalog(int id)
         {
             var catalog = DB.Catalogs.Find(id);
             return View(catalog);
         }
 
+        /// <summary>
+        /// 编辑分类
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="Title"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult RenameCatalog(int id, string Title)
+        public ActionResult RenameCatalog(int id, string Title, bool Commentable = true)
         {
             var catalog = DB.Catalogs.Find(id);
             catalog.Title = Title;
+            catalog.Commentable = Commentable;
             DB.SaveChanges();
             return RedirectToAction("Success", "Shared");
         }

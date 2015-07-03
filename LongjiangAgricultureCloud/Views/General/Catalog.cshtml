@@ -13,6 +13,10 @@
             <th>分类名称</th>
             <th>分类级数</th>
             <th>父类名</th>
+            @if (ViewBag.Level == 3)
+            {
+                <th>是否可评论</th>
+            }
             <th>操作</th>
         </tr>
     </thead>
@@ -24,10 +28,14 @@
                 <td>@c.Type</td>
                 <td>@c.Title</td>
                 <td>@(c.Level + 1)</td>
-                <td>@(c.Level == 0 ? "-" : c.Father.Title)</td>
+                <td>@(c.Level == 0 ? "-" : c.Father.Title)</td>                
+                @if (ViewBag.Level == 3)
+                {
+                    <td>@(c.Commentable ? "可评论" : "不可评论")</td>
+                }
                 <td>
                     <a href="/General/Catalog/@c.ID">管理子类别</a>
-                    <a href="/General/RenameCatalog/@c.ID">重命名</a>
+                    <a href="/General/RenameCatalog/@c.ID">编辑</a>
                     <a href="javascript: deleteDialog('/General/DeleteCatalog/@c.ID', 'catalog-@c.ID')">删除</a>
                 </td>
             </tr>
