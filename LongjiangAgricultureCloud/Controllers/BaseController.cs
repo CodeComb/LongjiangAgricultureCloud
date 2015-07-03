@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.Security;
 using LongjiangAgricultureCloud.Models;
 
 namespace LongjiangAgricultureCloud.Controllers
@@ -19,10 +20,19 @@ namespace LongjiangAgricultureCloud.Controllers
             base.Initialize(requestContext);
             if (User.Identity.IsAuthenticated)
             {
-                CurrentUser = (from u in DB.Users
-                        where u.Username == User.Identity.Name
-                        select u).Single();
-                ViewBag.CurrentUser = CurrentUser;
+                try
+                {
+                    CurrentUser = (from u in DB.Users
+                                   where u.Username == User.Identity.Name
+                                   select u).Single();
+                    ViewBag.CurrentUser = CurrentUser;
+
+                }
+                catch
+                {
+                    FormsAuthentication.SignOut();
+                    requestContext.HttpContext.Response.Redirect("/");
+                }
             }
             ViewBag.Provinces = DB.Areas.Where(x => x.Level == AreaLevel.省).ToList();
             ViewBag.Cities = DB.Areas.Where(x => x.Level == AreaLevel.市).ToList();
