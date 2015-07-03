@@ -13,8 +13,7 @@
             @Html.TextBoxFor(x => x.Title, new { @class = "textbox form" })
         </div>
         <div class="textbox-outer">
-            <div class="field">描述</div>
-            @Html.TextBoxFor(x => x.Description, new { @class = "textbox form" })
+            @Html.TextAreaFor(x => x.Description, new { @class = "textbox", placeHolder = "请在此处填写描述" })
         </div>
         <div class="textbox-outer">
             <div class="field">价格</div>
