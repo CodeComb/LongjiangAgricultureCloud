@@ -19,8 +19,8 @@
                 <td class="row-title">可否评论</td>
                 <td>
                     <select name="Commentable">
-                        <option value="0" @(Model.Commentable ? "selected" : "")>禁止评论</option>
-                        <option value="1" @(!Model.Commentable ? "selected" : "")>允许评论</option>
+                        <option value="false" @(Model.Commentable ? "selected" : "")>禁止评论</option>
+                        <option value="true" @(!Model.Commentable ? "selected" : "")>允许评论</option>
                     </select>
                 </td>
             </tr>
