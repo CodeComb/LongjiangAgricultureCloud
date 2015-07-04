@@ -26,7 +26,6 @@
         <div class="textbox-outer">
             <div class="field">分类1</div>
             <select id="lvl1" class="form">
-                <option>无</option>
                 @foreach (Catalog c in ViewBag.Level1)
                 {
                     <option @(Model.CatalogID != null && Model.Catalog.Father.FatherID == c.ID ? "selected" : "") value="@c.ID">@c.Title</option>
@@ -36,7 +35,6 @@
         <div class="textbox-outer">
             <div class="field">分类2</div>
             <select id="lvl2" class="form" data-parent-select="lvl1">
-                <option>无</option>
                 @foreach (Catalog c in ViewBag.Level2)
                 {
                     <option data-parent-id="@c.FatherID" @(Model.CatalogID != null && Model.Catalog.FatherID == c.ID ? "selected" : "") value="@c.ID">@c.Title</option>
@@ -46,7 +44,6 @@
         <div class="textbox-outer">
             <div class="field">分类3</div>
             <select id="lvl3" class="form" data-parent-select="lvl2">
-                <option>无</option>
                 @foreach (Catalog c in ViewBag.Level3)
                 {
                     <option data-parent-id="@c.FatherID" @(Model.CatalogID != null && Model.CatalogID == c.ID ? "selected" : "") value="@c.ID">@c.Title</option>
