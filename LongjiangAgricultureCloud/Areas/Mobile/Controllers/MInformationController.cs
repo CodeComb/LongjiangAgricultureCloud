@@ -26,7 +26,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         public ActionResult List(int id)
-        {ihou
+        {
             var catalog = DB.Catalogs.Find(id);
             ViewBag.Title = catalog.Title;
             return View();
