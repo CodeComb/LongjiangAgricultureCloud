@@ -42,6 +42,8 @@ namespace LongjiangAgricultureCloud.Controllers
                 query = query.Where(x => x.StoreCount <= StoreLte.Value);
             if (Store.HasValue)
                 query = query.Where(x => x.StoreID == Store.Value);
+            if (CurrentUser.Role == UserRole.库存管理员)
+                query = query.Where(x => x.Store.UserID != null && x.Store.UserID == CurrentUser.ID);
             query = query.OrderByDescending(x => x.Top);
             ViewBag.PageInfo = PagerHelper.Do(ref query, 50, p);
             return View(query);
@@ -612,12 +614,7 @@ namespace LongjiangAgricultureCloud.Controllers
             if (!string.IsNullOrEmpty(Name))
                 orders = orders.Where(x => !string.IsNullOrEmpty(x.User.Name) && x.User.Name.Contains(Name));
             if (CurrentUser.Role == UserRole.库存管理员)
-            {
-                var stores = (from s in DB.Stores
-                              where s.UserID == CurrentUser.ID
-                              select s.ID).ToList();
-                orders = orders.Where(x => stores.Contains(x.Product.StoreID));
-            }
+                orders = orders.Where(x => x.Product.Store.UserID == CurrentUser.ID);
             orders = orders.OrderBy(x => x.Order.Address).ThenBy(x => x.UserID).ToList();
             if (Raw == true)
                 return View("DistributeRaw", orders);
