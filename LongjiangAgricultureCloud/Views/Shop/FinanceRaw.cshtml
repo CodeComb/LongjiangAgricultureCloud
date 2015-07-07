@@ -1,11 +1,8 @@
 ﻿@model IEnumerable<OrderDetail>
 @{
-    Layout = null; 
+    Layout = null;
 }
-
 <style>
-    
-
     td, th {
         padding: 3px;
         font-size: 13px;
@@ -23,7 +20,6 @@
     }
 </style>
 <button onclick="window.print()">打印</button>
-
 <h2>财务详情</h2>
 <table class="table">
     <thead>
@@ -60,7 +56,6 @@
 </table>
 <p>总计：￥@Model.Sum(x => x.Price).ToString("0.00")</p>
 <br />
-
 <h2>供应商报表</h2>
 <table class="detail-table">
     @foreach (var i in (from od in Model where od.Product.ProviderID != null group od by od.Product.Provider.Title into g select new { Title = g.Key, Price = g.Sum(x => x.Price) }))
@@ -71,7 +66,6 @@
         </tr>
     }
 </table>
-
 <h2>大区经理报表</h2>
 <table>
     <tr>
@@ -83,21 +77,19 @@
     {
         <tr>
             <td rowspan="@a.Service.Count">@a.Manager (￥@(a.Service.Sum(x => x.Price).ToString("0.00")))</td>
-            @if(a.Service.Count > 0)
+            @if (a.Service.Count > 0)
             {
-            <td>@a.Service[0].Service</td>
-            <td>@a.Service[0].Price.ToString("0.00")</td>
+                <td>@a.Service[0].Service</td>
+                <td>@a.Service[0].Price.ToString("0.00")</td>
             }
         </tr>
-        for(var i = 1; i < a.Service.Count; i++)
-{
-<tr>
+        for (var i = 1; i < a.Service.Count; i++)
+        {
+            <tr>
 
-
-            <td>@a.Service[i].Service</td>
-            <td>@a.Service[i].Price.ToString("0.00")</td>
-</tr>
-}
+                <td>@a.Service[i].Service</td>
+                <td>@a.Service[i].Price.ToString("0.00")</td>
+            </tr>
+        }
     }
-       
 </table>

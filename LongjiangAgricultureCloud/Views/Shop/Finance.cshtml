@@ -67,32 +67,29 @@
 </table>
 
 <h2>大区经理报表</h2>
-<table class="detail-table" style="text-align: center">
+<table class="detail-table">
     <tr>
-        <td class="row-title" style="text-align: left">大区经理</td>
-        @foreach (vArea a in ViewBag.Area)
-        {
-            <td colspan="@a.Service.Count">@a.Manager (￥@(a.Service.Sum(x => x.Price).ToString("0.00")))</td>
-        }
+        <td>大区经理</td>
+        <td>服务站</td>
+        <td>金额</td>
     </tr>
-    <tr>
-        <td class="row-title" style="text-align: left">服务站</td>
-        @foreach (vArea a in ViewBag.Area)
-        {
-            foreach (var b in a.Service)
+    @foreach (vArea a in ViewBag.Area)
+    {
+        <tr>
+            <td rowspan="@a.Service.Count">@a.Manager (￥@(a.Service.Sum(x => x.Price).ToString("0.00")))</td>
+            @if (a.Service.Count > 0)
             {
-                <td>@b.Service</td>
+                <td>@a.Service[0].Service</td>
+                <td>@a.Service[0].Price.ToString("0.00")</td>
             }
-        }
-    </tr>
-    <tr>
-        <td class="row-title" style="text-align: left">金额</td>
-        @foreach (vArea a in ViewBag.Area)
+        </tr>
+        for (var i = 1; i < a.Service.Count; i++)
         {
-            foreach (var b in a.Service)
-            {
-                <td>￥@b.Price.ToString("0.00")</td>
-            }
+            <tr>
+
+                <td>@a.Service[i].Service</td>
+                <td>@a.Service[i].Price.ToString("0.00")</td>
+            </tr>
         }
-    </tr>
+    }
 </table>
