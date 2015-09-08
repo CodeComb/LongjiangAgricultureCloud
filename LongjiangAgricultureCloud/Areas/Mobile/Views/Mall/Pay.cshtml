@@ -15,8 +15,19 @@
     </a>
     <a href="#">
         <div class="list-outer">
-            微信支付（未开通）
+            <a href="javascription:AlipaySub()">微信支付（测试）</a>
+            @using (Html.BeginForm("Alipay","Mall",FormMethod.Post,new { id="frmAlipay",style="display:none"}))
+            {
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="aliOrderId" value="@ViewBag.OrderId" />
+                <input type="hidden" name="aliPrice" value="@Convert.ToDouble(ViewBag.Price).ToString("0.00")"/>
+            }
         </div>
     </a>
 </div>
 @Html.Partial("~/Areas/Mobile/Views/Shared/ShopNav.cshtml")
+<script>
+    function AlipaySub(){
+        $("#frmAlipay").submit();
+    }
+</script>

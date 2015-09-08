@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using LongjiangAgricultureCloud.Models;
 using LongjiangAgricultureCloud.Schema;
+using Com.Alipay;
 
 namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 {
@@ -163,6 +164,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                 od.Price = od.Product.Price * od.Count;
             }
             ViewBag.Price = orders.Sum(x => x.Price).ToString("0.00");
+            ViewBag.OrderId = id;
             return View();
         }
 
@@ -227,6 +229,78 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                             orderby c.Time descending
                             select c).Skip(p * 20).Take(20).ToList();
             return View(comments);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public void Alipay(string aliOrderId, string aliPrice)
+        {
+            ////////////////////////////////////////////请求参数////////////////////////////////////////////
+
+            //支付类型
+            string payment_type = "1";
+            //必填，不能修改
+            //服务器异步通知页面路径
+            string notify_url = "http://121.42.136.4:9002/payment/alipaynotify";
+            //需http://格式的完整路径，不能加?id=123这类自定义参数
+
+            //页面跳转同步通知页面路径
+            string return_url = "http://121.42.136.4:9002/payment/alipayreturn";
+            //需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
+
+            //卖家支付宝帐户
+            string seller_email = "qieaijiaren@163.com";
+            //必填
+
+            //商户订单号
+            string out_trade_no = aliOrderId;
+            //商户网站订单系统中唯一订单号，必填
+
+            //订单名称
+            string subject = "商品支付";
+            //必填
+
+            //付款金额
+            string total_fee = aliPrice;
+            //必填
+
+            //订单描述
+
+            string body = "商品支付";
+            //商品展示地址
+            string show_url = "http://121.42.136.4:9002";
+            //需以http://开头的完整路径，例如：http://121.42.136.4:9002/Payment/Buy
+
+            //防钓鱼时间戳
+            string anti_phishing_key = Submit.Query_timestamp();
+            //若要使用请调用类文件submit中的query_timestamp函数
+
+            //客户端的IP地址
+            string exter_invoke_ip = "";
+            //非局域网的外网IP地址，如：221.0.0.1
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //把请求参数打包成数组
+            SortedDictionary<string, string> sParaTemp = new SortedDictionary<string, string>();
+            sParaTemp.Add("partner", Config.Partner);
+            sParaTemp.Add("seller_id", Config.Seller_id);
+            sParaTemp.Add("_input_charset", Config.Input_charset.ToLower());
+            sParaTemp.Add("service", "alipay.wap.create.direct.pay.by.user");
+            sParaTemp.Add("payment_type", payment_type);
+            sParaTemp.Add("notify_url", notify_url);
+            sParaTemp.Add("return_url", return_url);
+            sParaTemp.Add("out_trade_no", out_trade_no);
+            sParaTemp.Add("subject", subject);
+            sParaTemp.Add("total_fee", total_fee);
+            sParaTemp.Add("show_url", show_url);
+            sParaTemp.Add("body", body);
+
+
+            //建立请求
+            string sHtmlText = Submit.BuildRequest(sParaTemp, "get", "确认");
+            Response.Write(sHtmlText);
         }
     }
 }

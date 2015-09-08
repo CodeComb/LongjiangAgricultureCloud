@@ -529,6 +529,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alipay\AlipayConfig.cs" />
+    <Compile Include="Alipay\AlipayCore.cs" />
+    <Compile Include="Alipay\AlipayNotify.cs" />
+    <Compile Include="Alipay\AlipaySubmit.cs" />
+    <Compile Include="Alipay\MD5.cs" />
+    <Compile Include="Alipay\RSA.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Mobile\Controllers\BaseController.cs" />
     <Compile Include="Areas\Mobile\Controllers\MallController.cs" />
