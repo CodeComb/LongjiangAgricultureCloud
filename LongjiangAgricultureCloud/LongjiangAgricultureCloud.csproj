@@ -179,6 +179,7 @@
     <Content Include="Areas\Mobile\Views\MService\ShowFammer.cshtml" />
     <Content Include="Areas\Mobile\Views\Shared\_LayoutSizeable.cshtml" />
     <Content Include="Areas\Mobile\Views\Mobile\Image.cshtml" />
+    <Content Include="Areas\Mobile\Views\Mall\AlipayReturn.cshtml" />
     <None Include="Properties\PublishProfiles\ChinaUnicom.pubxml" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\ckeditor.js" />
@@ -498,6 +499,7 @@
     <Content Include="Scripts\ckeditor\plugins\scayt\LICENSE.md" />
     <Content Include="Scripts\ckeditor\LICENSE.md" />
     <Content Include="Scripts\ckeditor\CHANGES.md" />
+    <None Include="Properties\PublishProfiles\newren.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\styles.js" />
     <Content Include="Scripts\codecomb.cascade-1.0.3.js" />
@@ -532,6 +534,7 @@
     <Compile Include="Alipay\AlipayConfig.cs" />
     <Compile Include="Alipay\AlipayCore.cs" />
     <Compile Include="Alipay\AlipayNotify.cs" />
+    <Compile Include="Alipay\AlipayReturnViewModel.cs" />
     <Compile Include="Alipay\AlipaySubmit.cs" />
     <Compile Include="Alipay\MD5.cs" />
     <Compile Include="Alipay\RSA.cs" />

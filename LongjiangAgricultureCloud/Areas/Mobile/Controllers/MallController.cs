@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using LongjiangAgricultureCloud.Models;
 using LongjiangAgricultureCloud.Schema;
 using Com.Alipay;
+using System.Collections.Specialized;
 
 namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 {
@@ -242,11 +243,11 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             string payment_type = "1";
             //必填，不能修改
             //服务器异步通知页面路径
-            string notify_url = "http://121.42.136.4:9002/payment/alipaynotify";
+            string notify_url = "http://121.42.136.4:9003/Mobile/Mall/alipaynotify";
             //需http://格式的完整路径，不能加?id=123这类自定义参数
 
             //页面跳转同步通知页面路径
-            string return_url = "http://121.42.136.4:9002/payment/alipayreturn";
+            string return_url = "http://121.42.136.4:9003/Mobile/Mall/alipayreturn";
             //需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
 
             //卖家支付宝帐户
@@ -269,8 +270,8 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 
             string body = "商品支付";
             //商品展示地址
-            string show_url = "http://121.42.136.4:9002";
-            //需以http://开头的完整路径，例如：http://121.42.136.4:9002/Payment/Buy
+            string show_url = "http://121.42.136.4:9003/Mobile/";
+            //需以http://开头的完整路径，例如：http://121.42.136.4:9003/Mobile
 
             //防钓鱼时间戳
             string anti_phishing_key = Submit.Query_timestamp();
@@ -302,5 +303,86 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             string sHtmlText = Submit.BuildRequest(sParaTemp, "get", "确认");
             Response.Write(sHtmlText);
         }
+
+
+        // 同步调用，只发生一次
+        public ActionResult AlipayReturn()
+        {
+            var model = new AlipayReturnViewModel();
+            SortedDictionary<string, string> sPara = GetRequestGet();
+
+            if (sPara.Count > 0)//判断是否有带返回参数
+            {
+
+                if (Request.QueryString["trade_status"] == "TRADE_FINISHED" || Request.QueryString["trade_status"] == "TRADE_SUCCESS")//验证成功
+                {
+                    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    //请在这里加上商户的业务逻辑程序代码
+
+
+                    //——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
+                    //获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表
+
+                    //商户订单号
+                    model.out_trade_no = Request.QueryString["out_trade_no"];
+
+                    //支付宝交易号
+                    model.trade_no = Request.QueryString["trade_no"];
+
+                    //交易状态
+                    model.trade_status = Request.QueryString["trade_status"];
+
+
+                    model.message = ("支付成功");
+
+                    Guid oid = new Guid(model.out_trade_no);
+                    var orders = (from od in DB.OrderDetails
+                                  where od.UserID == CurrentUser.ID
+                                  && od.OrderID == oid
+                                  orderby od.ID descending
+                                  select od).ToList();
+
+                    foreach (var od in orders)
+                    {
+                        od.Order.Status = OrderStatus.待收货;
+                        od.Order.PayMethod = PayMethod.支付宝;
+                    }
+                    DB.SaveChanges();
+                }
+                else//验证失败
+                {
+                    model.message = ("支付失败");
+                }
+            }
+            else
+            {
+                model.message = ("无返回参数");
+            }
+            return View(model);
+        }
+
+        /// <summary>
+        /// 获取支付宝GET过来通知消息，并以“参数名=参数值”的形式组成数组
+        /// </summary>
+        /// <returns>request回来的信息组成的数组</returns>
+        public SortedDictionary<string, string> GetRequestGet()
+        {
+            int i = 0;
+            SortedDictionary<string, string> sArray = new SortedDictionary<string, string>();
+            NameValueCollection coll;
+            //Load Form variables into NameValueCollection variable.
+            coll = Request.QueryString;
+
+            // Get names of all forms into a string array.
+            String[] requestItem = coll.AllKeys;
+
+            for (i = 0; i < requestItem.Length; i++)
+            {
+                sArray.Add(requestItem[i], Request.QueryString[requestItem[i]]);
+            }
+
+            return sArray;
+        }
+
     }
 }

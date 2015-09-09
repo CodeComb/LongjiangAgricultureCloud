@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "AlipayReturn";
+    Layout = "~/Areas/Mobile/Views/Shared/_Layout.cshtml";
+}
+
+
+@model  Com.Alipay.AlipayReturnViewModel
+
+<h1 class="widget-title">支付结果</h1>
+
+<div>
+    @Model.message<br>
+    商户订单号: @Model.out_trade_no<br>
+    支付宝交易号 : @Model.trade_no<br>
+    交易状态 : @Model.trade_status
+</div>
+
+
+@Html.Partial("~/Areas/Mobile/Views/Shared/ShopNav.cshtml")
