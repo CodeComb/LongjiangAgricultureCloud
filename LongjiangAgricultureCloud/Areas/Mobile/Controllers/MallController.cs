@@ -384,5 +384,14 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return sArray;
         }
 
+        [ValidateAntiForgeryToken]
+        public ActionResult Wxpay(string WxOrderId)
+        {
+            CodeComb.WxPay.Config.Init("wx9e472c509c175505", "1250972601", "renminzhongyechaoyuehezuoshe1234", "a5624cef16b373003bf02b6d001a0c96");
+            CodeComb.WxPay.NativePay notify = new CodeComb.WxPay.NativePay();
+            string url = notify.GetPayUrl(WxOrderId);
+            return Redirect(url);
+        }
+
     }
 }

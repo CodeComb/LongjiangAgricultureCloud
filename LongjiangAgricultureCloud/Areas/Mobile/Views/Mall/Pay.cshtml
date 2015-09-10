@@ -10,7 +10,13 @@
     <h3 style="text-align: center; padding-top:0.6em">共计 <span style="color: orange">￥@Convert.ToDouble(ViewBag.Price).ToString("0.00")</span></h3>
     <a href="#">
         <div class="list-outer">
-            微信支付（未开通）
+            <a href="javascript:WxpaySub()">微信支付（未开通）</a>
+            @using (Html.BeginForm("Wxpay", "Mall", FormMethod.Post, new { id = "frmWxpay", style = "display:none" }))
+            {
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="WxOrderId" value="@ViewBag.OrderId" />
+                <input type="hidden" name="WxPrice" value="@Convert.ToDouble(ViewBag.Price).ToString("0.00")" />
+            }
         </div>
     </a>
     <a href="#">
@@ -29,5 +35,8 @@
 <script>
     function AlipaySub(){
         $("#frmAlipay").submit();
+    }
+    function WxpaySub() {
+        $("#frmWxpay").submit();
     }
 </script>
