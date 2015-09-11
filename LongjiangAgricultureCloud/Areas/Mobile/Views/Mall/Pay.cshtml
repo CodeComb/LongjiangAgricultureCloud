@@ -10,7 +10,7 @@
     <h3 style="text-align: center; padding-top:0.6em">共计 <span style="color: orange">￥@Convert.ToDouble(ViewBag.Price).ToString("0.00")</span></h3>
     <a href="#">
         <div class="list-outer">
-            <a href="javascript:WxpaySub()">微信支付（未开通）</a>
+            <a href="javascript:WxpaySub()">微信支付</a>
             @using (Html.BeginForm("Wxpay", "Mall", FormMethod.Post, new { id = "frmWxpay", style = "display:none" }))
             {
                 @Html.AntiForgeryToken()
@@ -21,7 +21,7 @@
     </a>
     <a href="#">
         <div class="list-outer">
-            <a href="javascript:AlipaySub()">支付宝支付（测试）</a>
+            <a href="javascript:AlipaySub()">支付宝支付</a>
             @using (Html.BeginForm("Alipay","Mall",FormMethod.Post,new { id="frmAlipay",style="display:none"}))
             {
                 @Html.AntiForgeryToken()
