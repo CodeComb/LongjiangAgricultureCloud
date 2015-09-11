@@ -14,8 +14,8 @@
             @using (Html.BeginForm("Wxpay", "Mall", FormMethod.Post, new { id = "frmWxpay", style = "display:none" }))
             {
                 @Html.AntiForgeryToken()
-                <input type="hidden" name="WxOrderId" value="@ViewBag.OrderId" />
-                <input type="hidden" name="WxPrice" value="@Convert.ToDouble(ViewBag.Price).ToString("0.00")" />
+                <input type="hidden" name="wxOrderId" value="@ViewBag.OrderId" />
+                <input type="hidden" name="wxPrice" value="@Convert.ToDouble(ViewBag.Price).ToString("0.00")" />
             }
         </div>
     </a>

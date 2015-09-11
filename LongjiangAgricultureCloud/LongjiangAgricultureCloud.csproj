@@ -84,6 +84,9 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="ThoughtWorks.QRCode">
+      <HintPath>C:\Users\乐\Desktop\WxPayAPI_CS_v3\WxPayAPI\WxPayAPI\bin\ThoughtWorks.QRCode.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Razor">
@@ -180,6 +183,7 @@
     <Content Include="Areas\Mobile\Views\Shared\_LayoutSizeable.cshtml" />
     <Content Include="Areas\Mobile\Views\Mobile\Image.cshtml" />
     <Content Include="Areas\Mobile\Views\Mall\AlipayReturn.cshtml" />
+    <Content Include="Areas\Mobile\Views\Mall\Wxpay.cshtml" />
     <None Include="Properties\PublishProfiles\ChinaUnicom.pubxml" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\ckeditor.js" />
@@ -586,6 +590,23 @@
     <Compile Include="Schema\CheckRoleAttribute.cs" />
     <Compile Include="Schema\CheckRoleEqual.cs" />
     <Compile Include="Schema\MobileAuthorizeAttribute.cs" />
+    <Compile Include="Wxpay\business\DownloadBill.cs" />
+    <Compile Include="Wxpay\business\JsApiPay.cs" />
+    <Compile Include="Wxpay\business\MicroPay.cs" />
+    <Compile Include="Wxpay\business\NativeNotify.cs" />
+    <Compile Include="Wxpay\business\NativePay.cs" />
+    <Compile Include="Wxpay\business\OrderQuery.cs" />
+    <Compile Include="Wxpay\business\QRCode.cs" />
+    <Compile Include="Wxpay\business\Refund.cs" />
+    <Compile Include="Wxpay\business\RefundQuery.cs" />
+    <Compile Include="Wxpay\business\ResultNotify.cs" />
+    <Compile Include="Wxpay\lib\Config.cs" />
+    <Compile Include="Wxpay\lib\Data.cs" />
+    <Compile Include="Wxpay\lib\Exception.cs" />
+    <Compile Include="Wxpay\lib\HttpService.cs" />
+    <Compile Include="Wxpay\lib\Log.cs" />
+    <Compile Include="Wxpay\lib\Notify.cs" />
+    <Compile Include="Wxpay\lib\WxPayApi.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "生成二维码";
+    Layout = "~/Areas/Mobile/Views/Shared/_Layout.cshtml";
+}
+@Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
+<img src="@ViewBag.Code" /> <br  />
+
+（注：请先截图用微信客户端扫一扫打开相册的截图扫描支付）
+
+@Html.Partial("~/Areas/Mobile/Views/Shared/ShopNav.cshtml")

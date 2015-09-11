@@ -7,6 +7,8 @@ using LongjiangAgricultureCloud.Models;
 using LongjiangAgricultureCloud.Schema;
 using Com.Alipay;
 using System.Collections.Specialized;
+using WxPayAPI;
+using System.Text;
 
 namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 {
@@ -337,8 +339,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 
                     Guid oid = new Guid(model.out_trade_no);
                     var orders = (from od in DB.OrderDetails
-                                  where od.UserID == CurrentUser.ID
-                                  && od.OrderID == oid
+                                  where od.OrderID == oid
                                   orderby od.ID descending
                                   select od).ToList();
 
@@ -384,13 +385,72 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return sArray;
         }
         
-        public ActionResult Wxpay(string WxOrderId)
+        public ActionResult Wxpay(string wxOrderId, double  wxPrice)
         {
-            CodeComb.WxPay.Config.Init("wx9e472c509c175505", "1250972601", "renminzhongyechaoyuehezuoshe1234", "a5624cef16b373003bf02b6d001a0c96");
-            CodeComb.WxPay.NativePay notify = new CodeComb.WxPay.NativePay();
-            string url = notify.GetPrePayUrl(WxOrderId);
-            return Redirect(url);
+            NativePay nativePay = new NativePay();
+
+            string url = nativePay.GetPayUrl(wxOrderId, "购买商品", (wxPrice*100).ToString());
+            ViewBag.Code = QRCode.Create(url);
+            return View();
         }
 
+
+        public void WxResult()
+        {
+            WxPayData notifyData = GetNotifyData();
+            string _oid = notifyData.GetValue("attach").ToString();
+            Guid oid = new Guid(_oid);
+            Log.Info(this.GetType().ToString(), _oid);
+            var orders = (from od in DB.OrderDetails
+                          where od.OrderID == oid
+                          orderby od.ID descending
+                          select od).ToList();
+
+            foreach (var od in orders)
+            {
+                od.Order.Status = OrderStatus.待收货;
+                od.Order.PayMethod = PayMethod.微信支付;
+            }
+            DB.SaveChanges();
+        }
+
+        /// <summary>
+        /// 接收从微信支付后台发送过来的数据并验证签名
+        /// </summary>
+        /// <returns>微信支付后台返回的数据</returns>
+        public WxPayData GetNotifyData()
+        {
+            //接收从微信后台POST过来的数据
+            System.IO.Stream s = Request.InputStream;
+            int count = 0;
+            byte[] buffer = new byte[1024];
+            StringBuilder builder = new StringBuilder();
+            while ((count = s.Read(buffer, 0, 1024)) > 0)
+            {
+                builder.Append(Encoding.UTF8.GetString(buffer, 0, count));
+            }
+            s.Flush();
+            s.Close();
+            s.Dispose();
+
+            Log.Info(this.GetType().ToString(), "Receive data from WeChat : " + builder.ToString());
+
+            //转换数据格式并验证签名
+            WxPayData data = new WxPayData();
+            try
+            {
+                data.FromXml(builder.ToString());
+            }
+            catch (WxPayException ex)
+            {
+                //若签名错误，则立即返回结果给微信支付后台
+                WxPayData res = new WxPayData();
+                res.SetValue("return_code", "FAIL");
+                res.SetValue("return_msg", ex.Message);
+                Log.Error(this.GetType().ToString(), "Sign check error : " + res.ToXml());
+            }
+            Log.Info(this.GetType().ToString(), "Check sign success");
+            return data;
+        }
     }
 }
