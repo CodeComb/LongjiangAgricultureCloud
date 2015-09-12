@@ -51,6 +51,12 @@ class ViewController: UIViewController, UIWebViewDelegate {
             let result = UIApplication.sharedApplication().openURL(url!)
             return false;
         }
+        else if (request.URL?.scheme == "wxpay" || request.URL?.scheme == "alipay")
+        {
+            let url = request.URL
+            let result = UIApplication.sharedApplication().openURL(url!)
+            return false;
+        }
         return true;
     }
         

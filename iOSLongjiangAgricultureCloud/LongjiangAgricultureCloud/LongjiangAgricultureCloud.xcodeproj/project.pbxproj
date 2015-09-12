@@ -10,9 +10,9 @@
 		2F0F9E2C1B368A190065D3E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F9E2B1B368A190065D3E3 /* AppDelegate.swift */; };
 		2F0F9E2E1B368A190065D3E3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F9E2D1B368A190065D3E3 /* ViewController.swift */; };
 		2F0F9E311B368A190065D3E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F0F9E2F1B368A190065D3E3 /* Main.storyboard */; };
-		2F0F9E331B368A190065D3E3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F0F9E321B368A190065D3E3 /* Images.xcassets */; };
 		2F0F9E361B368A190065D3E3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F0F9E341B368A190065D3E3 /* LaunchScreen.xib */; };
 		2F0F9E421B368A190065D3E3 /* LongjiangAgricultureCloudTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F9E411B368A190065D3E3 /* LongjiangAgricultureCloudTests.swift */; };
+		4EA16FAA1BA18F29009B7894 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EA16FA91BA18F29009B7894 /* icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,11 +31,11 @@
 		2F0F9E2B1B368A190065D3E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F0F9E2D1B368A190065D3E3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2F0F9E301B368A190065D3E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		2F0F9E321B368A190065D3E3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2F0F9E351B368A190065D3E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		2F0F9E3B1B368A190065D3E3 /* LongjiangAgricultureCloudTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LongjiangAgricultureCloudTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F0F9E401B368A190065D3E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F0F9E411B368A190065D3E3 /* LongjiangAgricultureCloudTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongjiangAgricultureCloudTests.swift; sourceTree = "<group>"; };
+		4EA16FA91BA18F29009B7894 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,10 +77,10 @@
 		2F0F9E281B368A190065D3E3 /* LongjiangAgricultureCloud */ = {
 			isa = PBXGroup;
 			children = (
+				4EA16FA91BA18F29009B7894 /* icon.png */,
 				2F0F9E2B1B368A190065D3E3 /* AppDelegate.swift */,
 				2F0F9E2D1B368A190065D3E3 /* ViewController.swift */,
 				2F0F9E2F1B368A190065D3E3 /* Main.storyboard */,
-				2F0F9E321B368A190065D3E3 /* Images.xcassets */,
 				2F0F9E341B368A190065D3E3 /* LaunchScreen.xib */,
 				2F0F9E291B368A190065D3E3 /* Supporting Files */,
 			);
@@ -195,7 +195,7 @@
 			files = (
 				2F0F9E311B368A190065D3E3 /* Main.storyboard in Resources */,
 				2F0F9E361B368A190065D3E3 /* LaunchScreen.xib in Resources */,
-				2F0F9E331B368A190065D3E3 /* Images.xcassets in Resources */,
+				4EA16FAA1BA18F29009B7894 /* icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,30 +340,29 @@
 		2F0F9E461B368A190065D3E3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Yisheng Zheng (FU9P3S69Y7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Yisheng Zheng (FU9P3S69Y7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yisheng Zheng (6YR964F79Y)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yisheng Zheng (6YR964F79Y)";
 				INFOPLIST_FILE = LongjiangAgricultureCloud/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "535af694-cb56-48af-a158-f8ece414f581";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		2F0F9E471B368A190065D3E3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Yisheng Zheng (FU9P3S69Y7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Yisheng Zheng (FU9P3S69Y7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yisheng Zheng (6YR964F79Y)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yisheng Zheng (6YR964F79Y)";
 				INFOPLIST_FILE = LongjiangAgricultureCloud/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "535af694-cb56-48af-a158-f8ece414f581";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

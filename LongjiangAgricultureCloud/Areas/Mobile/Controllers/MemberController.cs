@@ -567,15 +567,13 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                 Verify = ViewBag.VerifyService ? false : true
             };
 
-            if (Type == InformationType.维修站)
+            var Picture = Request.Files["Picture"];
+
+            if (Picture != null)
             {
-                var Picture = Request.Files["Picture"];
-                if (Picture != null)
+                using (var binaryReader = new BinaryReader(Picture.InputStream))
                 {
-                    using (var binaryReader = new BinaryReader(Picture.InputStream))
-                    {
-                        service.Picture = binaryReader.ReadBytes(Picture.ContentLength);
-                    }
+                    service.Picture = binaryReader.ReadBytes(Picture.ContentLength);
                 }
             }
 
