@@ -32,7 +32,7 @@ namespace WxPayAPI
         //=======【支付结果通知url】===================================== 
         /* 支付结果通知回调url，用于商户接收支付结果
         */
-        public const string NOTIFY_URL = "http://221.208.208.32:7532//Mobile/Mall/WxResult";
+        public const string NOTIFY_URL = "http://221.208.208.32:7532/Mobile/Mall/WxResult";
 
         //=======【商户系统后台机器IP】===================================== 
         /* 此参数可手动配置也可在程序中自动获取

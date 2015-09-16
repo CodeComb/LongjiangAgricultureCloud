@@ -245,11 +245,11 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             string payment_type = "1";
             //必填，不能修改
             //服务器异步通知页面路径
-            string notify_url = "http://121.42.136.4:9003/Mobile/Mall/alipaynotify";
+            string notify_url = "http://221.208.208.32:7532/Mobile/Mall/alipaynotify";
             //需http://格式的完整路径，不能加?id=123这类自定义参数
 
             //页面跳转同步通知页面路径
-            string return_url = "http://121.42.136.4:9003/Mobile/Mall/alipayreturn";
+            string return_url = "http://221.208.208.32:7532/Mobile/Mall/alipayreturn";
             //需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
 
             //卖家支付宝帐户
@@ -272,7 +272,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 
             string body = "商品支付";
             //商品展示地址
-            string show_url = "http://121.42.136.4:9003/Mobile/";
+            string show_url = "http://221.208.208.32:7532/Mobile/";
             //需以http://开头的完整路径，例如：http://121.42.136.4:9003/Mobile
 
             //防钓鱼时间戳
