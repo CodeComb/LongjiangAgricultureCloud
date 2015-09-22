@@ -347,6 +347,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                     {
                         od.Order.Status = OrderStatus.待发货;
                         od.Order.PayMethod = PayMethod.支付宝;
+                        od.Order.PayTime = DateTime.Now;
                     }
                     DB.SaveChanges();
                 }
@@ -410,6 +411,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             {
                 od.Order.Status = OrderStatus.待发货;
                 od.Order.PayMethod = PayMethod.微信支付;
+                od.Order.PayTime = DateTime.Now;
             }
             DB.SaveChanges();
         }
