@@ -39,13 +39,10 @@
             <div class="field">地址</div>
             @Html.TextBoxFor(x => x.Address, new { @class = "textbox form" })
         </div>
-                if (Model.Type == InformationType.维修站)
-                {
-                    <div class="textbox-outer station">
-                        <div class="field">资质照片</div>
-                        <input type="file" name="Picture" />
-                    </div>
-                }
+                <div class="textbox-outer station">
+                    <div class="field">照片</div>
+                    <input type="file" name="Picture" />
+                </div>
                 <a href="javascript: $('form').submit();">
                     <div class="btn">保存修改</div>
                 </a>
