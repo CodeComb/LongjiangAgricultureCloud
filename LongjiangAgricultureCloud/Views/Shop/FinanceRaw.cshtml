@@ -48,8 +48,11 @@
                 <td>@od.Product.Standard</td>
                 <td>@od.Product.Unit</td>
                 <td>￥@((od.Price / od.Count).ToString("0.00"))</td>
-                <td>￥@od.Price.ToString("0.00")</td>
+                <td>￥@od.Price.ToString("0.00")</td>                
+                @if (od.Order.PayTime.HasValue)
+                {
                 <td>@od.Order.PayTime.Value.ToString("yyyy-MM-dd")</td>
+                }
             </tr>
         }
     </tbody>
