@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Timers;
-using CodeComb.WxPay;
 
 namespace LongjiangAgricultureCloud
 {
@@ -16,8 +15,6 @@ namespace LongjiangAgricultureCloud
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-
-            Config.Init("wx9e472c509c175505", "", "");
 
             var timer = new Timer();
             timer.Interval = 1000 * 60 * 60 * 12;

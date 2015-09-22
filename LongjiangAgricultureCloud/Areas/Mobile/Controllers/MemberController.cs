@@ -575,6 +575,9 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                 {
                     service.Picture = binaryReader.ReadBytes(Picture.ContentLength);
                 }
+                var fname = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(Picture.FileName);
+                Picture.SaveAs(Server.MapPath("~/Files/Video/" + fname));
+                service.VideoURL = fname;
             }
 
             DB.Informations.Add(service);

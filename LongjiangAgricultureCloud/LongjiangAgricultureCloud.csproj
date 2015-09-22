@@ -84,8 +84,9 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="ThoughtWorks.QRCode">
-      <HintPath>C:\Users\乐\Desktop\WxPayAPI_CS_v3\WxPayAPI\WxPayAPI\bin\ThoughtWorks.QRCode.dll</HintPath>
+    <Reference Include="ThoughtWorks.QRCode, Version=1.0.4778.30637, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ThoughtWorks.QRCode.1.1.0\lib\ThoughtWorks.QRCode.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -505,6 +506,7 @@
     <Content Include="Scripts\ckeditor\CHANGES.md" />
     <None Include="Properties\PublishProfiles\longjiang.pubxml" />
     <None Include="Properties\PublishProfiles\newren.pubxml" />
+    <None Include="Properties\PublishProfiles\Publish.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\styles.js" />
     <Content Include="Scripts\codecomb.cascade-1.0.3.js" />

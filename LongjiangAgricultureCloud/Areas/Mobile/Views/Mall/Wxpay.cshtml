@@ -1,12 +1,15 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "生成二维码";
-    Layout = "~/Areas/Mobile/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Mobile/Views/Shared/_Layout.cshtml";    
+    ViewBag.Back = true;
 }
 @Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
-<img src="@ViewBag.Code" /> <br  />
 
-（注：请先截图用微信客户端扫一扫打开相册的截图扫描支付） <br />
- <a href="/Mobile/Member/Order">支付完成点击跳转</a>
-
-@Html.Partial("~/Areas/Mobile/Views/Shared/ShopNav.cshtml")
+<div class="wrap-cont">
+    <p>
+        <img style="max-width: 80%;max-height:80%;" src="@ViewBag.Code" />
+    </p>
+    （注：请先截图用微信客户端扫一扫打开相册的截图扫描支付） <br />
+    <a href="/Mobile/Member/Order">支付完成点击跳转</a>
+    @Html.Partial("~/Areas/Mobile/Views/Shared/ShopNav.cshtml")
+</div>

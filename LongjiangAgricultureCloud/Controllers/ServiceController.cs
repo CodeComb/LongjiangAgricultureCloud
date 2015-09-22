@@ -200,6 +200,15 @@ namespace LongjiangAgricultureCloud.Controllers
             {
                 Information.Picture = null;
             }
+            var Video = Request.Files["Video"];
+            if (Video != null)
+            {
+
+            }
+            else
+            {
+                Information.VideoURL = null;
+            }
             DB.Informations.Add(Information);
             DB.SaveChanges();
             return RedirectToAction("Success", "Shared");

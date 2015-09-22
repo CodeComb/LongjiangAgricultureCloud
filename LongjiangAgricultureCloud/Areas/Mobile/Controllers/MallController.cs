@@ -345,7 +345,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 
                     foreach (var od in orders)
                     {
-                        od.Order.Status = OrderStatus.待收货;
+                        od.Order.Status = OrderStatus.待发货;
                         od.Order.PayMethod = PayMethod.支付宝;
                     }
                     DB.SaveChanges();
@@ -408,7 +408,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 
             foreach (var od in orders)
             {
-                od.Order.Status = OrderStatus.待收货;
+                od.Order.Status = OrderStatus.待发货;
                 od.Order.PayMethod = PayMethod.微信支付;
             }
             DB.SaveChanges();
