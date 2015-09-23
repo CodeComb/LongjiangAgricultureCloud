@@ -6,10 +6,10 @@
 @Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
 <div class="wrap-cont">
     <div class="list-outer">@Model.Title</div>
-    @if (!string.IsNullOrEmpty(Model.VideoURL))
+    @if (Model.Picture != null)
     {
     <div class="list-outer">
-        @Html.VideoOrImg(Model.VideoURL)
+        <img src="/Service/InformationImg/@Model.ID" alt="图片" />
     </div>
     }
     <div class="list-outer">@Model.Description</div>
