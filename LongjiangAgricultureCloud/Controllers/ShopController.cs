@@ -594,7 +594,7 @@ namespace LongjiangAgricultureCloud.Controllers
                           where od.OrderID != null
                           select od).ToList();
             if (string.IsNullOrEmpty(Status) || Status == "待发货")
-                orders = orders.Where(x => !x.DistributeFlag);
+                orders = orders.Where(x => !x.DistributeFlag && x.Order.Status == OrderStatus.待发货);
             else
                 orders = orders.Where(x => x.DistributeFlag);
             try
