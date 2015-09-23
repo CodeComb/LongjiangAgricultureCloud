@@ -596,7 +596,7 @@ namespace LongjiangAgricultureCloud.Controllers
             if (string.IsNullOrEmpty(Status) || Status == "待发货")
                 orders = orders.Where(x => !x.DistributeFlag);
             else
-                orders = orders.Where(x => x.Order.Status == OrderStatus.待收货 || x.Order.Status == OrderStatus.待评价 || x.Order.Status == OrderStatus.已完成 || x.DistributeFlag);
+                orders = orders.Where(x => x.DistributeFlag);
             try
             {
                 if (Begin.HasValue)
