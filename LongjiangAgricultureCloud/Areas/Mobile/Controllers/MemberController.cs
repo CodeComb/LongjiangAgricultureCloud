@@ -291,6 +291,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             {
                 var comment = new Comment
                 {
+                    ID = Guid.NewGuid(),
                     UserID = CurrentUser.ID,
                     TargetID = od.ProductID,
                     Type = CommentType.商品评论,

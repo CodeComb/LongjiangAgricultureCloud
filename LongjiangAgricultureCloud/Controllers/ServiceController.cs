@@ -257,6 +257,7 @@ namespace LongjiangAgricultureCloud.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [AllowAnonymous]
         public ActionResult InformationImg(int id)
         {
             var information = DB.Informations.Find(id);
