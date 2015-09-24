@@ -149,7 +149,7 @@ namespace LongjiangAgricultureCloud.Controllers
             var Video = Request.Files["Video"];
             if (Video != null)
             {
-                var fname = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(Video.FileName);
+                var fname = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(Video.FileName) ?? ".3gp";
                 if (Path.GetExtension(Video.FileName) == ".3gp")
                 {
                     var destname = Guid.NewGuid().ToString().Replace("-", "") + ".mp4";
@@ -201,7 +201,7 @@ namespace LongjiangAgricultureCloud.Controllers
             var Video = Request.Files["Video"];
             if (Video != null && Video.ContentLength > 0)
             {
-                var fname = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(Video.FileName);
+                var fname = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(Video.FileName) ?? ".3gp";
                 if (Path.GetExtension(Video.FileName) == ".3gp")
                 {
                     var destname = Guid.NewGuid().ToString().Replace("-", "") + ".mp4";
