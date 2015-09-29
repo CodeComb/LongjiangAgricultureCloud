@@ -202,6 +202,12 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                 od.Product.StoreCount -= od.Count;
                 od.OrderID = Order.ID;
             }
+            if (orders.Sum(x => x.Price) == 0)
+            {
+                Order.Status = OrderStatus.已取消;
+                DB.SaveChanges();
+                return Msg("您的订单中未包含任何商品");
+            }
             DB.SaveChanges();
             return RedirectToAction("Pay", "Mall", new { id = Order.ID });
         }
