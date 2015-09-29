@@ -31,20 +31,20 @@ namespace LongjiangAgricultureCloud.Controllers
             ViewBag.Stores = DB.Stores.ToList();
             IEnumerable<Product> query = DB.Products.Where(x => !x.Delete);
             if (!string.IsNullOrEmpty(Title))
-                query = query.Where(x => x.Title.Contains(Title) || Title.Contains(x.Title));
+                query = query.Where(x => x.Title.Contains(Title) || Title.Contains(x.Title)).ToList();
             if (!string.IsNullOrEmpty(ProductCode))
-                query = query.Where(x => x.ProductCode == ProductCode);
+                query = query.Where(x => x.ProductCode == ProductCode).ToList();
             if (!string.IsNullOrEmpty(Provider))
-                query = query.Where(x => x.Provider.Title.Contains(Provider) || Provider.Contains(x.Provider.Title));
+                query = query.Where(x => x.Provider.Title.Contains(Provider) || Provider.Contains(x.Provider.Title)).ToList();
             if (StoreGte.HasValue)
-                query = query.Where(x => x.StoreCount >= StoreGte.Value);
+                query = query.Where(x => x.StoreCount >= StoreGte.Value).ToList();
             if (StoreLte.HasValue)
-                query = query.Where(x => x.StoreCount <= StoreLte.Value);
+                query = query.Where(x => x.StoreCount <= StoreLte.Value).ToList();
             if (Store.HasValue)
-                query = query.Where(x => x.StoreID == Store.Value);
+                query = query.Where(x => x.StoreID == Store.Value).ToList();
             if (CurrentUser.Role == UserRole.库存管理员)
-                query = query.Where(x => x.Store.UserID != null && x.Store.UserID == CurrentUser.ID);
-            query = query.OrderByDescending(x => x.Top);
+                query = query.Where(x => x.Store.UserID != null && x.Store.UserID == CurrentUser.ID).ToList();
+            query = query.OrderByDescending(x => x.Top).ToList();
             ViewBag.PageInfo = PagerHelper.Do(ref query, 50, p);
             return View(query);
         }

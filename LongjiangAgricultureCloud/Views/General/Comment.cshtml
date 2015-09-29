@@ -10,6 +10,7 @@
         <option value="">评论类别</option>
         <option @(Request.QueryString["Type"] == "商品评论" ? "selected" : "")>商品评论</option>
         <option @(Request.QueryString["Type"] == "本地通评论" ? "selected" : "")>本地通评论</option>
+        <option @(Request.QueryString["Type"] == "农业信息评论" ? "selected" : "")>农业信息评论</option>
     </select>
     <input type="text" class="textbox datetime" name="Begin" placeholder="起始时间" value="@Request.QueryString["Begin"]" />
     <input type="text" class="textbox datetime" name="End" placeholder="结束时间" value="@Request.QueryString["End"]" />

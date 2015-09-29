@@ -106,6 +106,19 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
         public ActionResult Register(User User, string Confirm)
         {
             User.Role = UserRole.普通用户;
+            if (User.Username.Length != 11)
+            {
+                return Msg("请输入合法的手机号码！");
+            }
+            if (string.IsNullOrEmpty(User.Question) || string.IsNullOrEmpty(User.Answer))
+                return Msg("请填写密码提示问题或答案!");
+            foreach (var x in User.Username)
+            {
+                if (!"1234567890".Contains(x))
+                {
+                    return Msg("手机号码不合法！");
+                }
+            }
             if (User.Password != Confirm)
                 return Msg("两次密码输入不一致！");
             if (DB.Users.Any(x => x.Username == User.Username))

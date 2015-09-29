@@ -409,10 +409,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                     Helpers.Video.ChangeFilePhy(Server.MapPath("~/Files/Video/" + fname), Server.MapPath("~/Files/Video/" + destname), "480", "320");
                     Information.VideoURL = destname;
                 }
-                else
-                {
-                    Information.VideoURL = fname;
-                }
+                Information.VideoURL = fname;
             }
             DB.Informations.Add(Information);
             DB.SaveChanges();
