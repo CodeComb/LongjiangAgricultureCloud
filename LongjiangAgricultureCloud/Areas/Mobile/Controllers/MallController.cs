@@ -160,6 +160,10 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                           && od.OrderID == id
                           orderby od.ID descending
                           select od).ToList();
+            if (orders.Sum(x => x.Price) == 0)
+            {
+                return Msg("订单中没有任何商品!");
+            }
             foreach (var od in orders)
             {
                 if (od.Count > od.Product.StoreCount)
