@@ -41,7 +41,7 @@ namespace LongjiangAgricultureCloud.Helpers
 
         public static MvcHtmlString VideoOrImg<TModel>(this HtmlHelper<TModel> self, string URL)
         {
-            var ext = System.IO.Path.GetExtension(URL);
+            var ext = System.IO.Path.GetExtension(URL.ToLower());
             string[] pic = { ".png", ".jpg", ".bmp", ".gif", ".jpeg" };
             if (pic.Contains(ext))
                 return MvcHtmlString.Create("<p><img src='/Files/Video/" + URL + "' /></p>");

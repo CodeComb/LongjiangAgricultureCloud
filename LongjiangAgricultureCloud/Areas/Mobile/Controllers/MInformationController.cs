@@ -82,7 +82,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             var Video = Request.Files["Video"];
             if (Video != null)
             {
-                var fname = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(Video.FileName) ?? ".3gp";
+                 var fname = Guid.NewGuid().ToString().Replace("-", "") + ((string.IsNullOrEmpty(Path.GetExtension(Video.FileName)) && Video.ContentType.IndexOf("image") < 0) ? ".3gp" : Path.GetExtension(Video.FileName));
                 Video.SaveAs(Server.MapPath("~/Files/Video/" + fname));
                 if (Path.GetExtension(Video.FileName) == ".3gp")
                 {

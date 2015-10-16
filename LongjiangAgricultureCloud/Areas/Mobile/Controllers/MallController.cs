@@ -172,6 +172,10 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             }
             ViewBag.Price = orders.Sum(x => x.Price).ToString("0.00");
             ViewBag.OrderId = id;
+            if (Convert.ToDouble(ViewBag.Price) == 0)
+            {
+                return Msg("由于您没有及时付款，商品可能已经被其他用户抢走，请填写正确的数量并尝试重新下单，到货等问题请联系网站客服。");
+            }
             return View();
         }
 
@@ -244,11 +248,14 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             return View(comments);
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public void Alipay(string aliOrderId, string aliPrice)
+        public ActionResult Alipay(string aliOrderId, string aliPrice)
         {
+            if (Convert.ToDouble(aliPrice) == 0)
+            {
+                return Msg("您的订单中没有包含任何商品，无法完成支付！");
+            }
             ////////////////////////////////////////////请求参数////////////////////////////////////////////
 
             //支付类型
@@ -313,7 +320,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
 
             //建立请求
             string sHtmlText = Submit.BuildRequest(sParaTemp, "get", "确认");
-            Response.Write(sHtmlText);
+            return  Content(sHtmlText);
         }
 
 
@@ -398,6 +405,10 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
         
         public ActionResult Wxpay(string wxOrderId, double  wxPrice)
         {
+            if (wxPrice == 0)
+            {
+                return Msg("您的订单中没有包含任何商品，无法完成支付。");
+            }
             NativePay nativePay = new NativePay();
 
             string url = nativePay.GetPayUrl(wxOrderId, "购买商品", (wxPrice*100).ToString());
