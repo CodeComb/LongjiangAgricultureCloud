@@ -449,11 +449,11 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                 {
                     var destname = Guid.NewGuid().ToString().Replace("-", "") + ".mp4";
                     Helpers.Video.ChangeFilePhy(Server.MapPath("~/Files/Video/" + fname), Server.MapPath("~/Files/Video/" + destname), "480", "320");
-                    Information.VideoURL = destname;
+                    information.VideoURL = destname;
                 }
                 else
                 {
-                    Information.VideoURL = fname;
+                    information.VideoURL = fname;
                 }
             }
             DB.SaveChanges();

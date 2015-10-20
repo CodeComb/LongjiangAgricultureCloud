@@ -5,7 +5,13 @@
 }
 @Html.Partial("~/Areas/Mobile/Views/Shared/Header.cshtml")
 <div class="wrap-cont">
-    @using (Html.BeginForm("EditLocal", "Member", FormMethod.Post))
+    @if (!string.IsNullOrEmpty(Model.VideoURL))
+    {
+        <div class="list-outer">
+            @Html.VideoOrImg(Model.VideoURL)
+        </div>
+    }
+    @using (Html.BeginForm("EditLocal", "Member", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <div class="textbox-outer">
@@ -62,8 +68,12 @@
             <div class="field">地址</div>
             @Html.TextBoxFor(x => x.Address, new { @class = "textbox form" })
         </div>
+        <div class="textbox-outer">
+            <div class="field">视频/图片上传（可选）</div>
+            <input type="file" name="Video" class="form" />
+        </div>
         <a href="javascript: $('form').submit();">
-            <div class="btn">发布信息</div>
+            <div class="btn">编辑信息</div>
         </a>
                 }
 </div>

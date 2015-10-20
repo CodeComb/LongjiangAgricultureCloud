@@ -36,7 +36,7 @@
         <div class="field">单价</div>￥@Model.Price.ToString("0.00")
     </div>
     <div class="list-outer">
-        <div class="field">剩余库存</div>@Model.StoreCount
+        <div class="field">剩余库存</div>@(Model.StoreCount < 0 ? 0 : Model.StoreCount)
     </div>
      <br />
     @using (Html.BeginForm("Cart", "Mall", new { id = Model.ID }, FormMethod.Post, null))
