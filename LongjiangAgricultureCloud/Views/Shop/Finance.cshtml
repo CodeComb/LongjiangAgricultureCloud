@@ -29,8 +29,8 @@
             <th>数量</th>
             <th>规格</th>
             <th>单位</th>
-            <th>总金额</th>
             <th>单价</th>
+            <th>总金额</th>
             <th>付款时间</th>
         </tr>
     </thead>
@@ -45,8 +45,8 @@
                 <td>@od.Count</td>
                 <td>@od.Product.Standard</td>
                 <td>@od.Product.Unit</td>
-                <td>￥@od.Price.ToString("0.00")</td>
                 <td>￥@((od.Price / od.Count).ToString("0.00"))</td>
+                <td>￥@od.Price.ToString("0.00")</td>
                 @if (od.Order.PayTime.HasValue)
                 {
                 <td>@od.Order.PayTime.Value.ToString("yyyy-MM-dd")</td>

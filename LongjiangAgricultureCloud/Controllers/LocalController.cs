@@ -159,6 +159,7 @@ namespace LongjiangAgricultureCloud.Controllers
                 }
                 else
                 {
+                    Video.SaveAs(Server.MapPath("~/Files/Video/" + fname));
                     Information.VideoURL = fname;
                 }
             }
@@ -211,6 +212,7 @@ namespace LongjiangAgricultureCloud.Controllers
                 }
                 else
                 {
+                    Video.SaveAs(Server.MapPath("~/Files/Video/" + fname));
                     information.VideoURL = fname;
                 }
             }

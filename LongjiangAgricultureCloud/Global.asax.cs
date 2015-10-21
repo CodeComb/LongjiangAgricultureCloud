@@ -8,11 +8,34 @@ using System.Timers;
 
 namespace LongjiangAgricultureCloud
 {
+    public class AppHandleErrorAttribute : HandleErrorAttribute
+    {
+        /// <summary>
+        /// 异常
+        /// </summary>
+        /// <param name="filterContext"></param>
+        public override void OnException(ExceptionContext filterContext)
+        {
+            //使用log4net或其他记录错误消息
+            if (filterContext.HttpContext.Request.UrlReferrer.ToString().IndexOf("/Mobile") >= 0)
+            {
+                filterContext.ExceptionHandled = true;
+                filterContext.Result = new RedirectResult("/Mobile/Mobile/Message?msg=非法请求！请返回重试！&sid="+ filterContext.HttpContext.Session["sid"].ToString());//跳转至错误提示页面
+            }
+            else
+            {
+                base.OnException(filterContext);
+            }
+        }
+    }
+
     public class MvcApplication : System.Web.HttpApplication
     {
         public static string Path;
         protected void Application_Start()
         {
+            GlobalFilters.Filters.Add(new AppHandleErrorAttribute());
+
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
