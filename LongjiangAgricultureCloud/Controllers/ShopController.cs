@@ -621,7 +621,7 @@ namespace LongjiangAgricultureCloud.Controllers
                 orders = orders.Where(x => !string.IsNullOrEmpty(x.User.Name) && x.User.Name.Contains(Name));
             if (CurrentUser.Role == UserRole.库存管理员)
                 orders = orders.Where(x => x.Product.Store.UserID == CurrentUser.ID);
-            orders = orders.OrderBy(x => x.Order.Address).ThenBy(x => x.UserID).ToList();
+            orders = orders.OrderByDescending(x => x.Order.PayTime).ThenBy(x => x.UserID).ToList();
             if (Raw == true)
                 return View("DistributeRaw", orders);
             if (Xls == true)
@@ -652,7 +652,7 @@ namespace LongjiangAgricultureCloud.Controllers
                 orders = orders.Where(x => x.User.Username == Username).ToList();
             if (!string.IsNullOrEmpty(Address))
                 orders = orders.Where(x => x.Order.Address.Contains(Address)).ToList();
-            orders = orders.OrderBy(x => x.UserID).ToList();
+            orders = orders.OrderByDescending(x => x.Order.PayTime).ToList();
 
             var service = (from od in orders.Where(x => x.User.Role == UserRole.服务站 && x.User.ManagerID != null)
                            group od by od.User into g

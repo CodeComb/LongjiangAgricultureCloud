@@ -87,6 +87,8 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Join2(string Title, string Description, string Address, string Name, string Phone, string Tel, string Email)
         {
+            if (string.IsNullOrEmpty(Title) || string.IsNullOrEmpty(Description) || string.IsNullOrEmpty(Address) || string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Phone) || string.IsNullOrEmpty(Tel) || string.IsNullOrEmpty(Email))
+                return Msg("您填写的信息不完整");
             var Provider = new Provider();
             Provider.Title = Title;
             Provider.Description = Description;
