@@ -639,7 +639,7 @@ namespace LongjiangAgricultureCloud.Controllers
         /// <returns></returns>
         public ActionResult Finance(DateTime? Begin, DateTime? End, string Address, string ProductCode, string Name, string Username, bool Raw = false, bool Xls = false)
         {
-            IEnumerable<OrderDetail> orders = DB.OrderDetails.Where(x => x.Order.Status == OrderStatus.待评价 || x.Order.Status == OrderStatus.已完成 || x.Order.Status == OrderStatus.待收货 || x.Order.Status == OrderStatus.待发货).ToList();
+            IEnumerable<OrderDetail> orders = DB.OrderDetails.Where(x => x.Order.Status == OrderStatus.待评价 || x.Order.Status == OrderStatus.已完成 || x.Order.Status == OrderStatus.待收货 || x.Order.Status == OrderStatus.待发货 || x.Order.Status == OrderStatus.退款驳回).ToList();
             if (Begin.HasValue)
                 orders = orders.Where(x => x.Order.PayTime != null && x.Order.PayTime.Value >= Begin.Value).ToList();
             if (End.HasValue)

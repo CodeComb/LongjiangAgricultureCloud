@@ -164,6 +164,7 @@ namespace LongjiangAgricultureCloud.Controllers
                 query = query.Where(x => x.Type == Type);
             if (Verify.HasValue)
                 query = query.Where(x => x.Verify == (Verify.Value == 1 ? true : false));
+            query = query.OrderByDescending(x => x.Time);
             ViewBag.PageInfo = PagerHelper.Do(ref query, 50, p);
             return View(query);
         }

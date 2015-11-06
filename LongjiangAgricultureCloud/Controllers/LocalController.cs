@@ -21,7 +21,7 @@ namespace LongjiangAgricultureCloud.Controllers
         /// <param name="End"></param>
         /// <param name="p"></param>
         /// <returns></returns>
-        public ActionResult Index(int? CatalogID, DateTime? Begin, DateTime? End, int p = 0)
+        public ActionResult Index(int? CatalogID, DateTime? Begin, DateTime? End, bool? Verify, int p = 0)
         {
             ViewBag.Level1 = (from c in DB.Catalogs
                               where c.Level == 0
@@ -45,6 +45,8 @@ namespace LongjiangAgricultureCloud.Controllers
                 query = query.Where(x => x.Time >= Begin.Value);
             if (End.HasValue)
                 query = query.Where(x => x.Time <= End.Value);
+            if (Verify.HasValue)
+                query = query.Where(x => x.Verify == Verify.Value);
             query = query.OrderByDescending(x => x.Top).ThenByDescending(x => x.Time);
             ViewBag.PageInfo = PagerHelper.Do(ref query, 50, p);
             return View(query);

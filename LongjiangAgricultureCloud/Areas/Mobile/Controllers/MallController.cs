@@ -170,7 +170,8 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
                 {
                     return Msg("由于您没有及时付款，商品可能已经被其他用户抢走，请填写正确的数量并尝试重新下单，到货等问题请联系网站客服。");
                 }
-                od.Price = od.Product.Price * od.Count;
+                if (od.Price == 0)
+                    od.Price = od.Product.Price * od.Count;
             }
             ViewBag.Price = orders.Sum(x => x.Price).ToString("0.00");
             ViewBag.OrderId = id;

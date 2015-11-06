@@ -219,6 +219,8 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Forgot3(string Username, string Answer, string Password, string Confirm)
         {
+            if (string.IsNullOrEmpty(Password))
+                return Msg("请输入密码");
             var user = DB.Users.Where(x => x.Username == Username).SingleOrDefault();
             if (user == null) return Msg("没有找到该用户");
             if (Answer != user.Answer)
