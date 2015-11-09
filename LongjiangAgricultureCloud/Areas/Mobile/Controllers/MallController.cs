@@ -208,7 +208,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             foreach (var od in orders)
             {
                 if (od.Count > od.Product.StoreCount)
-                    od.Count = od.Product.StoreCount;
+                    return Msg("库存不足，请重新下单。");
                 od.Price = od.Product.Price * od.Count;
                 od.Product.StoreCount -= od.Count;
                 od.OrderID = Order.ID;
