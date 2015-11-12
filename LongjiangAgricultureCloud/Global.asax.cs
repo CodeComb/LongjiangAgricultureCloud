@@ -24,7 +24,8 @@ namespace LongjiangAgricultureCloud
             }
             else
             {
-                base.OnException(filterContext);
+                filterContext.ExceptionHandled = true;
+                filterContext.Result = new RedirectResult("/Message?msg=非法请求！请返回重试！&sid=" + filterContext.HttpContext.Session["sid"].ToString());//跳转至错误提示页面
             }
         }
     }
