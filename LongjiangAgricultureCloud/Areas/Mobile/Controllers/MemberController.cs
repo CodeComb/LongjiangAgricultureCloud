@@ -623,15 +623,12 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             service.Description = Description;
             service.Phone = Phone;
             service.Price = Price;
-            if (service.Type == InformationType.维修站)
+            var Picture = Request.Files["Picture"];
+            if (Picture != null && Picture.ContentLength > 0)
             {
-                var Picture = Request.Files["Picture"];
-                if (Picture != null && Picture.ContentLength > 0)
+                using (var binaryReader = new BinaryReader(Picture.InputStream))
                 {
-                    using (var binaryReader = new BinaryReader(Picture.InputStream))
-                    {
-                        service.Picture = binaryReader.ReadBytes(Picture.ContentLength);
-                    }
+                    service.Picture = binaryReader.ReadBytes(Picture.ContentLength);
                 }
             }
             DB.SaveChanges();

@@ -30,7 +30,7 @@ namespace LongjiangAgricultureCloud
         }
     }
 
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
         public static string Path;
         protected void Application_Start()

@@ -58,7 +58,7 @@
         }
         @if (ViewBag.CurrentUser.Role == UserRole.系统管理员)
         {
-            <a href="/Shop/Provider"><div class="sidebar-menu"><i class="fa fa-heart icon ico"></i>加盟管理</div></a>
+            <a href="/Shop/Provider"><div class="sidebar-menu"><i class="fa fa-heart icon ico"></i>加盟管理(@ViewBag.JoinCount)</div></a>
             <a href="/Shop/Order"><div class="sidebar-menu"><i class="fa fa-barcode icon ico"></i>订单管理</div></a>
             <a href="/Shop/Store"><div class="sidebar-menu"><i class="fa fa-inbox icon ico"></i>仓库管理</div></a>
         }
