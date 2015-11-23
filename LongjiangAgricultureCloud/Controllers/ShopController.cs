@@ -745,6 +745,8 @@ namespace LongjiangAgricultureCloud.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateStore(Store Store)
         {
+            if (DB.Stores.Where(x => x.Title == Store.Title).Count() > 0)
+                return Msg("该仓库已经存在，请更名后重试！");
             DB.Stores.Add(Store);
             DB.SaveChanges();
             return RedirectToAction("Success", "Shared");
@@ -761,6 +763,8 @@ namespace LongjiangAgricultureCloud.Controllers
         public ActionResult EditStore(int id, Store Store)
         {
             var store = DB.Stores.Find(id);
+            if (store.Title != Store.Title && DB.Stores.Where(x => x.Title == Store.Title).Count() > 0)
+                return Msg("该仓库已经存在，请更名后重试！");
             store.Title = Store.Title;
             store.UserID = Store.UserID;
             DB.SaveChanges();

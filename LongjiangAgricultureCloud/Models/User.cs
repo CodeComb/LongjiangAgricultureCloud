@@ -75,6 +75,11 @@ namespace LongjiangAgricultureCloud.Models
         /// 用户角色
         /// </summary>
         public UserRole Role { get; set; }
+
+        /// <summary>
+        /// 删除标记
+        /// </summary>
+        public bool Delete { get; set; }
         
         [Index]
         public int? ManagerID { get; set; }

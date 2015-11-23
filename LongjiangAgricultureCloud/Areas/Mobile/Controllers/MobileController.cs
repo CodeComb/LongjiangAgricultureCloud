@@ -71,6 +71,7 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             var user = (from u in DB.Users
                         where u.Username == Username
                         && u.Password == pwd
+                        && !u.Delete
                         select u).SingleOrDefault();
             if (user == null)
             {

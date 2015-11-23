@@ -22,7 +22,7 @@ namespace LongjiangAgricultureCloud.Controllers
         /// <returns></returns>
         public ActionResult Index(string Username, UserRole? Role, string Name, int p = 0)
         {
-            IEnumerable<User> query = DB.Users;
+            IEnumerable<User> query = DB.Users.Where(x => !x.Delete);
             if (!string.IsNullOrEmpty(Username))
                 query = query.Where(x => x.Username == Username);
             if (!string.IsNullOrEmpty(Name))
@@ -47,7 +47,7 @@ namespace LongjiangAgricultureCloud.Controllers
             var user = DB.Users.Find(id);
             if (user.ManagerID != CurrentUser.ID && CurrentUser.Role != UserRole.系统管理员)
                 return RedirectToAction("NoAccess", "Shared");
-            DB.Users.Remove(user);
+            user.Delete = true;
             DB.SaveChanges();
             return Content("ok");
         }

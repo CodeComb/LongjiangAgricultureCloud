@@ -50,7 +50,7 @@ namespace LongjiangAgricultureCloud.Controllers
             ViewBag.ServiceTel = ConfigurationManager.AppSettings["ServiceTel"];
             ViewBag.VerifyInformationComment = Convert.ToBoolean(ConfigurationManager.AppSettings["VerifyInformationComment"]);
             ViewBag.NewComment = DB.Comments.Where(x => !x.Verify).Count();
-            ViewBag.JoinCount = DB.Providers.Where(x => x.Status == ProviderStatus.等待审核).Count();
+            ViewBag.JoinCount = DB.Providers.Where(x => x.Status == ProviderStatus.等待审核 && !x.Delete).Count();
         }
 
         public ActionResult Msg(string msg)
