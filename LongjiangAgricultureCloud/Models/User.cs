@@ -79,6 +79,7 @@ namespace LongjiangAgricultureCloud.Models
         /// <summary>
         /// 删除标记
         /// </summary>
+        [Index]
         public bool Delete { get; set; }
         
         [Index]
