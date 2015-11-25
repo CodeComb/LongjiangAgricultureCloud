@@ -89,6 +89,8 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
         {
             if (string.IsNullOrEmpty(Title) || string.IsNullOrEmpty(Description) || string.IsNullOrEmpty(Address) || string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Phone) || string.IsNullOrEmpty(Tel) || string.IsNullOrEmpty(Email))
                 return Msg("您填写的信息不完整");
+            if (DB.Providers.Where(x => x.Title == Title && x.Delete == false).Count() > 0)
+                return Msg("已经存在同名供应商，请修改后再试！");
             var Provider = new Provider();
             Provider.Title = Title;
             Provider.Description = Description;

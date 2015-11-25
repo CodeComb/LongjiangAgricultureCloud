@@ -352,6 +352,8 @@ namespace LongjiangAgricultureCloud.Controllers
         public ActionResult CreateProvider(string Title, string Description, string Address, string Name, string Phone, string Tel, string Email)
         {
             var Provider = new Provider();
+            if (DB.Providers.Where(x => x.Delete == false && x.Title == Title).Count() > 0)
+                return Msg("已经存在同名供应商，请改名后再试！");
             Provider.Title = Title;
             Provider.Description = Description;
             Provider.Address = Address;
@@ -578,7 +580,7 @@ namespace LongjiangAgricultureCloud.Controllers
             if (Status.HasValue)
                 query = query.Where(x => x.Status == Status.Value).ToList();
             if (!string.IsNullOrEmpty(Name))
-                query = query.Where(x => x.User.Name.Contains(Name) || Name.Contains(x.User.Name)).ToList();
+                query = query.Where(x => x.User.Name != null && ( x.User.Name.Contains(Name) || Name.Contains(x.User.Name))).ToList();
             if (!string.IsNullOrEmpty(Phone))
                 query = query.Where(x => x.User.Username == Phone).ToList();
             if (!string.IsNullOrEmpty(Address))
@@ -602,18 +604,22 @@ namespace LongjiangAgricultureCloud.Controllers
                 if (Begin.HasValue)
                     orders = orders.Where(x =>
                     {
-                        if (x.Order.Status == OrderStatus.待发货)
+                        if (x.Order.Status == OrderStatus.待发货 && x.Order.PayTime.HasValue)
                             return x.Order.PayTime.Value >= Begin.Value;
-                        else
+                        else if (x.Order.DistributeTime.HasValue)
                             return x.Order.DistributeTime.Value >= Begin.Value;
+                        else
+                            return x.Order.Time >= Begin.Value;
                     });
                 if (End.HasValue)
                     orders = orders.Where(x =>
                     {
-                        if (x.Order.Status == OrderStatus.待发货)
+                        if (x.Order.Status == OrderStatus.待发货 && x.Order.PayTime.HasValue)
                             return x.Order.PayTime.Value <= End.Value;
-                        else
+                        else if (x.Order.DistributeTime.HasValue)
                             return x.Order.DistributeTime.Value <= End.Value;
+                        else
+                            return x.Order.Time < End.Value;
                     });
             }
             catch { }
@@ -621,7 +627,14 @@ namespace LongjiangAgricultureCloud.Controllers
                 orders = orders.Where(x => !string.IsNullOrEmpty(x.User.Name) && x.User.Name.Contains(Name));
             if (CurrentUser.Role == UserRole.库存管理员)
                 orders = orders.Where(x => x.Product.Store.UserID == CurrentUser.ID);
-            orders = orders.OrderByDescending(x => x.Order.PayTime).ThenBy(x => x.UserID).ToList();
+            try
+            {
+                orders = orders.OrderByDescending(x => x.Order.PayTime).ThenBy(x => x.UserID).ToList();
+            }
+            catch
+            {
+                orders = orders.OrderByDescending(x => x.Order.Time).ThenBy(x => x.UserID).ToList();
+            }
             if (Raw == true)
                 return View("DistributeRaw", orders);
             if (Xls == true)
@@ -644,8 +657,9 @@ namespace LongjiangAgricultureCloud.Controllers
                 && x.Order != null
                 && x.Order.PayTime != null
                 && x.Price > 0
-                && (x.Order.Status == OrderStatus.待评价 
-                || x.Order.Status == OrderStatus.已完成 
+                && (x.Order.Status == OrderStatus.待评价
+                || x.Order.Status == OrderStatus.已完成
+                || x.Order.Status == OrderStatus.退款中
                 || x.Order.Status == OrderStatus.待收货 
                 || x.Order.Status == OrderStatus.待发货 
                 || x.Order.Status == OrderStatus.退款驳回))

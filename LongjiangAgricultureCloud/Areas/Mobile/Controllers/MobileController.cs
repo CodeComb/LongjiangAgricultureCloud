@@ -63,7 +63,6 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
         /// <param name="returnUrl"></param>
         /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Login(string Username, string Password, string returnUrl)
         {
             var pwd = Helpers.Security.SHA1(Password);

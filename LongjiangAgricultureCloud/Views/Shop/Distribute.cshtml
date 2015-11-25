@@ -58,9 +58,9 @@
                 <td>@od.Order.InvoiceName</td>
                 <td>@od.Order.InvoiceAddress</td>
                 <td>￥@od.Price.ToString("0.00")</td>
-                <td class="status">@od.Order.Status</td>
+                <td class="status">@(od.DistributeFlag ? "已发货" : "待发货")</td>
                 <td class="control">
-                    @if (od.Order.Status == OrderStatus.待发货)
+                    @if (od.Order.Status == OrderStatus.待发货 && !od.DistributeFlag)
                     {
                         <a href="javascript: Distribute('@od.ID');">标记为已发货</a>
                     }

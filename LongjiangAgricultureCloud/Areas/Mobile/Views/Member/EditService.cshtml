@@ -10,7 +10,7 @@
     }
 </style>
 <div class="wrap-cont">
-    @using (Html.BeginForm("EditService", "Member", new { id = Model.ID }, FormMethod.Post, null))
+    @using (Html.BeginForm("EditService", "Member", new { id = Model.ID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <div class="textbox-outer">
@@ -42,7 +42,7 @@
             <div class="field">地址</div>
             @Html.TextBoxFor(x => x.Address, new { @class = "textbox form" })
         </div>
-        <div class="textbox-outer station">
+        <div class="textbox-outer">
             <div class="field">照片</div>
             <input type="file" name="Picture" />
         </div>
