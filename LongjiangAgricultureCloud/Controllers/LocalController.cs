@@ -38,16 +38,16 @@ namespace LongjiangAgricultureCloud.Controllers
                               && !c.Delete
                               && c.Type == CatalogType.本地通分类
                               select c).ToList();
-            IEnumerable<Information> query = DB.Informations.Where(x => x.Type == InformationType.本地通信息);
+            IEnumerable<Information> query = DB.Informations.Where(x => x.Type == InformationType.本地通信息).ToList();
             if (CatalogID.HasValue)
-                query = query.Where(x => x.CatalogID == CatalogID.Value);
+                query = query.Where(x => x.CatalogID == CatalogID.Value).ToList();
             if (Begin.HasValue)
-                query = query.Where(x => x.Time >= Begin.Value);
+                query = query.Where(x => x.Time >= Begin.Value).ToList();
             if (End.HasValue)
-                query = query.Where(x => x.Time <= End.Value);
+                query = query.Where(x => x.Time <= End.Value).ToList();
             if (Verify.HasValue)
-                query = query.Where(x => x.Verify == Verify.Value);
-            query = query.OrderByDescending(x => x.Top).ThenByDescending(x => x.Time);
+                query = query.Where(x => x.Verify == Verify.Value).ToList();
+            query = query.OrderByDescending(x => x.Top).ThenByDescending(x => x.Time).ToList();
             ViewBag.PageInfo = PagerHelper.Do(ref query, 50, p);
             return View(query);
         }

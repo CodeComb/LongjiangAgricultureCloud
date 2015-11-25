@@ -125,6 +125,12 @@ namespace LongjiangAgricultureCloud.Areas.Mobile.Controllers
             if (DB.Users.Any(x => x.Username == User.Username))
                 return Msg("该手机号码已存在，请修改后重新尝试注册！");
             User.Password = Security.SHA1(Confirm);
+            if (User.Name == null)
+                User.Name = "";
+            if (User.Address == null)
+                User.Address = "";
+            if (User.PostCode == null)
+                User.PostCode = "";
             DB.Users.Add(User);
             DB.SaveChanges();
             return Msg("注册成功！您可以使用该账号进行登录了！");

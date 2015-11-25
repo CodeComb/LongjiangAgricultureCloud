@@ -22,15 +22,15 @@ namespace LongjiangAgricultureCloud.Controllers
         /// <returns></returns>
         public ActionResult Index(string Username, UserRole? Role, string Name, int p = 0)
         {
-            IEnumerable<User> query = DB.Users.Where(x => !x.Delete);
+            IEnumerable<User> query = DB.Users.Where(x => !x.Delete).ToList();
             if (!string.IsNullOrEmpty(Username))
-                query = query.Where(x => x.Username == Username);
+                query = query.Where(x => x.Username == Username).ToList();
             if (!string.IsNullOrEmpty(Name))
-                query = query.Where(x => x.Name.Contains(Name));
+                query = query.Where(x => x.Name != null && x.Name.Contains(Name)).ToList();
             if (Role.HasValue)
-                query = query.Where(x => x.Role == Role.Value);
+                query = query.Where(x => x.Role == Role.Value).ToList();
             if (CurrentUser.Role == UserRole.大区经理)
-                query = query.Where(x => x.ManagerID == CurrentUser.ID);
+                query = query.Where(x => x.ManagerID == CurrentUser.ID).ToList();
             ViewBag.PageInfo = PagerHelper.Do(ref query, 50, p);
             return View(query);
         }

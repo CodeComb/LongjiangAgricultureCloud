@@ -29,7 +29,7 @@ namespace LongjiangAgricultureCloud.Controllers
         public ActionResult Index(string Title, string ProductCode, string Provider, int? Store, int? StoreGte, int? StoreLte, int p = 0)
         {
             ViewBag.Stores = DB.Stores.ToList();
-            IEnumerable<Product> query = DB.Products.Where(x => !x.Delete);
+            IEnumerable<Product> query = DB.Products.Where(x => !x.Delete).ToList();
             if (!string.IsNullOrEmpty(Title))
                 query = query.Where(x => x.Title.Contains(Title) || Title.Contains(x.Title)).ToList();
             if (!string.IsNullOrEmpty(ProductCode))
@@ -299,15 +299,15 @@ namespace LongjiangAgricultureCloud.Controllers
         /// <returns></returns>
         public ActionResult Provider(string Title, string Phone, string Name, ProviderStatus? Status ,int p = 1)
         {
-            IEnumerable<Provider> query = DB.Providers.Where(x => !x.Delete);
+            IEnumerable<Provider> query = DB.Providers.Where(x => !x.Delete).ToList();
             if (Status.HasValue)
-                query = query.Where(x => x.Status == Status.Value);
+                query = query.Where(x => x.Status == Status.Value).ToList();
             if (!string.IsNullOrEmpty(Title))
-                query = query.Where(x => x.Title.Contains(Title) || Title.Contains(x.Title));
+                query = query.Where(x => x.Title.Contains(Title) || Title.Contains(x.Title)).ToList();
             if (!string.IsNullOrEmpty(Phone))
-                query = query.Where(x => x.Phone == Phone);
+                query = query.Where(x => x.Phone == Phone).ToList();
             if (!string.IsNullOrEmpty(Name))
-                query = query.Where(x => x.Name == Name);
+                query = query.Where(x => x.Name == Name).ToList();
             ViewBag.PageInfo = PagerHelper.Do(ref query, 50, p);
             return View(query);
         }
@@ -568,21 +568,21 @@ namespace LongjiangAgricultureCloud.Controllers
         /// <returns></returns>
         public ActionResult Order(Guid? ID, DateTime? Begin, DateTime? End, OrderStatus? Status, string Address, string Name, string Phone, int p = 0)
         {
-            IEnumerable<Order> query = DB.Orders;
+            IEnumerable<Order> query = DB.Orders.ToList();
             if (ID.HasValue)
-                query = query.Where(x => x.ID == ID.Value);
+                query = query.Where(x => x.ID == ID.Value).ToList();
             if (Begin.HasValue)
-                query = query.Where(x => x.Time >= Begin.Value);
+                query = query.Where(x => x.Time >= Begin.Value).ToList();
             if (End.HasValue)
-                query = query.Where(x => x.Time <= End.Value);
+                query = query.Where(x => x.Time <= End.Value).ToList();
             if (Status.HasValue)
-                query = query.Where(x => x.Status == Status.Value);
+                query = query.Where(x => x.Status == Status.Value).ToList();
             if (!string.IsNullOrEmpty(Name))
-                query = query.Where(x => x.User.Name.Contains(Name) || Name.Contains(x.User.Name));
+                query = query.Where(x => x.User.Name.Contains(Name) || Name.Contains(x.User.Name)).ToList();
             if (!string.IsNullOrEmpty(Phone))
-                query = query.Where(x => x.User.Username == Phone);
+                query = query.Where(x => x.User.Username == Phone).ToList();
             if (!string.IsNullOrEmpty(Address))
-                query = query.Where(x => x.Address.Contains(Address) || Address.Contains(x.Address));
+                query = query.Where(x => x.Address.Contains(Address) || Address.Contains(x.Address)).ToList();
             query = query.OrderByDescending(x => x.Time);
             ViewBag.PageInfo = PagerHelper.Do(ref query, 50, p);
             return View(query);
@@ -639,7 +639,17 @@ namespace LongjiangAgricultureCloud.Controllers
         /// <returns></returns>
         public ActionResult Finance(DateTime? Begin, DateTime? End, string Address, string ProductCode, string Name, string Username, bool Raw = false, bool Xls = false)
         {
-            IEnumerable<OrderDetail> orders = DB.OrderDetails.Where(x => x.Order.Status == OrderStatus.待评价 || x.Order.Status == OrderStatus.已完成 || x.Order.Status == OrderStatus.待收货 || x.Order.Status == OrderStatus.待发货 || x.Order.Status == OrderStatus.退款驳回).ToList();
+            IEnumerable<OrderDetail> orders = DB.OrderDetails
+                .Where(x => x.OrderID != null 
+                && x.Order != null
+                && x.Order.PayTime != null
+                && x.Price > 0
+                && (x.Order.Status == OrderStatus.待评价 
+                || x.Order.Status == OrderStatus.已完成 
+                || x.Order.Status == OrderStatus.待收货 
+                || x.Order.Status == OrderStatus.待发货 
+                || x.Order.Status == OrderStatus.退款驳回))
+                .ToList();
             if (Begin.HasValue)
                 orders = orders.Where(x => x.Order.PayTime != null && x.Order.PayTime.Value >= Begin.Value).ToList();
             if (End.HasValue)
@@ -654,19 +664,39 @@ namespace LongjiangAgricultureCloud.Controllers
                 orders = orders.Where(x => x.Order.Address.Contains(Address)).ToList();
             orders = orders.OrderByDescending(x => x.Order.PayTime).ToList();
 
-            var service = (from od in orders.Where(x => x.User.Role == UserRole.服务站 && x.User.ManagerID != null)
-                           group od by od.User into g
-                           select new vService {
+            var service = new List<vService>();
+            try
+            {
+                service = (from od in orders
+                           where od.Price > 0
+                           && od.User != null
+                           && od.User.Name != null
+                           && od.User.ManagerID != null
+                           && od.User.Manager != null
+                           && od.User.Manager.Name != null
+                           && od.User.Role == UserRole.服务站
+                           group od by new {
+                               Name = od.User.Name,
+                               Manager = new {
+                                   Name = od.User.Manager.Name,
+                                   Username = od.User.Manager.Username
+                               }
+                           } 
+                           into g
+                           select new vService
+                           {
                                Service = g.Key.Name,
-                               Price = g.Sum(x => x.Price),
+                               Price = g != null && g.Count() > 0 ? g.Sum(x => x.Price) : 0,
                                Manager = g.Key.Manager.Name + " " + g.Key.Manager.Username
                            }).ToList();
-
+            }
+            catch (Exception e) { throw new Exception("Service Issue " + orders.Count() +"\r\n" + e.ToString()); }
             var area = (from s in service
                         group s by s.Manager into g
-                        select new vArea {
+                        select new vArea
+                        {
                             Manager = g.Key,
-                            Price = g.Sum(x => x.Price),
+                            Price = g != null && g.Count() > 0 ? g.Sum(x => x.Price) : 0,
                             Service = g.ToList()
                         }).ToList();
 

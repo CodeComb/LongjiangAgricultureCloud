@@ -19,7 +19,7 @@ namespace LongjiangAgricultureCloud
             if (filterContext.ExceptionHandled)
                 return;
             //使用log4net或其他记录错误消息
-            if (filterContext.HttpContext.Request.UrlReferrer.ToString().IndexOf("/Mobile") >= 0)
+            if (filterContext.HttpContext.Request.UrlReferrer.ToString().IndexOf("/Mobile") >= 0 && filterContext.Exception is ArgumentException)
             {
                 filterContext.ExceptionHandled = true;
                 filterContext.Result = new RedirectResult("/Mobile/Mobile/Message?msg=非法请求！请返回重试！&sid="+ filterContext.HttpContext.Session["sid"].ToString());//跳转至错误提示页面
