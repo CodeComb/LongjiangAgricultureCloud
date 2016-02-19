@@ -56,7 +56,7 @@
         </tr>
         <tr>
             <td class="row-title">单价</td>
-            <td>@Html.TextBoxFor(x => x.Price, new { @class = "textbox w-3" })</td>
+            <td>@Html.TextBoxFor(x => x.Price, new { @class = "textbox w-3 chk-price" })</td>
         </tr>
         @if (ViewBag.CurrentUser.Role == UserRole.库存管理员)
         {
@@ -91,7 +91,7 @@
         }
         <tr>
             <td class="row-title">库存</td>
-            <td>@Html.TextBoxFor(x => x.StoreCount, new { @class = "textbox w-3" })</td>
+            <td>@Html.TextBoxFor(x => x.StoreCount, new { @class = "textbox w-3 chk-integer" })</td>
         </tr>
         <tr>
             <td class="row-title">供应商</td>
